@@ -1,0 +1,52 @@
+| #  | Prompt test                                                                                                                | Document nên được retrieve | Mục đích test                     |
+| -- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------- | --------------------------------- |
+| 1  | Bệnh nào trên cà chua tạo ra các vòng đồng tâm giống bia bắn trên lá già phía dưới?                                        | Cháy sớm cà chua           | Keyword + semantic                |
+| 2  | Lá cà chua xuất hiện nhiều đốm nhỏ, tâm xám nhạt, viền nâu sẫm và có các chấm đen nhỏ ở giữa là bệnh gì?                   | Septoria cà chua           | Retrieval từ triệu chứng          |
+| 3  | Các chấm đen nhỏ nằm ở giữa vết bệnh Septoria là gì?                                                                       | Septoria cà chua           | Chi tiết chuyên sâu               |
+| 4  | Làm sao phân biệt Septoria với early blight trên cà chua?                                                                  | Septoria + Cháy sớm        | Multi-document retrieval          |
+| 5  | Cà chua có đốm vàng ở mặt trên lá nhưng mặt dưới có lớp mốc màu ô liu như nhung là bệnh gì?                                | Mốc lá cà chua             | Semantic symptom search           |
+| 6  | Bệnh nào trên cà chua thường xảy ra trong nhà kính khi độ ẩm trên 85%?                                                     | Mốc lá cà chua             | Điều kiện môi trường              |
+| 7  | Sau bao lâu Passalora fulva có thể tạo bào tử mới trên mặt dưới lá?                                                        | Mốc lá cà chua             | Retrieval số liệu                 |
+| 8  | Tại sao phải thông gió nhà kính khi cà chua bị mốc lá?                                                                     | Mốc lá cà chua             | Quan hệ nguyên nhân–biện pháp     |
+| 9  | Cà chua có vết lá như thấm nước, màu nâu sẫm giống dầu mỡ và có lớp trắng dưới lá thì có thể là bệnh gì?                   | Mốc sương muộn cà chua     | Retrieval triệu chứng             |
+| 10 | Điều kiện nhiệt độ và độ ẩm nào thuận lợi cho Phytophthora infestans trên cà chua?                                         | Mốc sương muộn cà chua     | Điều kiện bệnh                    |
+| 11 | Tại sao bệnh mốc sương muộn có thể bùng phát rất nhanh chỉ trong vài ngày?                                                 | Mốc sương muộn cà chua     | Chu kỳ bệnh                       |
+| 12 | Sporangia và zoospore đóng vai trò gì trong bệnh mốc sương muộn?                                                           | Mốc sương muộn cà chua     | Semantic biology                  |
+| 13 | Bệnh nào trên cà chua tạo vết lõm sâu dạng hố trên quả và có thể gây hiện tượng melting-out trong tán?                     | Đốm mục tiêu cà chua       | Triệu chứng đặc hiệu              |
+| 14 | Corynespora cassiicola gây bệnh gì trên cà chua?                                                                           | Đốm mục tiêu cà chua       | Entity lookup                     |
+| 15 | Target spot và early blight khác nhau như thế nào?                                                                         | Đốm mục tiêu + Cháy sớm    | Multi-document                    |
+| 16 | Tại sao bón quá nhiều đạm có thể làm bệnh target spot nghiêm trọng hơn?                                                    | Đốm mục tiêu cà chua       | Causal retrieval                  |
+| 17 | Lá cà chua có các đốm nhỏ dạng thấm nước rồi chuyển thành vết hoại tử với tâm nâu nhạt và viền sẫm là bệnh gì?             | Đốm mục tiêu cà chua       | Khó hơn vì gần bacterial spot     |
+| 18 | Bacterial spot trên cà chua gây triệu chứng gì trên quả xanh và quả trưởng thành?                                          | Đốm vi khuẩn cà chua       | Bộ phận cụ thể                    |
+| 19 | Cà chua có các đốm nhỏ góc cạnh trên lá và quả có vết nổi sần sùi thì nên nghi bệnh gì?                                    | Đốm vi khuẩn cà chua       | Symptom retrieval                 |
+| 20 | Vì sao không nên làm việc với cây cà chua khi lá đang ướt nếu ruộng có bệnh đốm vi khuẩn?                                  | Đốm vi khuẩn cà chua       | Cơ chế lây                        |
+| 21 | Đồng có chữa khỏi cây cà chua đã bị bacterial spot không?                                                                  | Đốm vi khuẩn cà chua       | Hiểu prevention vs cure           |
+| 22 | Bacterial speck và bacterial spot khác nhau thế nào trên quả cà chua?                                                      | Các bệnh đốm lá cà chua    | Differential retrieval            |
+| 23 | Vì sao không nên dùng quả cà chua bị bacterial speck hoặc bacterial spot để đóng hộp?                                      | Các bệnh đốm lá cà chua    | Chi tiết an toàn thực phẩm        |
+| 24 | Nếu chưa biết chính xác cây bị Septoria, early blight hay bacterial spot thì nên áp dụng những biện pháp chung nào?        | Các bệnh đốm lá cà chua    | Tổng hợp                          |
+| 25 | Cây cà chua bị còi, lá non nhỏ, vàng và cuộn lên; dưới lá có nhiều bọ phấn trắng. Nghi bệnh gì?                            | TYLCV                      | Retrieval từ triệu chứng + vector |
+| 26 | Vector chính truyền virus xoăn vàng lá cà chua là gì?                                                                      | TYLCV                      | Entity relation                   |
+| 27 | Bọ phấn Bemisia tabaci cần bao lâu để thu nhận TYLCV?                                                                      | TYLCV                      | Retrieval số liệu                 |
+| 28 | Thuốc trừ nấm có chữa được TYLCV không?                                                                                    | TYLCV                      | Loại trừ sai kiến thức            |
+| 29 | TYLCV và ToMV khác nhau về đường lây truyền như thế nào?                                                                   | TYLCV + ToMV               | Multi-document rất tốt            |
+| 30 | Lá cà chua có các mảng xanh đậm xen vàng, bề mặt nhăn và biến dạng thì nên nghĩ đến virus nào?                             | ToMV                       | Semantic retrieval                |
+| 31 | ToMV có thể lây từ cây này sang cây khác qua kéo cắt tỉa không?                                                            | ToMV                       | Practical retrieval               |
+| 32 | Tại sao vệ sinh tay và dụng cụ lại đặc biệt quan trọng với Tomato Mosaic Virus?                                            | ToMV                       | Causal retrieval                  |
+| 33 | Gen Tm-22 có liên quan đến bệnh gì trên cà chua?                                                                           | ToMV                       | Entity/gen retrieval              |
+| 34 | TYLCV hay ToMV có khả năng lây mạnh qua nhựa cây và dụng cụ hơn?                                                           | ToMV + TYLCV               | Comparative retrieval             |
+| 35 | Cây có lá khảm xanh vàng, nhăn, dạng lá dương xỉ nhưng không thấy bọ phấn thì nên nghi bệnh nào hơn?                       | ToMV                       | Differential semantic             |
+| 36 | Cây cà chua có lá nhỏ cuộn lên và còi cọc nhưng không có kiểu khảm xanh vàng rõ thì nên ưu tiên kiểm tra bệnh gì?          | TYLCV                      | Differential semantic             |
+| 37 | Nhện rất nhỏ ở mặt dưới lá, cây xuất hiện nhiều chấm trắng vàng và có tơ mịn. Đó có thể là gì?                             | Nhện đỏ hai chấm           | Pest retrieval                    |
+| 38 | Làm thế nào dùng một tờ giấy trắng để kiểm tra nhện đỏ?                                                                    | Nhện đỏ hai chấm           | Procedure retrieval               |
+| 39 | Tại sao dùng bifenthrin hoặc permethrin đôi khi có thể khiến nhện đỏ trở nên nghiêm trọng hơn về lâu dài?                  | Nhện đỏ hai chấm           | Causal reasoning                  |
+| 40 | Nhện đỏ phát triển nhanh nhất trong điều kiện thời tiết như thế nào?                                                       | Nhện đỏ hai chấm           | Environmental retrieval           |
+| 41 | Lá cây chuyển màu đồng, có rất nhiều chấm nhỏ nhưng không thấy vết bệnh tròn hay vòng đồng tâm. Tôi nên kiểm tra gì trước? | Nhện đỏ hai chấm           | Ambiguous symptom                 |
+| 42 | Bí có các mảng trắng dạng bột trên lá và thân, thời tiết không mưa nhiều nhưng bệnh vẫn lan. Có thể là bệnh gì?            | Phấn trắng cây bí          | Semantic retrieval                |
+| 43 | Tại sao bệnh phấn trắng trên bí vẫn có thể phát triển trong điều kiện khá khô?                                             | Phấn trắng cây bí          | Causal retrieval                  |
+| 44 | Khoảng nhiệt độ nào thuận lợi cho bệnh phấn trắng trên bí?                                                                 | Phấn trắng cây bí          | Numerical retrieval               |
+| 45 | Cần phun thuốc vào vị trí nào trên lá bí để quản lý phấn trắng hiệu quả?                                                   | Phấn trắng cây bí          | Practical retrieval               |
+| 46 | Dâu tây có nhiều đốm nâu tím, mô giữa các đốm chuyển đỏ tím, mép lá khô cong như bị cháy. Bệnh gì?                         | Cháy lá dâu tây            | Symptom retrieval                 |
+| 47 | Làm sao phân biệt leaf scorch với common leaf spot trên dâu tây?                                                           | Cháy lá dâu tây            | Differential retrieval            |
+| 48 | Tại sao tưới nhỏ giọt giúp giảm bệnh cháy lá dâu tây?                                                                      | Cháy lá dâu tây            | Causal retrieval                  |
+| 49 | Khoai tây có đốm nâu sẫm với các vòng đồng tâm trên lá già và củ có vết lõm khô như bần. Bệnh gì?                          | Cháy sớm khoai tây         | Cross-organ symptoms              |
+| 50 | Early blight trên khoai tây thường tăng nhanh ở giai đoạn nào của cây?                                                     | Cháy sớm khoai tây         | Growth stage retrieval            |
