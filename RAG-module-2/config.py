@@ -24,6 +24,23 @@ EMBEDDING_MODEL = os.getenv(
     "EMBEDDING_MODEL", "AITeamVN/Vietnamese_Embedding"
 ).strip()
 EMBEDDING_DEVICE = os.getenv("EMBEDDING_DEVICE", "cpu").strip() or "cpu"
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama").strip().casefold() or "ollama"
+
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen3.5:9b").strip() or "qwen3.5:9b"
+OLLAMA_BASE_URL = (
+    os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434").strip()
+    or "http://127.0.0.1:11434"
+)
+OLLAMA_NUM_CTX = int(os.getenv("OLLAMA_NUM_CTX", "8192"))
+OLLAMA_NUM_PREDICT = int(os.getenv("OLLAMA_NUM_PREDICT", "800"))
+OLLAMA_KEEP_ALIVE = os.getenv("OLLAMA_KEEP_ALIVE", "10m").strip() or "10m"
+OLLAMA_THINK = os.getenv("OLLAMA_THINK", "false").strip().casefold() in {
+    "1",
+    "true",
+    "yes",
+    "on",
+}
+
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash").strip()
 
 
@@ -42,7 +59,38 @@ def create_embeddings() -> Embeddings:
 
 
 def create_chat_model() -> BaseChatModel:
-    """Tạo Gemini chat model; đây là điểm thay thế khi thêm local LLM."""
+    """Tạo chat model theo ``LLM_PROVIDER`` trong file ``.env``."""
+
+    if LLM_PROVIDER == "ollama":
+        if OLLAMA_NUM_CTX < 1 or OLLAMA_NUM_PREDICT < 1:
+            raise RuntimeError(
+                "OLLAMA_NUM_CTX và OLLAMA_NUM_PREDICT phải lớn hơn 0."
+            )
+
+        try:
+            from langchain_ollama import ChatOllama
+        except ImportError as exc:
+            raise RuntimeError(
+                "Thiếu langchain-ollama. Hãy chạy "
+                "`python -m pip install -r requirements.txt`."
+            ) from exc
+
+        return ChatOllama(
+            model=OLLAMA_MODEL,
+            base_url=OLLAMA_BASE_URL,
+            temperature=0,
+            num_ctx=OLLAMA_NUM_CTX,
+            num_predict=OLLAMA_NUM_PREDICT,
+            reasoning=OLLAMA_THINK,
+            keep_alive=OLLAMA_KEEP_ALIVE,
+            validate_model_on_init=True,
+        )
+
+    if LLM_PROVIDER != "gemini":
+        raise RuntimeError(
+            f"LLM_PROVIDER không hợp lệ: {LLM_PROVIDER!r}. "
+            "Chỉ hỗ trợ 'ollama' hoặc 'gemini'."
+        )
 
     api_key = os.getenv("GEMINI_API_KEY", "").strip()
     if not api_key:

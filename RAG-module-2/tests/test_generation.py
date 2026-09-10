@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import pytest
+import config
 import rag
 from langchain_core.documents import Document
 from langchain_core.messages import AIMessage
@@ -87,6 +88,7 @@ def test_ask_does_not_create_llm_when_retrieval_is_empty(
 def test_ask_requires_gemini_key_only_after_retrieval(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    monkeypatch.setattr(config, "LLM_PROVIDER", "gemini")
     monkeypatch.delenv("GEMINI_API_KEY", raising=False)
     store = RecordingVectorStore(
         [
@@ -112,7 +114,7 @@ def test_ask_rejects_empty_llm_response() -> None:
         ]
     )
 
-    with pytest.raises(RuntimeError, match="Gemini trả về nội dung rỗng"):
+    with pytest.raises(RuntimeError, match="LLM trả về nội dung rỗng"):
         rag.ask("Bệnh ghẻ táo là gì?", llm=llm, vector_store=store)
 
 
@@ -132,4 +134,3 @@ def test_ask_propagates_provider_error_without_fake_answer() -> None:
 
     with pytest.raises(RuntimeError, match="quota exceeded"):
         rag.ask("Bệnh ghẻ táo là gì?", llm=llm, vector_store=store)
-

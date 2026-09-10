@@ -532,7 +532,7 @@ def retrieve(
 
 
 def format_context(documents: Sequence[Document]) -> str:
-    """Gắn nhãn nguồn cho từng chunk để Gemini có thể trích dẫn."""
+    """Gắn nhãn nguồn cho từng chunk để LLM có thể trích dẫn."""
 
     blocks: list[str] = []
     for index, document in enumerate(documents, start=1):
@@ -562,7 +562,7 @@ def ask(
     collection_name: str = COLLECTION_NAME,
     vector_store: Any | None = None,
 ) -> tuple[str, list[str]]:
-    """Retrieve context, goi Gemini va tra ``(answer, source_paths)``."""
+    """Retrieve context, gọi LLM và trả ``(answer, source_paths)``."""
 
     question = question.strip()
     documents = retrieve(
@@ -583,5 +583,5 @@ def ask(
     chain = RAG_PROMPT | (llm or create_chat_model()) | StrOutputParser()
     answer = chain.invoke({"context": context, "question": question}).strip()
     if not answer:
-        raise RuntimeError("Gemini trả về nội dung rỗng.")
+        raise RuntimeError("LLM trả về nội dung rỗng.")
     return answer, _unique_sources(documents)

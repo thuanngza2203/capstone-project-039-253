@@ -18,13 +18,13 @@ def create_parser() -> argparse.ArgumentParser:
     commands.add_parser("index", help="Đọc data/**/*.txt và build lại Chroma.")
 
     search_parser = commands.add_parser(
-        "search", help="Kiểm tra các chunk được retrieval mà không gọi Gemini."
+        "search", help="Kiểm tra các chunk được retrieval mà không gọi LLM."
     )
     search_parser.add_argument("question", help="Câu hỏi cần tìm trong kho dữ liệu.")
     search_parser.add_argument("--top-k", type=int, default=TOP_K)
 
     ask_parser = commands.add_parser(
-        "ask", help="Retrieval rồi dùng Gemini để tạo câu trả lời."
+        "ask", help="Retrieval rồi dùng LLM đã cấu hình để tạo câu trả lời."
     )
     ask_parser.add_argument("question", help="Câu hỏi gửi tới hệ thống RAG.")
     ask_parser.add_argument("--top-k", type=int, default=TOP_K)
