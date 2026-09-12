@@ -122,8 +122,8 @@ chroma.sqlite3
 *.sqlite3
 
 # Raw / processed dataset folders (keep configs/scripts, ignore heavy data)
-data/
-*/data/
+
+
 dataset/
 */dataset/
 datasets/

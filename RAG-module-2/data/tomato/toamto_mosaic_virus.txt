@@ -1,0 +1,579 @@
+VIRUS KHẢM CÀ CHUA – TOMATO MOSAIC VIRUS (ToMV)
+
+Nguồn tham khảo chính:
+HexaFarms
+https://hexafarms.com/blog/tomato-mosaic-virus-tomv-a-real-threat
+
+Tomato Mosaic Virus, viết tắt là ToMV, là virus gây bệnh khảm trên cây cà chua và có thể gây ảnh hưởng đáng kể đến sinh trưởng, chất lượng quả và năng suất.
+
+Bệnh đặc biệt nguy hiểm khi cây bị nhiễm ở giai đoạn sớm vì virus có thể làm cây sinh trưởng kém, biến dạng lá, rụng hoa và giảm năng suất.
+
+ToMV có thể lây lan rất dễ dàng thông qua nhựa cây, hạt giống nhiễm, tay người, dụng cụ bị nhiễm bẩn, vật liệu ghép và một số nguồn vật liệu thực vật khác.
+
+Do virus có thể lan qua tiếp xúc cơ học, vệ sinh trong quá trình chăm sóc cây là một trong những biện pháp quản lý quan trọng nhất.
+
+
+CÂY KÝ CHỦ
+
+Theo nguồn HexaFarms, ToMV chủ yếu gây nhiễm trên các cây thuộc:
+
+- Họ Cà, Solanaceae.
+- Họ Cải, Brassicaceae.
+
+Cà chua là một trong những cây ký chủ quan trọng nhất.
+
+Nguồn cũng ghi nhận ToMV có thể được phát hiện trên các nhóm cây khác.
+
+Tuy nhiên, tài liệu này tập trung vào bệnh trên cây cà chua.
+
+
+CÁCH ToMV LÂY TRUYỀN
+
+ToMV có thể được truyền qua nhiều con đường.
+
+Các con đường quan trọng được nguồn đề cập gồm:
+
+- Nhựa cây.
+- Hạt giống nhiễm.
+- Tay người.
+- Dụng cụ bị nhiễm.
+- Sản phẩm thuốc lá.
+- Ghép cây.
+
+
+LÂY QUA NHỰA CÂY
+
+Nhựa từ cây bị nhiễm virus có thể truyền bệnh sang cây khỏe.
+
+Khi mô cây bệnh bị:
+
+- Cắt.
+- Bẻ.
+- Tỉa.
+- Cọ xát.
+- Làm tổn thương.
+
+nhựa cây có thể bám lên tay, dụng cụ hoặc bề mặt khác.
+
+Nếu nhựa này tiếp xúc với mô cây khỏe, virus có thể được truyền sang cây mới.
+
+
+LÂY QUA HẠT GIỐNG
+
+Hạt giống nhiễm có thể là con đường đưa ToMV vào một vụ trồng mới.
+
+Điều này đặc biệt quan trọng trong:
+
+- Vườn ươm.
+- Nhà kính.
+- Hệ thống sản xuất sử dụng nhiều cây con.
+
+Sử dụng hạt giống sạch và nguồn giống đáng tin cậy giúp giảm nguy cơ đưa virus vào khu vực sản xuất.
+
+
+LÂY QUA TAY NGƯỜI
+
+Người chăm sóc cây có thể vô tình truyền virus.
+
+Ví dụ:
+
+- Chạm vào cây bệnh.
+- Sau đó chạm vào cây khỏe.
+- Nhựa cây nhiễm còn trên tay có thể được chuyển sang mô cây khác.
+
+Các công việc dễ làm lây virus gồm:
+
+- Tỉa chồi.
+- Buộc cây.
+- Thu hoạch.
+- Bấm ngọn.
+- Loại bỏ lá.
+- Ghép cây.
+
+
+LÂY QUA DỤNG CỤ
+
+Dụng cụ dùng trong chăm sóc cây có thể mang virus từ cây bệnh sang cây khỏe.
+
+Các dụng cụ nguy cơ cao gồm:
+
+- Kéo cắt.
+- Dao.
+- Dụng cụ ghép.
+- Dây buộc hoặc vật liệu tiếp xúc nhiều cây.
+- Bề mặt thao tác trong khu vực ươm.
+
+Vệ sinh dụng cụ giữa các cây hoặc giữa các khu vực là một biện pháp quan trọng để giảm lây lan.
+
+
+SẢN PHẨM THUỐC LÁ
+
+Nguồn HexaFarms đề cập rằng cả Tobacco Mosaic Virus và Tomato Mosaic Virus đều thuộc nhóm Tobamovirus và virus có thể liên quan đến vật liệu hoặc sản phẩm thuốc lá.
+
+Do đó, trong khu vực sản xuất cà chua cần hạn chế việc đưa vật liệu thuốc lá có nguy cơ nhiễm virus vào khu vực chăm sóc cây.
+
+Người thao tác với cây nên chú ý vệ sinh tay trước khi tiếp xúc với cây cà chua.
+
+
+LÂY QUA GHÉP
+
+Ghép một bộ phận cây nhiễm ToMV lên cây khỏe có thể truyền virus.
+
+Vì vậy, vật liệu dùng để ghép cần:
+
+- Không có triệu chứng virus.
+- Có nguồn gốc đáng tin cậy.
+- Được kiểm tra trước khi sử dụng.
+
+
+TRIỆU CHỨNG BAN ĐẦU
+
+Triệu chứng thường bắt đầu bằng hiện tượng:
+
+- Gân lá sáng màu hơn.
+- Màu lá trở nên không đồng đều.
+
+Sau đó xuất hiện kiểu khảm đặc trưng.
+
+
+TRIỆU CHỨNG KHẢM TRÊN LÁ
+
+Lá bị nhiễm ToMV thường xuất hiện các mảng màu xen kẽ.
+
+Có thể thấy:
+
+- Mảng xanh đậm.
+- Mảng xanh nhạt.
+- Mảng vàng.
+- Đôi khi có vùng gần trắng.
+
+Sự xen kẽ các màu này tạo nên hình dạng khảm hoặc mosaic.
+
+
+AUCUBA STRAIN
+
+Nguồn đề cập rằng khi cây nhiễm một chủng Aucuba của ToMV, các vùng màu trên lá có thể rất rõ.
+
+Lá có thể xuất hiện xen kẽ:
+
+- Xanh.
+- Vàng.
+- Trắng.
+
+Kiểu màu này làm triệu chứng trở nên nổi bật hơn so với dạng khảm thông thường.
+
+
+NHĂN VÀ GỒ GHỀ LÁ
+
+Ngoài thay đổi màu sắc, lá có thể bị:
+
+- Nhăn.
+- Gồ ghề.
+- Phồng.
+- Biến dạng bề mặt.
+
+Phiến lá không còn phẳng như cây khỏe.
+
+
+CONG VÀ BIẾN DẠNG LÁ
+
+Lá và lá chét có thể:
+
+- Cong.
+- Giảm kích thước.
+- Biến dạng.
+
+Trong một số điều kiện, các lá bị biến dạng mạnh có thể trở nên rất hẹp.
+
+
+TRIỆU CHỨNG DẠNG SỢI HOẶC LÁ DƯƠNG XỈ
+
+Nguồn cho biết trong mùa đông hoặc khi cây thiếu ánh sáng, triệu chứng có thể biểu hiện rõ theo dạng:
+
+- Filiform: lá rất hẹp, giống sợi.
+- Fern-like: lá có hình dạng giống lá dương xỉ.
+
+Các dạng này là biểu hiện biến dạng nghiêm trọng của phiến lá.
+
+
+TRIỆU CHỨNG TRÊN HOA
+
+ToMV có thể gây:
+
+- Rụng hoa.
+
+Rụng hoa làm giảm số lượng quả được hình thành và trực tiếp ảnh hưởng đến năng suất.
+
+
+TRIỆU CHỨNG TRÊN QUẢ
+
+Quả nhiễm ToMV có thể xuất hiện:
+
+- Khảm màu.
+- Đổi màu.
+- Các vùng màu không đồng đều.
+- Đôi khi có các vòng trên bề mặt.
+
+Các triệu chứng này làm giảm chất lượng và giá trị thương phẩm của quả.
+
+
+HOẠI TỬ BÊN TRONG QUẢ
+
+Nguồn đề cập rằng quả bị nhiễm có thể xuất hiện hoại tử mô mạch bên trong.
+
+Hiện tượng này còn được mô tả là:
+
+- Internal browning.
+- Hóa nâu bên trong.
+
+Triệu chứng bên trong có thể không dễ nhận biết chỉ bằng cách quan sát bề mặt quả.
+
+
+ẢNH HƯỞNG ĐẾN SINH TRƯỞNG
+
+Trong trường hợp bệnh nghiêm trọng:
+
+- Sinh trưởng cây giảm.
+- Cây có thể còi hơn.
+- Diện tích lá hữu hiệu giảm.
+- Sức sinh trưởng tổng thể suy giảm.
+
+Ảnh hưởng thường nghiêm trọng hơn khi cây bị nhiễm từ giai đoạn còn non.
+
+
+ẢNH HƯỞNG ĐẾN NĂNG SUẤT
+
+Nếu ToMV tấn công sớm:
+
+- Cây sinh trưởng kém.
+- Hoa có thể rụng nhiều hơn.
+- Số quả giảm.
+- Chất lượng quả giảm.
+- Năng suất cuối cùng giảm.
+
+Mức thiệt hại phụ thuộc vào thời điểm nhiễm và mức độ mẫn cảm của giống.
+
+
+CHẨN ĐOÁN BẰNG TRIỆU CHỨNG
+
+ToMV có thể được nghi ngờ khi cây xuất hiện:
+
+- Khảm xanh vàng trên lá.
+- Gân lá sáng.
+- Lá nhăn.
+- Lá cong hoặc biến dạng.
+- Lá nhỏ.
+- Dạng lá sợi hoặc lá dương xỉ.
+- Quả đổi màu.
+- Rụng hoa.
+
+Tuy nhiên, chỉ quan sát triệu chứng không phải lúc nào cũng đủ để xác định chính xác ToMV.
+
+
+TẠI SAO CẦN XÁC NHẬN BẰNG XÉT NGHIỆM?
+
+Nhiều bệnh virus và rối loạn sinh lý có thể tạo triệu chứng tương tự.
+
+Ví dụ:
+
+- Một số virus khác gây khảm.
+- Tổn thương thuốc.
+- Thiếu dinh dưỡng.
+- Stress môi trường.
+
+Do đó, trong sản xuất thương mại hoặc khi cần xác định chắc chắn nguồn bệnh, nên sử dụng xét nghiệm phù hợp.
+
+
+CHẨN ĐOÁN BẰNG ELISA
+
+Nguồn đề cập ELISA như một phương pháp huyết thanh học để phát hiện thành phần kháng nguyên của virus.
+
+ELISA có thể được sử dụng để hỗ trợ xác nhận cây có nhiễm ToMV hay không.
+
+
+CHẨN ĐOÁN BẰNG PHƯƠNG PHÁP PHÂN TỬ
+
+Nguồn cũng đề cập PCR như một phương pháp phân tử để phát hiện virus.
+
+Trong thực hành chẩn đoán virus RNA như ToMV, các kỹ thuật phân tử thường cần bước chuyển RNA thành DNA bổ sung trước khi khuếch đại, chẳng hạn RT-PCR.
+
+Việc lựa chọn phương pháp xét nghiệm cụ thể nên do phòng chẩn đoán thực hiện.
+
+
+QUẢN LÝ BỆNH
+
+Không có biện pháp hóa học thông thường nào có thể chữa khỏi mô cây đã bị nhiễm virus.
+
+Quản lý ToMV vì vậy tập trung vào:
+
+- Ngăn virus xâm nhập.
+- Hạn chế lây lan cơ học.
+- Sử dụng giống kháng.
+- Loại bỏ cây bệnh.
+- Giữ môi trường sản xuất sạch.
+- Quản lý vật liệu giống.
+
+
+KHÁNG DI TRUYỀN
+
+Nguồn HexaFarms nhấn mạnh vai trò của tính kháng di truyền.
+
+Các chương trình lai tạo cà chua tập trung đưa gen kháng từ nguồn vật liệu hoang dại vào giống trồng.
+
+
+GEN Tm-22
+
+Nguồn đề cập gen Tm-22 là một gen kháng quan trọng đối với ToMV.
+
+Gen này được ghi nhận trong:
+
+- Một số kiểu gen Solanum lycopersicum.
+- Một số nguồn cà chua hoang như Solanum arcanum.
+
+Khả năng kháng di truyền giúp cây hạn chế tác động của virus.
+
+
+VAI TRÒ CỦA GIỐNG KHÁNG
+
+Giống kháng có thể:
+
+- Giảm khả năng phát triển triệu chứng.
+- Giảm thiệt hại.
+- Giảm tốc độ lây lan trong hệ thống sản xuất.
+
+Tuy nhiên, tính kháng cần được lựa chọn phù hợp với chủng virus và khu vực sản xuất.
+
+
+THÔNG TIN GIỐNG TRONG NGUỒN
+
+Nguồn HexaFarms đưa ra ví dụ một số giống hoặc dòng có tính kháng, bao gồm:
+
+- Saladette đối với cà chua.
+- Telestar đối với ớt.
+
+Danh sách này chỉ mang tính ví dụ trong nguồn.
+
+Khi chọn giống tại Việt Nam, cần sử dụng giống phù hợp với điều kiện sản xuất và có thông tin kháng ToMV từ nhà cung cấp giống.
+
+
+VỆ SINH VÀ LOẠI CÂY BỆNH
+
+Nguồn đề cập hai biện pháp:
+
+- Sanitation: duy trì môi trường sạch.
+- Rouging: loại bỏ cây có triệu chứng.
+
+Hai biện pháp này giúp giảm lượng nguồn virus trong khu vực.
+
+
+LOẠI BỎ CÂY CÓ TRIỆU CHỨNG
+
+Khi một cây được xác định hoặc nghi ngờ mạnh bị ToMV:
+
+- Cần đánh dấu.
+- Hạn chế tiếp xúc với cây khỏe.
+- Cân nhắc loại bỏ cây khỏi khu vực sản xuất.
+
+Cây bệnh là nguồn virus có thể lây sang cây khác qua tay và dụng cụ.
+
+
+TRÌNH TỰ LÀM VIỆC
+
+Để hạn chế lây cơ học:
+
+- Chăm sóc khu vực cây khỏe trước.
+- Làm việc với cây nghi bệnh sau.
+- Vệ sinh tay và dụng cụ trước khi quay lại khu vực khỏe.
+
+Điều này giúp giảm khả năng mang nhựa cây nhiễm từ khu vực bệnh sang khu vực sạch.
+
+
+VỆ SINH DỤNG CỤ
+
+Các dụng cụ cắt tỉa và ghép cần được vệ sinh thường xuyên.
+
+Đặc biệt quan trọng sau khi tiếp xúc với:
+
+- Cây có triệu chứng.
+- Lá bị khảm.
+- Cây nghi nhiễm virus.
+
+Virus có thể lan rất nhanh nếu cùng một dụng cụ được sử dụng liên tiếp trên nhiều cây.
+
+
+VỆ SINH TAY
+
+Do virus có thể truyền qua tiếp xúc cơ học, người chăm sóc nên:
+
+- Rửa tay trước khi thao tác với cây.
+- Vệ sinh tay sau khi chạm cây nghi bệnh.
+- Tránh chuyển trực tiếp từ cây bệnh sang cây khỏe.
+
+
+QUẢN LÝ HẠT GIỐNG
+
+Hạt giống có thể góp phần đưa virus vào hệ thống sản xuất.
+
+Nên:
+
+- Sử dụng hạt giống từ nguồn tin cậy.
+- Tránh giữ giống từ cây có triệu chứng virus.
+- Tuân thủ quy trình xử lý hạt giống nếu nhà cung cấp hoặc cơ quan chuyên môn khuyến nghị.
+
+
+QUẢN LÝ CÂY GIỐNG
+
+Trước khi đưa cây con vào nhà kính hoặc ruộng:
+
+- Kiểm tra triệu chứng khảm.
+- Kiểm tra lá biến dạng.
+- Loại cây nghi nhiễm.
+
+Một cây giống nhiễm ToMV có thể trở thành nguồn lây cho nhiều cây khác sau các thao tác chăm sóc.
+
+
+QUẢN LÝ GHÉP CÂY
+
+Trong hệ thống sử dụng cây ghép:
+
+- Gốc ghép phải sạch bệnh.
+- Ngọn ghép phải sạch bệnh.
+- Dao ghép phải được vệ sinh.
+- Bề mặt thao tác phải sạch.
+
+Chỉ một vật liệu ghép nhiễm có thể đưa virus vào nhiều cây.
+
+
+CROSS PROTECTION
+
+Nguồn đề cập một phương pháp gọi là cross protection.
+
+Nguyên lý là:
+
+- Cho cây tiếp xúc trước với một chủng virus nhẹ.
+- Sau đó cây có thể được bảo vệ phần nào trước một chủng gây bệnh nặng hơn.
+
+Tuy nhiên, nguồn lưu ý hiệu quả của cross protection có thể thay đổi.
+
+Đây là kỹ thuật chuyên môn và không nên tự áp dụng trong sản xuất thông thường nếu không có chương trình kiểm soát được thiết kế rõ ràng.
+
+
+BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI VƯỜN HOẶC NHÀ KÍNH
+
+Khi nghi ngờ ToMV trên cà chua, có thể kiểm tra theo trình tự sau:
+
+- Quan sát gân lá có sáng màu bất thường.
+- Tìm kiểu khảm xanh đậm và xanh nhạt.
+- Tìm các vùng vàng hoặc trắng xen kẽ.
+- Quan sát lá có nhăn hoặc gồ ghề.
+- Kiểm tra lá có cong hoặc nhỏ hơn bình thường.
+- Tìm dạng lá rất hẹp hoặc giống lá dương xỉ.
+- Quan sát hiện tượng rụng hoa.
+- Kiểm tra quả có loang màu hoặc vòng.
+- Cắt kiểm tra quả nghi bệnh nếu cần để tìm hóa nâu bên trong.
+- Kiểm tra lịch sử cắt tỉa, ghép và vệ sinh dụng cụ.
+
+Nếu nhiều cây xuất hiện triệu chứng sau một đợt tỉa hoặc thao tác chung bằng dụng cụ, cần đặc biệt nghi ngờ con đường lây cơ học.
+
+
+BỔ SUNG: PHÂN BIỆT KHÁI QUÁT VỚI TYLCV
+
+ToMV và TYLCV đều có thể làm cây biến dạng lá nhưng có một số khác biệt hỗ trợ nhận biết.
+
+ToMV thường nổi bật với:
+
+- Khảm xanh vàng.
+- Lá nhăn và gồ ghề.
+- Có thể có dạng lá sợi hoặc lá dương xỉ.
+- Lây rất mạnh qua nhựa cây và dụng cụ.
+
+TYLCV thường nổi bật với:
+
+- Lá non nhỏ.
+- Mép lá cuộn lên.
+- Vàng lá rõ.
+- Cây còi cọc mạnh.
+- Lây chủ yếu qua bọ phấn Bemisia tabaci.
+
+Nếu triệu chứng không rõ, cần xét nghiệm để xác định chính xác virus.
+
+
+BỔ SUNG: PHÂN BIỆT VỚI THIẾU DINH DƯỠNG
+
+Thiếu dinh dưỡng có thể tạo:
+
+- Vàng lá.
+- Màu lá không đồng đều.
+
+Tuy nhiên, ToMV thường tạo kiểu khảm tương phản rõ hơn và có thể đi kèm:
+
+- Nhăn lá.
+- Gồ ghề lá.
+- Biến dạng.
+- Triệu chứng trên quả.
+
+Phân bố bệnh theo đường thao tác hoặc tiếp xúc giữa các cây cũng có thể gợi ý virus lây cơ học.
+
+
+BỔ SUNG: KHÔNG CÓ THUỐC CHỮA VIRUS TRÊN CÂY ĐÃ NHIỄM
+
+Khi ToMV đã xâm nhập và nhân lên trong cây:
+
+- Thuốc trừ nấm không chữa được bệnh.
+- Thuốc trừ vi khuẩn không chữa được bệnh.
+- Thuốc trừ côn trùng không loại virus khỏi cây.
+
+Biện pháp quan trọng nhất là ngăn lây lan sang cây chưa nhiễm.
+
+
+BỔ SUNG: ƯU TIÊN QUẢN LÝ
+
+Một chương trình quản lý ToMV nên ưu tiên:
+
+- Giống kháng.
+- Hạt giống và cây giống sạch.
+- Vệ sinh tay.
+- Vệ sinh dụng cụ.
+- Phát hiện sớm.
+- Loại bỏ cây bệnh.
+- Tránh lây qua ghép.
+- Quản lý vệ sinh toàn bộ khu vực sản xuất.
+
+Do ToMV dễ truyền cơ học, vệ sinh có vai trò đặc biệt quan trọng.
+
+
+LƯU Ý VỀ NGUỒN THÔNG TIN
+
+Nguồn HexaFarms đề cập ToMV được chẩn đoán bằng PCR để phát hiện vật liệu di truyền virus.
+
+Về mặt kỹ thuật, ToMV là virus RNA, vì vậy xét nghiệm phân tử thường cần bước phiên mã ngược trước khi PCR, chẳng hạn RT-PCR.
+
+Chi tiết quy trình xét nghiệm nên được thực hiện theo hướng dẫn của phòng chẩn đoán bệnh cây.
+
+
+TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
+
+Tomato Mosaic Virus trên cà chua có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
+
+- ToMV là virus gây bệnh khảm quan trọng trên cà chua.
+- Virus có thể truyền qua nhựa cây.
+- Hạt giống nhiễm có thể đưa virus vào vụ trồng mới.
+- Tay người có thể truyền virus giữa các cây.
+- Dụng cụ bị nhiễm là nguồn lây quan trọng.
+- Vật liệu ghép nhiễm có thể truyền bệnh.
+- Nguồn đề cập sản phẩm thuốc lá cũng có thể liên quan đến sự lây lan của Tobamovirus.
+- Triệu chứng thường bắt đầu bằng gân lá sáng màu.
+- Lá sau đó xuất hiện các mảng khảm xanh, vàng hoặc trắng.
+- Lá có thể nhăn, gồ ghề, cong và nhỏ.
+- Trong một số điều kiện, lá có thể trở nên rất hẹp hoặc giống lá dương xỉ.
+- Bệnh có thể gây rụng hoa.
+- Quả có thể loang màu, đổi màu hoặc có vòng.
+- Quả có thể xuất hiện hóa nâu bên trong.
+- Nhiễm sớm có thể làm giảm sinh trưởng và năng suất mạnh.
+- Chẩn đoán có thể dựa trên triệu chứng, ELISA và xét nghiệm phân tử.
+- Gen Tm-22 được nguồn đề cập là nguồn kháng quan trọng.
+- Sử dụng giống kháng là biện pháp quản lý hiệu quả.
+- Vệ sinh và loại bỏ cây bệnh giúp giảm lây lan.
+- Cross protection được nguồn đề cập nhưng hiệu quả có thể thay đổi.
+- Thuốc bảo vệ thực vật thông thường không chữa được cây đã nhiễm virus.
+- Quản lý ToMV phải tập trung vào phòng bệnh và vệ sinh.
