@@ -1,0 +1,10 @@
+docker run --rm --gpus all `
+  -p 8000:8000 `
+  --ipc=host `
+  -e VLLM_WSL2_ENABLE_PIN_MEMORY=1 `
+  vllm/vllm-openai:latest `
+  --model Qwen/Qwen3-0.6B `
+  --gpu-memory-utilization 0.75 `
+  --max-model-len 4096
+
+  
