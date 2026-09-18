@@ -22,6 +22,22 @@ if str(PROJECT_ROOT) not in sys.path:
 os.environ.setdefault("ANONYMIZED_TELEMETRY", "False")
 
 
+@pytest.fixture(autouse=True)
+def isolated_retrieval_settings(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Không để .env cá nhân bật tải reranker/model trong test offline."""
+    monkeypatch.setenv("RETRIEVAL_MODE", "hybrid")
+    monkeypatch.setenv("RETRIEVAL_CANDIDATE_K", "20")
+    monkeypatch.setenv("RETRIEVAL_RRF_K", "60")
+    monkeypatch.setenv("RERANKER_ENABLED", "false")
+    monkeypatch.setenv("CHAT_HISTORY_TURNS", "4")
+    monkeypatch.setenv("CHAT_HISTORY_MAX_CHARS", "6000")
+    monkeypatch.setenv("CHUNKING_STRATEGY", "recursive")
+    monkeypatch.setenv("CHUNK_MAX_TOKENS", "400")
+    monkeypatch.setenv("CHUNK_OVERLAP_TOKENS", "40")
+    monkeypatch.setenv("CHUNK_TOKENIZER_MODEL", "")
+    monkeypatch.delenv("CHROMA_DIR", raising=False)
+
+
 class KeywordEmbeddings(Embeddings):
     """Embedding nho, xac dinh va du de test retrieval ma khong tai model."""
 
@@ -71,4 +87,3 @@ def apple_data_dir(tmp_path: Path) -> Path:
     for filename in ("apple_black_rot.txt", "apple_scab.txt"):
         shutil.copy2(source_dir / filename, target_dir / filename)
     return tmp_path / "data"
-

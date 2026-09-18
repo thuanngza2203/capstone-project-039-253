@@ -20,13 +20,16 @@ data/
 Quy ước khuyến nghị:
 
 - Thư mục cấp đầu tiên là tên cây trồng, viết thường và ổn định, ví dụ `apple`, `tomato`.
-- Mỗi file chỉ mô tả một bệnh; đây là ranh giới để tạo `disease_id` và filter chính xác.
+- Mỗi file chỉ mô tả một bệnh; đây là ranh giới để mô tả bệnh và truy vết nguồn.
 - Filename dùng chữ cái Latin, chữ số và dấu gạch dưới; tên phải gợi đúng nội dung.
 - File dùng UTF-8 và không được rỗng.
 
-Loader không bắt buộc mọi tài liệu có cùng heading. Cấu trúc tốt chỉ giúp chunk dễ hiểu và retrieval chính xác hơn.
+Loader/recursive vẫn đọc được plain text. Với `CHUNKING_STRATEGY=structure`, cần
+một H1 `# Tiêu đề`, các mục H2 `##`, mục con H3 `###`, không nhảy cấp. Corpus hiện
+tại đã được thêm marker; không bắt buộc các file có cùng danh sách mục.
+Định dạng và ví dụ hiện hành: [CHUNKING.md](CHUNKING.md#4-định-dạng-dữ-liệu).
 
-## Template TXT khuyến nghị
+## Template plain text cho recursive
 
 Hai file trong `data/apple/` là ví dụ đầu tiên. Với dữ liệu mới, có thể dùng mẫu thực hành sau và bỏ các mục không có thông tin đáng tin cậy:
 
@@ -66,9 +69,11 @@ NGUỒN THAM KHẢO
 Tên tổ chức hoặc tác giả, tiêu đề, URL, ngày truy cập/cập nhật nếu có.
 ```
 
-Không cần thêm JSON, YAML hoặc tự viết identity header. Pipeline dùng thông tin tên bệnh/tên gọi trong plain text cùng định danh file để tạo metadata, rồi tự prepend header `Tài liệu` / `Bệnh` / `Tên gọi` vào từng chunk.
+Không cần thêm JSON, YAML hoặc tự viết identity header. Pipeline dùng tên bệnh/
+tên gọi và định danh file để tạo metadata. Recursive prepend header `Tài liệu` /
+`Bệnh` / `Tên gọi`; structure dùng header gọn có đường dẫn mục.
 
-Tên chuẩn và alias phải rõ ràng, mỗi tên chỉ thuộc một bệnh trong corpus. Không dùng ký tự `|` bên trong một alias vì `disease_aliases` dùng ` | ` làm dấu phân cách nội bộ.
+Tên chuẩn và alias phải rõ ràng. Tên gọi chung có thể xuất hiện ở nhiều cây; ghi rõ cây trong tài liệu để hỗ trợ xếp hạng. Không dùng ký tự `|` bên trong một alias vì `disease_aliases` dùng ` | ` làm dấu phân cách nội bộ.
 
 ### Pipeline suy ra danh tính bệnh
 
@@ -128,8 +133,8 @@ loader giữ metadata nguồn sau và bổ sung danh tính bệnh:
 | Trường | Ví dụ | Ý nghĩa |
 |---|---|---|
 | `disease` | `Bệnh ghẻ táo` | Tên chuẩn dùng để hiển thị |
-| `disease_id` | `apple-ghe-tao` | ID chuẩn hóa ổn định dùng cho Chroma filter |
-| `disease_aliases` | `bệnh ghẻ táo \| apple scab \| bệnh sẹo táo` | Chuỗi tên chuẩn và tên gọi khác để nhận diện câu hỏi |
+| `disease_id` | `apple-ghe-tao` | ID mô tả bệnh của tài liệu, không tự dùng để filter query |
+| `disease_aliases` | `bệnh ghẻ táo \| apple scab \| bệnh sẹo táo` | Tên chuẩn/tên gọi khác trong identity header hỗ trợ tìm kiếm |
 
 `source` là đường dẫn tương đối từ `data/`, được dùng trong nhãn `[Nguồn n: apple/apple_scab.txt]` và danh sách source của `ask()`. Đổi tên, di chuyển file hoặc sửa danh tính bệnh làm thay đổi index, vì vậy cần chạy lại `python main.py index`.
 
@@ -148,9 +153,9 @@ python main.py ask "<câu hỏi có đáp án trong file mới>"
 Nên thử thêm:
 
 - Một câu dùng tên bệnh chính xác.
-- Một câu dùng alias của cùng bệnh; kết quả phải cùng phạm vi `disease_id`.
+- Một câu dùng alias của cùng bệnh; kiểm tra nguồn mong đợi có được xếp cao không.
 - Một câu chỉ mô tả triệu chứng.
-- Một câu so sánh hai bệnh; retrieval phải tìm toàn corpus thay vì chọn nhầm một filter.
+- Một câu so sánh hai bệnh; kiểm tra có đủ nguồn của cả hai bệnh trong top-k.
 - Một câu ngoài corpus để quan sát Gemini có thừa nhận context không đủ hay không.
 
 V1 chưa có relevance threshold/evidence gate cứng, nên phép thử ngoài corpus là

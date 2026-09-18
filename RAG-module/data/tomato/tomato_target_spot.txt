@@ -1,4 +1,4 @@
-BỆNH ĐỐM MỤC TIÊU TRÊN CÂY CÀ CHUA
+# BỆNH ĐỐM MỤC TIÊU TRÊN CÂY CÀ CHUA
 
 Nguồn tham khảo chính:
 Bayer Vegetables
@@ -16,7 +16,7 @@ Bệnh có thể làm giảm năng suất theo hai cách:
 Trong những điều kiện thuận lợi, bệnh có thể gây rụng lá mạnh, làm tán cây bị “rụng rỗng” từ bên trong và trong trường hợp rất nặng có thể làm mô thân, lá bị sụp và cây chết.
 
 
-TÁC NHÂN GÂY BỆNH
+## TÁC NHÂN GÂY BỆNH
 
 Bệnh đốm mục tiêu do nấm Corynespora cassiicola gây ra.
 
@@ -27,7 +27,7 @@ Nguồn Bayer cho biết C. cassiicola có thể nhiễm hơn 500 loài thực v
 Tuy nhiên, trong tài liệu này chỉ tập trung vào bệnh trên cây cà chua.
 
 
-ĐẶC ĐIỂM SINH HỌC CỦA NẤM
+## ĐẶC ĐIỂM SINH HỌC CỦA NẤM
 
 Corynespora cassiicola có thể tồn tại và phát triển theo nhiều kiểu.
 
@@ -40,7 +40,7 @@ Nấm có thể hoạt động như:
 Khả năng sống trên bề mặt cây hoặc cỏ dại giúp nấm duy trì nguồn bệnh trong khu vực trồng.
 
 
-TÁC HẠI CỦA BỆNH
+## TÁC HẠI CỦA BỆNH
 
 Bệnh đốm mục tiêu có thể làm giảm năng suất rõ rệt khi phát triển mạnh.
 
@@ -59,7 +59,7 @@ Mức thiệt hại thực tế phụ thuộc vào:
 - Mức độ nhiễm trên lá và quả.
 
 
-CÁC BỘ PHẬN CÂY CÓ THỂ BỊ NHIỄM
+## CÁC BỘ PHẬN CÂY CÓ THỂ BỊ NHIỄM
 
 Nấm có thể gây bệnh trên tất cả các bộ phận phía trên mặt đất của cây cà chua, bao gồm:
 
@@ -75,9 +75,9 @@ Cây đặc biệt mẫn cảm:
 - Trong giai đoạn mang quả.
 
 
-CÁCH NHẬN BIẾT BỆNH ĐỐM MỤC TIÊU
+## CÁCH NHẬN BIẾT BỆNH ĐỐM MỤC TIÊU
 
-Triệu chứng ban đầu trên lá
+### Triệu chứng ban đầu trên lá
 
 Triệu chứng đầu tiên thường là những đốm rất nhỏ, gần kích thước đầu kim.
 
@@ -91,7 +91,7 @@ Sau đó, chúng phát triển thành các vết hoại tử nhỏ có:
 Ở giai đoạn sớm, các vết bệnh có thể bị nhầm với bệnh đốm vi khuẩn.
 
 
-TRIỆU CHỨNG KHI VẾT BỆNH LỚN DẦN
+### TRIỆU CHỨNG KHI VẾT BỆNH LỚN DẦN
 
 Khi vết bệnh phát triển:
 
@@ -106,7 +106,7 @@ Các vòng này tạo hình dạng giống bia bắn hoặc mục tiêu.
 Đây là nguồn gốc của tên gọi “target spot”.
 
 
-VÒNG ĐỒNG TÂM
+### VÒNG ĐỒNG TÂM
 
 Các vòng đồng tâm của bệnh đốm mục tiêu có thể giống bệnh cháy sớm.
 
@@ -121,7 +121,7 @@ Dấu hiệu vòng đồng tâm cần được đánh giá cùng với:
 - Triệu chứng trên cuống và thân.
 
 
-QUẦNG VÀNG
+### QUẦNG VÀNG
 
 Một số giống cà chua có thể xuất hiện quầng vàng xung quanh vết bệnh.
 
@@ -130,7 +130,7 @@ Một số giống cà chua có thể xuất hiện quầng vàng xung quanh v�
 Do đó, việc không thấy quầng vàng không loại trừ bệnh đốm mục tiêu.
 
 
-VẾT BỆNH LIÊN KẾT
+### VẾT BỆNH LIÊN KẾT
 
 Khi nhiều vết bệnh xuất hiện gần nhau, chúng có thể nhập lại.
 
@@ -144,7 +144,7 @@ Kết quả:
 Nếu bệnh lan mạnh, phần trong tán có thể mất lá nhanh chóng.
 
 
-HIỆN TƯỢNG “MELTING-OUT”
+### HIỆN TƯỢNG “MELTING-OUT”
 
 Bệnh đốm mục tiêu thường bắt đầu ở:
 
@@ -160,7 +160,7 @@ Khi các lá bên trong tán chết và rụng hàng loạt, tán cây có thể
 Hiện tượng này được gọi là “melting-out”.
 
 
-TRIỆU CHỨNG TRÊN THÂN VÀ CUỐNG LÁ
+## TRIỆU CHỨNG TRÊN THÂN VÀ CUỐNG LÁ
 
 Triệu chứng ban đầu trên thân và cuống lá thường là các đốm rất nhỏ.
 
@@ -179,7 +179,7 @@ Khi đó:
 - Phần mô phía trên vết bệnh có thể sụp xuống.
 
 
-TRIỆU CHỨNG TRÊN QUẢ
+## TRIỆU CHỨNG TRÊN QUẢ
 
 Triệu chứng trên quả thường bắt đầu bằng:
 
@@ -197,7 +197,7 @@ Khi bệnh phát triển, các vết lớn dần và tạo thành:
 Theo thời gian, mô trong vết bệnh có thể nứt.
 
 
-ẢNH HƯỞNG ĐẾN QUẢ
+### ẢNH HƯỞNG ĐẾN QUẢ
 
 Vết bệnh trên quả làm giảm mạnh giá trị thương phẩm.
 
@@ -211,7 +211,7 @@ Quả có thể:
 Ngay cả khi phần thịt bên trong chưa bị ảnh hưởng nghiêm trọng, vết bệnh ngoài vỏ vẫn có thể khiến quả bị loại khỏi thị trường.
 
 
-TRƯỜNG HỢP BỆNH NẶNG
+### TRƯỜNG HỢP BỆNH NẶNG
 
 Khi áp lực bệnh rất cao:
 
@@ -224,7 +224,7 @@ Khi áp lực bệnh rất cao:
 Trong trường hợp rất nghiêm trọng, cây có thể chết.
 
 
-PHÂN BIỆT VỚI BỆNH ĐỐM VI KHUẨN
+## PHÂN BIỆT VỚI BỆNH ĐỐM VI KHUẨN
 
 Ở giai đoạn đầu, các đốm nhỏ thấm nước có thể giống bệnh đốm vi khuẩn.
 
@@ -239,7 +239,7 @@ Bệnh đốm vi khuẩn không có đặc điểm vòng đồng tâm điển h�
 Nếu chỉ quan sát vết bệnh rất sớm, việc phân biệt có thể khó.
 
 
-PHÂN BIỆT VỚI BỆNH CHÁY SỚM
+## PHÂN BIỆT VỚI BỆNH CHÁY SỚM
 
 Bệnh đốm mục tiêu và bệnh cháy sớm đều có thể tạo vòng đồng tâm.
 
@@ -263,7 +263,7 @@ Do triệu chứng rất giống nhau, việc chẩn đoán có thể cần xem 
 - Chẩn đoán phòng thí nghiệm.
 
 
-CHU KỲ BỆNH
+## CHU KỲ BỆNH
 
 Nấm có thể tồn tại giữa các vụ trên:
 
@@ -274,7 +274,7 @@ Nấm có thể tồn tại giữa các vụ trên:
 Tàn dư và cây ký chủ thay thế giúp duy trì nguồn bệnh trong khu vực.
 
 
-SẢN SINH VÀ PHÁT TÁN BÀO TỬ
+### SẢN SINH VÀ PHÁT TÁN BÀO TỬ
 
 Nấm tạo bào tử.
 
@@ -287,7 +287,7 @@ Bào tử có thể được phát tán bằng:
 Khi bào tử đến lá cà chua và điều kiện đủ ẩm, quá trình nhiễm có thể bắt đầu.
 
 
-VAI TRÒ CỦA CỎ DẠI
+### VAI TRÒ CỦA CỎ DẠI
 
 Một số cỏ dại có thể mang nấm trên bề mặt mà chưa biểu hiện bệnh rõ.
 
@@ -296,7 +296,7 @@ Một số cỏ dại có thể mang nấm trên bề mặt mà chưa biểu hi�
 Vì vậy, quản lý cỏ dại có ý nghĩa trong chương trình kiểm soát bệnh.
 
 
-ĐIỀU KIỆN THUẬN LỢI CHO NHIỄM BỆNH
+## ĐIỀU KIỆN THUẬN LỢI CHO NHIỄM BỆNH
 
 Nhiễm bệnh cần độ ẩm cao và thời gian lá bị ướt kéo dài.
 
@@ -307,7 +307,7 @@ Theo nguồn Bayer:
 - Tương đương khoảng 16 đến 32 độ C.
 
 
-NHIỆT ĐỘ TỐI ƯU
+### NHIỆT ĐỘ TỐI ƯU
 
 Bệnh phát triển tối ưu trong khoảng:
 
@@ -317,7 +317,7 @@ Bệnh phát triển tối ưu trong khoảng:
 Khi nhiệt độ nằm trong khoảng này và lá giữ ẩm lâu, nguy cơ bệnh tăng rõ rệt.
 
 
-TÁN CÂY RẬM LÀM BỆNH NẶNG HƠN
+### TÁN CÂY RẬM LÀM BỆNH NẶNG HƠN
 
 Bệnh thường nghiêm trọng hơn ở cây có tán rất rậm.
 
@@ -331,7 +331,7 @@ Tán rậm:
 Do đó, quản lý tán là một phần quan trọng của phòng bệnh.
 
 
-VẾT THƯƠNG TRÊN QUẢ LÀM TĂNG NGUY CƠ
+### VẾT THƯƠNG TRÊN QUẢ LÀM TĂNG NGUY CƠ
 
 Quả bị tổn thương do:
 
@@ -344,7 +344,7 @@ có thể dễ bị nấm xâm nhập hơn.
 Hạn chế tổn thương quả giúp giảm nguy cơ bệnh.
 
 
-CÁCH QUẢN LÝ BỆNH ĐỐM MỤC TIÊU
+## CÁCH QUẢN LÝ BỆNH ĐỐM MỤC TIÊU
 
 Quản lý hiệu quả cần kết hợp:
 
@@ -360,7 +360,7 @@ Quản lý hiệu quả cần kết hợp:
 - Sử dụng thuốc phòng bệnh khi cần.
 
 
-TĂNG THÔNG THOÁNG TÁN
+### TĂNG THÔNG THOÁNG TÁN
 
 Có thể tăng luồng không khí bằng:
 
@@ -376,7 +376,7 @@ Mục tiêu là:
 - Giúp bề mặt lá khô nhanh hơn.
 
 
-TRÁNH BÓN QUÁ NHIỀU ĐẠM
+### TRÁNH BÓN QUÁ NHIỀU ĐẠM
 
 Bón quá nhiều đạm có thể làm cây tạo tán quá xanh tốt và rậm rạp.
 
@@ -389,7 +389,7 @@ Bón quá nhiều đạm có thể làm cây tạo tán quá xanh tốt và rậ
 Vì vậy, dinh dưỡng nên được quản lý cân đối.
 
 
-TỈA CHỒI NÁCH VÀ LÁ GIÀ
+### TỈA CHỒI NÁCH VÀ LÁ GIÀ
 
 Tỉa bớt chồi nách và lá già phía dưới giúp:
 
@@ -402,7 +402,7 @@ Tỉa bớt chồi nách và lá già phía dưới giúp:
 Tuy nhiên, không nên tỉa quá mức làm cây mất quá nhiều diện tích quang hợp.
 
 
-KIỂM TRA CÂY CON TRƯỚC KHI TRỒNG
+### KIỂM TRA CÂY CON TRƯỚC KHI TRỒNG
 
 Cây con nên được kiểm tra trước khi đưa ra ruộng.
 
@@ -415,7 +415,7 @@ Không nên trồng cây có:
 Mục tiêu là tránh đưa nguồn bệnh vào ruộng mới.
 
 
-TRÁNH TRỒNG GẦN RUỘNG CÀ CHUA CŨ
+### TRÁNH TRỒNG GẦN RUỘNG CÀ CHUA CŨ
 
 Nguồn khuyến nghị không trồng cà chua mới sát khu vực trồng cà chua cũ.
 
@@ -424,7 +424,7 @@ Tàn dư hoặc cây còn sót lại có thể duy trì nguồn bào tử.
 Khoảng cách giữa vụ cũ và vụ mới giúp giảm nguy cơ lây nhiễm sớm.
 
 
-QUẢN LÝ CỎ DẠI
+### QUẢN LÝ CỎ DẠI
 
 Cỏ dại có thể là nguồn tồn tại của nấm.
 
@@ -437,7 +437,7 @@ Do đó cần:
 Mục tiêu là giảm nguồn bào tử gần cây cà chua.
 
 
-TRÁNH TƯỚI PHUN TRÊN TÁN
+### TRÁNH TƯỚI PHUN TRÊN TÁN
 
 Tưới phun có thể:
 
@@ -448,7 +448,7 @@ Tưới phun có thể:
 Nếu có thể, nên sử dụng tưới nhỏ giọt hoặc phương pháp đưa nước trực tiếp vào vùng rễ.
 
 
-XỬ LÝ TÀN DƯ SAU THU HOẠCH
+### XỬ LÝ TÀN DƯ SAU THU HOẠCH
 
 Sau vụ thu hoạch cuối:
 
@@ -458,7 +458,7 @@ Sau vụ thu hoạch cuối:
 Mục tiêu là giảm nguồn nấm tồn tại giữa các vụ.
 
 
-LUÂN CANH
+### LUÂN CANH
 
 Nguồn Bayer khuyến nghị luân canh khỏi:
 
@@ -472,7 +472,7 @@ trong ít nhất:
 Luân canh giúp giảm nguồn bệnh tồn tại trong tàn dư và cây ký chủ.
 
 
-GIỐNG KHÁNG
+### GIỐNG KHÁNG
 
 Nguồn Bayer cho biết hiện chưa có giống cà chua thương mại có khả năng kháng hoàn toàn bệnh đốm mục tiêu.
 
@@ -481,7 +481,7 @@ Một số nguồn gen cà chua hoang đã được ghi nhận có tính kháng 
 Vì vậy, hiện tại không nên phụ thuộc vào giống như biện pháp duy nhất.
 
 
-SỬ DỤNG THUỐC DIỆT NẤM
+### SỬ DỤNG THUỐC DIỆT NẤM
 
 Nguồn Bayer cho biết chiến lược chính trong sản xuất thương mại thường là sử dụng thuốc diệt nấm định kỳ.
 
@@ -493,7 +493,7 @@ Thuốc nên được sử dụng:
 Điều này giúp bảo vệ mô khỏe trước khi nấm xâm nhập.
 
 
-KHOẢNG CÁCH PHUN
+### KHOẢNG CÁCH PHUN
 
 Nguồn cho biết trong một số chương trình, khoảng cách phun:
 
@@ -511,7 +511,7 @@ Tuy nhiên, khoảng cách thực tế phải tuân theo:
 Không nên tự động áp dụng lịch 10–14 ngày ở mọi điều kiện.
 
 
-YÊU CẦU BAO PHỦ
+### YÊU CẦU BAO PHỦ
 
 Độ bao phủ toàn bộ bề mặt cây rất quan trọng.
 
@@ -527,7 +527,7 @@ Khi phun cần chú ý:
 Tán cây quá rậm sẽ làm giảm khả năng bao phủ.
 
 
-MỘT SỐ HOẠT CHẤT ĐƯỢC NGUỒN ĐỀ CẬP
+### MỘT SỐ HOẠT CHẤT ĐƯỢC NGUỒN ĐỀ CẬP
 
 Nguồn Bayer đề cập các hoạt chất đã cho hiệu quả tốt trong một số nghiên cứu:
 
@@ -544,7 +544,7 @@ Các hoạt chất này thuộc các nhóm cơ chế tác động khác nhau.
 Danh sách trên chỉ phản ánh tài liệu nguồn và không phải là khuyến nghị sử dụng trực tiếp tại Việt Nam.
 
 
-QUẢN LÝ KHÁNG THUỐC
+### QUẢN LÝ KHÁNG THUỐC
 
 Nhiều nhãn thuốc khuyến nghị:
 
@@ -554,7 +554,7 @@ Nhiều nhãn thuốc khuyến nghị:
 Mục tiêu là hạn chế sự hình thành quần thể C. cassiicola kháng thuốc.
 
 
-NGUY CƠ KHÁNG STROBILURIN
+### NGUY CƠ KHÁNG STROBILURIN
 
 Nhóm strobilurin có nguy cơ kháng thuốc cao.
 
@@ -568,7 +568,7 @@ Các chủng C. cassiicola kháng strobilurin đã được phát hiện trên c
 Do đó, không nên sử dụng lặp lại liên tục cùng nhóm này.
 
 
-NGUYÊN TẮC LUÂN PHIÊN
+### NGUYÊN TẮC LUÂN PHIÊN
 
 Khi sử dụng thuốc nhiều lần:
 
@@ -581,7 +581,7 @@ Khi sử dụng thuốc nhiều lần:
 Quản lý kháng thuốc là yếu tố quan trọng để duy trì hiệu quả lâu dài.
 
 
-QUẢN LÝ TỔNG HỢP
+### QUẢN LÝ TỔNG HỢP
 
 Quản lý bệnh đốm mục tiêu lâu dài cần kết hợp:
 
@@ -596,7 +596,7 @@ Quản lý bệnh đốm mục tiêu lâu dài cần kết hợp:
 Không nên phụ thuộc vào một biện pháp duy nhất.
 
 
-BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI RUỘNG
+## BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI RUỘNG
 
 Khi nghi ngờ bệnh đốm mục tiêu trên cà chua, có thể kiểm tra theo trình tự sau:
 
@@ -616,7 +616,7 @@ Khi nghi ngờ bệnh đốm mục tiêu trên cà chua, có thể kiểm tra th
 Nếu triệu chứng rất giống early blight, nên xác nhận bằng chẩn đoán chuyên môn.
 
 
-BỔ SUNG: PHÂN BIỆT NHANH VỚI EARLY BLIGHT
+## BỔ SUNG: PHÂN BIỆT NHANH VỚI EARLY BLIGHT
 
 Target spot:
 
@@ -635,7 +635,7 @@ Early blight:
 Do hai bệnh rất giống nhau, chẩn đoán bằng mẫu bệnh có thể cần thiết trong sản xuất thương mại.
 
 
-LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
+## LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
 
 Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho cây cà chua và bệnh đốm mục tiêu tại khu vực sản xuất.
 
@@ -653,7 +653,7 @@ từ tài liệu Bayer hoặc các nguồn nước ngoài vào điều kiện Vi
 Nếu cần sử dụng nhiều lần, phải chú ý luân phiên cơ chế tác động để hạn chế kháng thuốc.
 
 
-TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
+## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
 
 Bệnh đốm mục tiêu trên cà chua có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 

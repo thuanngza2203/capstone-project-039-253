@@ -1,4 +1,4 @@
-BỆNH GỈ SẮT TÁO – TUYẾT TÙNG TRÊN CÂY TÁO
+# BỆNH GỈ SẮT TÁO – TUYẾT TÙNG TRÊN CÂY TÁO
 
 Nguồn tham khảo:
 University of Minnesota Extension
@@ -7,7 +7,7 @@ https://extension.umn.edu/plant-diseases/cedar-apple-rust
 Tài liệu này chỉ tập trung vào bệnh gỉ sắt táo – tuyết tùng trên cây táo, bao gồm triệu chứng, cơ chế nhiễm bệnh, mức độ gây hại và biện pháp quản lý trên cây táo.
 
 
-TỔNG QUAN VỀ BỆNH
+## TỔNG QUAN VỀ BỆNH
 
 Bệnh gỉ sắt táo – tuyết tùng là một bệnh nấm phổ biến trên cây táo.
 
@@ -18,9 +18,9 @@ Trong nhiều trường hợp, bệnh chỉ gây các đốm trên lá hoặc m�
 Tuy nhiên, khi bệnh xuất hiện với mật độ cao trên giống táo mẫn cảm, cây có thể bị giảm diện tích lá khỏe mạnh, lá vàng và rụng sớm, từ đó ảnh hưởng đến khả năng quang hợp và sức sinh trưởng của cây.
 
 
-CÁCH NHẬN BIẾT BỆNH GỈ SẮT TÁO – TUYẾT TÙNG
+## CÁCH NHẬN BIẾT BỆNH GỈ SẮT TÁO – TUYẾT TÙNG
 
-Triệu chứng trên lá
+### Triệu chứng trên lá
 
 Triệu chứng thường xuất hiện dưới dạng các đốm trên lá.
 
@@ -45,7 +45,7 @@ Nếu số lượng đốm bệnh ít, cây thường vẫn có thể sinh trư�
 Nếu bệnh phát triển nặng, nhiều đốm có thể xuất hiện trên cùng một lá. Khi đó, lá có thể vàng và rụng sớm.
 
 
-Triệu chứng trên quả
+### Triệu chứng trên quả
 
 Bệnh gỉ sắt táo – tuyết tùng hiếm khi gây triệu chứng nghiêm trọng trên quả.
 
@@ -58,7 +58,7 @@ Các tổn thương này chủ yếu nằm trên bề mặt quả và thường 
 Vì vậy, bệnh trên quả thường ảnh hưởng nhiều đến hình thức và giá trị thương phẩm hơn là gây thối sâu vào bên trong quả.
 
 
-BỆNH LÂY NHIỄM VÀO CÂY TÁO NHƯ THẾ NÀO?
+## BỆNH LÂY NHIỄM VÀO CÂY TÁO NHƯ THẾ NÀO?
 
 Bệnh gỉ sắt táo – tuyết tùng không hoàn thành toàn bộ vòng đời chỉ trên cây táo.
 
@@ -83,7 +83,7 @@ Các bào tử được tạo ra trên cây táo không tiếp tục gây nhiễ
 Vì vậy, bệnh gỉ sắt táo – tuyết tùng không lây trực tiếp từ cây táo này sang cây táo khác theo cùng cơ chế như nhiều bệnh nấm thông thường.
 
 
-ĐIỀU KIỆN THUẬN LỢI CHO BỆNH PHÁT TRIỂN
+## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH PHÁT TRIỂN
 
 Độ ẩm trên lá và quả là yếu tố quan trọng giúp bào tử nấm bắt đầu quá trình nhiễm bệnh.
 
@@ -99,7 +99,7 @@ Nguy cơ bệnh tăng khi:
 Trong điều kiện khô ráo kéo dài, nguy cơ hình thành các đợt nhiễm mới thường giảm.
 
 
-MỨC ĐỘ GÂY HẠI CỦA BỆNH
+## MỨC ĐỘ GÂY HẠI CỦA BỆNH
 
 Bệnh gỉ sắt táo – tuyết tùng thường không làm cây táo chết.
 
@@ -117,9 +117,9 @@ Bệnh trở nên đáng lo ngại hơn khi:
 Nếu bệnh chỉ xuất hiện ở mức nhẹ và cây vẫn giữ được phần lớn bộ lá khỏe mạnh, thường không cần áp dụng biện pháp xử lý mạnh.
 
 
-CÁCH QUẢN LÝ BỆNH GỈ SẮT TÁO – TUYẾT TÙNG TRÊN CÂY TÁO
+## CÁCH QUẢN LÝ BỆNH GỈ SẮT TÁO – TUYẾT TÙNG TRÊN CÂY TÁO
 
-Theo dõi cây thường xuyên
+### Theo dõi cây thường xuyên
 
 Kiểm tra lá cây từ mùa xuân đến mùa hè để phát hiện sớm các đốm màu vàng hoặc cam đỏ.
 
@@ -134,7 +134,7 @@ Kiểm tra quả để phát hiện các đốm màu xanh lục đến nâu ho�
 Khi đánh giá mức độ bệnh, cần quan sát toàn bộ cây thay vì chỉ dựa vào một vài lá có đốm.
 
 
-Chấp nhận mức độ nhiễm nhẹ
+### Chấp nhận mức độ nhiễm nhẹ
 
 Theo University of Minnesota Extension, các đốm trên lá và tổn thương nhẹ trên quả thường có thể được chấp nhận nếu cây không bị rụng lá đáng kể.
 
@@ -143,7 +143,7 @@ Nếu cây sinh trưởng tốt, vẫn giữ được phần lớn lá và chỉ
 Việc hạn chế sử dụng thuốc khi không cần thiết giúp giảm chi phí và giảm ảnh hưởng đến môi trường.
 
 
-Cắt tỉa và chăm sóc cây
+### Cắt tỉa và chăm sóc cây
 
 Nếu trên cây xuất hiện cành hoặc nhánh bị bệnh, có thể cắt bỏ và đưa phần bị bệnh ra khỏi khu vực trồng.
 
@@ -156,7 +156,7 @@ Không nên để tán cây quá dày vì độ ẩm kéo dài trên bề mặt 
 Cần duy trì sức khỏe tổng thể của cây bằng cách cung cấp đủ nước, dinh dưỡng cân đối và hạn chế các yếu tố gây suy yếu cây.
 
 
-LỰA CHỌN GIỐNG TÁO KHÁNG BỆNH
+## LỰA CHỌN GIỐNG TÁO KHÁNG BỆNH
 
 Trồng giống táo có khả năng kháng bệnh là một trong những biện pháp quản lý lâu dài và hiệu quả.
 
@@ -177,7 +177,7 @@ Danh sách giống trên được xây dựng cho điều kiện Minnesota.
 Khi áp dụng tại Việt Nam hoặc khu vực có khí hậu khác, cần xem xét thêm khả năng thích nghi của từng giống với nhiệt độ, độ cao, lượng mưa, thời gian lạnh và điều kiện canh tác tại địa phương.
 
 
-SỬ DỤNG THUỐC DIỆT NẤM
+## SỬ DỤNG THUỐC DIỆT NẤM
 
 University of Minnesota Extension không khuyến nghị sử dụng thuốc diệt nấm thường xuyên để phòng bệnh gỉ sắt táo – tuyết tùng trên cây táo vì cây thường có khả năng chịu được mức nhiễm nhẹ.
 
@@ -194,7 +194,7 @@ Khi đốm bệnh đã hình thành, thuốc không thể làm các tổn thươ
 Tại Việt Nam, nếu cần sử dụng thuốc bảo vệ thực vật, chỉ nên sử dụng sản phẩm đã được đăng ký hợp pháp cho cây táo và đúng đối tượng bệnh cần xử lý.
 
 
-LƯU Ý AN TOÀN KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
+## LƯU Ý AN TOÀN KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
 
 Việc đề cập đến thuốc hoặc hoạt chất trong tài liệu này chỉ nhằm mục đích tham khảo và giáo dục.
 
@@ -213,7 +213,7 @@ Tránh gây ô nhiễm nguồn nước và môi trường xung quanh.
 Nhãn thuốc và quy định của cơ quan quản lý tại địa phương phải được ưu tiên hơn các hướng dẫn chung trong tài liệu tham khảo.
 
 
-TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
+## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
 
 Bệnh gỉ sắt táo – tuyết tùng trên cây táo có thể được nhận biết bằng các dấu hiệu chính sau:
 

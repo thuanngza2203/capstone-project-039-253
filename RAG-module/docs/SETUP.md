@@ -6,10 +6,10 @@
 
 - Python 3.11.
 - Kết nối Internet ở lần cài dependency, lần tải embedding model đầu tiên và khi dùng Gemini.
-- Gemini API key nếu dùng lệnh `ask`.
+- Gemini API key nếu chọn `LLM_PROVIDER=gemini`. Ollama/vLLM cần server tương ứng.
 - Dung lượng trống cho môi trường Python, model Hugging Face và Chroma.
 
-`index` và `search` chạy local sau khi embedding model đã được tải. `ask` luôn cần mạng trong V1.
+Index và semantic search dùng embedding local. BM25 không tải embedding; reranker tải khi bật. `ask` gọi provider trong `.env`; xem [README](../README.md) cho Ollama/vLLM Docker.
 
 ## 1. Tạo môi trường Python
 
@@ -68,7 +68,7 @@ Kết quả thành công sẽ báo số tài liệu và số chunk được lưu
 
 Mỗi lần sửa dữ liệu, đổi embedding model, chunk size hoặc overlap, chạy lại lệnh này. Index được lưu tại `chroma_db/`.
 
-Nếu nâng cấp từ bản chưa có identity header và metadata bệnh, bắt buộc chạy lại `python main.py index`; index cũ không tương thích với filter `disease_id`.
+Nếu thay header/metadata/embedding, chạy lại index. Hybrid retrieval dùng tiếp index hiện có; không còn filter disease_id suy từ query.
 
 Lệnh `index` reset collection cũ trước khi ghi dữ liệu mới. Nếu tiến trình bị
 ngắt, hết bộ nhớ hoặc lỗi giữa chừng, hãy chạy lại lệnh sau khi sửa nguyên nhân;

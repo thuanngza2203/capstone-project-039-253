@@ -1,4 +1,4 @@
-BỆNH PHẤN TRẮNG TRÊN CÂY ANH ĐÀO
+# BỆNH PHẤN TRẮNG TRÊN CÂY ANH ĐÀO
 
 Nguồn tham khảo:
 Washington State University Tree Fruit
@@ -11,9 +11,9 @@ Các giống anh đào ngọt chín giữa vụ và cuối vụ thường bị �
 Để hạn chế áp lực bệnh trong vườn và bảo vệ quả đang phát triển, việc kiểm soát bệnh cần được thực hiện trong suốt mùa sinh trưởng, không chỉ tập trung vào giai đoạn quả gần thu hoạch.
 
 
-CÁCH NHẬN BIẾT BỆNH PHẤN TRẮNG
+## CÁCH NHẬN BIẾT BỆNH PHẤN TRẮNG
 
-Triệu chứng trên lá
+### Triệu chứng trên lá
 
 Các triệu chứng đầu tiên thường xuất hiện khoảng 7 đến 10 ngày sau khi bắt đầu đợt tưới đầu tiên trong mùa.
 
@@ -42,7 +42,7 @@ Khi nhiễm nặng, lá có thể nhăn, xoắn và biến dạng rõ rệt.
 Các lá mới hình thành trên chồi non có thể ngày càng nhỏ hơn bình thường, thường có màu nhạt và có thể bị méo mó.
 
 
-Triệu chứng trên quả
+### Triệu chứng trên quả
 
 Nhiễm bệnh trên quả ở giai đoạn sớm thường khó phát hiện bằng mắt thường.
 
@@ -57,7 +57,7 @@ Khi bệnh phát triển mạnh hơn, lớp nấm màu trắng dạng bột có 
 Quả bị phủ lớp nấm trắng thường mất giá trị thương phẩm, đặc biệt đối với các giống anh đào ngọt thu hoạch vào giữa hoặc cuối mùa.
 
 
-VÒNG ĐỜI CỦA NẤM VÀ MỐI LIÊN QUAN ĐẾN QUẢN LÝ BỆNH
+## VÒNG ĐỜI CỦA NẤM VÀ MỐI LIÊN QUAN ĐẾN QUẢN LÝ BỆNH
 
 Vào mùa thu, nấm Podosphaera clandestina tạo ra các cấu trúc tồn tại qua mùa bất lợi gọi là chasmothecia.
 
@@ -80,7 +80,7 @@ Mặc dù ascospore là nguồn khởi đầu cho dịch bệnh trong mùa, các
 Đến đầu mùa thu, nấm bắt đầu hình thành chasmothecia mới để chuẩn bị cho giai đoạn lá rụng và thời kỳ tồn tại qua mùa bất lợi.
 
 
-BỆNH PHẤN TRẮNG HOẠT ĐỘNG TRONG THỜI GIAN NÀO?
+## BỆNH PHẤN TRẮNG HOẠT ĐỘNG TRONG THỜI GIAN NÀO?
 
 Bệnh phấn trắng không chỉ hoạt động trong giai đoạn quả đang phát triển.
 
@@ -91,14 +91,14 @@ Vì vậy, nếu chỉ kiểm soát bệnh trong thời gian từ khi quả hìn
 Việc quản lý bệnh trong toàn bộ thời gian nấm hoạt động giúp giảm lượng nguồn bệnh tích tụ và hạn chế khả năng nấm tồn tại sang vụ sau.
 
 
-ĐIỀU KIỆN KHỞI PHÁT NHIỄM BỆNH
+## ĐIỀU KIỆN KHỞI PHÁT NHIỄM BỆNH
 
 Theo nghiên cứu được dẫn trong tài liệu của Washington State University, nhiễm bệnh sơ cấp vào mùa xuân thường có thể bắt đầu khi có khoảng 1/10 inch nước mưa hoặc nước tưới, tương đương khoảng 2,5 milimét nước, kết hợp với nhiệt độ từ 50 độ F trở lên, tương đương khoảng 10 độ C trở lên.
 
 Một đợt ẩm ướt vào mùa xuân có thể kích thích các cấu trúc tồn tại của nấm giải phóng bào tử và bắt đầu chu kỳ nhiễm bệnh mới.
 
 
-ĐIỀU KIỆN THUẬN LỢI CHO BỆNH PHÁT TRIỂN
+## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH PHÁT TRIỂN
 
 Nấm phấn trắng không cần lớp nước tự do trên bề mặt lá để phát triển.
 
@@ -122,9 +122,9 @@ Nồng độ bào tử trong không khí có xu hướng cao nhất từ cuối 
 Thời tiết ấm, ít mưa nhưng độ ẩm đủ cao để tạo sương buổi sáng là điều kiện rất thuận lợi để bệnh tăng nhanh.
 
 
-BIỆN PHÁP CANH TÁC
+## BIỆN PHÁP CANH TÁC
 
-Quản lý tưới nước
+### Quản lý tưới nước
 
 Trong điều kiện khô hạn ở miền Tây Hoa Kỳ, tưới quá sớm vào mùa xuân có thể kích thích bệnh phấn trắng bắt đầu sớm hơn.
 
@@ -141,7 +141,7 @@ Không nên áp dụng máy móc việc trì hoãn tưới cho mọi vùng trồ
 Mục tiêu chính là tránh tạo ra môi trường ẩm kéo dài không cần thiết trong tán cây nhưng đồng thời không để cây bị thiếu nước.
 
 
-Cắt tỉa cây
+### Cắt tỉa cây
 
 Độ ẩm cao tạo điều kiện thuận lợi cho bệnh phấn trắng.
 
@@ -159,7 +159,7 @@ Khi cắt tỉa nên:
 - Duy trì cấu trúc tán giúp ánh sáng và không khí đi vào bên trong.
 
 
-Quản lý chồi mọc từ gốc
+### Quản lý chồi mọc từ gốc
 
 Các chồi mọc từ gốc thường có nhiều mô lá non, là loại mô rất dễ bị bệnh phấn trắng.
 
@@ -172,7 +172,7 @@ Vì vậy, nấm có thể tồn tại và phát triển trên các chồi này 
 Nên loại bỏ các chồi mọc từ gốc không cần thiết để giảm nguồn bệnh trong vườn.
 
 
-QUẢN LÝ BỆNH TRÊN LÁ ĐỂ BẢO VỆ QUẢ
+## QUẢN LÝ BỆNH TRÊN LÁ ĐỂ BẢO VỆ QUẢ
 
 Một nguyên tắc quan trọng trong quản lý bệnh phấn trắng trên quả anh đào là phải kiểm soát bệnh trên lá.
 
@@ -185,7 +185,7 @@ Do đó, không nên đợi đến khi quả xuất hiện lớp nấm trắng m
 Việc giảm bệnh trên lá ngay từ sớm giúp giảm nguồn bào tử và bảo vệ quả trong suốt thời gian phát triển.
 
 
-BIỆN PHÁP HÓA HỌC
+## BIỆN PHÁP HÓA HỌC
 
 Phần lớn thuốc diệt nấm tổng hợp dùng để kiểm soát bệnh phấn trắng có tác dụng phòng ngừa tốt hơn là tiêu diệt hoàn toàn các vết bệnh đã hình thành.
 
@@ -206,7 +206,7 @@ Cần luân phiên các nhóm thuốc có cơ chế tác động khác nhau đ�
 Việc lựa chọn sản phẩm, hoạt chất, liều lượng, số lần phun và thời gian cách ly phải tuân theo nhãn thuốc và quy định tại địa phương.
 
 
-PHÒNG NGỪA KHÁNG THUỐC
+## PHÒNG NGỪA KHÁNG THUỐC
 
 Nấm gây bệnh có thể phát triển khả năng kháng thuốc nếu một nhóm thuốc có cùng cơ chế tác động được sử dụng quá thường xuyên.
 
@@ -220,7 +220,7 @@ Nấm gây bệnh có thể phát triển khả năng kháng thuốc nếu một
 - Theo dõi hiệu quả sau xử lý để phát hiện sớm dấu hiệu giảm độ nhạy của nấm với thuốc.
 
 
-QUẢN LÝ BỆNH SAU THU HOẠCH
+## QUẢN LÝ BỆNH SAU THU HOẠCH
 
 Bệnh phấn trắng có thể tiếp tục hoạt động sau khi quả đã được thu hoạch.
 
@@ -235,7 +235,7 @@ Do đó, sau thu hoạch vẫn cần:
 - Áp dụng biện pháp phòng bệnh phù hợp nếu áp lực bệnh trong vườn cao và sản phẩm được phép sử dụng.
 
 
-LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
+## LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
 
 Việc đề cập đến biện pháp hóa học trong tài liệu này nhằm mục đích cung cấp thông tin tham khảo.
 
@@ -258,7 +258,7 @@ Bảo vệ nguồn nước, người lao động, vật nuôi và các sinh vậ
 Nhãn thuốc và quy định của cơ quan quản lý tại địa phương phải được ưu tiên hơn các khuyến cáo chung trong tài liệu tham khảo.
 
 
-TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
+## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
 
 Bệnh phấn trắng trên cây anh đào có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 

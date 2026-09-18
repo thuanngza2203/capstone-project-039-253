@@ -28,17 +28,17 @@ Mỗi file nên chỉ mô tả một bệnh. Ghi rõ tên chuẩn và các tên 
 
 Không chỉnh trực tiếp file bên trong `chroma_db/`; thư mục này luôn có thể tạo lại từ `data/`.
 
-Sau khi source được nâng cấp để có disease identity, phải build lại index cũ. Khi smoke test, dùng cả một câu nêu rõ tên bệnh và một câu chỉ mô tả triệu chứng: câu đầu phải được filter đúng bệnh, câu sau phải được tìm trên toàn corpus.
+Bản hybrid dùng tiếp index hiện có. Thử cả tên bệnh, triệu chứng và câu so sánh; tất cả tìm toàn corpus. Dùng `search --debug` để đánh giá thứ hạng.
 
 ## Debug khi câu trả lời sai hoặc thiếu
 
 Chạy `search` bằng chính câu hỏi gây lỗi, rồi kiểm tra theo thứ tự:
 
 - **Không thấy source đúng:** xác nhận file nằm trong `data/`, có đuôi `.txt`, đúng UTF-8 và đã chạy lại `index` sau lần sửa gần nhất.
-- **Câu hỏi nêu rõ bệnh nhưng sang source khác:** kiểm tra `disease`, `disease_id`, `disease_aliases`; sửa tên/alias bị thiếu hoặc trùng rồi build lại index.
-- **Câu hỏi chung tìm nhiều bệnh:** đây là hành vi dự kiến vì query không khớp duy nhất một `disease_id`; đánh giá thứ tự dense search thay vì chờ một filter.
+- **Câu hỏi nêu rõ bệnh nhưng sang source khác:** so sánh `--mode semantic`, `--mode bm25`, `--mode hybrid` với `--no-rerank --debug`; xem nguồn đúng mất ở nhánh nào.
+- **Câu hỏi chung tìm nhiều bệnh:** đánh giá mức liên quan và thứ hạng; hiện không có filter suy từ query.
 - **Source đúng nhưng chunk thiếu phần quan trọng:** đặt thông tin liên quan gần nhau hơn trong TXT hoặc thử điều chỉnh chunk size/overlap.
-- **Chunk đúng nhưng đứng quá thấp:** thử `--top-k 6` trên lệnh `search` trước, hoặc viết câu hỏi bằng thuật ngữ xuất hiện trong tài liệu.
+- **Chunk đúng nhưng đứng quá thấp:** xem từng nhánh, thử tăng `RETRIEVAL_CANDIDATE_K` và so sánh có/không `--rerank` trên cùng query.
 - **Context đúng nhưng câu trả lời sai:** xem prompt và thử `GEMINI_MODEL`; đây là vấn đề generation, không phải indexing.
 - **Nguồn trả về không nói về câu hỏi:** corpus có thể chưa có tài liệu phù hợp. Không nên ép LLM suy đoán ngoài dữ liệu.
 
@@ -54,7 +54,7 @@ Chỉ đổi một biến tại một thời điểm và giữ lại vài câu h
    - `CHUNK_SIZE`: chunk lớn chứa nhiều ngữ cảnh hơn nhưng có thể pha nhiều chủ đề.
    - `CHUNK_OVERLAP`: overlap lớn giảm mất ý ở ranh giới nhưng tăng số chunk.
    - Với top-k, thử `python main.py search "<câu hỏi>" --top-k 6` trước khi đổi mặc định `TOP_K`.
-4. Nếu đổi chunk size/overlap, chạy lại `index`. Nếu chỉ đổi `TOP_K`, không cần rebuild.
+4. Nếu đổi chunk size/overlap, chạy lại `index`. Nếu chỉ đổi top-k, mode hoặc reranker, không cần rebuild.
 5. Chạy lại cùng bộ câu hỏi và chỉ giữ thay đổi nếu retrieval tốt hơn rõ ràng.
 
 Đổi `EMBEDDING_MODEL` hoặc thiết lập normalize luôn yêu cầu build lại index. Đổi `GEMINI_MODEL` không yêu cầu build lại.
@@ -83,7 +83,7 @@ Checklist trước khi coi dữ liệu mới là sẵn sàng:
 - Thông tin thuốc/hoạt chất không có liều lượng suy đoán; khuyến cáo tuân thủ nhãn và quy định địa phương.
 - `python main.py index` hoàn tất và báo số tài liệu/chunk hợp lý.
 - Một câu dùng tên bệnh chuẩn và một câu dùng alias đều tìm đúng file bằng `search`.
-- Một câu mô tả triệu chứng chung và một câu so sánh nhiều bệnh được thử để xác nhận retrieval không filter nhầm.
+- Một câu mô tả triệu chứng chung và một câu so sánh nhiều bệnh được thử để kiểm tra ứng viên và nguồn được xếp hạng.
 - Ít nhất ba câu hỏi tiếng Việt tìm đúng file bằng `search`.
 - Một câu ngoài phạm vi được thử bằng `ask` và hệ thống thừa nhận thiếu dữ liệu.
 - Nếu cần tiếng Anh, thêm một smoke test tiếng Anh; V1 không đảm bảo chất lượng tương đương tiếng Việt.

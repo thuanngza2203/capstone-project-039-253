@@ -7,13 +7,15 @@
 Module này đọc `.env`, khai báo đường dẫn và hằng số dùng chung, đồng thời chứa hai factory:
 
 - Factory embedding tạo `HuggingFaceEmbeddings` với `AITeamVN/Vietnamese_Embedding`, vector được normalize và thiết bị mặc định là CPU.
-- `create_chat_model()` tạo `ChatGoogleGenerativeAI` với `gemini-2.5-flash`, `temperature=0` và tắt thinking budget cho pipeline đơn giản, ổn định.
+- `create_chat_model()` chọn Ollama, Gemini hoặc vLLM qua `LLM_PROVIDER`.
+- `get_retrieval_settings()` đọc mode, candidate-k, RRF và reranker; xem [RETRIEVAL.md](RETRIEVAL.md).
+- `get_chat_settings()` đọc giới hạn lịch sử; xem [CHAT_MEMORY.md](CHAT_MEMORY.md).
 
 Các biến môi trường được hỗ trợ:
 
 | Biến | Mặc định | Dùng cho |
 |---|---|---|
-| `GEMINI_API_KEY` | Không có | Bắt buộc khi gọi `ask()` |
+| `GEMINI_API_KEY` | Không có | Bắt buộc khi chọn provider Gemini |
 | `GEMINI_MODEL` | `gemini-2.5-flash` | Model sinh câu trả lời |
 | `EMBEDDING_MODEL` | `AITeamVN/Vietnamese_Embedding` | Model tạo vector local |
 | `EMBEDDING_DEVICE` | `cpu` | Thiết bị chạy embedding, ví dụ `cpu` hoặc `cuda` |
@@ -42,17 +44,17 @@ Load và split tài liệu, reset collection, tạo embedding rồi lưu vào Ch
 
 Hàm luôn rebuild thay vì cập nhật tăng dần. Vì vậy cùng một corpus chạy `index` nhiều lần không tạo chunk trùng.
 
-Identity header và các trường disease là một phần của index. Sau khi nâng cấp từ index cũ, phải chạy lại `python main.py index`.
+Identity header và metadata là một phần của index. Chỉ cần index lại khi đổi nội dung/header/embedding; bổ sung hybrid retrieval dùng tiếp index hiện có.
 
 ### `retrieve(question, k=TOP_K) -> list[Document]`
 
-Kiểm tra câu hỏi, mở index và dựng catalog bệnh từ metadata. Nếu query khớp duy nhất một `disease_id`, hàm truyền Chroma filter theo ID đó; nếu không rõ hoặc nhắc nhiều bệnh, hàm dense search toàn collection. Kết quả trong phạm vi tìm kiếm được xếp theo độ tương đồng, tối đa `k` document.
+Kiểm tra query, mở Chroma, gọi `retrieval.search_store()` và trả top-k Document. Tham số `mode` chọn semantic, bm25 hoặc hybrid; `rerank` bật/tắt CrossEncoder. Mọi mode đều tìm toàn corpus, không khớp alias để tạo disease filter.
 
-Hàm này không gọi Gemini nên phù hợp để debug retrieval hoặc dùng trong code khác.
+Hàm này không gọi LLM sinh câu trả lời. `retrieve_with_debug()` nhận cùng tham số và trả `SearchResult`: `.documents` để dùng tiếp, `.to_debug_dict()` để xem ứng viên/thứ hạng/điểm.
 
-Filter chỉ bật khi việc đối chiếu tên bệnh/tên gọi khác cho đúng một ID. Câu hỏi mô tả triệu chứng không có tên bệnh và câu hỏi so sánh từ hai bệnh trở lên cố ý không filter.
+Chi tiết các hàm trong `retrieval.py`, cách inject store và đọc debug: [RETRIEVAL.md](RETRIEVAL.md).
 
-Tên được so khớp không phân biệt chữ hoa hay dấu tiếng Việt. Các từ cấu trúc như “bệnh”, “trên”, “cây” được bỏ qua, nhưng các từ còn lại của alias phải tạo thành một cụm liên tiếp. Vì vậy “bệnh ghẻ trên táo” vẫn khớp, còn mô tả “quả bị thối rồi chuyển màu đen” không tự động bị coi là tên bệnh thối đen. Cụm đứng sau phủ định rõ như “không phải” hoặc “loại trừ” cũng không bật filter.
+Alias tiếp tục nằm trong identity header để hỗ trợ tìm kiếm; không có bảng cây/bệnh hay quy tắc phủ định để khóa phạm vi truy vấn.
 
 ### `format_context(documents) -> str`
 
@@ -74,14 +76,30 @@ Gọi `retrieve()`, format context, chạy chuỗi `ChatPromptTemplate | chat mo
 
 `source_paths` được suy ra trực tiếp từ kết quả retrieval và loại bỏ đường dẫn lặp. Nếu không có chunk, hàm trả thông báo thiếu dữ liệu mà không gọi Gemini. Nếu thiếu API key hoặc API lỗi, hàm báo lỗi thay vì tự sinh một câu trả lời thay thế.
 
+### `RAGSession`
+
+Giữ Chroma, LLM client và lịch sử riêng cho một cuộc hội thoại trong cùng
+process. `warmup()` chuẩn bị model local; `ask()` dùng history để viết query
+độc lập, retrieve rồi trả lời; `ask_with_debug()` trả thêm query thực tế và
+trace. `search()` luôn độc lập và không gọi LLM. `clear_history()` xóa lịch sử
+mà không nạp lại tài nguyên.
+
+## `conversation.py`
+
+`ChatTurn` giữ câu gốc/query retrieval/câu trả lời. `ConversationMemory` giới hạn
+số lượt và ký tự; `rewrite_question()` dùng cùng LLM của phiên để làm rõ câu
+nối tiếp. Kiểm tra JSON đầu ra để tránh đưa câu trả lời vào retrieval. Xem
+[CHAT_MEMORY.md](CHAT_MEMORY.md) để đọc luồng và các giới hạn.
+
 ## `main.py`
 
-`argparse` ánh xạ ba subcommand tới API trong `rag.py`:
+`argparse` ánh xạ bốn subcommand tới API trong `rag.py`:
 
 ```powershell
 python main.py index
 python main.py search "<câu hỏi>"
 python main.py ask "<câu hỏi>"
+python main.py chat --debug
 ```
 
 CLI chỉ chịu trách nhiệm nhận input và trình bày output. Có thể import `rag.py` mà không phụ thuộc CLI.
@@ -93,7 +111,7 @@ CLI chỉ chịu trách nhiệm nhận input và trình bày output. Có thể i
 | `Document` | Gói nội dung văn bản và metadata đi cùng nhau |
 | `RecursiveCharacterTextSplitter` | Chia văn bản theo đoạn/câu với overlap |
 | `HuggingFaceEmbeddings` | Chạy embedding tiếng Việt trên máy |
-| `Chroma` | Persist vector/identity metadata, similarity search local và filter theo `disease_id` |
+| `Chroma` | Persist vector/text/metadata, semantic search và cung cấp text cho BM25 |
 | `ChatPromptTemplate` | Ghép quy tắc, câu hỏi và context thành prompt |
 | `ChatGoogleGenerativeAI` | Gọi Gemini để sinh câu trả lời |
 | `StrOutputParser` | Chuyển message từ model thành chuỗi |
@@ -124,23 +142,20 @@ print(answer)
 print("Nguồn:", *sources, sep="\n- ")
 ```
 
-## Thay Gemini bằng local LLM sau này
+## Chọn LLM provider
 
-Giữ nguyên chữ ký `create_chat_model()` và chỉ đổi phần khởi tạo bên trong `config.py`. Ví dụ định hướng với Ollama sau khi bổ sung dependency phù hợp:
+Đổi `LLM_PROVIDER` trong `.env`, đặt model/endpoint/key tương ứng và chạy lại chương trình. Ví dụ:
 
-```python
-from langchain_ollama import ChatOllama
-
-
-def create_chat_model():
-    return ChatOllama(model="ten-model-local", temperature=0)
+```dotenv
+LLM_PROVIDER=vllm
+VLLM_BASE_URL=http://127.0.0.1:8000/v1
+VLLM_MODEL=Qwen/Qwen3-0.6B
 ```
 
 Không cần sửa `ask()` vì LangChain chat model vẫn tham gia cùng pipeline prompt/parser. Cũng không cần build lại Chroma nếu chỉ thay LLM. Nếu thay embedding model, bắt buộc chạy lại `python main.py index`.
 
 ## Vì sao V1 chưa có các thành phần khác?
 
-- **BM25/hybrid search và reranker:** tăng dependency và nhiều tham số phải đánh giá; dense search đủ để tạo baseline dễ hiểu.
 - **Semantic chunking:** cần thêm embedding call trong ingestion và khó quan sát hơn recursive chunking.
 - **Memory hội thoại:** làm câu hỏi phụ thuộc state, trong khi V1 cần mỗi truy vấn độc lập và dễ test.
 - **Citation validator:** V1 đã trả danh sách source thật riêng; validation tự động có thể thêm khi cần độ tin cậy cao hơn.

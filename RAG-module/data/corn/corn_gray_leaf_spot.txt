@@ -1,4 +1,4 @@
-BỆNH ĐỐM XÁM LÁ TRÊN CÂY NGÔ
+# BỆNH ĐỐM XÁM LÁ TRÊN CÂY NGÔ
 
 Nguồn tham khảo chính:
 Bayer Crop Science
@@ -13,7 +13,7 @@ Bệnh có thể xuất hiện trong hầu hết các vụ trồng ngô ở nh�
 Việc sử dụng giống có mức độ mẫn cảm thấp, quản lý tàn dư cây ngô, luân canh và theo dõi ruộng đúng thời điểm là những biện pháp quan trọng để hạn chế thiệt hại.
 
 
-TÁC NHÂN GÂY BỆNH
+## TÁC NHÂN GÂY BỆNH
 
 Bệnh đốm xám lá trên ngô do nấm Cercospora zeae-maydis gây ra.
 
@@ -31,9 +31,9 @@ Việc giảm khả năng quang hợp có thể dẫn đến:
 - Tăng nguy cơ xuất hiện một số bệnh thối thân vào cuối mùa.
 
 
-CÁCH NHẬN BIẾT BỆNH ĐỐM XÁM LÁ
+## CÁCH NHẬN BIẾT BỆNH ĐỐM XÁM LÁ
 
-Triệu chứng ban đầu
+### Triệu chứng ban đầu
 
 Các vết bệnh thường bắt đầu dưới dạng những đốm nhỏ màu nâu nhạt đến nâu.
 
@@ -46,7 +46,7 @@ Một cách kiểm tra ngoài đồng ruộng là đưa lá lên trước ánh s
 Khi soi ngược sáng, có thể quan sát thấy một quầng nhạt giống như thấm nước bao quanh vết bệnh.
 
 
-Hình dạng đặc trưng của vết bệnh
+### Hình dạng đặc trưng của vết bệnh
 
 Trong giai đoạn đầu, vết bệnh thường có hình chữ nhật hoặc gần hình chữ nhật.
 
@@ -65,7 +65,7 @@ Chiều dài của vết bệnh có thể đạt khoảng 3 đến 4 inch, tươ
 Mặc dù kéo dài, nhiều vết bệnh vẫn giữ hình dạng tương đối chữ nhật do bị giới hạn giữa các gân lá.
 
 
-Vết bệnh khi trưởng thành
+### Vết bệnh khi trưởng thành
 
 Khi điều kiện ấm và ẩm thuận lợi, nấm tạo ra nhiều cấu trúc sinh bào tử.
 
@@ -80,7 +80,7 @@ Khi nhiều vết bệnh nằm gần nhau, chúng có thể liên kết thành n
 Nếu nhiều lá phía trên bị bệnh nặng, khả năng quang hợp của cây giảm mạnh và nguy cơ mất năng suất tăng lên.
 
 
-ẢNH HƯỞNG CỦA THỜI TIẾT ĐẾN HÌNH DẠNG VẾT BỆNH
+## ẢNH HƯỞNG CỦA THỜI TIẾT ĐẾN HÌNH DẠNG VẾT BỆNH
 
 Trong điều kiện nóng và khô, sự phát triển của vết bệnh có thể chậm lại hoặc tạm dừng.
 
@@ -95,7 +95,7 @@ Khi thời tiết ấm và ẩm trở lại, bệnh có thể tiếp tục phát
 Điều này có nghĩa là một giai đoạn khô nóng có thể làm bệnh tạm thời chậm lại nhưng không nhất thiết loại bỏ nguồn bệnh trên cây.
 
 
-PHÂN BIỆT BỆNH ĐỐM XÁM LÁ VỚI MỘT SỐ BỆNH LÁ KHÁC
+## PHÂN BIỆT BỆNH ĐỐM XÁM LÁ VỚI MỘT SỐ BỆNH LÁ KHÁC
 
 Bệnh đốm xám lá có thể bị nhầm với một số bệnh lá khác trên ngô.
 
@@ -110,7 +110,7 @@ Một số dấu hiệu hỗ trợ phân biệt gồm:
 Bệnh có thể bị nhầm với bệnh cháy lá thán thư, bệnh đốm mắt hoặc bệnh gỉ sắt thông thường.
 
 
-Phân biệt với bệnh gỉ sắt thông thường
+### Phân biệt với bệnh gỉ sắt thông thường
 
 Bệnh gỉ sắt thông thường tạo các mụn gỉ nổi lên khỏi bề mặt lá.
 
@@ -119,7 +119,7 @@ Các mụn gỉ thường có màu đỏ đến đỏ nâu và chứa bào tử 
 Ngược lại, bệnh đốm xám lá tạo ra các vùng mô chết phẳng, thường có hình chữ nhật và không tạo mụn gỉ bột nổi lên.
 
 
-Phân biệt với bệnh đốm mắt
+### Phân biệt với bệnh đốm mắt
 
 Bệnh đốm mắt thường tạo các đốm nhỏ, tròn, có phần trung tâm màu nâu nhạt và quầng vàng trong mờ xung quanh.
 
@@ -128,14 +128,14 @@ Các đốm này thường nhỏ hơn nhiều so với vết bệnh đốm xám 
 Bệnh đốm xám lá thường tạo vết bệnh dài, góc cạnh và bị giới hạn bởi các gân lá.
 
 
-Phân biệt với bệnh cháy lá thán thư
+### Phân biệt với bệnh cháy lá thán thư
 
 Bệnh cháy lá thán thư có thể gây các vùng mô chết trên lá nhưng hình dạng vết bệnh thường không đều và không có đặc điểm hình chữ nhật bị giới hạn rõ giữa các gân lá như bệnh đốm xám lá.
 
 Nếu triệu chứng không điển hình hoặc nhiều bệnh xuất hiện đồng thời, nên sử dụng chẩn đoán chuyên môn để xác nhận chính xác.
 
 
-CHU KỲ BỆNH
+## CHU KỲ BỆNH
 
 Nấm gây bệnh đốm xám lá có thể tồn tại qua mùa bất lợi trong tàn dư cây ngô còn lại trên mặt đất hoặc nằm sát bề mặt đất.
 
@@ -152,7 +152,7 @@ Bào tử có thể được phát tán lên các lá phía dưới của cây n
 Do nguồn bệnh nằm trên tàn dư gần mặt đất, các lá thấp thường là những lá đầu tiên bị nhiễm.
 
 
-THỜI ĐIỂM BỆNH PHÁT TRIỂN
+## THỜI ĐIỂM BỆNH PHÁT TRIỂN
 
 Theo tài liệu Bayer, nhiễm bệnh có thể bắt đầu từ tháng Sáu trong điều kiện sản xuất tại Hoa Kỳ.
 
@@ -174,7 +174,7 @@ Bệnh xuất hiện càng sớm thì càng có nhiều thời gian để tạo 
 Do đó, nhiễm bệnh sớm thường làm tăng nguy cơ thiệt hại kinh tế.
 
 
-ĐIỀU KIỆN THUẬN LỢI CHO BỆNH PHÁT TRIỂN
+## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH PHÁT TRIỂN
 
 Bệnh đốm xám lá phát triển mạnh trong điều kiện ấm và ẩm.
 
@@ -196,7 +196,7 @@ Trong điều kiện nóng và khô, bệnh có thể phát triển chậm lại
 Khi điều kiện ẩm thuận lợi quay trở lại, quá trình phát triển bệnh có thể tiếp tục.
 
 
-CÁC YẾU TỐ LÀM TĂNG NGUY CƠ BỆNH
+## CÁC YẾU TỐ LÀM TĂNG NGUY CƠ BỆNH
 
 Nguy cơ bệnh thường cao hơn khi có nhiều yếu tố sau cùng xuất hiện:
 
@@ -212,7 +212,7 @@ Nguy cơ bệnh thường cao hơn khi có nhiều yếu tố sau cùng xuất h
 Bổ sung: Những ruộng nằm trong vùng trũng, thông khí kém hoặc thường xuyên giữ ẩm lâu sau mưa và sương cũng có thể tạo vi khí hậu thuận lợi hơn cho bệnh.
 
 
-ẢNH HƯỞNG CỦA BỆNH ĐẾN NĂNG SUẤT
+## ẢNH HƯỞNG CỦA BỆNH ĐẾN NĂNG SUẤT
 
 Khi giống ngô mẫn cảm và thời tiết thuận lợi, bệnh có thể làm giảm năng suất đáng kể.
 
@@ -231,7 +231,7 @@ Hậu quả có thể gồm:
 Mức độ thiệt hại thường nghiêm trọng hơn khi bệnh phát triển mạnh trên các lá phía trên và quanh bắp trong giai đoạn cây đang hình thành và tích lũy vật chất vào hạt.
 
 
-NGUY CƠ ĐỔ THÂN VÀ BỆNH THỐI THÂN CUỐI VỤ
+## NGUY CƠ ĐỔ THÂN VÀ BỆNH THỐI THÂN CUỐI VỤ
 
 Khi diện tích lá quang hợp giảm mạnh, cây có thể phải huy động carbohydrate dự trữ từ thân để tiếp tục nuôi hạt.
 
@@ -247,9 +247,9 @@ Vì vậy, những ruộng bị bệnh đốm xám lá nặng có thể có nguy
 Bổ sung: Khi ruộng bị bệnh nặng vào cuối vụ, nên kiểm tra độ chắc của thân và khả năng đứng cây để xác định thứ tự ưu tiên thu hoạch.
 
 
-CÁCH QUẢN LÝ BỆNH ĐỐM XÁM LÁ
+## CÁCH QUẢN LÝ BỆNH ĐỐM XÁM LÁ
 
-Lựa chọn giống ít mẫn cảm
+### Lựa chọn giống ít mẫn cảm
 
 Sử dụng giống hoặc sản phẩm ngô có mức độ mẫn cảm thấp là một trong những biện pháp quan trọng nhất.
 
@@ -263,7 +263,7 @@ Giống ít mẫn cảm thường:
 Ở những ruộng có lịch sử bệnh nặng, khả năng chống chịu bệnh nên được xem là một tiêu chí quan trọng khi lựa chọn giống.
 
 
-Luân canh cây trồng
+### Luân canh cây trồng
 
 Nấm tồn tại trên tàn dư ngô.
 
@@ -274,7 +274,7 @@ Luân canh với cây trồng không phải ngô giúp làm giảm lượng tàn
 Theo tài liệu Bayer, trong các hệ thống canh tác bảo tồn hoặc ít làm đất, luân canh ít nhất hai năm có thể cần thiết để giảm nguồn bệnh vì nấm có thể tồn tại trên tàn dư ngô lâu hơn một năm.
 
 
-Quản lý tàn dư cây ngô
+### Quản lý tàn dư cây ngô
 
 Tàn dư ngô là nguồn tồn tại quan trọng của nấm.
 
@@ -291,7 +291,7 @@ Tuy nhiên, quyết định làm đất cần cân nhắc đồng thời các y�
 Không nên sử dụng việc chôn tàn dư như biện pháp duy nhất để kiểm soát bệnh.
 
 
-THEO DÕI ĐỒNG RUỘNG
+## THEO DÕI ĐỒNG RUỘNG
 
 Ở những ruộng có nguy cơ bệnh, tài liệu Bayer khuyến nghị bắt đầu kiểm tra khoảng giai đoạn V10 đến V14.
 
@@ -313,7 +313,7 @@ Khi kiểm tra ruộng:
 Bổ sung: Một vài đốm bệnh trên các lá thấp không đồng nghĩa với việc bắt buộc phải phun thuốc. Quan trọng hơn là vị trí của bệnh trên tán, tốc độ bệnh tiến lên các lá phía trên, giai đoạn sinh trưởng của cây và dự báo thời tiết.
 
 
-SỬ DỤNG THUỐC DIỆT NẤM
+## SỬ DỤNG THUỐC DIỆT NẤM
 
 Nếu bệnh đốm xám lá đã xuất hiện và thời tiết tiếp tục thuận lợi cho bệnh, sử dụng thuốc diệt nấm trong mùa có thể giúp bảo vệ năng suất.
 
@@ -328,7 +328,7 @@ Tuy nhiên, việc lựa chọn hoạt chất và sản phẩm cụ thể phải
 Không nên tự động áp dụng tên sản phẩm thương mại hoặc hoạt chất được đề cập trong tài liệu nước ngoài vào điều kiện Việt Nam.
 
 
-KHI NÀO NÊN CÂN NHẮC PHUN THUỐC?
+## KHI NÀO NÊN CÂN NHẮC PHUN THUỐC?
 
 Có thể cân nhắc biện pháp hóa học khi nhiều yếu tố nguy cơ cùng xuất hiện:
 
@@ -345,7 +345,7 @@ Có thể cân nhắc biện pháp hóa học khi nhiều yếu tố nguy cơ c�
 Nếu bệnh xuất hiện rất muộn hoặc chỉ có một lượng nhỏ vết bệnh ở các lá thấp, lợi ích kinh tế của việc phun có thể thấp.
 
 
-PHÒNG NGỪA KHÁNG THUỐC
+## PHÒNG NGỪA KHÁNG THUỐC
 
 Không nên sử dụng liên tục một hoạt chất hoặc một nhóm thuốc có cùng cơ chế tác động.
 
@@ -359,7 +359,7 @@ Không nên sử dụng liên tục một hoạt chất hoặc một nhóm thu�
 - Chỉ phun khi nguy cơ bệnh và lợi ích kinh tế phù hợp.
 
 
-LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
+## LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
 
 Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho cây ngô và bệnh đốm xám lá tại khu vực sản xuất.
 
@@ -378,7 +378,7 @@ Bảo vệ người lao động, nguồn nước và sinh vật không phải đ
 Thông tin về thuốc trong tài liệu tham khảo nước ngoài chỉ nên được xem là thông tin kỹ thuật, không thay thế quy định tại địa phương.
 
 
-BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI ĐỒNG RUỘNG
+## BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI ĐỒNG RUỘNG
 
 Khi nghi ngờ bệnh đốm xám lá, có thể kiểm tra theo trình tự sau:
 
@@ -395,7 +395,7 @@ Khi nghi ngờ bệnh đốm xám lá, có thể kiểm tra theo trình tự sau
 Nếu triệu chứng không điển hình, có thể cần chẩn đoán bằng kính hiển vi hoặc phòng xét nghiệm bệnh cây.
 
 
-TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
+## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
 
 Bệnh đốm xám lá trên ngô có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 

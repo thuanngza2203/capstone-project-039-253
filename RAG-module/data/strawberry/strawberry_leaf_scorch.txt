@@ -1,4 +1,4 @@
-BỆNH CHÁY LÁ TRÊN CÂY DÂU TÂY
+# BỆNH CHÁY LÁ TRÊN CÂY DÂU TÂY
 
 Nguồn tham khảo chính:
 University of California Agriculture and Natural Resources – Integrated Pest Management
@@ -11,7 +11,7 @@ Khi bệnh phát triển mạnh, lá bị khô, mép lá cong lại và toàn b�
 Bệnh chủ yếu ảnh hưởng đến lá nhưng nấm cũng có thể gây hại trên đài quả, hoa, cuống quả, cuống lá và quả.
 
 
-TÁC NHÂN GÂY BỆNH
+## TÁC NHÂN GÂY BỆNH
 
 Bệnh cháy lá trên dâu tây thường liên quan đến nấm Diplocarpon earlianum.
 
@@ -22,9 +22,9 @@ Các cấu trúc sinh sản vô tính của nấm có thể tiếp tục phát t
 Khi điều kiện ẩm thuận lợi trở lại, nấm tạo bào tử và bắt đầu các đợt nhiễm bệnh mới.
 
 
-CÁCH NHẬN BIẾT BỆNH CHÁY LÁ
+## CÁCH NHẬN BIẾT BỆNH CHÁY LÁ
 
-Triệu chứng ban đầu trên lá
+### Triệu chứng ban đầu trên lá
 
 Bệnh tạo ra các đốm màu nâu đến tím trên mặt trên của lá dâu tây.
 
@@ -41,7 +41,7 @@ Theo nguồn UC IPM, mỗi đốm thường có đường kính khoảng:
 - Tương đương khoảng 1,5 đến 4,5 milimét.
 
 
-Triệu chứng khi bệnh phát triển mạnh
+### Triệu chứng khi bệnh phát triển mạnh
 
 Khi số lượng vết bệnh tăng lên, phần mô nằm giữa các đốm thường chuyển sang màu đỏ tươi hoặc đỏ tím.
 
@@ -63,7 +63,7 @@ Sau đó:
 Toàn bộ lá lúc này có vẻ như bị cháy hoặc bị xém.
 
 
-Dấu hiệu “cháy lá”
+### Dấu hiệu “cháy lá”
 
 Tên bệnh xuất phát từ hình dạng của lá bị nhiễm nặng.
 
@@ -78,7 +78,7 @@ Lá thường có:
 Khi nhìn tổng thể, lá trông giống như đã bị cháy bởi nhiệt.
 
 
-TRIỆU CHỨNG TRÊN QUẢ
+## TRIỆU CHỨNG TRÊN QUẢ
 
 Quả bị nhiễm có thể xuất hiện:
 
@@ -92,7 +92,7 @@ Quả có vết lõm và đổi màu thường mất giá trị thẩm mỹ và 
 Theo nguồn UC IPM, quả bị bệnh vẫn có thể ăn được nếu không có vấn đề khác, nhưng hình dạng và chất lượng bên ngoài thường làm quả không hấp dẫn đối với người tiêu dùng.
 
 
-TRIỆU CHỨNG TRÊN CÁC BỘ PHẬN KHÁC
+## TRIỆU CHỨNG TRÊN CÁC BỘ PHẬN KHÁC
 
 Ngoài phiến lá, nấm còn có thể nhiễm:
 
@@ -104,7 +104,7 @@ Ngoài phiến lá, nấm còn có thể nhiễm:
 Khi những bộ phận này bị nhiễm nặng, khả năng phát triển của hoa và quả có thể bị ảnh hưởng.
 
 
-PHÂN BIỆT VỚI BỆNH ĐỐM LÁ THÔNG THƯỜNG
+## PHÂN BIỆT VỚI BỆNH ĐỐM LÁ THÔNG THƯỜNG
 
 Triệu chứng của bệnh cháy lá có thể giống bệnh đốm lá thông thường trên dâu tây.
 
@@ -126,7 +126,7 @@ Tuy nhiên, các bệnh đốm lá trên dâu tây có thể có biểu hiện k
 Nếu triệu chứng không điển hình, cần kết hợp thêm lịch sử bệnh, điều kiện thời tiết và chẩn đoán chuyên môn.
 
 
-CHU KỲ BỆNH
+## CHU KỲ BỆNH
 
 Nấm gây bệnh có thể tồn tại qua mùa bất lợi trong:
 
@@ -136,7 +136,7 @@ Nấm gây bệnh có thể tồn tại qua mùa bất lợi trong:
 Các cấu trúc sinh bào tử vô tính của nấm có thể tiếp tục hình thành trong phần lá già đang phân hủy.
 
 
-Nguồn bệnh vào mùa xuân
+### Nguồn bệnh vào mùa xuân
 
 Khi thời tiết ẩm vào mùa xuân, nấm tạo bào tử.
 
@@ -149,7 +149,7 @@ Bào tử được phát tán đến mô khỏe bằng:
 Khi gặp lá hoặc các bộ phận mẫn cảm và có đủ độ ẩm, bào tử có thể gây nhiễm.
 
 
-Lây lan trong mùa
+### Lây lan trong mùa
 
 Sau khi các đợt nhiễm ban đầu hình thành, nguồn bào tử mới tiếp tục được tạo ra trên mô bệnh.
 
@@ -158,7 +158,7 @@ Nước tưới từ trên cao và mưa có thể làm bào tử phát tán từ
 Bệnh vì vậy có thể tăng nhanh nếu lá thường xuyên bị ướt.
 
 
-ĐIỀU KIỆN THUẬN LỢI CHO BỆNH PHÁT TRIỂN
+## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH PHÁT TRIỂN
 
 Bệnh cháy lá phát triển thuận lợi trong điều kiện:
 
@@ -171,7 +171,7 @@ Bệnh cháy lá phát triển thuận lợi trong điều kiện:
 Các vườn có tán lá dày, thông khí kém hoặc ít ánh sáng cũng dễ duy trì độ ẩm cao hơn và tạo môi trường thuận lợi cho bệnh.
 
 
-VAI TRÒ CỦA TƯỚI PHUN
+## VAI TRÒ CỦA TƯỚI PHUN
 
 Tưới phun trên tán làm lá bị ướt và tạo nước bắn.
 
@@ -184,7 +184,7 @@ Tưới phun trên tán làm lá bị ướt và tạo nước bắn.
 Do đó, nếu bệnh đã từng xuất hiện, nên ưu tiên hệ thống tưới hạn chế làm ướt lá.
 
 
-MỨC ĐỘ GÂY HẠI
+## MỨC ĐỘ GÂY HẠI
 
 Bệnh cháy lá gây hại chủ yếu thông qua việc phá hủy diện tích lá khỏe mạnh.
 
@@ -198,7 +198,7 @@ Khi số lượng đốm tăng lên:
 Nếu bệnh nặng, hoa và quả cũng có thể bị ảnh hưởng.
 
 
-ẢNH HƯỞNG ĐẾN NĂNG SUẤT VÀ CHẤT LƯỢNG QUẢ
+## ẢNH HƯỞNG ĐẾN NĂNG SUẤT VÀ CHẤT LƯỢNG QUẢ
 
 Khi nhiều lá bị bệnh:
 
@@ -210,7 +210,7 @@ Khi nhiều lá bị bệnh:
 Quả bị nhiễm trực tiếp có thể xuất hiện vệt đổi màu hoặc vết lõm, làm giảm giá trị thương phẩm.
 
 
-CÁCH QUẢN LÝ BỆNH CHÁY LÁ
+## CÁCH QUẢN LÝ BỆNH CHÁY LÁ
 
 Quản lý hiệu quả nên tập trung vào:
 
@@ -225,7 +225,7 @@ Quản lý hiệu quả nên tập trung vào:
 Các biện pháp canh tác thường có thể kiểm soát bệnh tốt trong nhiều trường hợp.
 
 
-SỬ DỤNG GIỐNG KHÁNG
+### SỬ DỤNG GIỐNG KHÁNG
 
 Ở những khu vực bệnh cháy lá thường xuyên xuất hiện hoặc điều kiện thường xuyên ẩm, nên ưu tiên giống có khả năng kháng hoặc ít mẫn cảm.
 
@@ -239,7 +239,7 @@ Giống kháng giúp:
 Khả năng kháng có thể khác nhau giữa các giống và từng vùng sản xuất.
 
 
-TRỒNG DÂU TÂY THEO HỆ THỐNG HÀNG NĂM
+### TRỒNG DÂU TÂY THEO HỆ THỐNG HÀNG NĂM
 
 Nguồn UC IPM khuyến nghị có thể trồng dâu tây như cây hàng năm trong những khu vực bệnh thường xuyên xảy ra.
 
@@ -250,7 +250,7 @@ Nếu cây được duy trì nhiều năm, nấm có thể tồn tại và tích
 Việc thay cây sau mỗi vụ có thể giúp làm gián đoạn chu kỳ bệnh.
 
 
-LỰA CHỌN VỊ TRÍ TRỒNG
+### LỰA CHỌN VỊ TRÍ TRỒNG
 
 Nên trồng dâu tây ở nơi:
 
@@ -268,7 +268,7 @@ Nguồn UC IPM khuyến nghị trồng trên luống hoặc mô đất cao.
 - Hạn chế điều kiện thuận lợi cho nấm.
 
 
-QUẢN LÝ MẬT ĐỘ TRỒNG
+### QUẢN LÝ MẬT ĐỘ TRỒNG
 
 Không nên trồng cây quá dày.
 
@@ -282,7 +282,7 @@ Khoảng cách hợp lý giúp:
 Cần kiểm soát cỏ dại xung quanh cây vì cỏ dại cũng có thể làm giảm thông thoáng.
 
 
-QUẢN LÝ TÀN DƯ CÂY BỆNH
+### QUẢN LÝ TÀN DƯ CÂY BỆNH
 
 Tàn dư lá bệnh là nguồn tồn tại quan trọng của nấm.
 
@@ -293,7 +293,7 @@ Tàn dư bệnh nên được đưa khỏi khu vực dự kiến trồng dâu t�
 Không nên để nhiều lá bệnh tích tụ quanh gốc cây qua mùa.
 
 
-QUẢN LÝ NƯỚC TƯỚI
+### QUẢN LÝ NƯỚC TƯỚI
 
 Để giữ lá khô hơn, nguồn UC IPM khuyến nghị sử dụng:
 
@@ -303,7 +303,7 @@ QUẢN LÝ NƯỚC TƯỚI
 Các phương pháp này phù hợp hơn tưới phun trên tán nếu mục tiêu là giảm bệnh lá.
 
 
-THỜI ĐIỂM TƯỚI
+### THỜI ĐIỂM TƯỚI
 
 Nếu cần tưới, nên tưới vào buổi sáng.
 
@@ -314,7 +314,7 @@ Nên hạn chế tưới muộn vào chiều tối hoặc ban đêm nếu phươ
 Lá ướt suốt đêm tạo điều kiện thuận lợi hơn cho quá trình nhiễm bệnh.
 
 
-CÁC BIỆN PHÁP CANH TÁC QUAN TRỌNG
+### CÁC BIỆN PHÁP CANH TÁC QUAN TRỌNG
 
 Khi bệnh cháy lá đã từng xuất hiện, có thể áp dụng đồng thời:
 
@@ -330,7 +330,7 @@ Khi bệnh cháy lá đã từng xuất hiện, có thể áp dụng đồng th�
 Theo nguồn UC IPM, các biện pháp này có thể mang lại hiệu quả kiểm soát tốt trong nhiều trường hợp.
 
 
-SỬ DỤNG THUỐC DIỆT NẤM
+### SỬ DỤNG THUỐC DIỆT NẤM
 
 Nguồn UC IPM đề cập thiophanate-methyl như một hoạt chất có thể làm giảm mức độ bệnh trong các chương trình được đăng ký tại khu vực của nguồn.
 
@@ -343,7 +343,7 @@ Tuy nhiên, thông tin này phản ánh đăng ký và hướng dẫn của ngu�
 Không nên tự động áp dụng hoạt chất, liều lượng hoặc lịch phun này tại Việt Nam.
 
 
-THUỐC KHÔNG THAY THẾ BIỆN PHÁP CANH TÁC
+### THUỐC KHÔNG THAY THẾ BIỆN PHÁP CANH TÁC
 
 Nguồn UC IPM nhấn mạnh thuốc diệt nấm nên được sử dụng kết hợp với các biện pháp canh tác.
 
@@ -359,7 +359,7 @@ thì hiệu quả của thuốc thường giảm.
 Quản lý môi trường tán và nguồn bệnh là nền tảng lâu dài hơn.
 
 
-BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI VƯỜN
+## BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI VƯỜN
 
 Khi nghi ngờ bệnh cháy lá trên dâu tây, có thể kiểm tra theo trình tự sau:
 
@@ -377,7 +377,7 @@ Khi nghi ngờ bệnh cháy lá trên dâu tây, có thể kiểm tra theo trìn
 Nếu vết bệnh có đường viền rất rõ hoặc trung tâm trắng rõ rệt, cần cân nhắc khả năng bệnh đốm lá thông thường hoặc bệnh lá khác.
 
 
-PHÂN BIỆT KHÁI QUÁT VỚI BỆNH ĐỐM LÁ THÔNG THƯỜNG
+## PHÂN BIỆT KHÁI QUÁT VỚI BỆNH ĐỐM LÁ THÔNG THƯỜNG
 
 Bệnh cháy lá:
 
@@ -394,7 +394,7 @@ Bệnh đốm lá thông thường:
 Việc phân biệt bằng mắt có thể khó nếu bệnh ở giai đoạn sớm.
 
 
-LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
+## LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
 
 Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho cây dâu tây và bệnh cần xử lý tại khu vực sản xuất.
 
@@ -409,7 +409,7 @@ Nếu cần phun nhiều lần, nên chú ý luân phiên nhóm cơ chế tác �
 Kết hợp thuốc với quản lý tàn dư, mật độ trồng và nước tưới để đạt hiệu quả tốt hơn.
 
 
-TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
+## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
 
 Bệnh cháy lá trên dâu tây có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 

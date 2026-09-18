@@ -8,6 +8,12 @@ from langchain_core.messages import AIMessage
 from langchain_core.runnables import RunnableLambda
 
 
+@pytest.fixture(autouse=True)
+def generation_only(monkeypatch: pytest.MonkeyPatch) -> None:
+    # Các test này kiểm tra prompt/LLM, dùng thứ tự cố định của fake semantic store.
+    monkeypatch.setenv("RETRIEVAL_MODE", "semantic")
+
+
 class RecordingVectorStore:
     def __init__(self, documents: list[Document]) -> None:
         self.documents = documents

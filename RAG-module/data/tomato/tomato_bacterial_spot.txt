@@ -1,4 +1,4 @@
-BỆNH ĐỐM VI KHUẨN TRÊN CÂY CÀ CHUA
+# BỆNH ĐỐM VI KHUẨN TRÊN CÂY CÀ CHUA
 
 Nguồn tham khảo chính:
 University of Wisconsin–Madison Extension
@@ -18,7 +18,7 @@ Bệnh có thể gây hại trên tất cả các bộ phận phía trên mặt 
 - Quả.
 
 
-TÁC NHÂN GÂY BỆNH
+## TÁC NHÂN GÂY BỆNH
 
 Theo University of Wisconsin Extension, bệnh đốm vi khuẩn trên cà chua có thể do một số loài vi khuẩn Xanthomonas gây ra, bao gồm:
 
@@ -36,7 +36,7 @@ Các vi khuẩn này có thể được đưa vào vườn hoặc nhà kính th�
 Điều đáng chú ý là cây con hoặc hạt giống mang vi khuẩn không phải lúc nào cũng biểu hiện triệu chứng rõ ràng.
 
 
-VI KHUẨN XÂM NHẬP VÀO CÂY NHƯ THẾ NÀO?
+## VI KHUẨN XÂM NHẬP VÀO CÂY NHƯ THẾ NÀO?
 
 Vi khuẩn có thể xâm nhập vào mô cây thông qua:
 
@@ -55,9 +55,9 @@ Vết thương có thể hình thành do:
 Khi điều kiện nóng và ẩm thuận lợi, vi khuẩn có thể tăng sinh nhanh và tạo ra các đợt nhiễm mới.
 
 
-CÁCH NHẬN BIẾT BỆNH ĐỐM VI KHUẨN
+## CÁCH NHẬN BIẾT BỆNH ĐỐM VI KHUẨN
 
-Triệu chứng trên lá
+### Triệu chứng trên lá
 
 Trên lá, bệnh thường bắt đầu bằng những đốm nhỏ.
 
@@ -75,7 +75,7 @@ Sau đó, đốm chuyển dần sang màu nâu đỏ hoặc nâu sẫm khi già.
 Một số vết bệnh có thể có quầng vàng xung quanh.
 
 
-Vết bệnh dạng góc cạnh
+### Vết bệnh dạng góc cạnh
 
 Trên lá cà chua, nhiều vết bệnh có dạng góc cạnh hoặc bờ tương đối thẳng.
 
@@ -84,7 +84,7 @@ Trên lá cà chua, nhiều vết bệnh có dạng góc cạnh hoặc bờ tư�
 Đặc điểm này có thể hỗ trợ nhận biết bệnh ngoài đồng ruộng.
 
 
-Triệu chứng khi bệnh nặng
+### Triệu chứng khi bệnh nặng
 
 Khi số lượng vết bệnh tăng lên:
 
@@ -96,12 +96,12 @@ Khi số lượng vết bệnh tăng lên:
 Nếu cây mất nhiều lá, khả năng quang hợp và sức sinh trưởng giảm rõ rệt.
 
 
-TRIỆU CHỨNG TRÊN QUẢ
+## TRIỆU CHỨNG TRÊN QUẢ
 
 Triệu chứng trên quả khác nhau tùy theo giai đoạn phát triển.
 
 
-Triệu chứng trên quả xanh
+### Triệu chứng trên quả xanh
 
 Trên quả còn xanh, các vết bệnh thường:
 
@@ -111,7 +111,7 @@ Trên quả còn xanh, các vết bệnh thường:
 - Có thể có quầng vàng nhạt xung quanh.
 
 
-Triệu chứng khi quả trưởng thành
+### Triệu chứng khi quả trưởng thành
 
 Khi quả tiếp tục phát triển, các vết bệnh có thể lớn hơn.
 
@@ -132,7 +132,7 @@ Một số vết có thể nổi lên.
 Một số khác hơi lõm nhưng có phần mép nhô cao.
 
 
-ẢNH HƯỞNG ĐẾN GIÁ TRỊ THƯƠNG PHẨM
+## ẢNH HƯỞNG ĐẾN GIÁ TRỊ THƯƠNG PHẨM
 
 Quả có nhiều vết bệnh thường không đạt tiêu chuẩn thương phẩm.
 
@@ -147,7 +147,7 @@ Nguồn University of Wisconsin Extension khuyến nghị không ăn quả có t
 Lý do được nguồn nêu là các tổn thương trên quả có thể tạo vị trí thuận lợi để các vi sinh vật khác, bao gồm tác nhân có khả năng gây bệnh cho người, xâm nhập.
 
 
-TRIỆU CHỨNG TRÊN THÂN VÀ CUỐNG
+## TRIỆU CHỨNG TRÊN THÂN VÀ CUỐNG
 
 Bệnh có thể xuất hiện trên thân và cuống cây.
 
@@ -156,7 +156,7 @@ Các tổn thương thường là các đốm hoặc vùng sẫm màu trên mô 
 Khi bệnh phát triển mạnh đồng thời trên lá, thân và quả, cây có thể suy yếu nhanh hơn.
 
 
-PHÂN BIỆT VỚI BỆNH ĐỐM NHỎ VI KHUẨN
+## PHÂN BIỆT VỚI BỆNH ĐỐM NHỎ VI KHUẨN
 
 Triệu chứng của bệnh đốm vi khuẩn có thể dễ bị nhầm với bệnh bacterial speck trên cà chua.
 
@@ -171,7 +171,7 @@ Do đó, chẩn đoán chỉ dựa vào hình dạng vết bệnh đôi khi khô
 Nếu cần xác định chính xác để phục vụ sản xuất thương mại hoặc lựa chọn biện pháp quản lý, nên sử dụng dịch vụ chẩn đoán bệnh cây.
 
 
-NGUỒN BỆNH
+## NGUỒN BỆNH
 
 Vi khuẩn gây bệnh có thể được đưa vào khu vực sản xuất bằng hạt giống hoặc cây con nhiễm bệnh.
 
@@ -180,7 +180,7 @@ Sau khi xuất hiện trong ruộng, vi khuẩn có thể tồn tại tốt tron
 Tuy nhiên, khả năng sống sót của vi khuẩn trong đất trống khi không còn gắn với tàn dư thực vật thường kém hơn nhiều.
 
 
-VAI TRÒ CỦA TÀN DƯ CÂY BỆNH
+## VAI TRÒ CỦA TÀN DƯ CÂY BỆNH
 
 Tàn dư cà chua bị nhiễm là nguồn bệnh quan trọng.
 
@@ -189,7 +189,7 @@ Vi khuẩn có thể tồn tại trong mô cây chết và trở thành nguồn 
 Do đó, việc loại bỏ và xử lý tàn dư cuối vụ có vai trò quan trọng trong quản lý bệnh.
 
 
-ĐIỀU KIỆN THUẬN LỢI CHO BỆNH
+## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH
 
 Bệnh phát triển thuận lợi trong điều kiện nóng và ẩm.
 
@@ -201,7 +201,7 @@ Theo nguồn University of Wisconsin Extension, khoảng nhiệt độ thuận l
 Ngoài nhiệt độ, độ ẩm và nước trên bề mặt cây đóng vai trò rất quan trọng.
 
 
-ẢNH HƯỞNG CỦA MƯA
+## ẢNH HƯỞNG CỦA MƯA
 
 Mưa kèm gió có thể làm bệnh nghiêm trọng hơn.
 
@@ -215,7 +215,7 @@ Nước mưa giúp:
 Do đó, bệnh thường tăng nhanh trong những giai đoạn mưa nhiều, nóng và ẩm.
 
 
-CÁCH QUẢN LÝ CÂY ĐÃ BỊ BỆNH
+## CÁCH QUẢN LÝ CÂY ĐÃ BỊ BỆNH
 
 Nguồn University of Wisconsin Extension nhấn mạnh rằng cây đã bị bệnh đốm vi khuẩn không thể được chữa khỏi hoàn toàn.
 
@@ -228,7 +228,7 @@ Khi cây đã biểu hiện triệu chứng rõ:
 Vì vậy, cây bệnh nặng nên được loại bỏ khỏi vườn hoặc nhà kính để giảm nguy cơ lan sang cây khỏe.
 
 
-XỬ LÝ CÂY BỆNH
+## XỬ LÝ CÂY BỆNH
 
 Nguồn khuyến nghị cây bệnh có thể được:
 
@@ -241,7 +241,7 @@ Không nên để cây bệnh nằm lại trong vườn.
 Việc xử lý phải phù hợp với quy định môi trường và nông nghiệp tại địa phương.
 
 
-PHÒNG BỆNH TỪ HẠT GIỐNG VÀ CÂY CON
+## PHÒNG BỆNH TỪ HẠT GIỐNG VÀ CÂY CON
 
 Một trong những biện pháp quan trọng nhất là sử dụng:
 
@@ -253,7 +253,7 @@ Hạt giống hoặc cây con nhiễm bệnh có thể đưa vi khuẩn vào vư
 Do đó, nên mua giống từ nguồn đáng tin cậy và kiểm tra cây con trước khi trồng.
 
 
-XỬ LÝ HẠT BẰNG NƯỚC NÓNG
+## XỬ LÝ HẠT BẰNG NƯỚC NÓNG
 
 Nếu nghi ngờ hạt giống bị nhiễm, nguồn University of Wisconsin Extension đề cập có thể cân nhắc xử lý hạt bằng nước nóng trước khi gieo.
 
@@ -266,7 +266,7 @@ Nhiệt độ quá cao hoặc thời gian quá dài có thể làm giảm sức 
 Do đó, không nên tự ước lượng nhiệt độ hoặc thời gian xử lý nếu không có hướng dẫn kỹ thuật đáng tin cậy.
 
 
-QUẢN LÝ NƯỚC TƯỚI
+## QUẢN LÝ NƯỚC TƯỚI
 
 Để giữ lá khô và giảm khả năng vi khuẩn phát tán, nên tránh tưới từ trên xuống.
 
@@ -284,7 +284,7 @@ Thay vào đó, có thể sử dụng:
 Các hệ thống này đưa nước trực tiếp đến vùng rễ và giúp giữ tán lá khô hơn.
 
 
-KHÔNG THAO TÁC KHI CÂY ĐANG ƯỚT
+## KHÔNG THAO TÁC KHI CÂY ĐANG ƯỚT
 
 Không nên chạm, cắt tỉa, buộc dây hoặc thực hiện các hoạt động chăm sóc khi cây đang ướt do:
 
@@ -297,7 +297,7 @@ Nước trên bề mặt cây giúp vi khuẩn di chuyển dễ dàng giữa cá
 Nếu phải làm việc trong vườn, nên chờ cây khô.
 
 
-VỆ SINH DỤNG CỤ
+## VỆ SINH DỤNG CỤ
 
 Dụng cụ có thể mang vi khuẩn từ cây bệnh sang cây khỏe.
 
@@ -311,7 +311,7 @@ Nguồn đánh giá cồn 70% thường ít ăn mòn dụng cụ hơn so với d
 Dụng cụ nên được vệ sinh thường xuyên, đặc biệt khi làm việc trong khu vực đã có cây bệnh.
 
 
-SỬ DỤNG ĐỒNG
+## SỬ DỤNG ĐỒNG
 
 Ở những khu vực bệnh thường xuyên xuất hiện, có thể cân nhắc sử dụng sản phẩm chứa đồng đã được đăng ký cho cà chua theo hướng phòng ngừa.
 
@@ -327,7 +327,7 @@ Tuy nhiên, nguồn lưu ý rằng nếu đồng được sử dụng quá nhi�
 Nguyên nhân có thể liên quan đến sự xuất hiện của các quần thể vi khuẩn có khả năng chịu đồng.
 
 
-THUỐC PHÒNG KHÔNG CHỮA ĐƯỢC CÂY BỆNH
+## THUỐC PHÒNG KHÔNG CHỮA ĐƯỢC CÂY BỆNH
 
 Các sản phẩm chứa đồng chủ yếu giúp hạn chế nhiễm bệnh mới.
 
@@ -340,7 +340,7 @@ Chúng không thể:
 Do đó, việc phòng bệnh từ sớm có giá trị hơn nhiều so với xử lý sau khi bệnh đã lan rộng.
 
 
-QUẢN LÝ TÀN DƯ CUỐI VỤ
+## QUẢN LÝ TÀN DƯ CUỐI VỤ
 
 Sau khi kết thúc vụ, tàn dư cà chua nên được xử lý.
 
@@ -353,7 +353,7 @@ Nguồn khuyến nghị:
 Mục tiêu là giảm lượng vi khuẩn có thể tồn tại đến vụ sau.
 
 
-LUÂN CANH
+## LUÂN CANH
 
 Ở nơi bệnh đã từng xuất hiện, nguồn University of Wisconsin Extension khuyến nghị không trồng cà chua trở lại cùng vị trí trong ít nhất khoảng một năm.
 
@@ -362,14 +362,14 @@ Luân canh giúp tạo thời gian để tàn dư cây bệnh phân hủy và l�
 Thời gian luân canh dài hơn có thể được cân nhắc trong vườn có lịch sử bệnh nặng.
 
 
-LOẠI BỎ CÂY CÀ CHUA MỌC TỰ NHIÊN
+## LOẠI BỎ CÂY CÀ CHUA MỌC TỰ NHIÊN
 
 Cây cà chua mọc lại từ hạt của vụ trước có thể duy trì nguồn bệnh.
 
 Các cây này nên được loại bỏ và xử lý giống như tàn dư bệnh nếu nghi ngờ chúng mang vi khuẩn.
 
 
-QUẢN LÝ TRONG NHÀ KÍNH
+## QUẢN LÝ TRONG NHÀ KÍNH
 
 Bệnh đốm vi khuẩn có thể nghiêm trọng trong nhà kính nếu:
 
@@ -389,7 +389,7 @@ Trong nhà kính nên:
 - Loại bỏ cây bệnh sớm.
 
 
-BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI VƯỜN
+## BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI VƯỜN
 
 Khi nghi ngờ bệnh đốm vi khuẩn trên cà chua, có thể kiểm tra theo trình tự sau:
 
@@ -409,7 +409,7 @@ Khi nghi ngờ bệnh đốm vi khuẩn trên cà chua, có thể kiểm tra the
 Nếu triệu chứng giống bacterial speck hoặc không rõ ràng, nên xác nhận bằng phòng chẩn đoán bệnh cây.
 
 
-BỔ SUNG: CÁCH GIẢM NGUY CƠ LÂY LAN KHI PHÁT HIỆN CÂY BỆNH
+## BỔ SUNG: CÁCH GIẢM NGUY CƠ LÂY LAN KHI PHÁT HIỆN CÂY BỆNH
 
 Khi phát hiện một số cây nghi bệnh:
 
@@ -424,7 +424,7 @@ Khi phát hiện một số cây nghi bệnh:
 Mục tiêu là giảm sự di chuyển cơ học của vi khuẩn trong vườn.
 
 
-LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
+## LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
 
 Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho cây cà chua và bệnh đốm vi khuẩn tại khu vực sản xuất.
 
@@ -439,7 +439,7 @@ Khi sử dụng đồng, cần lưu ý nguy cơ giảm hiệu quả nếu sử d
 Kết hợp thuốc với các biện pháp vệ sinh, cây giống sạch bệnh, tưới hợp lý và loại bỏ cây bệnh để đạt hiệu quả tốt hơn.
 
 
-TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
+## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
 
 Bệnh đốm vi khuẩn trên cây cà chua có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 

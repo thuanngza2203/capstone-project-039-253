@@ -1,4 +1,4 @@
-BỆNH PHẤN TRẮNG TRÊN CÂY BÍ
+# BỆNH PHẤN TRẮNG TRÊN CÂY BÍ
 
 Nguồn tham khảo chính:
 Pacific Northwest Plant Disease Management Handbook
@@ -13,7 +13,7 @@ Khi bệnh phát triển mạnh, diện tích lá xanh giảm, lá có thể chu
 Đối với các loại bí thu hoạch để bảo quản, bệnh nặng cũng có thể ảnh hưởng đến màu vỏ và khả năng bảo quản của quả.
 
 
-TÁC NHÂN GÂY BỆNH
+## TÁC NHÂN GÂY BỆNH
 
 Nhiều loài nấm có thể gây bệnh phấn trắng trên cây bí.
 
@@ -30,7 +30,7 @@ Podosphaera xanthii thường được xem là tác nhân gây bệnh mạnh hơ
 Các loài nấm này phát triển chủ yếu trên bề mặt mô cây và tạo rất nhiều bào tử vô tính có khả năng phát tán bằng gió.
 
 
-ĐIỀU KIỆN NHIỆT ĐỘ THUẬN LỢI
+## ĐIỀU KIỆN NHIỆT ĐỘ THUẬN LỢI
 
 Nhiễm bệnh có thể xảy ra trong khoảng nhiệt độ khá rộng.
 
@@ -44,7 +44,7 @@ Theo nguồn tài liệu:
 Nhiệt độ trên khoảng 100 độ F, tương đương khoảng 38 độ C, được báo cáo có thể làm bệnh ngừng phát triển.
 
 
-VAI TRÒ CỦA ĐỘ ẨM
+## VAI TRÒ CỦA ĐỘ ẨM
 
 Khác với nhiều bệnh nấm lá khác, nấm phấn trắng không cần một lớp nước tự do kéo dài trên bề mặt lá để phát triển.
 
@@ -59,14 +59,14 @@ Trong khi đó, điều kiện khô hơn lại có thể thúc đẩy:
 Vì vậy, bệnh phấn trắng có thể phát triển mạnh ngay cả khi thời tiết không có mưa kéo dài.
 
 
-SƯƠNG VÀ THỜI TIẾT ẤM
+## SƯƠNG VÀ THỜI TIẾT ẤM
 
 Nhiệt độ ấm kết hợp với sự hình thành sương trong mùa hè rất thuận lợi cho bệnh.
 
 Những đêm có độ ẩm cao hoặc có sương, sau đó là ban ngày khô và ấm, có thể tạo điều kiện tốt cho cả nhiễm bệnh và phát tán bào tử.
 
 
-ẢNH HƯỞNG CỦA MẬT ĐỘ TRỒNG VÀ ÁNH SÁNG
+## ẢNH HƯỞNG CỦA MẬT ĐỘ TRỒNG VÀ ÁNH SÁNG
 
 Bệnh thường nghiêm trọng hơn khi cây được trồng quá dày.
 
@@ -82,7 +82,7 @@ Mật độ cao làm:
 Do đó, những lá nằm sâu bên trong tán hoặc ở khu vực bị che bóng thường có nguy cơ bị bệnh cao hơn.
 
 
-CÁCH NẤM TỒN TẠI VÀ LÂY LAN
+## CÁCH NẤM TỒN TẠI VÀ LÂY LAN
 
 Ở vùng Tây Bắc Thái Bình Dương, giai đoạn sinh sản hữu tính tạo chasmothecia hiếm khi được quan sát.
 
@@ -95,7 +95,7 @@ Conidia rất nhẹ và có thể được gió mang đi trên khoảng cách xa
 Do đó, ngay cả ruộng không có nguồn bệnh rõ ràng tại chỗ vẫn có thể nhận bào tử từ khu vực khác.
 
 
-CHASMOTHECIA
+## CHASMOTHECIA
 
 Trong một số trường hợp, nấm tạo ra các cấu trúc nhỏ màu đen gọi là chasmothecia.
 
@@ -108,7 +108,7 @@ Chasmothecia là cấu trúc sinh sản hữu tính và có thể giúp nấm t�
 Trong vùng mà chasmothecia được hình thành, chúng có thể góp phần tạo nguồn bệnh cho vụ tiếp theo.
 
 
-THỜI GIAN XUẤT HIỆN TRIỆU CHỨNG
+## THỜI GIAN XUẤT HIỆN TRIỆU CHỨNG
 
 Sau khi nhiễm bệnh, các quần thể nấm có thể nhìn thấy bằng mắt thường trong khoảng:
 
@@ -124,9 +124,9 @@ Tốc độ xuất hiện phụ thuộc vào:
 - Mật độ trồng.
 
 
-CÁCH NHẬN BIẾT BỆNH PHẤN TRẮNG
+## CÁCH NHẬN BIẾT BỆNH PHẤN TRẮNG
 
-Triệu chứng ban đầu
+### Triệu chứng ban đầu
 
 Triệu chứng đầu tiên thường là những chấm hoặc đốm trắng rất nhỏ trên bề mặt lá hoặc thân.
 
@@ -135,7 +135,7 @@ Các đốm này nằm chủ yếu trên bề mặt mô cây.
 Ban đầu, chúng có thể xuất hiện rải rác và dễ bị bỏ sót.
 
 
-Triệu chứng khi bệnh phát triển
+### Triệu chứng khi bệnh phát triển
 
 Các đốm trắng tăng kích thước và chuyển thành các mảng trắng dạng bột.
 
@@ -150,7 +150,7 @@ Mảng bệnh có thể tiếp tục lan rộng và hợp lại với nhau.
 Bề mặt mô bị bệnh trông như được phủ một lớp bột trắng hoặc bột phấn.
 
 
-Triệu chứng trên lá bị bệnh nặng
+### Triệu chứng trên lá bị bệnh nặng
 
 Khi nhiễm bệnh nghiêm trọng:
 
@@ -163,7 +163,7 @@ Khi nhiễm bệnh nghiêm trọng:
 Khi nhiều lá chết, tán cây trở nên thưa hơn.
 
 
-ẢNH HƯỞNG ĐẾN QUẢ
+## ẢNH HƯỞNG ĐẾN QUẢ
 
 Nấm phấn trắng chủ yếu gây hại trên lá và thân hơn là trực tiếp làm thối quả.
 
@@ -179,7 +179,7 @@ Tuy nhiên, khi lá chết nhiều, quả mất lớp che phủ tự nhiên củ
 Do đó, việc giữ tán lá khỏe mạnh có ý nghĩa quan trọng đối với chất lượng quả.
 
 
-MỨC ĐỘ PHÂN BỐ TRONG RUỘNG
+## MỨC ĐỘ PHÂN BỐ TRONG RUỘNG
 
 Bệnh thường bắt đầu từ các ổ nhỏ rải rác trong ruộng.
 
@@ -188,7 +188,7 @@ Nếu điều kiện thuận lợi, bào tử tiếp tục được gió phát t
 Trong những vụ có áp lực bệnh cao, phần lớn ruộng có thể bị nhiễm.
 
 
-CÁC YẾU TỐ LÀM TĂNG NGUY CƠ BỆNH
+## CÁC YẾU TỐ LÀM TĂNG NGUY CƠ BỆNH
 
 Nguy cơ bệnh tăng khi:
 
@@ -203,7 +203,7 @@ Nguy cơ bệnh tăng khi:
 - Bệnh xuất hiện sớm trong vụ.
 
 
-CÁCH QUẢN LÝ BỆNH PHẤN TRẮNG
+## CÁCH QUẢN LÝ BỆNH PHẤN TRẮNG
 
 Quản lý hiệu quả nên kết hợp:
 
@@ -218,7 +218,7 @@ Quản lý hiệu quả nên kết hợp:
 Không nên phụ thuộc hoàn toàn vào một nhóm thuốc.
 
 
-SỬ DỤNG GIỐNG CÓ KHẢ NĂNG CHỊU BỆNH
+## SỬ DỤNG GIỐNG CÓ KHẢ NĂNG CHỊU BỆNH
 
 Nếu có giống chịu bệnh phấn trắng phù hợp, nên ưu tiên sử dụng.
 
@@ -234,7 +234,7 @@ Tuy nhiên, bệnh thường:
 Nguồn tài liệu liệt kê một số giống chịu bệnh trong điều kiện Hoa Kỳ.
 
 
-Một số giống bí đỏ và bí ngô chịu bệnh
+### Một số giống bí đỏ và bí ngô chịu bệnh
 
 - Aladdin.
 - Gladiator.
@@ -243,21 +243,21 @@ Một số giống bí đỏ và bí ngô chịu bệnh
 - Pure Gold.
 
 
-Một số giống bí acorn chịu bệnh
+### Một số giống bí acorn chịu bệnh
 
 - Royal Ace.
 - Table Star.
 - Taybelle.
 
 
-Một số giống bí vàng mùa hè chịu bệnh
+### Một số giống bí vàng mùa hè chịu bệnh
 
 - Patriot II.
 - Sunglo.
 - Sunray.
 
 
-Một số giống zucchini chịu bệnh
+### Một số giống zucchini chịu bệnh
 
 - Payroll.
 - Sebring.
@@ -267,7 +267,7 @@ Danh sách giống này phản ánh nguồn giống và điều kiện sản xu�
 Khi áp dụng tại Việt Nam, cần lựa chọn giống có thông tin chống chịu phù hợp với thị trường giống và điều kiện địa phương.
 
 
-LUÂN CANH CÂY TRỒNG
+## LUÂN CANH CÂY TRỒNG
 
 Nguồn tài liệu khuyến nghị luân canh khỏi cây họ bầu bí trong khoảng hai năm.
 
@@ -278,7 +278,7 @@ Luân canh giúp giảm khả năng nguồn bệnh tồn tại tại chỗ từ 
 Tuy nhiên, vì bào tử phấn trắng có thể được gió mang từ xa, luân canh không thể loại bỏ hoàn toàn nguy cơ bệnh.
 
 
-QUẢN LÝ MẬT ĐỘ TRỒNG
+## QUẢN LÝ MẬT ĐỘ TRỒNG
 
 Không nên trồng cây quá dày.
 
@@ -293,7 +293,7 @@ Khoảng cách hợp lý giúp:
 Mật độ phù hợp cần được điều chỉnh theo giống, kiểu sinh trưởng và hệ thống canh tác.
 
 
-HẠN CHẾ BÓNG RÂM
+## HẠN CHẾ BÓNG RÂM
 
 Không nên trồng bí ở những vị trí bị che bóng mạnh bởi:
 
@@ -305,7 +305,7 @@ Không nên trồng bí ở những vị trí bị che bóng mạnh bởi:
 Ánh sáng tốt giúp hạn chế vi khí hậu thuận lợi cho bệnh.
 
 
-THEO DÕI RUỘNG
+## THEO DÕI RUỘNG
 
 Nên bắt đầu kiểm tra ruộng trước khi bệnh trở nên phổ biến.
 
@@ -321,7 +321,7 @@ Khi kiểm tra:
 Phát hiện sớm có ý nghĩa đặc biệt quan trọng vì nhiều thuốc phấn trắng có hiệu quả tốt nhất khi được sử dụng trước hoặc ngay khi bệnh mới xuất hiện.
 
 
-YÊU CẦU BAO PHỦ KHI PHUN THUỐC
+## YÊU CẦU BAO PHỦ KHI PHUN THUỐC
 
 Nguồn tài liệu nhấn mạnh rằng độ bao phủ lá tốt là yếu tố rất quan trọng.
 
@@ -334,7 +334,7 @@ Khi sử dụng thuốc:
 Tán quá rậm sẽ làm giảm hiệu quả bao phủ.
 
 
-CÁC NHÓM THUỐC ĐƯỢC NGUỒN ĐỀ CẬP
+## CÁC NHÓM THUỐC ĐƯỢC NGUỒN ĐỀ CẬP
 
 Nguồn Pacific Northwest Plant Disease Management Handbook liệt kê nhiều nhóm thuốc và vật liệu có thể được sử dụng trong hệ thống sản xuất tại Hoa Kỳ.
 
@@ -356,7 +356,7 @@ Các nhóm chính gồm:
 Danh sách này phản ánh đăng ký thuốc tại vùng Pacific Northwest và có thể không phù hợp với đăng ký tại Việt Nam.
 
 
-BICARBONATE
+### BICARBONATE
 
 Các sản phẩm bicarbonate được nguồn ghi nhận có thể sử dụng để quản lý bệnh phấn trắng.
 
@@ -365,7 +365,7 @@ Các sản phẩm bicarbonate được nguồn ghi nhận có thể sử dụng 
 Bicarbonate thường phát huy hiệu quả tốt nhất khi bệnh mới bắt đầu hoặc trong chương trình phòng ngừa.
 
 
-SẢN PHẨM CHỨA ĐỒNG
+### SẢN PHẨM CHỨA ĐỒNG
 
 Các sản phẩm chứa đồng được nguồn xếp vào nhóm FRAC M1.
 
@@ -374,7 +374,7 @@ Nguồn không khuyến nghị sử dụng đồng như vật liệu duy nhất 
 Do đó, đồng nên được xem là một phần của chương trình kết hợp nếu sản phẩm được đăng ký phù hợp.
 
 
-NHÓM FRAC 3
+### NHÓM FRAC 3
 
 Các thuốc ức chế khử methyl thuộc nhóm FRAC 3 được đăng ký trong nguồn.
 
@@ -386,14 +386,14 @@ Nguồn nhấn mạnh cần:
 Mục tiêu là giảm nguy cơ nấm hình thành tính kháng thuốc.
 
 
-NHÓM FRAC 7
+### NHÓM FRAC 7
 
 Một số thuốc nhóm FRAC 7 được đề cập.
 
 Nguồn khuyến cáo không nên sử dụng quá nhiều lần liên tiếp trước khi chuyển sang thuốc có cơ chế tác động khác.
 
 
-NHÓM FRAC 11
+### NHÓM FRAC 11
 
 Các thuốc strobilurin thuộc nhóm FRAC 11 có thể kiểm soát bệnh phấn trắng.
 
@@ -405,7 +405,7 @@ Nguồn đặc biệt nhấn mạnh:
 - Sau đó cần luân phiên với một nhóm cơ chế tác động khác.
 
 
-DẦU
+### DẦU
 
 Một số loại dầu được đăng ký để hỗ trợ kiểm soát bệnh phấn trắng.
 
@@ -419,7 +419,7 @@ Tuy nhiên, nguồn cảnh báo:
 Dầu thường không mang lại hiệu quả tốt nếu sử dụng đơn độc trong điều kiện áp lực bệnh cao.
 
 
-PHỐI HỢP NHIỀU CƠ CHẾ TÁC ĐỘNG
+### PHỐI HỢP NHIỀU CƠ CHẾ TÁC ĐỘNG
 
 Nguồn liệt kê nhiều sản phẩm phối hợp hai nhóm FRAC.
 
@@ -432,7 +432,7 @@ Mục tiêu chính của các phối hợp này là:
 Tuy nhiên, ngay cả khi dùng sản phẩm phối hợp, vẫn cần tuân thủ giới hạn số lần sử dụng liên tiếp của từng nhóm FRAC.
 
 
-QUẢN LÝ KHÁNG THUỐC
+## QUẢN LÝ KHÁNG THUỐC
 
 Quản lý kháng thuốc là một phần rất quan trọng trong kiểm soát bệnh phấn trắng.
 
@@ -452,7 +452,7 @@ Nguồn đặc biệt khuyến nghị với nhóm FRAC 11 chỉ nên sử dụng
 Đối với nhiều nhóm khác, không nên sử dụng quá hai lần liên tiếp trước khi luân phiên.
 
 
-BIỆN PHÁP SINH HỌC
+## BIỆN PHÁP SINH HỌC
 
 Nguồn tài liệu liệt kê một số sản phẩm sinh học và chất kích hoạt sức đề kháng của cây.
 
@@ -473,7 +473,7 @@ Biện pháp sinh học thường phù hợp nhất khi:
 Không nên kỳ vọng sản phẩm sinh học có thể phục hồi lá đã bị bệnh nặng.
 
 
-BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI RUỘNG
+## BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI RUỘNG
 
 Khi nghi ngờ bệnh phấn trắng trên cây bí, có thể kiểm tra theo trình tự sau:
 
@@ -491,7 +491,7 @@ Khi nghi ngờ bệnh phấn trắng trên cây bí, có thể kiểm tra theo t
 Nếu triệu chứng không điển hình, cần phân biệt với cặn thuốc, bụi hoặc các lớp sáp tự nhiên trên lá.
 
 
-PHÂN BIỆT VỚI CẶN THUỐC HOẶC BỤI TRÊN LÁ
+## PHÂN BIỆT VỚI CẶN THUỐC HOẶC BỤI TRÊN LÁ
 
 Lớp trắng trên lá không phải lúc nào cũng là bệnh phấn trắng.
 
@@ -505,7 +505,7 @@ Có thể kiểm tra:
 Cặn thuốc hoặc bụi thường có phân bố liên quan đến hướng phun hoặc môi trường và không có dạng phát triển sinh học rõ.
 
 
-LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
+## LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
 
 Nguồn Pacific Northwest Plant Disease Management Handbook liệt kê nhiều sản phẩm, liều lượng, thời gian cách ly và thời gian tái xâm nhập áp dụng cho hệ thống sản xuất tại Hoa Kỳ.
 
@@ -529,7 +529,7 @@ Luôn tuân thủ:
 Không tự ý phối trộn sản phẩm nếu nhãn không cho phép.
 
 
-TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
+## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
 
 Bệnh phấn trắng trên cây bí có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 

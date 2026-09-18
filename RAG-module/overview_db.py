@@ -1,11 +1,16 @@
 from collections import Counter
 
-from config import CHROMA_DIR, COLLECTION_NAME, create_embeddings
+from config import COLLECTION_NAME, create_embeddings, get_index_directory
 from rag import _new_vector_store
+
+
+index_dir = get_index_directory()
+
+print(f"Đang đọc Vector DB tại: {index_dir}")
 
 store = _new_vector_store(
     create_embeddings(),
-    CHROMA_DIR,
+    index_dir,
     COLLECTION_NAME,
 )
 
