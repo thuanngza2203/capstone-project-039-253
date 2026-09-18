@@ -67,7 +67,7 @@ def test_multiple_questions_reuse_models_store_and_client(
 
     monkeypatch.setitem(sys.modules, "langchain_huggingface", SimpleNamespace(HuggingFaceEmbeddings=embedding_factory))
     monkeypatch.setitem(sys.modules, "sentence_transformers", SimpleNamespace(CrossEncoder=FakeReranker))
-    monkeypatch.setattr(rag, "_new_vector_store", store_factory)
+    monkeypatch.setattr(rag, "new_vector_store", store_factory)
     monkeypatch.setattr(rag, "create_chat_model", llm_factory)
 
     # Test vòng đời tài nguyên, tắt memory để không thêm lời gọi rewrite.

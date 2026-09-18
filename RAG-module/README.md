@@ -5,6 +5,123 @@ trong Chroma và dùng LLM để sinh câu trả lời có trích nguồn. LLM m
 `qwen3.5:4b` chạy local qua Ollama; có thể chuyển sang Gemini hoặc vLLM chạy
 trong Docker bằng `LLM_PROVIDER` trong `.env`.
 
+## Chạy thử nhanh với Ollama Qwen3.5 4B
+
+Dành cho máy đã có `.venv` và dependencies. Nếu cài lần đầu, làm các mục
+**1–4** bên dưới trước. Thực hiện các bước sau trong cùng terminal PowerShell.
+
+### Bước 1 — Vào module và activate venv
+
+```powershell
+Set-Location D:\HCMUT\Capstone_Project\RAG-module
+.\.venv\Scripts\Activate.ps1
+```
+
+Sau khi activate, dùng `python` như các lệnh bên dưới. Không cần tạo lại venv
+hoặc cài lại dependencies mỗi lần chạy.
+
+### Bước 2 — Chọn cấu hình trong `.env`
+
+Để thử chunking mới với Ollama, sửa các giá trị này trong file `.env` hiện có:
+
+```dotenv
+LLM_PROVIDER=ollama
+OLLAMA_MODEL=qwen3.5:4b
+OLLAMA_BASE_URL=http://127.0.0.1:11434
+OLLAMA_THINK=false
+
+CHUNKING_STRATEGY=structure
+CHUNK_MAX_TOKENS=400
+CHUNK_OVERLAP_TOKENS=40
+CHROMA_DIR=
+
+RETRIEVAL_MODE=hybrid
+RERANKER_ENABLED=false
+CHAT_HISTORY_TURNS=4
+
+RAG_CHUNK_SIZE=1000
+RAG_CHUNK_OVERLAP=150
+RAG_TOP_K=4
+```
+
+`CHROMA_DIR` để trống để tự chọn index: `structure` → `chroma_db_structure/`,
+`recursive` → `chroma_db/`. Các biến số như `RAG_TOP_K` phải có giá trị nếu được
+khai báo; không để dạng `RAG_TOP_K=`. Giữ cấu hình embedding đã dùng để tạo index.
+
+Sau khi sửa `.env`, thoát và mở lại `chat`. Nếu terminal đã đặt biến `$env:...`
+cùng tên, giá trị đó có ưu tiên hơn `.env`; mở terminal mới nếu muốn đọc lại
+cấu hình từ file mà không giữ các override trước đó.
+
+### Bước 3 — Kiểm tra Ollama
+
+```powershell
+ollama list
+```
+
+Nếu chưa có model `qwen3.5:4b`, tải một lần:
+
+```powershell
+ollama pull qwen3.5:4b
+```
+
+Nếu không kết nối được Ollama, mở ứng dụng Ollama hoặc chạy `ollama serve`
+trong terminal khác. `index`, `preview-chunks` và `search` không cần Ollama;
+`ask`/`chat` có sinh câu trả lời thì cần.
+
+### Bước 4 — Xem chunk và tạo index khi cần
+
+```powershell
+python main.py preview-chunks --source apple/apple_black_rot.txt
+```
+
+Lệnh này dùng strategy trong `.env`, in header/body, vị trí nguồn và thống kê
+token; không tạo embedding hoặc ghi Chroma.
+
+**Chỉ chạy lệnh sau nếu index chưa có, hoặc đã sửa data, cách chia/header,
+token budget hay embedding model:**
+
+```powershell
+python main.py index
+```
+
+`index` tự đọc tài liệu, chia chunk, tạo embedding và lưu Chroma; không cần
+chạy bước chunking riêng trước nó. Index đã có và cấu hình tương ứng không đổi
+thì bỏ qua. Các thay đổi cache BM25, config provider và kiểm tra citation của
+plan 18/09 không yêu cầu index lại nếu text/header/embedding vẫn giữ nguyên.
+
+### Bước 5 — Kiểm tra retrieval, rồi hỏi chatbot
+
+```powershell
+# Chỉ xem chunk được lấy ra, không gọi LLM:
+python main.py search "Bệnh ghẻ táo có triệu chứng gì?" --debug
+
+# Hỏi một câu, có gọi Ollama:
+python main.py ask "Cách quản lý bệnh thối đen trên táo?"
+
+# Hỏi liên tục, dùng lại tài nguyên và giữ lịch sử:
+python main.py chat --debug
+```
+
+Trong chat, thử lần lượt:
+
+1. `Bệnh ghẻ táo có triệu chứng gì?`
+2. `Vậy tác nhân gây bệnh đó là gì?`
+3. `Cháy lá sớm trên khoai tây do tác nhân nào?`
+
+Xem `retrieval_query` để kiểm tra câu nối tiếp có được làm rõ đúng bệnh không.
+Gõ `/reset` để xóa lịch sử, `/exit` để thoát. Lịch sử chỉ tồn tại trong phiên.
+
+Nếu chỉ muốn kiểm tra retrieval nhiều lần và quan sát cache BM25, dùng:
+
+```powershell
+python main.py chat --search-only --mode bm25 --no-rerank --debug
+```
+
+Lệnh này không cần Ollama/embedding. BM25 dựng cache ở query đầu và dùng lại
+trong cùng phiên; chạy từng lệnh `search` riêng tạo process mới nên không đo
+được lợi ích cache giữa các query. Thay `--mode bm25` bằng `--mode hybrid` để
+thử kết hợp embedding và BM25.
+
 ## Luồng xử lý
 
 ```mermaid
@@ -52,6 +169,22 @@ python main.py preview-chunks --strategy structure --source apple/apple_black_ro
 python main.py index --strategy recursive
 python main.py index --strategy structure
 ```
+
+`--strategy` chỉ ghi đè cho lệnh index/preview đó, không sửa `.env`. Ví dụ,
+chạy `index --strategy structure` rồi `search` khi `.env` vẫn là `recursive`
+thì `search` vẫn đọc index recursive.
+
+Khi đã có cả hai index, so sánh cùng câu hỏi và cùng retrieval settings mà
+không cần đổi `.env`:
+
+```powershell
+python main.py search "Cắt tỉa táo thối đen khi nào?" --index-dir chroma_db --mode hybrid --no-rerank --top-k 4 --debug
+python main.py search "Cắt tỉa táo thối đen khi nào?" --index-dir chroma_db_structure --mode hybrid --no-rerank --top-k 4 --debug
+```
+
+Nếu `CHROMA_DIR` đã được điền, dùng `--index-dir` riêng cho cả hai lệnh index
+để không ghi vào cùng thư mục. Muốn so sánh đúng corpus trước khi thêm heading,
+dùng snapshot raw theo hướng dẫn A/B trong `docs/CHUNKING.md`.
 
 Đổi strategy không chia lại các chunk đã lưu. Sửa data hoặc budget thì chạy
 `index` lại. Có thể dùng `--index-dir` trên cả bốn lệnh để chọn index cụ thể.
@@ -244,13 +377,8 @@ Embedding để ở CPU nhằm dành VRAM cho LLM. Lần chạy `index` đầu t
 
 ## 5. Chạy RAG
 
-Vẫn ở thư mục `RAG-module` và đã activate `.venv`:
-
-```powershell
-python main.py index
-python main.py search "Bệnh ghẻ táo có triệu chứng gì?"
-python main.py ask "Cách quản lý bệnh thối đen trên táo?"
-```
+Làm theo mục **Chạy thử nhanh với Ollama Qwen3.5 4B** ở đầu README: activate
+venv → chọn `.env` → kiểm tra Ollama → index nếu cần → search/ask/chat.
 
 Thay đổi số chunk truy xuất:
 
@@ -263,14 +391,17 @@ Các lệnh chính:
 
 | Lệnh | Tác dụng | Cần LLM provider đã chọn |
 | --- | --- | --- |
+| `python main.py preview-chunks` | Xem chunk và token trước khi index | Không |
 | `python main.py index` | Build lại index từ `data/**/*.txt` | Không |
 | `python main.py search "<câu hỏi>"` | In các chunk gần nhất | Không |
 | `python main.py ask "<câu hỏi>"` | Sinh câu trả lời và in nguồn | Có |
 | `python main.py chat` | Hỏi liên tục, giữ tài nguyên của phiên | Có |
 | `python main.py chat --search-only` | Retrieval liên tục, giữ model local | Không |
 
-Chạy lại `index` khi thêm/sửa tài liệu hoặc đổi embedding model. Đổi LLM,
-context, prompt hay provider không yêu cầu build lại index.
+Chạy lại `index` khi thêm/sửa tài liệu, đổi cách chia/header/budget hoặc embedding
+model. Chuyển sang strategy đã có index phù hợp thì chỉ cần chọn lại index.
+Đổi LLM, context, prompt, provider, mode retrieval hoặc bật/tắt reranker không
+yêu cầu build lại index.
 
 ## Chuyển giữa Ollama, Gemini và vLLM
 
@@ -373,6 +504,16 @@ hay tải embedding model thật:
 ```powershell
 python -m pytest -q
 ```
+
+Thử nhanh ba câu hội thoại với **Ollama thật** và index đang chọn trong `.env`:
+
+```powershell
+python scripts/smoke_chat.py --mode bm25
+```
+
+Script in câu hỏi, query đã làm rõ, nguồn, câu trả lời và thời gian mỗi lượt.
+Đây là smoke test để đọc kết quả thực tế; không tự chấm tính đúng đắn của nội
+dung như một benchmark có nhãn.
 
 ## Xử lý lỗi thường gặp
 

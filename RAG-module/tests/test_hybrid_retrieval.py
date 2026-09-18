@@ -29,6 +29,48 @@ class Store:
         return self.semantic_results[:k]
 
 
+class ChromaLikeStore(Store):
+    """Giong Chroma: ``include=[]`` chi tra id, nen cache corpus co hieu luc."""
+
+    def __init__(self, corpus, semantic_results=None):
+        super().__init__(corpus, semantic_results)
+        self.content_reads = 0
+
+    def get(self, *, include):
+        if not include:
+            return {"ids": [f"id-{index}" for index in range(len(self.corpus))]}
+        self.content_reads += 1
+        return super().get(include=include)
+
+
+def test_corpus_is_read_once_while_collection_is_unchanged() -> None:
+    docs = [document("Venturia inaequalis", "scab.txt"),
+            document("Diplodia seriata", "rot.txt")]
+    store = ChromaLikeStore(docs)
+    assert rag.retrieve("Venturia", mode="bm25", vector_store=store)
+    assert rag.retrieve("Diplodia", mode="bm25", vector_store=store)
+    assert store.content_reads == 1
+
+
+def test_corpus_is_read_again_after_collection_changes() -> None:
+    docs = [document("Venturia inaequalis", "scab.txt")]
+    store = ChromaLikeStore(docs)
+    assert rag.retrieve("Venturia", mode="bm25", vector_store=store)
+    store.corpus = docs + [document("Diplodia seriata", "rot.txt")]
+    found = rag.retrieve("Diplodia", mode="bm25", vector_store=store)
+    assert [doc.metadata["source"] for doc in found] == ["rot.txt"]
+    assert store.content_reads == 2
+
+
+def test_store_without_ids_still_returns_correct_results() -> None:
+    """Store khong tra 'ids' thi bo cache; ket qua van phai dung."""
+    store = Store([document("Venturia inaequalis", "scab.txt"),
+                   document("Diplodia seriata", "rot.txt")])
+    for _ in range(2):
+        found = rag.retrieve("Diplodia", mode="bm25", vector_store=store)
+        assert [doc.metadata["source"] for doc in found] == ["rot.txt"]
+
+
 @pytest.mark.parametrize("question", ["ĐỐM MẮT ẾCH", "dom mat ech", "đốm mắt ếch"])
 def test_bm25_handles_case_accents_and_unicode_forms(question: str) -> None:
     correct = document("Lá có đốm mắt ếch.", "apple.txt")

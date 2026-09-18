@@ -12,7 +12,7 @@ from langchain_core.documents import Document
 def test_create_chat_model_fails_before_provider_import_without_key(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    monkeypatch.setattr(config, "LLM_PROVIDER", "gemini")
+    monkeypatch.setenv("LLM_PROVIDER", "gemini")
     monkeypatch.delenv("GEMINI_API_KEY", raising=False)
 
     with pytest.raises(RuntimeError, match="GEMINI_API_KEY"):
@@ -28,11 +28,13 @@ def test_create_chat_model_builds_configured_ollama_model(
         def __init__(self, **kwargs: object) -> None:
             captured.update(kwargs)
 
-    monkeypatch.setattr(config, "LLM_PROVIDER", "ollama")
-    monkeypatch.setattr(config, "OLLAMA_MODEL", "qwen3.5:9b")
-    monkeypatch.setattr(config, "OLLAMA_NUM_CTX", 8192)
-    monkeypatch.setattr(config, "OLLAMA_NUM_PREDICT", 800)
-    monkeypatch.setattr(config, "OLLAMA_THINK", False)
+    monkeypatch.setenv("LLM_PROVIDER", "ollama")
+    monkeypatch.setenv("OLLAMA_MODEL", "qwen3.5:9b")
+    monkeypatch.setenv("OLLAMA_BASE_URL", "http://ollama.test:11434")
+    monkeypatch.setenv("OLLAMA_NUM_CTX", "8192")
+    monkeypatch.setenv("OLLAMA_NUM_PREDICT", "800")
+    monkeypatch.setenv("OLLAMA_KEEP_ALIVE", "30m")
+    monkeypatch.setenv("OLLAMA_THINK", "false")
     monkeypatch.setitem(
         sys.modules,
         "langchain_ollama",
@@ -44,12 +46,12 @@ def test_create_chat_model_builds_configured_ollama_model(
     assert isinstance(model, FakeChatOllama)
     assert captured == {
         "model": "qwen3.5:9b",
-        "base_url": config.OLLAMA_BASE_URL,
+        "base_url": "http://ollama.test:11434",
         "temperature": 0,
         "num_ctx": 8192,
         "num_predict": 800,
         "reasoning": False,
-        "keep_alive": config.OLLAMA_KEEP_ALIVE,
+        "keep_alive": "30m",
         "validate_model_on_init": True,
     }
 
@@ -57,7 +59,7 @@ def test_create_chat_model_builds_configured_ollama_model(
 def test_create_chat_model_rejects_unknown_provider(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    monkeypatch.setattr(config, "LLM_PROVIDER", "unknown")
+    monkeypatch.setenv("LLM_PROVIDER", "unknown")
 
     with pytest.raises(RuntimeError, match="LLM_PROVIDER không hợp lệ"):
         config.create_chat_model()

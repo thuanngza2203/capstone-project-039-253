@@ -17,9 +17,26 @@ DATA_DIR = PROJECT_ROOT / "data"
 CHROMA_DIR = PROJECT_ROOT / "chroma_db"
 COLLECTION_NAME = "plant_disease_vi"
 
-CHUNK_SIZE = 1000
-CHUNK_OVERLAP = 150
-TOP_K = 4
+
+def _int_setting(name: str, default: int, *, minimum: int = 1) -> int:
+    """Đọc số nguyên từ environment; mọi cấu hình số đều đi qua đây."""
+
+    limit = "lớn hơn 0" if minimum == 1 else f"từ {minimum} trở lên"
+    try:
+        value = int(os.getenv(name, str(default)))
+    except ValueError as exc:
+        raise ValueError(f"{name} phải là số nguyên {limit}.") from exc
+    if value < minimum:
+        raise ValueError(f"{name} phải là số nguyên {limit}.")
+    return value
+
+
+# Tham số của đường recursive và số chunk trả về; mặc định giữ nguyên như cũ.
+CHUNK_SIZE = _int_setting("RAG_CHUNK_SIZE", 1000)
+CHUNK_OVERLAP = _int_setting("RAG_CHUNK_OVERLAP", 150, minimum=0)
+TOP_K = _int_setting("RAG_TOP_K", 4)
+if CHUNK_OVERLAP >= CHUNK_SIZE:
+    raise ValueError("RAG_CHUNK_OVERLAP phải nhỏ hơn RAG_CHUNK_SIZE.")
 
 
 @dataclass(frozen=True)
@@ -39,7 +56,7 @@ def get_chunking_settings(*, strategy: str | None = None) -> ChunkingSettings:
     # Các biến token không ảnh hưởng đường recursive, kể cả khi đang chỉnh thử.
     if selected == "recursive":
         return ChunkingSettings(strategy=selected)
-    maximum = _positive_int_setting("CHUNK_MAX_TOKENS", 400)
+    maximum = _int_setting("CHUNK_MAX_TOKENS", 400)
     try:
         overlap = int(os.getenv("CHUNK_OVERLAP_TOKENS", "40"))
     except ValueError as exc:
@@ -79,16 +96,6 @@ class RetrievalSettings:
     reranker_device: str = "cpu"
 
 
-def _positive_int_setting(name: str, default: int) -> int:
-    try:
-        value = int(os.getenv(name, str(default)))
-    except ValueError as exc:
-        raise ValueError(f"{name} phải là số nguyên lớn hơn 0.") from exc
-    if value < 1:
-        raise ValueError(f"{name} phải là số nguyên lớn hơn 0.")
-    return value
-
-
 @dataclass(frozen=True)
 class ChatSettings:
     """Giới hạn lịch sử trong RAM; số lượt bằng 0 để tắt memory."""
@@ -104,9 +111,7 @@ def get_chat_settings(*, history_turns: int | None = None) -> ChatSettings:
         raise ValueError("CHAT_HISTORY_TURNS phải là số nguyên không âm.") from exc
     if not isinstance(turns, int) or isinstance(turns, bool) or turns < 0:
         raise ValueError("CHAT_HISTORY_TURNS phải là số nguyên không âm.")
-    max_chars = _positive_int_setting("CHAT_HISTORY_MAX_CHARS", 6000)
-    if max_chars < 300:
-        raise ValueError("CHAT_HISTORY_MAX_CHARS phải từ 300 trở lên.")
+    max_chars = _int_setting("CHAT_HISTORY_MAX_CHARS", 6000, minimum=300)
     return ChatSettings(history_turns=turns, history_max_chars=max_chars)
 
 
@@ -129,8 +134,8 @@ def get_retrieval_settings(
 
     return RetrievalSettings(
         mode=selected_mode,
-        candidate_k=_positive_int_setting("RETRIEVAL_CANDIDATE_K", 20),
-        rrf_k=_positive_int_setting("RETRIEVAL_RRF_K", 60),
+        candidate_k=_int_setting("RETRIEVAL_CANDIDATE_K", 20),
+        rrf_k=_int_setting("RETRIEVAL_RRF_K", 60),
         reranker_enabled=rerank,
         reranker_model=(
             os.getenv("RERANKER_MODEL", "").strip()
@@ -143,30 +148,60 @@ EMBEDDING_MODEL = os.getenv(
     "EMBEDDING_MODEL", "AITeamVN/Vietnamese_Embedding"
 ).strip()
 EMBEDDING_DEVICE = os.getenv("EMBEDDING_DEVICE", "cpu").strip() or "cpu"
-LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama").strip().casefold() or "ollama"
+# Embedding vẫn đọc lúc import: nó là danh tính của index đã build, được manifest
+# so khớp khi query, không phải nút chỉnh theo từng lần gọi như cấu hình LLM.
 
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen3.5:4b").strip() or "qwen3.5:4b"
-OLLAMA_BASE_URL = (
-    os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434").strip()
-    or "http://127.0.0.1:11434"
-)
-OLLAMA_NUM_CTX = int(os.getenv("OLLAMA_NUM_CTX", "8192"))
-OLLAMA_NUM_PREDICT = int(os.getenv("OLLAMA_NUM_PREDICT", "800"))
-OLLAMA_KEEP_ALIVE = os.getenv("OLLAMA_KEEP_ALIVE", "10m").strip() or "10m"
-OLLAMA_THINK = os.getenv("OLLAMA_THINK", "false").strip().casefold() in {
-    "1",
-    "true",
-    "yes",
-    "on",
-}
 
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash").strip()
+@dataclass(frozen=True)
+class LLMSettings:
+    """Cấu hình provider; đọc tại thời điểm gọi như các nhóm setting còn lại."""
 
-VLLM_MODEL = os.getenv("VLLM_MODEL", "Qwen/Qwen3-0.6B").strip() or "Qwen/Qwen3-0.6B"
-VLLM_BASE_URL = (
-    os.getenv("VLLM_BASE_URL", "http://127.0.0.1:8000/v1").strip()
-    or "http://127.0.0.1:8000/v1"
-).rstrip("/")
+    provider: str = "ollama"
+    ollama_model: str = "qwen3.5:4b"
+    ollama_base_url: str = "http://127.0.0.1:11434"
+    ollama_num_ctx: int = 8192
+    ollama_num_predict: int = 800
+    ollama_keep_alive: str = "10m"
+    ollama_think: bool = False
+    gemini_model: str = "gemini-2.5-flash"
+    vllm_model: str = "Qwen/Qwen3-0.6B"
+    vllm_base_url: str = "http://127.0.0.1:8000/v1"
+
+
+def get_llm_settings(*, provider: str | None = None) -> LLMSettings:
+    """Đọc environment tại thời điểm gọi, không chốt cứng lúc import module.
+
+    Nhờ vậy `provider=` và biến môi trường đổi trong process đều có hiệu lực.
+    Riêng file `.env` vẫn chỉ được `load_dotenv` đọc một lần lúc import, nên sửa
+    file thì vẫn phải khởi động lại chương trình.
+    """
+
+    selected = (
+        provider if provider is not None else os.getenv("LLM_PROVIDER", "ollama")
+    ).strip().casefold() or "ollama"
+    return LLMSettings(
+        provider=selected,
+        ollama_model=os.getenv("OLLAMA_MODEL", "").strip() or LLMSettings.ollama_model,
+        ollama_base_url=(
+            os.getenv("OLLAMA_BASE_URL", "").strip() or LLMSettings.ollama_base_url
+        ),
+        ollama_num_ctx=int(os.getenv("OLLAMA_NUM_CTX", "8192")),
+        ollama_num_predict=int(os.getenv("OLLAMA_NUM_PREDICT", "800")),
+        ollama_keep_alive=(
+            os.getenv("OLLAMA_KEEP_ALIVE", "").strip() or LLMSettings.ollama_keep_alive
+        ),
+        ollama_think=os.getenv("OLLAMA_THINK", "false").strip().casefold() in {
+            "1",
+            "true",
+            "yes",
+            "on",
+        },
+        gemini_model=os.getenv("GEMINI_MODEL", "").strip() or LLMSettings.gemini_model,
+        vllm_model=os.getenv("VLLM_MODEL", "").strip() or LLMSettings.vllm_model,
+        vllm_base_url=(
+            os.getenv("VLLM_BASE_URL", "").strip() or LLMSettings.vllm_base_url
+        ).rstrip("/"),
+    )
 
 
 @lru_cache(maxsize=1)
@@ -183,11 +218,13 @@ def create_embeddings() -> Embeddings:
     )
 
 
-def create_chat_model() -> BaseChatModel:
-    """Tạo Ollama, Gemini hoặc vLLM client theo config đọc khi khởi động."""
+def create_chat_model(*, provider: str | None = None) -> BaseChatModel:
+    """Tạo Ollama, Gemini hoặc vLLM client theo cấu hình đọc lúc gọi hàm."""
 
-    if LLM_PROVIDER == "ollama":
-        if OLLAMA_NUM_CTX < 1 or OLLAMA_NUM_PREDICT < 1:
+    settings = get_llm_settings(provider=provider)
+
+    if settings.provider == "ollama":
+        if settings.ollama_num_ctx < 1 or settings.ollama_num_predict < 1:
             raise RuntimeError(
                 "OLLAMA_NUM_CTX và OLLAMA_NUM_PREDICT phải lớn hơn 0."
             )
@@ -201,17 +238,17 @@ def create_chat_model() -> BaseChatModel:
             ) from exc
 
         return ChatOllama(
-            model=OLLAMA_MODEL,
-            base_url=OLLAMA_BASE_URL,
+            model=settings.ollama_model,
+            base_url=settings.ollama_base_url,
             temperature=0,
-            num_ctx=OLLAMA_NUM_CTX,
-            num_predict=OLLAMA_NUM_PREDICT,
-            reasoning=OLLAMA_THINK,
-            keep_alive=OLLAMA_KEEP_ALIVE,
+            num_ctx=settings.ollama_num_ctx,
+            num_predict=settings.ollama_num_predict,
+            reasoning=settings.ollama_think,
+            keep_alive=settings.ollama_keep_alive,
             validate_model_on_init=True,
         )
 
-    if LLM_PROVIDER == "vllm":
+    if settings.provider == "vllm":
         # Chỉ kiểm tra cấu hình vLLM khi provider này được chọn.
         try:
             max_tokens = int(os.getenv("VLLM_MAX_TOKENS", "800"))
@@ -247,8 +284,8 @@ def create_chat_model() -> BaseChatModel:
             ) from exc
 
         return ChatOpenAI(
-            model=VLLM_MODEL,
-            base_url=VLLM_BASE_URL,
+            model=settings.vllm_model,
+            base_url=settings.vllm_base_url,
             api_key=os.getenv("VLLM_API_KEY", "").strip() or "EMPTY",
             temperature=0,
             max_tokens=max_tokens,
@@ -258,9 +295,9 @@ def create_chat_model() -> BaseChatModel:
             extra_body=extra_body,
         )
 
-    if LLM_PROVIDER != "gemini":
+    if settings.provider != "gemini":
         raise RuntimeError(
-            f"LLM_PROVIDER không hợp lệ: {LLM_PROVIDER!r}. "
+            f"LLM_PROVIDER không hợp lệ: {settings.provider!r}. "
             "Chỉ hỗ trợ 'ollama', 'gemini' hoặc 'vllm'."
         )
 
@@ -274,7 +311,7 @@ def create_chat_model() -> BaseChatModel:
     from langchain_google_genai import ChatGoogleGenerativeAI
 
     return ChatGoogleGenerativeAI(
-        model=GEMINI_MODEL,
+        model=settings.gemini_model,
         api_key=api_key,
         temperature=0,
         thinking_budget=0,

@@ -10,9 +10,10 @@ import hashlib
 import math
 import re
 import unicodedata
-from dataclasses import dataclass, replace
+from dataclasses import dataclass, field, replace
 from functools import lru_cache
 from typing import Any
+from weakref import WeakKeyDictionary
 
 from langchain_core.documents import Document
 
@@ -101,8 +102,9 @@ def unique_documents(documents: list[Document]) -> list[Document]:
 def read_chunks(store: Any) -> list[Document]:
     """Đọc snapshot text/metadata đang được index; không tải embedding.
 
-    Với corpus hiện tại, đọc cả collection giúp source đơn giản và không có
-    BM25 cache cũ sau rebuild. Corpus lớn hơn cần pagination/index BM25 riêng.
+    Đọc cả collection nên corpus lớn hơn sẽ cần pagination/index BM25 riêng.
+    Kết quả được dùng lại qua ``corpus_index()``; cache ở đó tự hết hiệu lực khi
+    collection đổi, nên rebuild index không để lại BM25 cũ.
     """
     if not callable(getattr(store, "get", None)):
         raise ValueError(
@@ -138,24 +140,82 @@ def tokenize(text: str) -> list[str]:
     return words + bigrams
 
 
-def bm25_search(question: str, documents: list[Document], limit: int) -> list[SearchHit]:
-    """BM25 xếp hạng từ khóa trên các chunk, gồm cả identity header hiện có."""
+@dataclass
+class CorpusIndex:
+    """Corpus đã tokenize kèm BM25, dựng một lần cho mỗi snapshot của index.
+
+    Tách khỏi query để phần đắt (đọc Chroma, tokenize cả corpus, dựng BM25)
+    không phải làm lại ở mỗi câu hỏi trong cùng một phiên.
+    """
+
+    documents: list[Document] = field(default_factory=list)
+    tokens: list[list[str]] = field(default_factory=list)
+    bm25: Any = None
+
+
+def build_corpus_index(documents: list[Document]) -> CorpusIndex:
+    """Tokenize và dựng BM25; chunk không có token nào bị loại khỏi corpus."""
     from rank_bm25 import BM25Plus
 
-    query_tokens = tokenize(question)
     corpus = [(doc, tokenize(doc.page_content)) for doc in unique_documents(documents)]
     corpus = [(doc, tokens) for doc, tokens in corpus if tokens]
-    if not query_tokens or not corpus:
-        return []
-
+    if not corpus:
+        return CorpusIndex()
     # BM25Plus có IDF dương, tránh trường hợp Okapi cho IDF=0 khi từ xuất hiện
     # trong đúng một nửa corpus (rất dễ gặp ở corpus/test chỉ có vài tài liệu).
-    index = BM25Plus([tokens for _, tokens in corpus])
-    scores = index.get_scores(query_tokens)
+    return CorpusIndex(
+        documents=[doc for doc, _ in corpus],
+        tokens=[tokens for _, tokens in corpus],
+        bm25=BM25Plus([tokens for _, tokens in corpus]),
+    )
+
+
+_CORPUS_CACHE: WeakKeyDictionary = WeakKeyDictionary()
+
+
+def _collection_fingerprint(store: Any) -> tuple[str, ...] | None:
+    """ID của collection: đủ để thấy index bị build lại, rẻ hơn đọc nội dung.
+
+    Trả None khi store không cung cấp ``ids`` (ví dụ store giả trong test); khi
+    đó bỏ qua cache thay vì đoán rằng corpus không đổi.
+    """
+    try:
+        records = store.get(include=[])
+    except TypeError:
+        return None
+    ids = records.get("ids") if isinstance(records, dict) else None
+    return None if ids is None else tuple(ids)
+
+
+def corpus_index(store: Any) -> CorpusIndex:
+    """Dùng lại corpus/BM25 khi snapshot của index không đổi trong process này."""
+    fingerprint = _collection_fingerprint(store)
+    if fingerprint is not None:
+        cached = _CORPUS_CACHE.get(store)
+        if cached is not None and cached[0] == fingerprint:
+            return cached[1]
+
+    index = build_corpus_index(read_chunks(store))
+    if fingerprint is not None:
+        try:
+            _CORPUS_CACHE[store] = (fingerprint, index)
+        except TypeError:
+            # Store không hỗ trợ weakref: vẫn trả kết quả đúng, chỉ không cache.
+            pass
+    return index
+
+
+def bm25_search_index(question: str, index: CorpusIndex, limit: int) -> list[SearchHit]:
+    """Chấm điểm một query trên corpus đã dựng sẵn."""
+    query_tokens = tokenize(question)
+    if not query_tokens or index.bm25 is None:
+        return []
+
+    scores = index.bm25.get_scores(query_tokens)
     query_terms = set(query_tokens)
     hits = [
         SearchHit(document=doc, chunk_id=chunk_key(doc), bm25_score=float(score))
-        for (doc, tokens), score in zip(corpus, scores)
+        for doc, tokens, score in zip(index.documents, index.tokens, scores)
         if query_terms.intersection(tokens)
     ]
     # Không lấy chunk không có từ nào khớp chỉ để lấp đầy top-k.
@@ -164,6 +224,11 @@ def bm25_search(question: str, documents: list[Document], limit: int) -> list[Se
     for rank, hit in enumerate(hits, start=1):
         hit.bm25_rank = rank
     return hits[:limit]
+
+
+def bm25_search(question: str, documents: list[Document], limit: int) -> list[SearchHit]:
+    """BM25 trên danh sách chunk truyền thẳng vào; dựng corpus mới mỗi lần gọi."""
+    return bm25_search_index(question, build_corpus_index(documents), limit)
 
 
 def semantic_search(question: str, store: Any, limit: int) -> list[SearchHit]:
@@ -242,7 +307,7 @@ def search_store(
     if settings.mode in {"semantic", "hybrid"}:
         semantic_hits = semantic_search(question, store, limit)
     if settings.mode in {"bm25", "hybrid"}:
-        bm25_hits = bm25_search(question, read_chunks(store), limit)
+        bm25_hits = bm25_search_index(question, corpus_index(store), limit)
 
     if settings.mode == "hybrid":
         candidates = reciprocal_rank_fusion(semantic_hits, bm25_hits, settings.rrf_k)

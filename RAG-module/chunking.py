@@ -18,6 +18,9 @@ from langchain_core.documents import Document
 from config import ChunkingSettings
 
 CHUNKING_VERSION = "structure-v1"
+# Đã thử compact-v2 (thêm dòng "Tên gọi" từ disease_aliases) và bỏ: alias là text
+# cấp bệnh lặp ở mọi chunk, lại cố ý bỏ phần "trên cây X", nên làm các tài liệu
+# cùng tên bệnh khác cây giống nhau hơn. Benchmark 18/09: 38/58 so với 40/58.
 HEADER_VERSION = "compact-v1"
 HEADING = re.compile(r"^(#{1,3})[ \t]+(.+?)\s*$")
 # Đây là field của định dạng tài liệu, không phải luật match query/cây/bệnh.
@@ -202,10 +205,15 @@ def split_unit_spans(
             for pattern in (r"\n\s*\n", r"[.!?;](?:\s+|$)", r"\n", r"\s+"):
                 candidates = [start + m.end() for m in re.finditer(pattern, text[start:end])
                               if start + m.end() >= floor]
-                fitting = [pos for pos in reversed(candidates)
-                           if count(prefix + text[start:pos].rstrip()) <= settings.max_tokens]
-                if fitting:
-                    end = fitting[0]
+                # Lấy vị trí xa nhất còn vừa budget; generator để dừng ngay khi
+                # gặp vị trí đầu tiên hợp lệ thay vì đếm token cho mọi candidate.
+                fitting = next(
+                    (pos for pos in reversed(candidates)
+                     if count(prefix + text[start:pos].rstrip()) <= settings.max_tokens),
+                    None,
+                )
+                if fitting is not None:
+                    end = fitting
                     break
         left, right = _trim_span(text, start, end)
         if left < right:

@@ -1,15 +1,18 @@
+"""Thống kê nhanh chunk trong Chroma; chỉ đọc metadata, không nạp model."""
+
 from collections import Counter
 
-from config import COLLECTION_NAME, create_embeddings, get_index_directory
-from rag import _new_vector_store
+from config import COLLECTION_NAME, get_index_directory
+from rag import new_vector_store
 
 
 index_dir = get_index_directory()
 
 print(f"Đang đọc Vector DB tại: {index_dir}")
 
-store = _new_vector_store(
-    create_embeddings(),
+# store.get() không cần embedding: bỏ qua việc nạp model để script chạy tức thì.
+store = new_vector_store(
+    None,
     index_dir,
     COLLECTION_NAME,
 )

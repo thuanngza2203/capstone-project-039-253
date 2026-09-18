@@ -14,7 +14,7 @@ from time import perf_counter
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from config import LLM_PROVIDER, OLLAMA_MODEL
+from config import get_llm_settings
 from rag import RAGSession
 
 
@@ -22,10 +22,15 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mode", choices=["bm25", "semantic", "hybrid"], default="bm25")
     args = parser.parse_args()
-    if LLM_PROVIDER != "ollama":
+    settings = get_llm_settings()
+    if settings.provider != "ollama":
         raise RuntimeError("Script này cần LLM_PROVIDER=ollama trong .env.")
 
-    print(f"Provider: {LLM_PROVIDER}; model: {OLLAMA_MODEL}; mode: {args.mode}", flush=True)
+    print(
+        f"Provider: {settings.provider}; model: {settings.ollama_model}; "
+        f"mode: {args.mode}",
+        flush=True,
+    )
     session = RAGSession(mode=args.mode, rerank=False, history_turns=4)
     session.warmup()
     for question in [

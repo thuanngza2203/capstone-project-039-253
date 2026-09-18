@@ -9,6 +9,7 @@ from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 
+from chunking import HEADER_VERSION
 from config import ChunkingSettings
 
 
@@ -40,7 +41,7 @@ def describe_manifest(documents, settings: ChunkingSettings, *, collection: str,
         "chunking": asdict(settings), "embedding_model": embedding_model,
         "chunking_version": "structure-v1" if settings.strategy == "structure" else "recursive-v1",
         "legacy_chunk_size": chunk_size, "legacy_chunk_overlap": chunk_overlap,
-        "header_version": "compact-v1" if settings.strategy == "structure" else "identity-v1",
+        "header_version": HEADER_VERSION if settings.strategy == "structure" else "identity-v1",
     }
 
 

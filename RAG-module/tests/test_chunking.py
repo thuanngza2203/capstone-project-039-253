@@ -179,7 +179,7 @@ def test_preview_does_not_load_models_or_chroma(tmp_path, apple_data_dir, monkey
     fail = lambda *a, **kw: pytest.fail("Preview touched a model/store")
     monkeypatch.setattr(rag, "create_embeddings", fail)
     monkeypatch.setattr(rag, "create_chat_model", fail)
-    monkeypatch.setattr(rag, "_new_vector_store", fail)
+    monkeypatch.setattr(rag, "new_vector_store", fail)
     monkeypatch.setattr(chunk_preview, "load_tokenizer", lambda model: CharacterTokenizer())
     monkeypatch.setenv("CHUNK_MAX_TOKENS", "1800")
     path = tmp_path / "preview.jsonl"
@@ -220,7 +220,7 @@ def test_partial_index_cannot_be_queried(tmp_path, apple_data_dir, fake_embeddin
             pass
         def add_documents(self, chunks):
             raise RuntimeError("write failed")
-    monkeypatch.setattr(rag, "_new_vector_store", lambda *a: BrokenStore())
+    monkeypatch.setattr(rag, "new_vector_store", lambda *a: BrokenStore())
     directory = tmp_path / "broken"
     with pytest.raises(RuntimeError, match="write failed"):
         rag.build_index(apple_data_dir, directory, embeddings=fake_embeddings)

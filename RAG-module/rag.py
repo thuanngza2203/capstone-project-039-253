@@ -383,7 +383,7 @@ def split_documents(
     return chunks
 
 
-def _new_vector_store(
+def new_vector_store(
     embeddings: Embeddings | None,
     persist_directory: Path | str,
     collection_name: str,
@@ -434,7 +434,7 @@ def build_index(
         documents, settings, collection=collection_name,
         embedding_model=_embedding_identity(embeddings), chunk_size=chunk_size, chunk_overlap=chunk_overlap,
     )
-    vector_store = _new_vector_store(
+    vector_store = new_vector_store(
         embedding_model, persist_path, collection_name
     )
     # Nếu add_documents bị lỗi, query phải thấy trạng thái building thay vì đọc index dở dang.
@@ -474,7 +474,7 @@ def _load_vector_store(
     embedding_model = None
     if load_embeddings:
         embedding_model = embeddings or create_embeddings()
-    vector_store = _new_vector_store(
+    vector_store = new_vector_store(
         embedding_model,
         persist_path,
         collection_name,
@@ -553,6 +553,33 @@ def format_context(documents: Sequence[Document]) -> str:
     return "\n\n".join(blocks)
 
 
+# Viết theo NFC để khớp cả khi LLM trả về "Nguồn" ở dạng tổ hợp dấu khác.
+_CITATION_PATTERN = re.compile(
+    unicodedata.normalize("NFC", r"\[\s*Nguồn\s+(\d+)"), re.IGNORECASE
+)
+
+
+def cited_source_numbers(answer: str) -> list[int]:
+    """Các số nguồn LLM đã dẫn, theo thứ tự xuất hiện trong câu trả lời."""
+
+    return [
+        int(number)
+        for number in _CITATION_PATTERN.findall(unicodedata.normalize("NFC", answer))
+    ]
+
+
+def invalid_citations(answer: str, document_count: int) -> list[int]:
+    """Số nguồn ngoài [1, document_count]: nhãn trỏ ra ngoài NGỮ CẢNH lượt này."""
+
+    return sorted(
+        {
+            number
+            for number in cited_source_numbers(answer)
+            if not 1 <= number <= document_count
+        }
+    )
+
+
 def _unique_sources(documents: Sequence[Document]) -> list[str]:
     return list(
         dict.fromkeys(
@@ -613,6 +640,15 @@ def _answer_from_documents(
     }).strip()
     if not answer:
         raise RuntimeError("LLM trả về nội dung rỗng.")
+    # Cảnh báo thay vì raise: câu trả lời vẫn tới người dùng, nhưng nhãn trỏ ra
+    # ngoài NGỮ CẢNH là dấu hiệu trích dẫn bịa và cần thấy được khi chạy/đo.
+    invalid = invalid_citations(answer, len(documents))
+    if invalid:
+        warnings.warn(
+            f"Câu trả lời dẫn nguồn không có trong NGỮ CẢNH: {invalid}; "
+            f"lượt này chỉ có {len(documents)} nguồn.",
+            stacklevel=2,
+        )
     return answer, _unique_sources(documents)
 
 

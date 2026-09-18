@@ -94,7 +94,7 @@ def test_ask_does_not_create_llm_when_retrieval_is_empty(
 def test_ask_requires_gemini_key_only_after_retrieval(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    monkeypatch.setattr(config, "LLM_PROVIDER", "gemini")
+    monkeypatch.setenv("LLM_PROVIDER", "gemini")
     monkeypatch.delenv("GEMINI_API_KEY", raising=False)
     store = RecordingVectorStore(
         [

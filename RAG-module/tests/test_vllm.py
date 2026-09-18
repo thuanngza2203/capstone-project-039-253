@@ -56,9 +56,9 @@ def test_ask_sends_rag_prompt_to_vllm_chat_api(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Exercise the real LangChain/SDK request with an offline HTTP transport."""
-    monkeypatch.setattr(config, "LLM_PROVIDER", "vllm")
-    monkeypatch.setattr(config, "VLLM_BASE_URL", "http://docker.test:8000/v1")
-    monkeypatch.setattr(config, "VLLM_MODEL", "plant-chat")
+    monkeypatch.setenv("LLM_PROVIDER", "vllm")
+    monkeypatch.setenv("VLLM_BASE_URL", "http://docker.test:8000/v1")
+    monkeypatch.setenv("VLLM_MODEL", "plant-chat")
     monkeypatch.setenv("VLLM_API_KEY", api_key)
     monkeypatch.setenv("VLLM_MAX_TOKENS", "321")
     monkeypatch.setenv("VLLM_TIMEOUT", "25")
@@ -137,7 +137,7 @@ def test_ask_sends_rag_prompt_to_vllm_chat_api(
 def test_invalid_vllm_config_fails_before_client_creation(
     setting: str, value: str, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    monkeypatch.setattr(config, "LLM_PROVIDER", "vllm")
+    monkeypatch.setenv("LLM_PROVIDER", "vllm")
     monkeypatch.setenv("VLLM_MAX_TOKENS", "800")
     monkeypatch.setenv("VLLM_TIMEOUT", "120")
     monkeypatch.setenv("VLLM_THINK", "")
@@ -151,7 +151,7 @@ def test_invalid_vllm_config_fails_before_client_creation(
 
 
 def test_missing_vllm_dependency_reports_install_command(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(config, "LLM_PROVIDER", "vllm")
+    monkeypatch.setenv("LLM_PROVIDER", "vllm")
     monkeypatch.setenv("VLLM_THINK", "")
     monkeypatch.setitem(sys.modules, "langchain_openai", None)
     with pytest.raises(RuntimeError, match="pip install -r requirements.txt"):
