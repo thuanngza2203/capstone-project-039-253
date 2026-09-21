@@ -1,4 +1,5 @@
 # Cài bằng uv pip install -r requirements.txt --torch-backend=auto trên Linux.
 # vLLM tự chọn các dependency Torch/Transformers tương thích với nó.
+# 0.17.0 đã có Qwen3.5 và --language-model-only; không giữ bản cũ thiếu hỗ trợ.
 vllm>=0.17.0
 python-dotenv>=1.1,<2

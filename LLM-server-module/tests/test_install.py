@@ -62,7 +62,7 @@ class InstallerTests(unittest.TestCase):
         for key in ("LLM_PYTHON_BIN", "INSTALL_TEST_OLD_PYTHON", "INSTALL_TEST_OS"):
             self.env.pop(key, None)
         self.env.update({
-            "PATH": str(self.bin_dir) + os.pathsep + self.env.get("PATH", ""),
+            "INSTALL_TEST_BIN": self.bin_dir.as_posix(),
             "INSTALL_TEST_LOG": self.log.as_posix(),
             "UV_PYTHON": "unrelated-python",
             "VIRTUAL_ENV": str(self.root / "unrelated-venv"),
@@ -74,8 +74,17 @@ class InstallerTests(unittest.TestCase):
         path.chmod(0o755)
 
     def run_installer(self, *arguments: str):
+        # Git Bash chỉnh PATH khi khởi động; thêm stub sau bước đó.
+        bootstrap = '''
+stub_bin="$INSTALL_TEST_BIN"
+if command -v cygpath >/dev/null 2>&1; then
+  stub_bin="$(cygpath -u "$stub_bin")"
+fi
+export PATH="$stub_bin:$PATH"
+exec bash install.sh "$@"
+'''
         return subprocess.run(
-            [BASH, "install.sh", *arguments], cwd=self.module, env=self.env,
+            [BASH, "-c", bootstrap, "test_install", *arguments], cwd=self.module, env=self.env,
             text=True, encoding="utf-8", capture_output=True, timeout=30,
         )
 
@@ -86,7 +95,7 @@ class InstallerTests(unittest.TestCase):
         return [entry.rstrip("\0").split("\0") for entry in entries if entry]
 
     def test_fresh_install_uses_chosen_python_and_targets_own_venv(self):
-        self.env["LLM_PYTHON_BIN"] = str(self.bin_dir / "chosen-python")
+        self.env["LLM_PYTHON_BIN"] = (self.bin_dir / "chosen-python").as_posix()
         result = self.run_installer()
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         calls = self.calls()

@@ -87,9 +87,26 @@ trước khi cài. Repository private cần credential GitHub có quyền đọc
 
 `install.sh` cài vLLM trong `.venv` của module này, dùng
 `uv pip install ... --torch-backend=auto` và lưu phiên bản đã cài vào
-`runtime/requirements.freeze.txt`. Chạy lại installer khi cần cập nhật
-dependencies, không chạy mỗi lần mở server.
+`runtime/requirements.freeze.txt`. Requirements yêu cầu vLLM từ **0.17.0**,
+phiên bản đã hỗ trợ Qwen3.5. Bản mới hơn phù hợp GPU/driver sẽ được chọn khi
+cài lần đầu; không cần tự dùng nightly.
+[Release vLLM 0.17.0](https://github.com/vllm-project/vllm/releases/tag/v0.17.0),
 [Cài đặt vLLM](https://docs.vllm.ai/en/stable/getting_started/quickstart/)
+
+Installer và launcher đều nhắm đến venv của Python đã chọn, tránh dùng nhầm
+vLLM có sẵn trong template Vast. Nếu máy có nhiều Python, chọn interpreter
+khi tạo venv mới, ví dụ `LLM_PYTHON_BIN=python3.12 bash install.sh`.
+
+**Cài lần đầu / bổ sung dependency thiếu:** `bash install.sh`.
+**Chủ động nâng cấp:** dừng LLM, sao lưu `runtime/requirements.freeze.txt`, rồi:
+
+```bash
+bash install.sh --upgrade
+```
+
+Chạy installer bình thường không ép nâng cấp toàn bộ stack đã cài, nhưng vẫn
+cập nhật package nếu cần để thỏa requirements mới. Không cần chạy installer
+mỗi lần mở server. Giữ bản freeze sau khi kiểm tra inference thực tế thành công.
 
 ### 1.3. Tạo cấu hình server
 
@@ -150,6 +167,9 @@ python check_api.py
 Kết quả thành công phải có `API hoạt động, model: qwen3.5-4b` và câu trả lời.
 Lệnh này gửi GET `/v1/models` rồi POST `/v1/chat/completions` có Bearer key.
 Đây là kiểm tra kết nối/giao thức, không đánh giá chất lượng trả lời bệnh cây.
+File `.env` phải tồn tại; `--env-file` sai đường dẫn sẽ báo lỗi trước khi gọi
+API. File UTF-8 có BOM từ editor Windows cũng đọc được. Checker không theo
+redirect để tránh chuyển key sang endpoint khác; cấu hình URL đích trực tiếp.
 
 `serve.py` giữ API tại `127.0.0.1:8000` và truyền key qua biến `VLLM_API_KEY`
 của vLLM. Host kết nối bằng tunnel hoặc proxy ở các mục dưới. Script khởi
@@ -280,7 +300,8 @@ Nếu RAG của bạn chạy trong container, URL public vẫn dùng được. V
 - **Đổi model/context:** sửa `.env` server, `Ctrl+C` server cũ, rồi chạy lại.
   Nếu đổi tên API, sửa `VLLM_MODEL` bên RAG cho khớp.
 - **Lấy code mới:** dừng server trước, `git status --short`, rồi `git pull --ff-only`;
-  chạy installer khi dependencies cần cập nhật và khởi động lại server.
+  dùng `bash install.sh` khi requirements đổi, hoặc `bash install.sh --upgrade`
+  khi muốn nâng cấp các package đang cài, rồi khởi động lại server.
 - **Kết thúc thuê:** thoát terminal không dừng tính phí. Stop còn phí disk;
   destroy xóa disk instance. Sao lưu `.env`, cache/config runtime cần giữ
   trước khi destroy. [Vòng đời instance](https://docs.vast.ai/guides/instances/manage-instances)
@@ -290,6 +311,7 @@ Nếu RAG của bạn chạy trong container, URL public vẫn dùng được. V
 | `Connection refused` | Server đã sẵn sàng chưa, tunnel/proxy có chạy và đúng port không? |
 | HTTP 401/403 | `VLLM_API_KEY` ở RAG phải khớp `LLM_API_KEY` ở server. |
 | HTTP 404 / sai model | URL có `/v1`; `VLLM_MODEL` phải khớp `LLM_SERVED_MODEL_NAME`. |
+| HTTP 301/302/307/308 | Sửa URL sang endpoint HTTPS cuối cùng; checker không tự chuyển tiếp API key qua redirect. |
 | CUDA không hoạt động | Kiểm tra `nvidia-smi`, đúng venv và driver/wheel theo tài liệu vLLM. |
 | OOM | Kiểm tra GPU còn model khác, giảm context/concurrency hoặc dùng model nhỏ hơn; giảm mức VRAM không tự chữa mọi lỗi thiếu bộ nhớ. |
 | Không hỗ trợ `qwen3_5` hoặc flag | Kiểm tra phiên bản vLLM/model card; cập nhật trong venv server riêng. |
@@ -308,7 +330,9 @@ python -m unittest discover -s tests -v
 ```
 
 Các test kiểm tra cấu hình, cách khởi động, không lộ key trong argv và HTTP
-request/response bằng mock. Không cần cài vLLM/GPU để chạy test này. Test RAG
+request/response. Có test HTTP thật trên loopback để kiểm tra auth và chặn
+redirect; API trong test mô phỏng phản hồi LLM. Test installer dùng công cụ
+giả trong thư mục tạm, không tải packages. Không cần cài vLLM/GPU để chạy test này. Test RAG
 riêng kiểm tra request thật của LangChain qua HTTP transport giả tới endpoint
 HTTPS remote.
 

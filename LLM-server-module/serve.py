@@ -133,7 +133,9 @@ def main(argv: list[str] | None = None) -> int:
             return 0
         if sys.platform != "linux":
             raise ValueError("Khởi động vLLM trên Linux; Windows chỉ dùng --dry-run hoặc check_api.py.")
-        executable = shutil.which("vllm")
+        # Vast template có thể cài sẵn vLLM khác trong PATH. Chỉ dùng bản đi
+        # cùng Python đang chạy để giữ đúng dependencies của venv đã chọn.
+        executable = shutil.which("vllm", path=str(Path(sys.executable).parent))
         if executable is None:
             raise ValueError("Không tìm thấy vllm. Chạy bash install.sh và activate .venv của module này.")
         settings.cache_dir.mkdir(parents=True, exist_ok=True)

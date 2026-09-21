@@ -72,7 +72,7 @@ class ServerTests(unittest.TestCase):
             }
             with patch.object(serve, "read_environment", return_value=env), \
                  patch.object(serve.sys, "platform", "linux"), \
-                 patch.object(serve.shutil, "which", return_value="/venv/bin/vllm"), \
+                 patch.object(serve.shutil, "which", return_value="/venv/bin/vllm") as lookup, \
                  patch.object(serve.os, "execvpe") as execute, redirect_stdout(io.StringIO()) as output:
                 self.assertEqual(serve.main([]), 0)
             executable, command, child_env = execute.call_args.args
@@ -81,6 +81,7 @@ class ServerTests(unittest.TestCase):
             self.assertEqual(command[command.index("--port") + 1], "8123")
             self.assertEqual(child_env["VLLM_API_KEY"], "secret-not-in-argv")
             self.assertEqual(child_env["HF_HOME"], str(cache.resolve()))
+            lookup.assert_called_once_with("vllm", path=str(Path(serve.sys.executable).parent))
             self.assertNotIn("secret-not-in-argv", " ".join(command) + output.getvalue())
             self.assertTrue(cache.is_dir())
 
