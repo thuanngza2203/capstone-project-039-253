@@ -1,9 +1,12 @@
 # BỆNH ĐỐM LÁ SEPTORIA TRÊN CÂY CÀ CHUA
 
-Nguồn tham khảo chính:
-North Carolina State University Extension
-https://content.ces.ncsu.edu/septoria-leaf-spot-of-tomato
+## CÂY TRỒNG
+Cà chua (Tomato)
 
+## TÊN BỆNH
+Bệnh đốm lá Septoria trên cây cà chua (Septoria leaf spot)
+
+## TỔNG QUAN
 Bệnh đốm lá Septoria trên cà chua là một bệnh nấm phổ biến và có thể gây thiệt hại nghiêm trọng, đặc biệt trong những mùa có nhiệt độ vừa phải và lượng mưa nhiều.
 
 Bệnh do nấm Septoria lycopersici gây ra.
@@ -12,9 +15,7 @@ Bệnh chủ yếu ảnh hưởng đến lá và thường bắt đầu ở các
 
 Nếu bệnh phát triển mạnh, nhiều lá có thể bị cháy, vàng và chết, làm giảm diện tích quang hợp và có thể làm giảm năng suất rõ rệt.
 
-
 ## TÁC NHÂN GÂY BỆNH
-
 Bệnh đốm lá Septoria trên cà chua do nấm Septoria lycopersici gây ra.
 
 Nấm có khả năng tồn tại qua mùa bất lợi trong:
@@ -24,9 +25,7 @@ Nấm có khả năng tồn tại qua mùa bất lợi trong:
 
 Khi điều kiện môi trường thuận lợi, nấm tạo bào tử và gây các đợt nhiễm mới trên cây cà chua.
 
-
 ## BỘ PHẬN CÂY BỊ ẢNH HƯỞNG
-
 Triệu chứng thường xuất hiện đầu tiên trên các lá già phía dưới.
 
 Sau đó bệnh có thể lan lên các phần non hơn của cây.
@@ -39,9 +38,7 @@ Ngoài lá, vết bệnh cũng có thể xuất hiện trên:
 
 Quả rất hiếm khi bị nhiễm trực tiếp.
 
-
-## CÁCH NHẬN BIẾT BỆNH ĐỐM LÁ SEPTORIA
-
+## TRIỆU CHỨNG
 ### Triệu chứng ban đầu trên lá
 
 Các vết bệnh thường:
@@ -114,9 +111,8 @@ Các vết trên những bộ phận này thường nhỏ, màu nâu đến sẫ
 
 Quả hiếm khi bị nhiễm trực tiếp, vì vậy bệnh Septoria chủ yếu được xem là bệnh gây hại trên bộ lá.
 
-
-## PHÂN BIỆT VỚI BỆNH CHÁY SỚM
-
+## PHÂN BIỆT VỚI BỆNH KHÁC
+### PHÂN BIỆT VỚI BỆNH CHÁY SỚM
 Bệnh đốm lá Septoria có thể bị nhầm với bệnh cháy sớm.
 
 Bệnh Septoria thường:
@@ -136,9 +132,7 @@ Bệnh cháy sớm thường:
 
 Dấu hiệu vòng đồng tâm là một trong những điểm phân biệt hữu ích nhất giữa hai bệnh.
 
-
-## PHÂN BIỆT VỚI BỆNH ĐỐM XÁM LÁ
-
+### PHÂN BIỆT VỚI BỆNH ĐỐM XÁM LÁ
 Bệnh đốm xám lá do các loài Stemphylium gây ra có thể rất giống Septoria.
 
 Cả hai đều có thể tạo:
@@ -156,9 +150,7 @@ Tuy nhiên, ở bệnh đốm xám lá:
 
 Một số giống cà chua lai có khả năng kháng đốm xám lá, trong khi nhiều giống cà chua gia truyền có thể không có tính kháng, khiến việc phân biệt ngoài đồng khó hơn.
 
-
-## CÓ THỂ CÓ NHIỀU BỆNH CÙNG LÚC
-
+### CÓ THỂ CÓ NHIỀU BỆNH CÙNG LÚC
 Một cây cà chua có thể đồng thời bị nhiều bệnh lá.
 
 Ví dụ, cùng một cây có thể có:
@@ -171,9 +163,24 @@ Ví dụ, cùng một cây có thể có:
 
 Nếu trên cùng cây xuất hiện nhiều kiểu vết bệnh khác nhau, cần cân nhắc khả năng có nhiều tác nhân cùng hiện diện.
 
+### SO SÁNH NHANH VỚI CHÁY SỚM
+Septoria leaf spot:
+
+- Nhiều đốm nhỏ.
+- Trung tâm nhạt.
+- Viền nâu sẫm.
+- Có thể có pycnidia đen.
+- Không có vòng đồng tâm rõ.
+
+Early blight:
+
+- Vết bệnh thường lớn hơn.
+- Màu nâu sẫm hơn.
+- Có các vòng đồng tâm giống bia bắn.
+
+Nếu cùng lúc có cả hai kiểu vết bệnh, cây có thể bị đồng nhiễm nhiều tác nhân.
 
 ## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH
-
 Bệnh phát triển mạnh trong điều kiện:
 
 - Độ ẩm cao.
@@ -183,9 +190,8 @@ Bệnh phát triển mạnh trong điều kiện:
 
 Mưa là yếu tố đặc biệt quan trọng vì bào tử Septoria thường được phát tán bằng nước bắn.
 
-
-## CÁCH NẤM TỒN TẠI QUA VỤ
-
+## CHU KỲ BỆNH VÀ CƠ CHẾ LÂY LAN
+### CÁCH NẤM TỒN TẠI QUA VỤ
 Nấm có thể tồn tại qua mùa bất lợi trên:
 
 - Tàn dư cà chua nhiễm bệnh.
@@ -193,9 +199,7 @@ Nấm có thể tồn tại qua mùa bất lợi trên:
 
 Khi tàn dư vẫn còn trên ruộng, chúng có thể trở thành nguồn bệnh cho vụ tiếp theo.
 
-
-## CÁCH BÀO TỬ LÂY LAN
-
+### CÁCH BÀO TỬ LÂY LAN
 Bào tử thường được phát tán bằng nước.
 
 Các con đường quan trọng gồm:
@@ -208,9 +212,7 @@ Các con đường quan trọng gồm:
 
 Nước là yếu tố quan trọng trong việc đưa bào tử từ vết bệnh sang mô khỏe.
 
-
-## VÌ SAO KHÔNG NÊN LÀM VIỆC KHI CÂY ĐANG ƯỚT?
-
+### VÌ SAO KHÔNG NÊN LÀM VIỆC KHI CÂY ĐANG ƯỚT
 Khi lá đang ướt:
 
 - Bào tử dễ bám lên tay.
@@ -226,9 +228,7 @@ Do đó, thao tác như:
 
 nên được thực hiện khi tán cây đã khô.
 
-
-## QUẢN LÝ BỆNH ĐỐM LÁ SEPTORIA
-
+## PHÒNG NGỪA VÀ QUẢN LÝ CANH TÁC
 Quản lý hiệu quả cần kết hợp nhiều biện pháp.
 
 Các biện pháp quan trọng gồm:
@@ -245,9 +245,7 @@ Các biện pháp quan trọng gồm:
 - Vệ sinh dụng cụ.
 - Sử dụng thuốc diệt nấm khi cần.
 
-
 ### LUÂN CANH
-
 Nguồn NC State Extension khuyến nghị luân canh khỏi cà chua trong:
 
 - Ít nhất 2 năm.
@@ -256,9 +254,7 @@ Mục tiêu là giảm lượng nguồn bệnh còn tồn tại trong tàn dư.
 
 Nên luân canh với cây không phải ký chủ của nấm.
 
-
 ### QUẢN LÝ CỎ DẠI
-
 Một số cỏ dại thuộc họ cà có thể đóng vai trò cây ký chủ.
 
 Do đó cần:
@@ -269,9 +265,7 @@ Do đó cần:
 
 Mục tiêu là giảm nơi nấm tồn tại giữa các vụ.
 
-
 ### QUẢN LÝ TÀN DƯ
-
 Tàn dư cà chua nhiễm bệnh nên được:
 
 - Thu gom.
@@ -280,9 +274,7 @@ Tàn dư cà chua nhiễm bệnh nên được:
 
 Không nên để nhiều tàn dư bệnh trên mặt đất vì chúng có thể trở thành nguồn bào tử trong vụ tiếp theo.
 
-
 ### GIẢM THỜI GIAN LÁ BỊ ƯỚT
-
 Cần hạn chế điều kiện làm lá duy trì ướt lâu.
 
 Có thể:
@@ -294,9 +286,7 @@ Có thể:
 
 Mục tiêu là giảm thời gian thuận lợi cho nhiễm bệnh.
 
-
 ### LÀM GIÀN HOẶC CẮM CỌC
-
 Cắm cọc hoặc làm giàn giúp:
 
 - Tăng lưu thông không khí.
@@ -304,9 +294,7 @@ Cắm cọc hoặc làm giàn giúp:
 - Giữ tán cách xa mặt đất.
 - Giảm nước bắn từ đất lên lá.
 
-
 ### PHỦ ĐẤT
-
 Có thể sử dụng:
 
 - Rơm.
@@ -317,9 +305,7 @@ Lớp phủ tạo hàng rào giữa mặt đất và lá thấp.
 
 Điều này giúp giảm nước bắn mang bào tử từ tàn dư hoặc đất lên cây.
 
-
 ### THEO DÕI CÂY THƯỜNG XUYÊN
-
 Nên kiểm tra ruộng định kỳ.
 
 Khi kiểm tra:
@@ -331,9 +317,7 @@ Khi kiểm tra:
 - Quan sát pycnidia màu đen trong trung tâm.
 - Theo dõi xem bệnh có lan lên lá non hơn hay không.
 
-
 ### LOẠI BỎ LÁ HOẶC CÂY BỆNH
-
 Nếu bệnh mới xuất hiện trên một số lá phía dưới:
 
 - Có thể loại bỏ lá bệnh.
@@ -343,9 +327,7 @@ Không nên loại bỏ quá nhiều lá trong một lần vì có thể làm gi
 
 Nếu cây bị bệnh rất nặng và trở thành nguồn lây lớn, có thể cân nhắc loại bỏ cả cây.
 
-
 ### VỆ SINH DỤNG CỤ
-
 Sau khi rời khu vực bệnh:
 
 - Làm sạch dụng cụ.
@@ -354,9 +336,7 @@ Sau khi rời khu vực bệnh:
 
 Biện pháp này đặc biệt quan trọng khi cây đang ẩm.
 
-
 ### QUẢN LÝ CHO VƯỜN GIA ĐÌNH
-
 Nguồn NC State khuyến nghị người trồng tại nhà ưu tiên biện pháp canh tác trước khi sử dụng thuốc.
 
 Các biện pháp hữu ích gồm:
@@ -371,9 +351,8 @@ Nếu bệnh xuất hiện ở các lá thấp, loại bỏ những lá này có
 
 Tuy nhiên, không nên loại bỏ quá nhiều lá cùng lúc.
 
-
+## QUẢN LÝ BẰNG THUỐC VÀ KHÁNG THUỐC
 ### SỬ DỤNG THUỐC DIỆT NẤM
-
 Nguồn NC State liệt kê nhiều hoạt chất có hiệu quả với Septoria leaf spot trong sản xuất thương mại.
 
 Các nhóm được đề cập gồm:
@@ -397,9 +376,7 @@ Các nhóm được đề cập gồm:
 
 Một số sản phẩm là hỗn hợp nhiều hoạt chất thuộc các nhóm FRAC khác nhau.
 
-
 ### QUẢN LÝ KHÁNG THUỐC
-
 Nếu cần sử dụng thuốc nhiều lần:
 
 - Không nên phụ thuộc liên tục vào một nhóm FRAC.
@@ -410,9 +387,7 @@ Nếu cần sử dụng thuốc nhiều lần:
 
 Mục tiêu là giảm nguy cơ quần thể nấm phát triển tính kháng.
 
-
 ### CANH TÁC HỮU CƠ
-
 Nguồn cho biết lựa chọn thuốc hữu cơ cho Septoria còn hạn chế.
 
 Một số dạng đồng được chứng nhận hữu cơ có thể cung cấp mức kiểm soát nhất định.
@@ -423,9 +398,7 @@ Tuy nhiên, hiệu quả của thuốc hữu cơ thường hạn chế hơn.
 
 Vì vậy, các biện pháp canh tác cần được thực hiện trước và xuyên suốt chương trình quản lý.
 
-
 ### THUỐC CHỈ CÓ TÁC DỤNG PHÒNG NGỪA TỐT NHẤT
-
 Đối với vườn gia đình, nguồn đề cập các hoạt chất như:
 
 - Chlorothalonil.
@@ -446,9 +419,7 @@ Một khi vết bệnh đã hình thành:
 
 Mục tiêu của thuốc là bảo vệ mô chưa bị nhiễm.
 
-
 ### LƯU Ý VỀ DANH SÁCH THUỐC TRONG NGUỒN
-
 Danh sách hoạt chất và sản phẩm trong nguồn NC State phản ánh đăng ký tại Hoa Kỳ.
 
 Không nên tự động áp dụng:
@@ -462,9 +433,8 @@ vào điều kiện Việt Nam.
 
 Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho cây cà chua và bệnh Septoria tại địa phương.
 
-
-## BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI RUỘNG
-
+## KIỂM TRA VÀ CHẨN ĐOÁN NGOÀI RUỘNG
+### CÁCH KIỂM TRA NHANH NGOÀI RUỘNG
 Khi nghi ngờ bệnh Septoria trên cà chua, có thể kiểm tra theo trình tự sau:
 
 - Bắt đầu từ các lá già phía dưới.
@@ -480,28 +450,7 @@ Khi nghi ngờ bệnh Septoria trên cà chua, có thể kiểm tra theo trình 
 
 Pycnidia màu đen ở giữa vết bệnh là một trong những dấu hiệu chẩn đoán có giá trị nhất.
 
-
-## BỔ SUNG: SO SÁNH NHANH VỚI CHÁY SỚM
-
-Septoria leaf spot:
-
-- Nhiều đốm nhỏ.
-- Trung tâm nhạt.
-- Viền nâu sẫm.
-- Có thể có pycnidia đen.
-- Không có vòng đồng tâm rõ.
-
-Early blight:
-
-- Vết bệnh thường lớn hơn.
-- Màu nâu sẫm hơn.
-- Có các vòng đồng tâm giống bia bắn.
-
-Nếu cùng lúc có cả hai kiểu vết bệnh, cây có thể bị đồng nhiễm nhiều tác nhân.
-
-
-## BỔ SUNG: KHI NÀO CẦN CHẨN ĐOÁN CHUYÊN MÔN?
-
+### KHI NÀO CẦN CHẨN ĐOÁN CHUYÊN MÔN
 Nên cân nhắc gửi mẫu đến phòng chẩn đoán khi:
 
 - Vết bệnh không điển hình.
@@ -513,9 +462,7 @@ Nên cân nhắc gửi mẫu đến phòng chẩn đoán khi:
 
 Chẩn đoán chính xác giúp tránh sử dụng thuốc không cần thiết hoặc sai mục tiêu.
 
-
 ## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
-
 Bệnh đốm lá Septoria trên cà chua có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 
 - Bệnh do nấm Septoria lycopersici gây ra.
@@ -547,3 +494,7 @@ Bệnh đốm lá Septoria trên cà chua có thể được nhận biết và q
 - Thuốc diệt nấm có hiệu quả tốt nhất khi được sử dụng phòng ngừa.
 - Cần luân phiên nhóm FRAC để giảm nguy cơ kháng thuốc.
 - Không tự động áp dụng tên sản phẩm, liều lượng hoặc lịch phun từ Hoa Kỳ vào điều kiện Việt Nam.
+
+## NGUỒN THAM KHẢO
+North Carolina State University Extension
+https://content.ces.ncsu.edu/septoria-leaf-spot-of-tomato

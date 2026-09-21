@@ -26,20 +26,22 @@ Bệnh có thể tấn công các bộ phận non của cây táo, gồm:
 - Hoa, cuống hoa và đài hoa.
 - Cành non.
 
-## TRIỆU CHỨNG TRÊN LÁ
+## TRIỆU CHỨNG
+
+### Trên lá
 Triệu chứng ban đầu trên lá non là các đốm nhỏ màu xanh ô liu, giống những vết dầu mờ.
 Các đốm bệnh lớn dần, chuyển sang màu nâu đen hoặc đen và có bề mặt mịn như nhung.
 Vùng mô bị bệnh có thể dày lên.
 Khi bệnh nặng, các vết bệnh liên kết với nhau làm lá cong queo, biến dạng và rụng sớm.
 Rụng lá sớm làm giảm khả năng quang hợp của cây.
 
-## TRIỆU CHỨNG TRÊN QUẢ
+### Trên quả
 Vết bệnh ban đầu trên quả tương tự vết bệnh trên lá.
 Khi quả phát triển, các vết bệnh tạo thành sẹo màu đen hoặc nâu, có bề mặt sần sùi, khô và cứng.
 Vỏ quả tại vùng bệnh phát triển không đồng đều với phần còn lại, làm quả biến dạng, còi cọc và có thể nứt.
 Các vết nứt có thể tạo điều kiện cho nấm hoặc vi khuẩn khác xâm nhập, dẫn đến thối thứ cấp và giảm khả năng bảo quản.
 
-## TRIỆU CHỨNG TRÊN HOA VÀ CÀNH NON
+### Trên hoa và cành non
 Trên cuống hoa và đài hoa, bệnh có thể tạo các đốm đen và làm hoa rụng sớm, giảm tỷ lệ đậu quả.
 Trên cành non, bệnh có thể tạo các mụn nhỏ, sần sùi và làm nứt vỏ.
 Cành bị bệnh có thể phát triển kém và suy yếu.
@@ -57,7 +59,6 @@ Bệnh đốm lá do vi khuẩn:
 - Vết bệnh có thể có quầng vàng xung quanh.
 
 ## CHU KỲ BỆNH
-
 ### Giai đoạn lây nhiễm sơ cấp:
 Sau mùa vụ, nấm tồn tại qua mùa đông trong lá bệnh rụng trên mặt đất.
 Vào mùa xuân, khi thời tiết ấm và ẩm, nấm hình thành quả thể và giải phóng bào tử túi.
@@ -81,42 +82,41 @@ Vết bệnh làm giảm chất lượng, giá trị thương phẩm và thời 
 Bệnh kéo dài có thể làm cây suy yếu, cành phát triển kém và giảm sức chống chịu với các tác nhân gây hại khác.
 Tài liệu nguồn nêu rằng thiệt hại có thể rất lớn nếu bệnh không được quản lý kịp thời; các con số cụ thể cần được kiểm chứng theo giống, vùng trồng và điều kiện sản xuất.
 
-## QUẢN LÝ BỆNH THEO HƯỚNG TỔNG HỢP
+## PHÒNG NGỪA
 
-### Biện pháp canh tác:
+### Biện pháp canh tác
 - Thu gom và xử lý lá rụng, cành bệnh sau thu hoạch để giảm nguồn nấm tồn tại qua mùa đông.
 - Cắt tỉa cành và tạo tán thông thoáng để tăng lưu thông không khí và giúp lá khô nhanh sau mưa hoặc sương.
 - Cân nhắc sử dụng giống có khả năng kháng bệnh phù hợp với điều kiện địa phương.
 - Bón phân cân đối và chăm sóc cây hợp lý để duy trì sức sinh trưởng.
 
-### Biện pháp sinh học:
+### Biện pháp sinh học
 Tài liệu nguồn đề cập đến các vi sinh vật đối kháng như Trichoderma spp. và Bacillus subtilis.
 Hiệu quả thực tế phụ thuộc vào chủng vi sinh vật, sản phẩm, điều kiện vườn và hướng dẫn sử dụng.
 
-### Biện pháp hóa học:
-Tài liệu nguồn đề cập các hoạt chất như Mancozeb, Propineb và Difenoconazole.
-Việc sử dụng thuốc bảo vệ thực vật phải tuân thủ nhãn sản phẩm, quy định địa phương, đúng cây trồng, đúng bệnh, đúng liều lượng, đúng thời điểm và thời gian cách ly.
-Không sử dụng danh sách hoạt chất này như một khuyến cáo mặc định cho mọi quốc gia hoặc vùng trồng.
-
-## GỢI Ý QUẢN LÝ THEO GIAI ĐOẠN
-
-### Cuối mùa vụ:
+### Quản lý theo giai đoạn
+**Cuối mùa vụ:**
 - Thu gom và xử lý lá rụng, cành bệnh.
 - Giảm nguồn bệnh tồn tại trong vườn.
 
-### Giai đoạn cây ngủ nghỉ:
+**Giai đoạn cây ngủ nghỉ:**
 - Vệ sinh vườn và kiểm tra các vị trí có thể còn tàn dư bệnh.
 - Chỉ sử dụng sản phẩm xử lý được phép theo hướng dẫn và quy định địa phương.
 
-### Giai đoạn nứt chồi và ra lộc non:
+**Giai đoạn nứt chồi và ra lộc non:**
 - Theo dõi dự báo mưa, độ ẩm và thời gian lá bị ướt.
 - Tăng cường kiểm tra lá non.
 - Áp dụng biện pháp phòng ngừa phù hợp trước hoặc quanh các đợt thời tiết thuận lợi cho bệnh.
 
-### Giai đoạn ra hoa và đậu quả:
+**Giai đoạn ra hoa và đậu quả:**
 - Bảo vệ hoa và quả non.
 - Theo dõi bệnh sau các đợt mưa.
 - Ưu tiên biện pháp an toàn cho hoa, quả non, thiên địch và môi trường.
+
+## QUẢN LÝ BẰNG BIỆN PHÁP HÓA HỌC
+Tài liệu nguồn đề cập các hoạt chất như Mancozeb, Propineb và Difenoconazole.
+Việc sử dụng thuốc bảo vệ thực vật phải tuân thủ nhãn sản phẩm, quy định địa phương, đúng cây trồng, đúng bệnh, đúng liều lượng, đúng thời điểm và thời gian cách ly.
+Không sử dụng danh sách hoạt chất này như một khuyến cáo mặc định cho mọi quốc gia hoặc vùng trồng.
 
 ## TỪ KHÓA TRUY XUẤT
 apple scab
@@ -133,7 +133,7 @@ ascospores
 conidia
 apple disease management
 
-## LƯU Ý NGUỒN
+## NGUỒN THAM KHẢO
 Nội dung được biên tập lại từ tài liệu người dùng cung cấp.
 Các phần mang tính quảng cáo sản phẩm cụ thể đã được loại bỏ.
 Thông tin về thuốc, hoạt chất, hiệu quả và thời điểm xử lý cần được kiểm chứng bằng tài liệu kỹ thuật chính thống và quy định tại địa phương trước khi đưa ra khuyến cáo thực tế.

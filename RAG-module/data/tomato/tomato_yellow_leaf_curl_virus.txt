@@ -1,9 +1,12 @@
 # VIRUS XOĂN VÀNG LÁ CÀ CHUA
 
-Nguồn tham khảo chính:
-Wikipedia – Tomato yellow leaf curl virus
-https://en.wikipedia.org/wiki/Tomato_yellow_leaf_curl_virus
+## CÂY TRỒNG
+Cà chua (Tomato)
 
+## TÊN BỆNH
+Virus xoăn vàng lá cà chua – Tomato yellow leaf curl virus (TYLCV)
+
+## TỔNG QUAN
 Virus xoăn vàng lá cà chua, thường được viết tắt là TYLCV, là một virus DNA thuộc chi Begomovirus và họ Geminiviridae.
 
 Theo nguồn Wikipedia được cung cấp, loài được ghi trong phân loại là Begomovirus coheni.
@@ -14,9 +17,7 @@ Bệnh có thể gây cây còi cọc mạnh, lá nhỏ, lá cong hoặc cuộn 
 
 Trong trường hợp nhiễm sớm và nặng, tổn thất năng suất có thể rất lớn.
 
-
 ## TÁC NHÂN GÂY BỆNH
-
 TYLCV là virus DNA sợi đơn dạng vòng.
 
 Virus thuộc:
@@ -30,18 +31,14 @@ Theo nguồn, bộ gen virus gồm một phân tử DNA sợi đơn dạng vòng
 
 Virus chủ yếu gây bệnh trên cà chua.
 
-
 ## CÂY KÝ CHỦ
-
 Cà chua là cây ký chủ chính của TYLCV.
 
 Nguồn cũng ghi nhận virus có thể được phát hiện trên một số cây khác.
 
 Tuy nhiên, tài liệu này tập trung vào bệnh trên cây cà chua.
 
-
-## VECTOR TRUYỀN BỆNH
-
+## VECTOR VÀ CƠ CHẾ TRUYỀN BỆNH
 TYLCV được truyền chủ yếu bởi bọ phấn trắng Bemisia tabaci.
 
 Bemisia tabaci còn được gọi bằng một số tên tiếng Anh như:
@@ -103,9 +100,7 @@ Ngoài ra, một số nghiên cứu được nguồn trích dẫn cho thấy vir
 
 Nguồn cũng đề cập bằng chứng virus có thể được truyền sang thế hệ con của vector ít nhất hai thế hệ trong một số nghiên cứu.
 
-
 ## CẤU TRÚC BỘ GEN
-
 Bộ gen TYLCV là DNA sợi đơn dạng vòng.
 
 Nguồn mô tả có sáu vùng đọc mở chính:
@@ -156,9 +151,7 @@ Theo nguồn:
 
 Các protein này góp phần giúp virus nhân lên, vượt qua cơ chế phòng vệ của cây và gây triệu chứng.
 
-
-## TRIỆU CHỨNG TRÊN CÂY CÀ CHUA
-
+## TRIỆU CHỨNG
 Các triệu chứng quan trọng của TYLCV gồm:
 
 - Cây còi cọc mạnh.
@@ -259,9 +252,8 @@ Nếu cây bị nhiễm khi còn non:
 
 Do đó, phòng bọ phấn và ngăn virus xâm nhập từ giai đoạn cây con có ý nghĩa đặc biệt quan trọng.
 
-
-## PHÂN BỐ VÀ TẦM QUAN TRỌNG
-
+## DỊCH TỄ HỌC VÀ CƠ CHẾ LÂY LAN
+### PHÂN BỐ VÀ TẦM QUAN TRỌNG
 TYLCV chủ yếu gây vấn đề nghiêm trọng ở các vùng:
 
 - Nhiệt đới.
@@ -277,9 +269,7 @@ Nguồn cho biết virus đã được phát hiện tại nhiều quốc gia ở
 
 Sự phân bố rộng của Bemisia tabaci tạo điều kiện để virus tiếp tục lan sang các khu vực mới.
 
-
-## LỊCH SỬ PHÁT HIỆN
-
+### LỊCH SỬ PHÁT HIỆN
 Nguồn ghi nhận TYLCV được phát hiện lần đầu tại Israel khoảng năm 1930.
 
 Sau đó, virus được ghi nhận tại nhiều quốc gia trồng cà chua trên thế giới.
@@ -290,9 +280,7 @@ Nguồn cũng đề cập một trường hợp xác nhận tại Cộng hòa Do
 - PCR.
 - Giải trình tự bộ gen.
 
-
-## DỊCH TỄ HỌC
-
+### DỊCH TỄ HỌC
 Sự lây lan của bệnh phụ thuộc mạnh vào:
 
 - Sự hiện diện của cây nhiễm.
@@ -302,9 +290,7 @@ Sự lây lan của bệnh phụ thuộc mạnh vào:
 
 Do bọ phấn có phạm vi phân bố rộng, nguy cơ virus được đưa vào khu vực mới có thể tăng nếu vector đã hiện diện.
 
-
-## CƠ CHẾ LÂY LAN TRONG RUỘNG
-
+### CƠ CHẾ LÂY LAN TRONG RUỘNG
 Chu trình lây lan có thể được mô tả như sau:
 
 - Bọ phấn chích hút cây nhiễm.
@@ -317,9 +303,7 @@ Chu trình lây lan có thể được mô tả như sau:
 
 Chu trình này có thể lặp lại nhanh nếu mật độ vector cao.
 
-
-## TYLCV KHÔNG ĐƯỢC CHỮA KHỎI BẰNG THUỐC TRỪ NẤM
-
+## KHÔNG CÓ THUỐC CHỮA VIRUS TRÊN CÂY ĐÃ NHIỄM
 TYLCV là bệnh do virus.
 
 Do đó:
@@ -330,9 +314,7 @@ Do đó:
 
 Quản lý bệnh chủ yếu dựa trên phòng ngừa và kiểm soát vector.
 
-
-## QUẢN LÝ TYLCV
-
+## PHÒNG NGỪA VÀ QUẢN LÝ VECTOR
 Các biện pháp được nguồn đề cập gồm:
 
 - Quản lý bọ phấn trắng.
@@ -419,9 +401,38 @@ Do đó cần kết hợp:
 - Theo dõi bọ phấn.
 - Loại bỏ cây nhiễm sớm.
 
+## XỬ LÝ VÀ HẠN CHẾ NGUỒN LÂY
+### XỬ LÝ CÂY NGHI NHIỄM
+Nếu một cây biểu hiện triệu chứng nghi TYLCV:
 
-## BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI RUỘNG
+- Đánh dấu cây.
+- Kiểm tra bọ phấn xung quanh.
+- Hạn chế để cây trở thành nguồn virus lâu dài.
+- Theo dõi cây lân cận.
+- Cân nhắc loại bỏ cây nhiễm rõ trong chương trình quản lý tổng hợp.
+- Kiểm soát bọ phấn trước hoặc đồng thời khi loại bỏ cây để tránh vector chuyển sang cây khỏe.
 
+Việc loại bỏ cây bệnh mà không quản lý bọ phấn có thể khiến côn trùng bay sang cây khỏe gần đó.
+
+### QUẢN LÝ CÂY GIỐNG
+Giai đoạn cây con rất quan trọng vì nhiễm sớm có thể gây thiệt hại rất lớn.
+
+Nên:
+
+- Sử dụng cây giống khỏe.
+- Kiểm tra bọ phấn trước khi đưa cây ra ruộng.
+- Không đưa cây có triệu chứng nghi virus vào khu vực sản xuất.
+- Giữ khu vực ươm tách biệt với nguồn cây nhiễm.
+
+### QUẢN LÝ CỎ DẠI VÀ CÂY KÝ CHỦ PHỤ
+Nguồn cho biết TYLCV có thể được phát hiện trên nhiều cây khác ngoài cà chua.
+
+Do đó, cây ký chủ phụ và cỏ dại có thể góp phần duy trì virus và bọ phấn trong khu vực.
+
+Quản lý cỏ dại nên được xem là một phần của chương trình kiểm soát.
+
+## KIỂM TRA VÀ PHÂN BIỆT
+### CÁCH KIỂM TRA NHANH NGOÀI RUỘNG
 Khi nghi ngờ TYLCV trên cà chua, có thể kiểm tra theo trình tự sau:
 
 - Quan sát cây có còi cọc hơn cây xung quanh.
@@ -436,9 +447,7 @@ Khi nghi ngờ TYLCV trên cà chua, có thể kiểm tra theo trình tự sau:
 
 Sự kết hợp giữa cây còi, lá non nhỏ, vàng và cuộn lên cùng với sự hiện diện của bọ phấn là dấu hiệu rất đáng nghi ngờ TYLCV.
 
-
-## BỔ SUNG: PHÂN BIỆT VỚI THIẾU DINH DƯỠNG
-
+### PHÂN BIỆT VỚI THIẾU DINH DƯỠNG
 Thiếu dinh dưỡng có thể gây vàng lá nhưng thường không tạo đồng thời đầy đủ các dấu hiệu:
 
 - Lá non nhỏ mạnh.
@@ -449,9 +458,7 @@ Thiếu dinh dưỡng có thể gây vàng lá nhưng thường không tạo đ�
 
 Nếu triệu chứng không rõ, cần xác nhận bằng chẩn đoán virus.
 
-
-## BỔ SUNG: PHÂN BIỆT VỚI TỔN THƯƠNG THUỐC DIỆT CỎ
-
+### PHÂN BIỆT VỚI TỔN THƯƠNG THUỐC DIỆT CỎ
 Một số tổn thương thuốc diệt cỏ có thể làm:
 
 - Lá cong.
@@ -467,44 +474,7 @@ Tuy nhiên, TYLCV thường đi kèm:
 
 Thông tin về lịch sử phun thuốc và phân bố triệu chứng trong ruộng giúp hỗ trợ phân biệt.
 
-
-## BỔ SUNG: XỬ LÝ CÂY NGHI NHIỄM
-
-Nếu một cây biểu hiện triệu chứng nghi TYLCV:
-
-- Đánh dấu cây.
-- Kiểm tra bọ phấn xung quanh.
-- Hạn chế để cây trở thành nguồn virus lâu dài.
-- Theo dõi cây lân cận.
-- Cân nhắc loại bỏ cây nhiễm rõ trong chương trình quản lý tổng hợp.
-- Kiểm soát bọ phấn trước hoặc đồng thời khi loại bỏ cây để tránh vector chuyển sang cây khỏe.
-
-Việc loại bỏ cây bệnh mà không quản lý bọ phấn có thể khiến côn trùng bay sang cây khỏe gần đó.
-
-
-## BỔ SUNG: QUẢN LÝ CÂY GIỐNG
-
-Giai đoạn cây con rất quan trọng vì nhiễm sớm có thể gây thiệt hại rất lớn.
-
-Nên:
-
-- Sử dụng cây giống khỏe.
-- Kiểm tra bọ phấn trước khi đưa cây ra ruộng.
-- Không đưa cây có triệu chứng nghi virus vào khu vực sản xuất.
-- Giữ khu vực ươm tách biệt với nguồn cây nhiễm.
-
-
-## BỔ SUNG: QUẢN LÝ CỎ DẠI VÀ CÂY KÝ CHỦ PHỤ
-
-Nguồn cho biết TYLCV có thể được phát hiện trên nhiều cây khác ngoài cà chua.
-
-Do đó, cây ký chủ phụ và cỏ dại có thể góp phần duy trì virus và bọ phấn trong khu vực.
-
-Quản lý cỏ dại nên được xem là một phần của chương trình kiểm soát.
-
-
-## CHẨN ĐOÁN TYLCV
-
+### CHẨN ĐOÁN TYLCV
 Nguồn đề cập một số phương pháp chẩn đoán virus như:
 
 - Quan sát thể vùi bằng kính hiển vi.
@@ -517,9 +487,7 @@ Trong sản xuất, PCR là một trong những phương pháp có thể đượ
 
 Triệu chứng ngoài đồng chỉ cho phép nghi ngờ và không phải lúc nào cũng đủ để xác định chính xác tác nhân.
 
-
 ## LƯU Ý VỀ THUỐC BẢO VỆ THỰC VẬT
-
 Thuốc trừ côn trùng chỉ nhằm quản lý bọ phấn truyền bệnh.
 
 Thuốc không chữa được cây đã nhiễm virus.
@@ -535,9 +503,7 @@ Không tự động áp dụng hoạt chất, liều lượng hoặc chương tr
 
 Cần đặc biệt chú ý quản lý kháng thuốc ở Bemisia tabaci.
 
-
 ## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
-
 Virus xoăn vàng lá cà chua có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 
 - TYLCV là virus DNA sợi đơn dạng vòng.
@@ -567,3 +533,11 @@ Virus xoăn vàng lá cà chua có thể được nhận biết và quản lý d
 - Cây giống cần được kiểm tra kỹ trước khi trồng.
 - Cây nghi nhiễm cần được xử lý sớm kết hợp với quản lý vector.
 - PCR và các kỹ thuật chẩn đoán phân tử có thể được sử dụng để xác nhận TYLCV.
+
+## NGUỒN THAM KHẢO
+Wikipedia – Tomato yellow leaf curl virus
+https://en.wikipedia.org/wiki/Tomato_yellow_leaf_curl_virus
+
+Nguồn bổ sung để đối chiếu:
+NC State Extension – Tomato Yellow Leaf Curl Virus
+https://content.ces.ncsu.edu/tomato-yellow-leaf-curl-virus

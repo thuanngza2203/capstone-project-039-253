@@ -1,9 +1,12 @@
 # BỆNH MỐC LÁ TRÊN CÂY CÀ CHUA
 
-Nguồn tham khảo chính:
-University of Minnesota Extension
-https://extension.umn.edu/agriculture/specialty-crops/vegetable-farming/disease-management/tomato-leaf-mold
+## CÂY TRỒNG
+Cà chua (Tomato)
 
+## TÊN BỆNH
+Bệnh mốc lá trên cây cà chua (Tomato leaf mold)
+
+## TỔNG QUAN
 Bệnh mốc lá trên cây cà chua, hay Tomato Leaf Mold, là một bệnh nấm thường gặp chủ yếu trong nhà kính và nhà màng hoặc high tunnel, nơi độ ẩm không khí có thể duy trì ở mức cao trong thời gian dài.
 
 Bệnh do nấm Passalora fulva gây ra.
@@ -19,9 +22,7 @@ Khi lá bị nhiễm nặng, lá héo và chết, làm giảm diện tích quang
 
 Trong trường hợp nghiêm trọng, hoa và quả cũng có thể bị nhiễm, trực tiếp làm giảm năng suất.
 
-
 ## TÁC NHÂN GÂY BỆNH
-
 Bệnh mốc lá cà chua do nấm Passalora fulva gây ra.
 
 Theo nguồn University of Minnesota Extension, nấm này không được biết là gây bệnh trên cây ký chủ nào khác ngoài cà chua.
@@ -30,9 +31,8 @@ Có nhiều nòi sinh lý khác nhau của P. fulva.
 
 Điều này có ý nghĩa quan trọng trong quản lý vì một giống cà chua có khả năng kháng một số nòi chưa chắc đã kháng được tất cả các nòi hiện diện trong khu vực sản xuất.
 
-
-## MÔI TRƯỜNG DỄ XUẤT HIỆN BỆNH
-
+## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH
+### MÔI TRƯỜNG DỄ XUẤT HIỆN BỆNH
 Bệnh thường là vấn đề trong:
 
 - Nhà kính.
@@ -42,9 +42,7 @@ Bệnh thường là vấn đề trong:
 
 Bệnh ít gặp hơn trong vườn ngoài trời thông thoáng vì độ ẩm thường không duy trì ở mức cao đủ lâu.
 
-
-## ĐỘ ẨM LÀ YẾU TỐ QUAN TRỌNG NHẤT
-
+### ĐỘ ẨM LÀ YẾU TỐ QUAN TRỌNG NHẤT
 Độ ẩm tương đối cao là yếu tố chính thúc đẩy bệnh.
 
 Theo nguồn:
@@ -60,9 +58,7 @@ Nếu độ ẩm duy trì cao trong nhiều ngày:
 - Nhiều bào tử mới được tạo ra.
 - Bệnh lan nhanh từ lá này sang lá khác.
 
-
-## NHIỆT ĐỘ THUẬN LỢI
-
+### NHIỆT ĐỘ THUẬN LỢI
 Nấm có thể gây nhiễm trong một khoảng nhiệt độ khá rộng.
 
 Theo nguồn:
@@ -79,9 +75,7 @@ Khoảng nhiệt độ tối ưu được nguồn nêu là:
 
 Khi nhiệt độ thuận lợi kết hợp với độ ẩm trên 85%, nguy cơ bệnh tăng mạnh.
 
-
-## CÁCH NHẬN BIẾT BỆNH MỐC LÁ
-
+## TRIỆU CHỨNG
 ### Triệu chứng trên mặt trên của lá
 
 Các lá già thường bị nhiễm trước.
@@ -179,9 +173,7 @@ Khi bệnh tiến triển, vùng bị nhiễm:
 
 Quả bị nhiễm trực tiếp sẽ giảm chất lượng thương phẩm.
 
-
-## CÁCH PHÂN BIỆT BỆNH MỐC LÁ VỚI CÁC VẤN ĐỀ KHÁC
-
+## PHÂN BIỆT VỚI CÁC VẤN ĐỀ KHÁC
 Dấu hiệu đặc trưng nhất là sự kết hợp giữa:
 
 - Đốm vàng nhạt ở mặt trên lá.
@@ -191,9 +183,8 @@ Một số bệnh khác có thể gây vàng lá hoặc đốm lá nhưng không
 
 Nếu chỉ nhìn mặt trên, bệnh có thể bị bỏ sót hoặc chẩn đoán sai.
 
-
-## SINH HỌC VÀ KHẢ NĂNG TỒN TẠI CỦA NẤM
-
+## CHU KỲ BỆNH VÀ CƠ CHẾ LÂY LAN
+### SINH HỌC VÀ KHẢ NĂNG TỒN TẠI CỦA NẤM
 Bào tử của Passalora fulva có thể tồn tại trong thời gian dài.
 
 Theo nguồn University of Minnesota Extension:
@@ -202,9 +193,7 @@ Theo nguồn University of Minnesota Extension:
 
 Khả năng tồn tại cụ thể trên cọc, dụng cụ hoặc thành high tunnel qua mùa đông tại Minnesota chưa được xác định rõ.
 
-
-## CẤU TRÚC NGHỈ CỦA NẤM
-
+### CẤU TRÚC NGHỈ CỦA NẤM
 Nấm tạo các cấu trúc nghỉ:
 
 - Màu sẫm.
@@ -217,9 +206,7 @@ Khi tiếp xúc với không khí trong điều kiện phù hợp, chúng có th
 
 Theo nguồn, đây được xem là con đường quan trọng giúp nấm tồn tại từ vụ này sang vụ khác.
 
-
-## VAI TRÒ CỦA HẠT GIỐNG
-
+### VAI TRÒ CỦA HẠT GIỐNG
 Nấm có thể tồn tại:
 
 - Trên bề mặt hạt cà chua.
@@ -229,9 +216,7 @@ Do đó, hạt giống có thể là một con đường đưa mầm bệnh vào
 
 Sử dụng hạt giống sạch bệnh và nguồn giống đáng tin cậy giúp giảm nguy cơ đưa nấm vào nhà kính hoặc high tunnel.
 
-
-## CHU KỲ LÂY NHIỄM
-
+### CHU KỲ LÂY NHIỄM
 Khi bào tử tiếp xúc với lá cà chua và điều kiện đủ ẩm, quá trình nhiễm bắt đầu.
 
 Sau khi lá bị nhiễm, nấm phát triển trong mô và tạo lớp bào tử ở mặt dưới lá.
@@ -242,9 +227,7 @@ Theo nguồn:
 
 Nếu độ ẩm tiếp tục trên 85%, các bào tử này tiếp tục gây nhiễm cho các lá khác.
 
-
-## NHIỀU THẾ HỆ TRONG MỘT VỤ
-
+### NHIỀU THẾ HỆ TRONG MỘT VỤ
 Trong một mùa sinh trưởng, nấm có thể hoàn thành nhiều thế hệ.
 
 Mỗi thế hệ tạo thêm bào tử.
@@ -256,9 +239,7 @@ Do đó, nếu độ ẩm cao kéo dài:
 - Các tầng lá phía trên dần bị bệnh.
 - Khả năng rụng và chết lá tăng.
 
-
-## CÁCH BỆNH LÂY LAN
-
+### CÁCH BỆNH LÂY LAN
 Bào tử có thể được phát tán từ cây này sang cây khác bằng:
 
 - Gió.
@@ -270,9 +251,7 @@ Bào tử có thể được phát tán từ cây này sang cây khác bằng:
 
 Do đó, các thao tác chăm sóc trong khu vực bệnh có thể góp phần làm bệnh lan nếu không vệ sinh dụng cụ và không quản lý độ ẩm tốt.
 
-
 ## THEO DÕI BỆNH TRÊN RUỘNG VÀ NHÀ KÍNH
-
 Nguồn khuyến nghị tăng cường theo dõi khi độ ẩm tương đối:
 
 - Trên 85%.
@@ -289,16 +268,13 @@ Khi kiểm tra cây:
 
 Mốc thời gian này phản ánh khí hậu Minnesota và không nên áp dụng máy móc cho Việt Nam.
 
-
-## SỬ DỤNG GIỐNG KHÁNG
-
+## PHÒNG NGỪA
+### SỬ DỤNG GIỐNG KHÁNG
 Nhiều danh mục hạt giống có các giống được ghi là kháng bệnh mốc lá.
 
 Tuy nhiên, khả năng kháng có thể không ổn định giữa các khu vực.
 
-
-### TẠI SAO GIỐNG KHÁNG KHÔNG PHẢI LÚC NÀO CŨNG HIỆU QUẢ?
-
+**TẠI SAO GIỐNG KHÁNG KHÔNG PHẢI LÚC NÀO CŨNG HIỆU QUẢ?:**
 Passalora fulva có nhiều nòi.
 
 Nguồn University of Minnesota Extension đề cập có 12 nòi.
@@ -315,9 +291,7 @@ Ngoài ra, quần thể P. fulva có thể thay đổi khi:
 - Nòi mới xuất hiện.
 - Nòi mới được đưa vào từ khu vực khác.
 
-
-### CÁCH THỬ GIỐNG KHÁNG
-
+**CÁCH THỬ GIỐNG KHÁNG:**
 Đối với trang trại có lịch sử bệnh mốc lá, nguồn khuyến nghị:
 
 - Thử giống kháng trên quy mô nhỏ trước.
@@ -326,9 +300,7 @@ Nếu giống đó có hiệu quả tại địa điểm cụ thể, có thể m
 
 Cách này giúp tránh phụ thuộc hoàn toàn vào thông tin kháng chung trên danh mục hạt giống.
 
-
-## QUẢN LÝ NƯỚC TƯỚI
-
+### QUẢN LÝ NƯỚC TƯỚI
 Nên sử dụng tưới nhỏ giọt.
 
 Tránh tưới trực tiếp lên lá.
@@ -340,9 +312,7 @@ Mục tiêu là:
 - Giảm độ ẩm quanh cây.
 - Hạn chế phát tán bào tử bằng nước.
 
-
-## QUẢN LÝ KHOẢNG CÁCH CÂY
-
+### QUẢN LÝ KHOẢNG CÁCH CÂY
 Nên duy trì khoảng cách phù hợp giữa:
 
 - Các cây.
@@ -355,9 +325,7 @@ Khoảng cách hợp lý giúp:
 - Giúp lá khô nhanh hơn.
 - Giảm điều kiện thuận lợi cho bệnh.
 
-
-## TẠO TÁN THÔNG THOÁNG
-
+### TẠO TÁN THÔNG THOÁNG
 Có thể sử dụng:
 
 - Cọc.
@@ -369,9 +337,7 @@ Mục tiêu là giữ tán cây mở và thông thoáng.
 
 Điều này đặc biệt quan trọng trong nhà kính và high tunnel, nơi không khí thường lưu thông kém hơn ngoài trời.
 
-
-## THÔNG GIÓ NHÀ KÍNH VÀ HIGH TUNNEL
-
+### THÔNG GIÓ NHÀ KÍNH VÀ HIGH TUNNEL
 Để giảm độ ẩm, có thể:
 
 - Mở cửa thông gió.
@@ -380,18 +346,14 @@ Mục tiêu là giữ tán cây mở và thông thoáng.
 
 Mục tiêu là đưa không khí ẩm ra khỏi khu vực tán cây và thay bằng không khí khô hơn.
 
-
-## HẠN CHẾ SƯƠNG ĐỌNG TRÊN LÁ
-
+### HẠN CHẾ SƯƠNG ĐỌNG TRÊN LÁ
 Nguồn khuyến nghị trong nhà kính có thể giữ nhiệt độ ban đêm cao hơn nhiệt độ ngoài trời.
 
 Mục đích là giảm nguy cơ hình thành sương trên lá.
 
 Sương đọng cung cấp điều kiện ẩm rất thuận lợi cho bệnh.
 
-
-## VỆ SINH CỌC, DÂY VÀ GIÀN
-
+### VỆ SINH CỌC, DÂY VÀ GIÀN
 Nguồn khuyến nghị vệ sinh:
 
 - Cọc.
@@ -403,9 +365,7 @@ Một lựa chọn được nguồn đề cập là dung dịch thuốc tẩy gi
 
 Khi áp dụng thực tế, cần tuân thủ hướng dẫn của chất khử trùng và chú ý an toàn lao động.
 
-
-## VỆ SINH NHÀ KÍNH CUỐI VỤ
-
+### VỆ SINH NHÀ KÍNH CUỐI VỤ
 Cuối mùa nên vệ sinh:
 
 - Tường nhà kính hoặc high tunnel.
@@ -417,9 +377,7 @@ Nguồn khuyến nghị sử dụng chất khử trùng thương mại phù hợ
 
 Mục tiêu là giảm lượng bào tử hoặc vật liệu nhiễm bệnh còn lại cho vụ sau.
 
-
-## QUẢN LÝ TÀN DƯ CÂY BỆNH
-
+### QUẢN LÝ TÀN DƯ CÂY BỆNH
 Tàn dư cuối vụ là nguồn tồn tại rất quan trọng.
 
 Nên:
@@ -430,9 +388,18 @@ Nên:
 
 Không nên để lá và thân bệnh tích tụ trong nhà kính hoặc high tunnel.
 
+### ƯU TIÊN QUẢN LÝ ĐỘ ẨM TRƯỚC THUỐC
+Do bệnh phụ thuộc rất mạnh vào độ ẩm cao, trong nhà kính và high tunnel nên ưu tiên:
 
-## SỬ DỤNG THUỐC DIỆT NẤM
+- Tăng thông gió.
+- Giảm tưới làm ướt lá.
+- Duy trì khoảng cách cây.
+- Tạo tán thông thoáng.
+- Hạn chế sương đọng.
 
+Nếu môi trường vẫn duy trì độ ẩm trên 85% trong thời gian dài, bệnh có thể tiếp tục phát triển ngay cả khi có sử dụng thuốc.
+
+## QUẢN LÝ BẰNG THUỐC DIỆT NẤM
 Nguồn University of Minnesota Extension nhấn mạnh thuốc nên được sử dụng:
 
 - Trước khi nhiễm bệnh xảy ra.
@@ -489,9 +456,7 @@ Vì vậy:
 
 Khi áp dụng tại Việt Nam, phải tuân thủ hoàn toàn nhãn và quy định đăng ký thuốc tại Việt Nam.
 
-
-## BỔ SUNG: CÁCH KIỂM TRA NHANH TRONG NHÀ KÍNH HOẶC HIGH TUNNEL
-
+## KIỂM TRA NHANH TRONG NHÀ KÍNH HOẶC HIGH TUNNEL
 Khi nghi ngờ bệnh mốc lá trên cà chua, có thể kiểm tra theo trình tự sau:
 
 - Kiểm tra các lá già trước.
@@ -507,22 +472,7 @@ Khi nghi ngờ bệnh mốc lá trên cà chua, có thể kiểm tra theo trình
 
 Nếu chỉ có đốm vàng mà không có lớp mốc ô liu bên dưới, cần cân nhắc các nguyên nhân khác như thiếu dinh dưỡng hoặc bệnh lá khác.
 
-
-## BỔ SUNG: ƯU TIÊN QUẢN LÝ ĐỘ ẨM TRƯỚC THUỐC
-
-Do bệnh phụ thuộc rất mạnh vào độ ẩm cao, trong nhà kính và high tunnel nên ưu tiên:
-
-- Tăng thông gió.
-- Giảm tưới làm ướt lá.
-- Duy trì khoảng cách cây.
-- Tạo tán thông thoáng.
-- Hạn chế sương đọng.
-
-Nếu môi trường vẫn duy trì độ ẩm trên 85% trong thời gian dài, bệnh có thể tiếp tục phát triển ngay cả khi có sử dụng thuốc.
-
-
 ## LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
-
 Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho cây cà chua và bệnh mốc lá tại khu vực sản xuất.
 
 Luôn đọc và tuân thủ nhãn sản phẩm.
@@ -535,9 +485,7 @@ Luân phiên các nhóm cơ chế tác động khi cần nhiều lần xử lý.
 
 Kết hợp thuốc với quản lý độ ẩm, thông gió, vệ sinh và giống kháng để đạt hiệu quả bền vững hơn.
 
-
 ## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
-
 Bệnh mốc lá trên cây cà chua có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 
 - Bệnh do nấm Passalora fulva gây ra.
@@ -568,3 +516,7 @@ Bệnh mốc lá trên cây cà chua có thể được nhận biết và quản
 - Thuốc nên được dùng phòng ngừa khi điều kiện thuận lợi cho bệnh.
 - Cần luân phiên nhóm hóa học để giảm nguy cơ kháng thuốc.
 - Quy định về high tunnel trong nguồn là của Minnesota và không nên áp dụng máy móc tại Việt Nam.
+
+## NGUỒN THAM KHẢO
+University of Minnesota Extension
+https://extension.umn.edu/agriculture/specialty-crops/vegetable-farming/disease-management/tomato-leaf-mold

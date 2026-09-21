@@ -1,18 +1,19 @@
 # BỆNH CHÁY SỚM TRÊN CÂY CÀ CHUA
 
-Nguồn tham khảo chính:
-University of Wisconsin – Vegetable Pathology
-https://vegpath.plantpath.wisc.edu/diseases/tomato-early-blight/
+## CÂY TRỒNG
+Cà chua (Tomato)
 
+## TÊN BỆNH
+Bệnh cháy sớm trên cây cà chua (Tomato early blight)
+
+## TỔNG QUAN
 Bệnh cháy sớm trên cây cà chua, hay Tomato Early Blight, là một bệnh nấm phổ biến và có khả năng gây thiệt hại nghiêm trọng trong cả sản xuất thương mại lẫn vườn gia đình.
 
 Bệnh có thể làm hư hại lá, thân và làm cây suy yếu mạnh. Trong trường hợp nặng, bệnh có thể gây rụng lá nghiêm trọng và thậm chí làm cây chết.
 
 Bệnh cháy sớm thường xuất hiện ở phần dưới của cây trước, sau đó tiến triển lên các tầng lá phía trên nếu điều kiện môi trường thuận lợi.
 
-
 ## TÁC NHÂN GÂY BỆNH
-
 Bệnh cháy sớm trên cà chua do nấm Alternaria solani gây ra.
 
 Nấm có thể tồn tại trong:
@@ -23,9 +24,7 @@ Nấm có thể tồn tại trong:
 
 Khi điều kiện thích hợp xuất hiện, nấm có thể tạo bào tử và gây các đợt nhiễm bệnh mới.
 
-
-## CÁCH NHẬN BIẾT BỆNH CHÁY SỚM
-
+## TRIỆU CHỨNG
 ### Triệu chứng trên lá
 
 Triệu chứng bệnh thường xuất hiện đầu tiên ở phần gốc của cây.
@@ -70,9 +69,7 @@ Các vết bệnh trên thân thường xuất hiện gần phần dưới cây 
 
 Sự xuất hiện của triệu chứng trên cả thân và lá cho thấy bệnh đã phát triển mạnh hơn.
 
-
-## TẠI SAO CÁC LÁ PHÍA DƯỚI THƯỜNG BỊ BỆNH TRƯỚC?
-
+## ĐẶC ĐIỂM KHỞI PHÁT TRÊN CÂY
 Bệnh cháy sớm thường bắt đầu ở phần gốc cây.
 
 Nấm Alternaria solani có thể tồn tại trong tàn dư thực vật trên hoặc gần mặt đất.
@@ -87,23 +84,7 @@ Ngoài ra, phần dưới tán thường có:
 
 Những điều kiện này tạo môi trường thuận lợi cho bệnh bắt đầu phát triển.
 
-
-## ẢNH HƯỞNG CỦA TÁN CÂY DÀY
-
-Triệu chứng bệnh thường bắt đầu xuất hiện khi tán cây bắt đầu khép kín.
-
-Khi lá và cành phát triển dày:
-
-- Không khí lưu thông kém.
-- Độ ẩm trong tán tăng.
-- Lá giữ ẩm lâu hơn.
-- Nấm có điều kiện thuận lợi để nhiễm bệnh.
-
-Do đó, mật độ cây và độ thông thoáng của tán có ảnh hưởng đáng kể đến mức độ phát triển bệnh.
-
-
-## NGUỒN GỐC VÀ CHU KỲ BỆNH
-
+## CHU KỲ BỆNH VÀ NGUỒN BỆNH
 Nấm Alternaria solani có thể tồn tại trên tàn dư cây bệnh hoặc cây đang bị nhiễm.
 
 Tàn dư mang nấm là nguồn bào tử quan trọng cho vụ sau.
@@ -114,9 +95,8 @@ Nếu độ ẩm đủ cao và lá duy trì trạng thái ướt, bào tử có 
 
 Sau khi vết bệnh hình thành, nấm có thể tiếp tục tạo bào tử mới và làm bệnh lan rộng trong khu vực trồng.
 
-
 ## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH
-
+### ĐIỀU KIỆN THUẬN LỢI CHO BỆNH
 Bệnh cháy sớm phát triển thuận lợi khi:
 
 - Tán cây dày.
@@ -128,9 +108,19 @@ Bệnh cháy sớm phát triển thuận lợi khi:
 
 Các khu vực có thông thoáng kém thường dễ xuất hiện bệnh hơn.
 
+### ẢNH HƯỞNG CỦA TÁN CÂY DÀY
+Triệu chứng bệnh thường bắt đầu xuất hiện khi tán cây bắt đầu khép kín.
+
+Khi lá và cành phát triển dày:
+
+- Không khí lưu thông kém.
+- Độ ẩm trong tán tăng.
+- Lá giữ ẩm lâu hơn.
+- Nấm có điều kiện thuận lợi để nhiễm bệnh.
+
+Do đó, mật độ cây và độ thông thoáng của tán có ảnh hưởng đáng kể đến mức độ phát triển bệnh.
 
 ## P-DAY VÀ DỰ ĐOÁN NGUY CƠ BỆNH
-
 Nguồn University of Wisconsin đề cập việc sử dụng Physiological Days, hay P-Days, để hỗ trợ dự đoán nguy cơ phát triển bệnh cháy sớm.
 
 P-Day là một chỉ số thể hiện lượng nhiệt sinh lý tích lũy trong mùa.
@@ -156,9 +146,7 @@ P-Day là công cụ hỗ trợ quản lý bệnh trong điều kiện và hệ 
 
 Khi áp dụng ở khu vực khác, cần sử dụng mô hình đã được hiệu chỉnh phù hợp với khí hậu địa phương.
 
-
-## CÁCH XỬ LÝ KHI CÂY ĐÃ BỊ BỆNH
-
+## XỬ LÝ KHI CÂY ĐÃ BỊ BỆNH
 Khi triệu chứng bệnh cháy sớm đã xuất hiện, việc kiểm soát trở nên khó khăn hơn.
 
 Các biện pháp lúc này chủ yếu nhằm làm chậm sự phát triển của bệnh và bảo vệ các phần cây còn khỏe.
@@ -217,9 +205,7 @@ Mục tiêu của thuốc là:
 
 Do đó, phòng bệnh sớm thường hiệu quả hơn xử lý sau khi bệnh đã phát triển mạnh.
 
-
-## PHÒNG BỆNH CHO CÁC VỤ SAU
-
+## PHÒNG NGỪA CHO CÁC VỤ SAU
 Bệnh cháy sớm được kiểm soát tốt nhất bằng các biện pháp phòng ngừa.
 
 Các biện pháp quan trọng gồm:
@@ -335,9 +321,8 @@ Nên kiểm tra cây từ sớm.
 
 Phát hiện sớm giúp các biện pháp quản lý có hiệu quả cao hơn.
 
-
-## BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI VƯỜN
-
+## KIỂM TRA VÀ PHÂN BIỆT NGOÀI VƯỜN
+### CÁCH KIỂM TRA NHANH NGOÀI VƯỜN
 Khi nghi ngờ bệnh cháy sớm trên cây cà chua, có thể kiểm tra theo trình tự sau:
 
 - Bắt đầu từ các lá già phía dưới.
@@ -353,9 +338,7 @@ Khi nghi ngờ bệnh cháy sớm trên cây cà chua, có thể kiểm tra theo
 
 Dấu hiệu vòng đồng tâm giống bia bắn là một đặc điểm rất hữu ích khi nhận biết bệnh cháy sớm.
 
-
-## LƯU Ý VỀ PHÂN BIỆT VỚI CÁC BỆNH ĐỐM LÁ KHÁC
-
+### LƯU Ý VỀ PHÂN BIỆT VỚI CÁC BỆNH ĐỐM LÁ KHÁC
 Không phải tất cả các đốm nâu trên cà chua đều là bệnh cháy sớm.
 
 Bệnh cháy sớm thường có:
@@ -367,9 +350,7 @@ Bệnh cháy sớm thường có:
 
 Nếu triệu chứng không điển hình, cần phân biệt với các bệnh đốm lá khác trước khi quyết định xử lý.
 
-
 ## LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
-
 Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho cây cà chua và bệnh cháy sớm tại khu vực sản xuất.
 
 Luôn đọc và tuân thủ nhãn sản phẩm.
@@ -382,9 +363,7 @@ Nếu cần sử dụng thuốc trong thời gian dài, nên chú ý luân phiê
 
 Thuốc nên được xem là một phần của chương trình quản lý tổng hợp, không thay thế các biện pháp vệ sinh, luân canh và thông thoáng tán.
 
-
 ## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
-
 Bệnh cháy sớm trên cây cà chua có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 
 - Bệnh do nấm Alternaria solani gây ra.
@@ -408,3 +387,7 @@ Bệnh cháy sớm trên cây cà chua có thể được nhận biết và qu�
 - Tăng khoảng cách cây giúp giảm độ ẩm.
 - Có thể sử dụng lớp phủ đất khoảng 2,5 centimét nhưng không nên phủ quá dày.
 - Quản lý tổng hợp và phòng bệnh từ sớm là chiến lược hiệu quả nhất.
+
+## NGUỒN THAM KHẢO
+University of Wisconsin – Vegetable Pathology
+https://vegpath.plantpath.wisc.edu/diseases/tomato-early-blight/

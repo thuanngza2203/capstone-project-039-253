@@ -1,16 +1,17 @@
 # BỆNH THỐI ĐEN TRÊN CÂY TÁO
 
-Nguồn tham khảo:
-University of Minnesota Extension
-https://extension.umn.edu/plant-diseases/black-rot-apple
+## CÂY TRỒNG
+Táo
 
+## TÊN BỆNH
+Bệnh thối đen trên cây táo
+
+## TỔNG QUAN
 Bệnh thối đen là một bệnh nấm thường gặp trên cây táo. Bệnh có thể ảnh hưởng đến quả, lá, cành và thân cây. Việc nhận biết sớm triệu chứng, loại bỏ nguồn bệnh và duy trì sức khỏe của cây có vai trò quan trọng trong việc hạn chế bệnh phát triển và lây lan.
 
+## TRIỆU CHỨNG
 
-## CÁCH NHẬN BIẾT BỆNH THỐI ĐEN
-
-### Triệu chứng trên quả
-
+### Trên quả
 Các vùng thối màu nâu lớn có thể hình thành ở bất kỳ vị trí nào trên quả, nhưng thường xuất hiện nhiều nhất ở khu vực gần cuống hoa.
 
 Khi vùng nhiễm bệnh phát triển lớn hơn, trên bề mặt quả có thể xuất hiện các vòng tròn đồng tâm màu nâu đến đen.
@@ -23,18 +24,14 @@ Một số quả bị bệnh sẽ teo lại, khô cứng và vẫn bám trên c�
 
 Trong một số trường hợp, quả bị nhiễm bệnh từ đầu mùa. Quả có thể chín sớm bất thường và xuất hiện hiện tượng thối lõi.
 
-
-### Triệu chứng trên lá
-
+### Trên lá
 Lá bị nhiễm bệnh thường xuất hiện các đốm có hình dạng giống “mắt ếch”.
 
 Đốm mắt ếch thường có dạng tròn, với viền màu tím hoặc đỏ và phần trung tâm màu nâu nhạt.
 
 Các đốm có thể to dần theo thời gian. Tuy nhiên, bệnh đốm lá thường không ảnh hưởng nghiêm trọng đến sức khỏe tổng thể của cây, trừ trường hợp có quá nhiều lá chuyển vàng và rụng. Tình trạng này hiếm khi xảy ra.
 
-
-### Triệu chứng trên cành và thân cây
-
+### Trên cành và thân cây
 Trên cành bị nhiễm bệnh có thể xuất hiện các vết loét lõm màu nâu đỏ. Phần vỏ cây tại vị trí vết loét thường sần sùi, nứt nẻ hoặc bong ra.
 
 Vết loét đôi khi khó quan sát. Khi phát hiện quả bị thối hoặc lá có đốm mắt ếch, cần kiểm tra kỹ các cành và thân cây để tìm các vùng vỏ bị tổn thương hoặc có dấu hiệu loét.
@@ -46,9 +43,7 @@ Vết loét lõm thường xuất hiện tại những khu vực cây đã bị 
 - Các cành bị gãy, cành chết hoặc những vùng gỗ bị tổn thương.
 - Những vị trí đã bị bệnh cháy lá hoặc các bệnh khác làm chết mô cây.
 
-
-## BỆNH THỐI ĐEN TỒN TẠI VÀ LÂY LAN NHƯ THẾ NÀO?
-
+## TÁC NHÂN, CHU KỲ VÀ CƠ CHẾ LÂY LAN
 Bệnh thối đen trên cây táo do nấm Diplodia seriata gây ra. Tên khoa học Botryosphaeria obtusa trước đây cũng thường được sử dụng để chỉ tác nhân gây bệnh này.
 
 Nấm có khả năng sinh sống và phát triển trên cả mô cây đã chết lẫn các bộ phận còn sống như thân, cành, lá và quả.
@@ -65,9 +60,7 @@ Cành và thân cây thường bị nhiễm bệnh qua các phần gỗ đã ch�
 
 Nguồn bệnh có thể tích tụ qua nhiều năm nếu quả khô, cành chết và các bộ phận bị nhiễm bệnh không được loại bỏ khỏi cây và khu vực trồng.
 
-
-## TÌNH TRẠNG CĂNG THẲNG CỦA CÂY ẢNH HƯỞNG ĐẾN BỆNH NHƯ THẾ NÀO?
-
+## YẾU TỐ LÀM CÂY MẪN CẢM VÀ BỆNH NẶNG HƠN
 Những cây khỏe mạnh thường có khả năng chống chịu bệnh tốt hơn. Ngược lại, cây đang bị suy yếu hoặc chịu điều kiện bất lợi sẽ dễ bị bệnh thối đen tấn công và gây hại nặng hơn.
 
 Ở những vùng có mùa đông lạnh, mô cây bị tổn thương do rét có thể trở thành vị trí thuận lợi để nấm xâm nhập.
@@ -84,26 +77,9 @@ Những cây từng bị bệnh cháy lá thường có nguy cơ phát triển b
 
 Các yếu tố khác như cắt tỉa không đúng kỹ thuật, để lại vết thương lớn, cành gãy, sâu hại, dinh dưỡng mất cân đối hoặc cây trồng ở vị trí không phù hợp cũng có thể làm tăng nguy cơ mắc bệnh.
 
-
-## CÁCH XỬ LÝ BỆNH THỐI ĐEN
-
-### Thực hiện vệ sinh vườn cây
-
-Mục tiêu quan trọng nhất trong việc kiểm soát bệnh là giảm nguồn nấm và bào tử có thể gây ra các đợt nhiễm bệnh trong tương lai.
-
-Cần thực hiện các biện pháp sau:
-
-- Cắt bỏ những cành đã chết, bị bệnh hoặc có vết loét.
-- Thu hái toàn bộ quả bị thối, quả teo khô và quả còn sót lại trên cây.
-- Thu gom các bộ phận cây bị nhiễm bệnh đã rơi xuống đất.
-- Đưa vật liệu bị bệnh ra khỏi khu vực trồng.
-- Xử lý bộ phận bị bệnh bằng phương pháp phù hợp theo quy định địa phương, chẳng hạn như tiêu hủy, chôn lấp hoặc đưa đến nơi xử lý rác thực vật.
-- Không nên để cành bệnh, quả khô hoặc gỗ nhiễm bệnh nằm trong vườn vì chúng có thể tiếp tục là nguồn phát tán bào tử.
-- Khi chặt bỏ một cây táo bị bệnh nặng, nên loại bỏ cả phần gốc cây nếu có thể. Gốc và phần gỗ chết còn lại có thể trở thành nơi nấm tồn tại.
-
+## PHÒNG NGỪA
 
 ### Cắt tỉa đúng thời điểm và đúng kỹ thuật
-
 Tại Minnesota, tài liệu gốc khuyến nghị cắt tỉa khi nhiệt độ dưới 32 độ F, tương đương 0 độ C. Tháng Hai và tháng Ba thường là thời điểm thích hợp tại khu vực này vì nấm chưa hoạt động mạnh cho đến mùa xuân.
 
 Khuyến cáo về tháng cắt tỉa không nên áp dụng máy móc cho mọi khu vực. Tại Việt Nam hoặc những vùng có khí hậu khác, cần lựa chọn thời điểm khô ráo, ít mưa, cây không ở giai đoạn sinh trưởng quá mạnh và điều kiện không thuận lợi cho nấm phát tán.
@@ -118,9 +94,7 @@ Khi cắt tỉa, nên thực hiện theo thứ tự:
 
 Tán cây thông thoáng giúp lá và quả khô nhanh hơn sau mưa, từ đó làm giảm thời gian ẩm ướt thuận lợi cho nấm phát triển.
 
-
 ### Duy trì sức khỏe của cây
-
 Để giảm nguy cơ mắc bệnh và giúp cây phục hồi, cần hạn chế các yếu tố gây căng thẳng cho cây.
 
 - Chọn vị trí trồng có ánh sáng phù hợp và đất thoát nước tốt.
@@ -133,9 +107,22 @@ Tán cây thông thoáng giúp lá và quả khô nhanh hơn sau mưa, từ đó
 - Loại bỏ sớm cành hoặc cây đã chết do bệnh cháy lá để ngăn chúng trở thành nguồn xâm nhiễm của bệnh thối đen.
 - Theo dõi cây thường xuyên để phát hiện sớm quả thối, đốm mắt ếch và vết loét.
 
+## XỬ LÝ KHI CÂY ĐÃ BỊ BỆNH
+
+### Vệ sinh vườn cây
+Mục tiêu quan trọng nhất trong việc kiểm soát bệnh là giảm nguồn nấm và bào tử có thể gây ra các đợt nhiễm bệnh trong tương lai.
+
+Cần thực hiện các biện pháp sau:
+
+- Cắt bỏ những cành đã chết, bị bệnh hoặc có vết loét.
+- Thu hái toàn bộ quả bị thối, quả teo khô và quả còn sót lại trên cây.
+- Thu gom các bộ phận cây bị nhiễm bệnh đã rơi xuống đất.
+- Đưa vật liệu bị bệnh ra khỏi khu vực trồng.
+- Xử lý bộ phận bị bệnh bằng phương pháp phù hợp theo quy định địa phương, chẳng hạn như tiêu hủy, chôn lấp hoặc đưa đến nơi xử lý rác thực vật.
+- Không nên để cành bệnh, quả khô hoặc gỗ nhiễm bệnh nằm trong vườn vì chúng có thể tiếp tục là nguồn phát tán bào tử.
+- Khi chặt bỏ một cây táo bị bệnh nặng, nên loại bỏ cả phần gốc cây nếu có thể. Gốc và phần gỗ chết còn lại có thể trở thành nơi nấm tồn tại.
 
 ### Sử dụng thuốc diệt nấm
-
 Theo University of Minnesota Extension, trong điều kiện tại Minnesota, thông thường không cần phun thuốc diệt nấm chỉ để kiểm soát bệnh thối đen nếu đã thực hiện tốt các biện pháp vệ sinh, cắt tỉa và chăm sóc cây.
 
 Thuốc diệt nấm chỉ nên được cân nhắc sau khi đã áp dụng đầy đủ các biện pháp canh tác phù hợp nhưng bệnh vẫn tiếp tục phát triển.
@@ -146,9 +133,7 @@ Việc phun các hoạt chất này có thể giúp hạn chế đốm lá hình
 
 Hiệu quả và tính hợp pháp của một sản phẩm phụ thuộc vào quốc gia, khu vực, loại cây trồng, đối tượng dịch hại, liều lượng và hướng dẫn ghi trên nhãn. Không nên tự ý sử dụng một hoạt chất chỉ dựa trên tên được đề cập trong tài liệu nước ngoài.
 
-
 ## LƯU Ý AN TOÀN KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
-
 Việc đề cập đến thuốc bảo vệ thực vật hoặc hoạt chất trong tài liệu này chỉ nhằm mục đích cung cấp thông tin tham khảo và giáo dục.
 
 Luôn đọc kỹ và tuân thủ hướng dẫn trên nhãn của sản phẩm đang sử dụng.
@@ -161,9 +146,7 @@ Sử dụng đầy đủ trang bị bảo hộ, tuân thủ thời gian cách ly
 
 Nhãn thuốc là căn cứ pháp lý quan trọng và phải được ưu tiên tuân thủ.
 
-
 ## TÓM TẮT BIỆN PHÁP QUẢN LÝ
-
 Để quản lý bệnh thối đen trên cây táo, cần kết hợp nhiều biện pháp:
 
 - Nhận biết sớm triệu chứng trên quả, lá, cành và thân cây.
@@ -173,3 +156,7 @@ Nhãn thuốc là căn cứ pháp lý quan trọng và phải được ưu tiên
 - Duy trì chế độ tưới nước, dinh dưỡng và chăm sóc hợp lý.
 - Chỉ cân nhắc thuốc diệt nấm khi các biện pháp canh tác chưa đủ hiệu quả.
 - Luôn tuân thủ nhãn thuốc và quy định sử dụng thuốc bảo vệ thực vật tại địa phương.
+
+## NGUỒN THAM KHẢO
+University of Minnesota Extension
+https://extension.umn.edu/plant-diseases/black-rot-apple
