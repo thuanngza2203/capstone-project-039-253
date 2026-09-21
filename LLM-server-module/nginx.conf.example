@@ -1,0 +1,29 @@
+# Dành cho public HTTPS. Dùng SSH tunnel thì không cần Nginx.
+# Sửa domain, đường certificate và upstream port nếu đổi LLM_PORT.
+pid /tmp/llm-server-nginx.pid;
+error_log /dev/stderr;
+events {}
+http {
+    access_log /dev/stdout;
+    server {
+        listen 8443 ssl;
+        server_name llm.example.com;
+        ssl_certificate /workspace/llm-tls/fullchain.pem;
+        ssl_certificate_key /workspace/llm-tls/privkey.pem;
+        ssl_protocols TLSv1.2 TLSv1.3;
+
+        # Chỉ public hai endpoint RAG sử dụng. vLLM kiểm tra Bearer token.
+        location = /v1/models {
+            proxy_pass http://127.0.0.1:8000;
+        }
+        location = /v1/chat/completions {
+            proxy_pass http://127.0.0.1:8000;
+            proxy_http_version 1.1;
+            proxy_buffering off;
+            proxy_read_timeout 180s;
+        }
+        location / {
+            return 404;
+        }
+    }
+}

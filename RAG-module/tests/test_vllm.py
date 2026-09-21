@@ -49,22 +49,24 @@ def test_env_file_selects_provider_on_startup(
     ("api_key", "think", "expected_think"),
     [("", "", None), ("docker-test-key", "false", False), ("docker-test-key", "true", True)],
 )
+@pytest.mark.parametrize("base_url", ["http://docker.test:8000/v1", "https://vast.test:31443/v1"])
 def test_ask_sends_rag_prompt_to_vllm_chat_api(
     api_key: str,
     think: str,
     expected_think: bool | None,
+    base_url: str,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Exercise the real LangChain/SDK request with an offline HTTP transport."""
     monkeypatch.setenv("LLM_PROVIDER", "vllm")
-    monkeypatch.setenv("VLLM_BASE_URL", "http://docker.test:8000/v1")
+    monkeypatch.setenv("VLLM_BASE_URL", base_url)
     monkeypatch.setenv("VLLM_MODEL", "plant-chat")
     monkeypatch.setenv("VLLM_API_KEY", api_key)
     monkeypatch.setenv("VLLM_MAX_TOKENS", "321")
     monkeypatch.setenv("VLLM_TIMEOUT", "25")
     monkeypatch.setenv("VLLM_THINK", think)
     monkeypatch.delenv("GEMINI_API_KEY", raising=False)
-    # A configured OpenAI account must not override the chosen Docker endpoint/key.
+    # An OpenAI account must not override the chosen local/remote endpoint/key.
     monkeypatch.setenv("OPENAI_API_KEY", "must-not-be-used")
     monkeypatch.setenv("OPENAI_BASE_URL", "https://must-not-be-used.invalid/v1")
     requests = []
@@ -114,7 +116,7 @@ def test_ask_sends_rag_prompt_to_vllm_chat_api(
     assert len(requests) == 1
     request = requests[0]
     assert request.method == "POST"
-    assert str(request.url) == "http://docker.test:8000/v1/chat/completions"
+    assert str(request.url) == f"{base_url}/chat/completions"
     assert request.headers["authorization"] == f"Bearer {api_key or 'EMPTY'}"
     assert request.extensions["timeout"]["read"] == 25
     body = json.loads(request.content)

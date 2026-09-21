@@ -2,8 +2,14 @@
 
 Module này đọc tài liệu `.txt`, tạo embedding tiếng Việt trên máy, lưu vector
 trong Chroma và dùng LLM để sinh câu trả lời có trích nguồn. LLM mặc định là
-`qwen3.5:4b` chạy local qua Ollama; có thể chuyển sang Gemini hoặc vLLM chạy
-trong Docker bằng `LLM_PROVIDER` trong `.env`.
+`qwen3.5:4b` chạy local qua Ollama; có thể chuyển sang Gemini hoặc API vLLM
+local/remote bằng `LLM_PROVIDER` trong `.env`.
+
+**Chỉ chạy LLM trên Vast.ai, giữ RAG ở host:** xem
+[LLM-server-module](../LLM-server-module/README.md). Module riêng này khởi động
+vLLM trên Linux; RAG gọi API qua `VLLM_BASE_URL` và `VLLM_API_KEY`. Dùng
+`LLM_PROVIDER=vllm`, giữ embedding, retrieval, Chroma và lịch sử chat ở host.
+Đổi endpoint LLM không cần index lại.
 
 ## Chạy thử nhanh với Ollama Qwen3.5 4B
 
