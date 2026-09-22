@@ -210,8 +210,8 @@ def test_explicit_options_override_environment(monkeypatch: pytest.MonkeyPatch) 
 
 
 @pytest.mark.parametrize(("question", "source"), [
-    ("Bệnh cháy lá sớm trên khoai tây có triệu chứng gì?", "potato/potato_earrly_blight.txt"),
-    ("Cách trị early blight trên potato?", "potato/potato_earrly_blight.txt"),
+    ("Bệnh cháy lá sớm trên khoai tây có triệu chứng gì?", "potato/potato_early_blight.txt"),
+    ("Cách trị early blight trên potato?", "potato/potato_early_blight.txt"),
     ("Corynespora cassiicola", "tomato/tomato_target_spot.txt"),
 ])
 def test_real_corpus_bm25_keeps_expected_source_in_top_four(question, source) -> None:

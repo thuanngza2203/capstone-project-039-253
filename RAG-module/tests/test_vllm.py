@@ -134,7 +134,13 @@ def test_ask_sends_rag_prompt_to_vllm_chat_api(
 @pytest.mark.parametrize(
     ("setting", "value"),
     [("VLLM_MAX_TOKENS", "0"), ("VLLM_MAX_TOKENS", "abc"),
-     ("VLLM_TIMEOUT", "-1"), ("VLLM_TIMEOUT", "abc"), ("VLLM_THINK", "invalid")],
+     ("VLLM_TIMEOUT", "-1"), ("VLLM_TIMEOUT", "abc"), ("VLLM_THINK", "invalid"),
+     # URL sai phải báo tại chỗ, không để server remote trả 404/401 sau vòng mạng.
+     ("VLLM_BASE_URL", "http://127.0.0.1:8000"),
+     ("VLLM_BASE_URL", "http://127.0.0.1:8000/v1/chat/completions"),
+     ("VLLM_BASE_URL", "ftp://llm.example.com/v1"),
+     ("VLLM_BASE_URL", "/v1"),
+     ("VLLM_BASE_URL", "https://user:pass@llm.example.com/v1")],
 )
 def test_invalid_vllm_config_fails_before_client_creation(
     setting: str, value: str, monkeypatch: pytest.MonkeyPatch
@@ -150,6 +156,20 @@ def test_invalid_vllm_config_fails_before_client_creation(
     )
     with pytest.raises(RuntimeError, match=setting):
         config.create_chat_model()
+
+
+@pytest.mark.parametrize("url", [
+    "http://127.0.0.1:8001/v1",
+    "https://llm.example.com:31443/v1",
+    "https://llm.example.com/v1/",
+])
+def test_remote_vast_urls_are_accepted(url: str, monkeypatch: pytest.MonkeyPatch) -> None:
+    """SSH tunnel và HTTPS public đều phải qua được validate."""
+    monkeypatch.setenv("LLM_PROVIDER", "vllm")
+    monkeypatch.setenv("VLLM_BASE_URL", url)
+    monkeypatch.setenv("VLLM_THINK", "")
+    monkeypatch.setattr(langchain_openai, "ChatOpenAI", lambda **kwargs: kwargs)
+    assert config.create_chat_model()["base_url"] == url.rstrip("/")
 
 
 def test_missing_vllm_dependency_reports_install_command(monkeypatch: pytest.MonkeyPatch) -> None:

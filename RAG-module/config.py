@@ -5,6 +5,7 @@ import os
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from dotenv import load_dotenv
 from langchain_core.embeddings import Embeddings
@@ -250,6 +251,25 @@ def create_chat_model(*, provider: str | None = None) -> BaseChatModel:
 
     if settings.provider == "vllm":
         # Chỉ kiểm tra cấu hình vLLM khi provider này được chọn.
+        # Cùng ràng buộc với check_api.py của LLM-server-module: URL sai phải báo
+        # ngay, thay vì để server remote trả 404/401 khó đoán sau một vòng mạng.
+        address = urlsplit(settings.vllm_base_url)
+        if address.scheme not in {"http", "https"} or not address.hostname:
+            raise RuntimeError(
+                "VLLM_BASE_URL phải dạng http(s)://host[:port]/v1. Ví dụ "
+                "http://127.0.0.1:8001/v1 khi dùng SSH tunnel tới Vast.ai."
+            )
+        if not address.path.endswith("/v1"):
+            raise RuntimeError(
+                "VLLM_BASE_URL phải kết thúc bằng /v1 (địa chỉ gốc của API), "
+                "không thêm /chat/completions."
+            )
+        if address.username or address.password or address.query or address.fragment:
+            raise RuntimeError(
+                "VLLM_BASE_URL không được chứa credentials, query hay fragment. "
+                "Đặt API key vào VLLM_API_KEY."
+            )
+
         try:
             max_tokens = int(os.getenv("VLLM_MAX_TOKENS", "800"))
             timeout = int(os.getenv("VLLM_TIMEOUT", "120"))
