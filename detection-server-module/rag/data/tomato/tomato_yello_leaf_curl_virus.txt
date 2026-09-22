@@ -1,0 +1,569 @@
+VIRUS XOĂN VÀNG LÁ CÀ CHUA
+
+Nguồn tham khảo chính:
+Wikipedia – Tomato yellow leaf curl virus
+https://en.wikipedia.org/wiki/Tomato_yellow_leaf_curl_virus
+
+Virus xoăn vàng lá cà chua, thường được viết tắt là TYLCV, là một virus DNA thuộc chi Begomovirus và họ Geminiviridae.
+
+Theo nguồn Wikipedia được cung cấp, loài được ghi trong phân loại là Begomovirus coheni.
+
+TYLCV là một trong những tác nhân virus nghiêm trọng nhất trên cây cà chua, đặc biệt ở các vùng nhiệt đới và cận nhiệt đới.
+
+Bệnh có thể gây cây còi cọc mạnh, lá nhỏ, lá cong hoặc cuộn lên, vàng lá, giảm ra hoa và giảm mạnh khả năng tạo quả.
+
+Trong trường hợp nhiễm sớm và nặng, tổn thất năng suất có thể rất lớn.
+
+
+TÁC NHÂN GÂY BỆNH
+
+TYLCV là virus DNA sợi đơn dạng vòng.
+
+Virus thuộc:
+
+- Họ Geminiviridae.
+- Chi Begomovirus.
+
+Theo nguồn, bộ gen virus gồm một phân tử DNA sợi đơn dạng vòng có kích thước khoảng:
+
+- 2.787 nucleotide.
+
+Virus chủ yếu gây bệnh trên cà chua.
+
+
+CÂY KÝ CHỦ
+
+Cà chua là cây ký chủ chính của TYLCV.
+
+Nguồn cũng ghi nhận virus có thể được phát hiện trên một số cây khác.
+
+Tuy nhiên, tài liệu này tập trung vào bệnh trên cây cà chua.
+
+
+VECTOR TRUYỀN BỆNH
+
+TYLCV được truyền chủ yếu bởi bọ phấn trắng Bemisia tabaci.
+
+Bemisia tabaci còn được gọi bằng một số tên tiếng Anh như:
+
+- Silverleaf whitefly.
+- Sweet potato whitefly.
+
+Bọ phấn trắng là côn trùng chích hút thuộc họ Aleyrodidae và bộ Hemiptera.
+
+
+VAI TRÒ CỦA BỌ PHẤN TRẮNG
+
+Bọ phấn trắng là con đường lây lan quan trọng nhất của TYLCV giữa các cây cà chua.
+
+Khi bọ phấn trắng chích hút cây nhiễm virus, chúng có thể thu nhận virus.
+
+Sau một thời gian tiềm ẩn trong cơ thể côn trùng, chúng có thể truyền virus sang cây khỏe khi tiếp tục chích hút.
+
+
+KIỂU TRUYỀN VIRUS
+
+Theo nguồn, TYLCV được Bemisia tabaci truyền theo kiểu:
+
+- Persistent.
+- Circulative.
+- Nonpropagative.
+
+Có thể hiểu khái quát là virus được côn trùng thu nhận, di chuyển qua cơ thể vector và sau đó được truyền sang cây khác.
+
+Virus không được mô tả là nhân lên mạnh trong vector theo kiểu propagative.
+
+
+THỜI GIAN THU NHẬN VIRUS
+
+Nguồn ghi nhận bọ phấn trắng có thể thu nhận virus trong khoảng:
+
+- 15 đến 20 phút.
+
+Khoảng thời gian này được gọi là thời gian tiếp cận thu nhận virus.
+
+
+THỜI GIAN TIỀM ẨN TRONG VECTOR
+
+Sau khi thu nhận virus, bọ phấn cần một khoảng thời gian trước khi có khả năng truyền virus hiệu quả.
+
+Nguồn nêu thời gian tiềm ẩn khoảng:
+
+- 8 đến 24 giờ.
+
+
+GIỚI TÍNH CỦA VECTOR VÀ KHẢ NĂNG TRUYỀN
+
+Theo nguồn, bọ phấn cái có thể truyền TYLCV hiệu quả hơn bọ phấn đực.
+
+Ngoài ra, một số nghiên cứu được nguồn trích dẫn cho thấy virus có thể được truyền:
+
+- Từ bọ phấn đực nhiễm sang bọ phấn cái.
+- Từ bọ phấn cái nhiễm sang bọ phấn đực.
+
+Nguồn cũng đề cập bằng chứng virus có thể được truyền sang thế hệ con của vector ít nhất hai thế hệ trong một số nghiên cứu.
+
+
+CẤU TRÚC BỘ GEN
+
+Bộ gen TYLCV là DNA sợi đơn dạng vòng.
+
+Nguồn mô tả có sáu vùng đọc mở chính:
+
+- V1.
+- V2.
+- C1.
+- C2.
+- C3.
+- C4.
+
+
+V1
+
+V1 mã hóa protein vỏ.
+
+Protein vỏ có vai trò:
+
+- Bao bọc DNA virus.
+- Hình thành hạt virus.
+- Bảo vệ vật liệu di truyền của virus.
+- Có vai trò quan trọng đối với quá trình truyền virus qua côn trùng.
+
+
+V2
+
+V2 được mô tả là protein tiền vỏ.
+
+Chức năng của protein này chưa hoàn toàn rõ ràng.
+
+Nguồn cho rằng V2 có thể liên quan đến sự di chuyển của virus trong cây.
+
+
+C1
+
+C1 là protein liên quan đến quá trình sao chép virus.
+
+Đây là thành phần thiết yếu đối với khả năng nhân bản bộ gen virus.
+
+
+C2, C3 VÀ C4
+
+Theo nguồn:
+
+- C2 có liên quan đến ức chế cơ chế im lặng gen sau phiên mã của cây.
+- C3 có liên quan đến tăng tích lũy virus.
+- C4 có liên quan đến việc hình thành triệu chứng bệnh.
+
+Các protein này góp phần giúp virus nhân lên, vượt qua cơ chế phòng vệ của cây và gây triệu chứng.
+
+
+TRIỆU CHỨNG TRÊN CÂY CÀ CHUA
+
+Các triệu chứng quan trọng của TYLCV gồm:
+
+- Cây còi cọc mạnh.
+- Lá nhỏ hơn bình thường.
+- Lá cong hoặc cuộn lên.
+- Vàng lá.
+- Vàng hoa.
+- Giảm số lượng quả.
+
+
+CÒI CỌC
+
+Cây nhiễm TYLCV có thể sinh trưởng chậm rõ rệt.
+
+So với cây khỏe:
+
+- Cây thấp hơn.
+- Đốt thân ngắn.
+- Tán nhỏ hơn.
+- Khả năng phát triển sinh khối giảm.
+
+Nếu cây bị nhiễm khi còn non, triệu chứng còi cọc thường nghiêm trọng hơn.
+
+
+LÁ NHỎ
+
+Một triệu chứng đặc trưng là kích thước lá giảm.
+
+Lá non phát triển:
+
+- Nhỏ.
+- Hẹp.
+- Biến dạng.
+
+Tán cây vì vậy trông thưa và không phát triển bình thường.
+
+
+XOĂN VÀ CUỘN LÁ
+
+Lá có thể:
+
+- Cong lên.
+- Cuộn mép lên trên.
+- Biến dạng.
+
+Đặc điểm này kết hợp với vàng lá tạo nên tên gọi bệnh xoăn vàng lá cà chua.
+
+
+VÀNG LÁ
+
+Cây bị bệnh có thể xuất hiện hiện tượng chlorosis.
+
+Lá mất màu xanh bình thường và chuyển:
+
+- Xanh vàng.
+- Vàng.
+
+Vàng lá thường rõ trên các lá non đang phát triển.
+
+
+TRIỆU CHỨNG TRÊN HOA
+
+Nguồn ghi nhận hoa cũng có thể bị vàng.
+
+Bệnh nặng có thể ảnh hưởng đến:
+
+- Sự phát triển của hoa.
+- Khả năng đậu quả.
+
+Kết quả cuối cùng là số lượng quả trên cây giảm.
+
+
+ẢNH HƯỞNG ĐẾN NĂNG SUẤT
+
+TYLCV có thể gây tổn thất năng suất rất lớn.
+
+Nguồn Wikipedia ghi nhận mức tổn thất có thể đạt:
+
+- Khoảng 90 đến 100% trong những trường hợp rất nghiêm trọng.
+
+Mức độ thiệt hại phụ thuộc vào:
+
+- Thời điểm cây bị nhiễm.
+- Mật độ bọ phấn.
+- Giống cà chua.
+- Điều kiện môi trường.
+- Mức độ kiểm soát vector.
+
+
+TẠI SAO NHIỄM SỚM NGUY HIỂM?
+
+Nếu cây bị nhiễm khi còn non:
+
+- Sinh trưởng bị kìm hãm từ sớm.
+- Lá mới tiếp tục biến dạng.
+- Khả năng ra hoa giảm.
+- Số quả hình thành giảm mạnh.
+
+Do đó, phòng bọ phấn và ngăn virus xâm nhập từ giai đoạn cây con có ý nghĩa đặc biệt quan trọng.
+
+
+PHÂN BỐ VÀ TẦM QUAN TRỌNG
+
+TYLCV chủ yếu gây vấn đề nghiêm trọng ở các vùng:
+
+- Nhiệt đới.
+- Cận nhiệt đới.
+
+Nguồn cho biết virus đã được phát hiện tại nhiều quốc gia ở:
+
+- Châu Phi.
+- Châu Á.
+- Australia.
+- Trung Mỹ.
+- Bắc Mỹ.
+
+Sự phân bố rộng của Bemisia tabaci tạo điều kiện để virus tiếp tục lan sang các khu vực mới.
+
+
+LỊCH SỬ PHÁT HIỆN
+
+Nguồn ghi nhận TYLCV được phát hiện lần đầu tại Israel khoảng năm 1930.
+
+Sau đó, virus được ghi nhận tại nhiều quốc gia trồng cà chua trên thế giới.
+
+Nguồn cũng đề cập một trường hợp xác nhận tại Cộng hòa Dominica năm 1994 bằng:
+
+- Blot hybridization.
+- PCR.
+- Giải trình tự bộ gen.
+
+
+DỊCH TỄ HỌC
+
+Sự lây lan của bệnh phụ thuộc mạnh vào:
+
+- Sự hiện diện của cây nhiễm.
+- Mật số bọ phấn trắng.
+- Khả năng di chuyển của Bemisia tabaci.
+- Cây ký chủ khác trong khu vực.
+
+Do bọ phấn có phạm vi phân bố rộng, nguy cơ virus được đưa vào khu vực mới có thể tăng nếu vector đã hiện diện.
+
+
+CƠ CHẾ LÂY LAN TRONG RUỘNG
+
+Chu trình lây lan có thể được mô tả như sau:
+
+- Bọ phấn chích hút cây nhiễm.
+- Bọ phấn thu nhận TYLCV.
+- Virus trải qua thời gian tiềm ẩn trong vector.
+- Bọ phấn di chuyển sang cây khỏe.
+- Bọ phấn chích hút cây khỏe.
+- Virus được truyền vào cây mới.
+- Cây mới trở thành nguồn virus cho các bọ phấn khác.
+
+Chu trình này có thể lặp lại nhanh nếu mật độ vector cao.
+
+
+TYLCV KHÔNG ĐƯỢC CHỮA KHỎI BẰNG THUỐC TRỪ NẤM
+
+TYLCV là bệnh do virus.
+
+Do đó:
+
+- Thuốc trừ nấm không tiêu diệt virus.
+- Thuốc trừ vi khuẩn không tiêu diệt virus.
+- Mô cây đã nhiễm không thể được phục hồi bằng thuốc bảo vệ thực vật thông thường.
+
+Quản lý bệnh chủ yếu dựa trên phòng ngừa và kiểm soát vector.
+
+
+QUẢN LÝ TYLCV
+
+Các biện pháp được nguồn đề cập gồm:
+
+- Quản lý bọ phấn trắng.
+- Sử dụng giống kháng hoặc chịu bệnh.
+- Luân canh.
+- Chọn vật liệu giống phù hợp.
+- Sản xuất trong điều kiện nhà kính.
+- Lai tạo giống kháng.
+
+
+SỬ DỤNG GIỐNG KHÁNG HOẶC CHỊU BỆNH
+
+Một trong những biện pháp quan trọng nhất là sử dụng:
+
+- Giống kháng.
+- Giống chịu bệnh.
+
+Giống kháng có thể:
+
+- Giảm mức độ triệu chứng.
+- Hạn chế tổn thất năng suất.
+- Giảm phụ thuộc vào thuốc kiểm soát vector.
+
+Tuy nhiên, khả năng kháng có thể không hoàn toàn và cần kết hợp với quản lý bọ phấn.
+
+
+QUẢN LÝ BỌ PHẤN TRẮNG
+
+Kiểm soát Bemisia tabaci là biện pháp quan trọng để giảm tốc độ lây lan của virus.
+
+Mục tiêu không chỉ là giảm số lượng côn trùng mà còn giảm:
+
+- Số lần vector tiếp xúc với cây.
+- Khả năng bọ phấn mang virus từ cây bệnh sang cây khỏe.
+
+
+HẠN CHẾ CỦA THUỐC TRỪ CÔN TRÙNG
+
+Nguồn lưu ý rằng hiệu quả của thuốc trừ côn trùng có thể không tối ưu ở vùng nhiệt đới do bọ phấn phát triển tính kháng thuốc.
+
+Vì vậy, phụ thuộc hoàn toàn vào thuốc trừ côn trùng không phải là chiến lược bền vững.
+
+
+QUẢN LÝ KHÁNG THUỐC Ở BỌ PHẤN
+
+Nguồn đề cập việc luân phiên hoặc phối hợp thuốc nhằm tăng hiệu quả kiểm soát bọ phấn.
+
+Trong thực hành quản lý hiện đại, cần:
+
+- Luân phiên các nhóm cơ chế tác động.
+- Tránh sử dụng lặp lại liên tục một nhóm thuốc.
+- Tuân thủ số lần phun tối đa trên nhãn.
+- Kết hợp biện pháp không hóa học.
+
+Mục tiêu là giảm áp lực chọn lọc dẫn đến kháng thuốc.
+
+
+LUÂN CANH
+
+Luân canh được nguồn đề cập như một biện pháp hỗ trợ.
+
+Mục tiêu là:
+
+- Giảm cây ký chủ liên tục.
+- Giảm cơ hội duy trì virus và vector trong khu vực.
+
+Hiệu quả luân canh phụ thuộc vào việc đồng thời quản lý cây ký chủ khác và cỏ dại.
+
+
+NHÀ KÍNH
+
+Nguồn đề cập trồng cà chua trong nhà kính như một biện pháp quản lý.
+
+Nhà kính có thể giúp giảm tiếp xúc với bọ phấn nếu được quản lý tốt.
+
+Tuy nhiên, nhà kính không tự động ngăn được TYLCV.
+
+Nếu bọ phấn xâm nhập vào bên trong, điều kiện kín có thể khiến quần thể tăng nhanh.
+
+Do đó cần kết hợp:
+
+- Cửa lưới phù hợp.
+- Kiểm tra cây giống.
+- Theo dõi bọ phấn.
+- Loại bỏ cây nhiễm sớm.
+
+
+BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI RUỘNG
+
+Khi nghi ngờ TYLCV trên cà chua, có thể kiểm tra theo trình tự sau:
+
+- Quan sát cây có còi cọc hơn cây xung quanh.
+- Kiểm tra lá non.
+- Tìm hiện tượng lá nhỏ.
+- Quan sát mép lá cong hoặc cuộn lên.
+- Kiểm tra vàng lá.
+- Quan sát số lượng hoa.
+- Đánh giá khả năng đậu quả.
+- Kiểm tra mặt dưới lá để tìm bọ phấn.
+- Theo dõi xem nhiều cây gần nhau có cùng triệu chứng hay không.
+
+Sự kết hợp giữa cây còi, lá non nhỏ, vàng và cuộn lên cùng với sự hiện diện của bọ phấn là dấu hiệu rất đáng nghi ngờ TYLCV.
+
+
+BỔ SUNG: PHÂN BIỆT VỚI THIẾU DINH DƯỠNG
+
+Thiếu dinh dưỡng có thể gây vàng lá nhưng thường không tạo đồng thời đầy đủ các dấu hiệu:
+
+- Lá non nhỏ mạnh.
+- Cuộn lá lên trên.
+- Còi cọc nghiêm trọng.
+- Giảm đậu quả.
+- Có quần thể bọ phấn trong khu vực.
+
+Nếu triệu chứng không rõ, cần xác nhận bằng chẩn đoán virus.
+
+
+BỔ SUNG: PHÂN BIỆT VỚI TỔN THƯƠNG THUỐC DIỆT CỎ
+
+Một số tổn thương thuốc diệt cỏ có thể làm:
+
+- Lá cong.
+- Lá nhỏ.
+- Chồi biến dạng.
+
+Tuy nhiên, TYLCV thường đi kèm:
+
+- Vàng lá rõ.
+- Còi cọc toàn cây.
+- Giảm ra hoa và đậu quả.
+- Sự hiện diện của bọ phấn hoặc lịch sử bệnh trong khu vực.
+
+Thông tin về lịch sử phun thuốc và phân bố triệu chứng trong ruộng giúp hỗ trợ phân biệt.
+
+
+BỔ SUNG: XỬ LÝ CÂY NGHI NHIỄM
+
+Nếu một cây biểu hiện triệu chứng nghi TYLCV:
+
+- Đánh dấu cây.
+- Kiểm tra bọ phấn xung quanh.
+- Hạn chế để cây trở thành nguồn virus lâu dài.
+- Theo dõi cây lân cận.
+- Cân nhắc loại bỏ cây nhiễm rõ trong chương trình quản lý tổng hợp.
+- Kiểm soát bọ phấn trước hoặc đồng thời khi loại bỏ cây để tránh vector chuyển sang cây khỏe.
+
+Việc loại bỏ cây bệnh mà không quản lý bọ phấn có thể khiến côn trùng bay sang cây khỏe gần đó.
+
+
+BỔ SUNG: QUẢN LÝ CÂY GIỐNG
+
+Giai đoạn cây con rất quan trọng vì nhiễm sớm có thể gây thiệt hại rất lớn.
+
+Nên:
+
+- Sử dụng cây giống khỏe.
+- Kiểm tra bọ phấn trước khi đưa cây ra ruộng.
+- Không đưa cây có triệu chứng nghi virus vào khu vực sản xuất.
+- Giữ khu vực ươm tách biệt với nguồn cây nhiễm.
+
+
+BỔ SUNG: QUẢN LÝ CỎ DẠI VÀ CÂY KÝ CHỦ PHỤ
+
+Nguồn cho biết TYLCV có thể được phát hiện trên nhiều cây khác ngoài cà chua.
+
+Do đó, cây ký chủ phụ và cỏ dại có thể góp phần duy trì virus và bọ phấn trong khu vực.
+
+Quản lý cỏ dại nên được xem là một phần của chương trình kiểm soát.
+
+
+CHẨN ĐOÁN TYLCV
+
+Nguồn đề cập một số phương pháp chẩn đoán virus như:
+
+- Quan sát thể vùi bằng kính hiển vi.
+- Phát hiện miễn dịch bằng kháng thể.
+- PCR.
+- Lai phân tử.
+- Giải trình tự.
+
+Trong sản xuất, PCR là một trong những phương pháp có thể được sử dụng để xác nhận sự hiện diện của virus.
+
+Triệu chứng ngoài đồng chỉ cho phép nghi ngờ và không phải lúc nào cũng đủ để xác định chính xác tác nhân.
+
+
+LƯU Ý VỀ THUỐC BẢO VỆ THỰC VẬT
+
+Thuốc trừ côn trùng chỉ nhằm quản lý bọ phấn truyền bệnh.
+
+Thuốc không chữa được cây đã nhiễm virus.
+
+Chỉ sử dụng sản phẩm:
+
+- Được đăng ký hợp pháp cho cây cà chua.
+- Được phép sử dụng để quản lý bọ phấn.
+
+Luôn đọc và tuân thủ nhãn.
+
+Không tự động áp dụng hoạt chất, liều lượng hoặc chương trình thuốc từ tài liệu nước ngoài vào điều kiện Việt Nam.
+
+Cần đặc biệt chú ý quản lý kháng thuốc ở Bemisia tabaci.
+
+
+TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
+
+Virus xoăn vàng lá cà chua có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
+
+- TYLCV là virus DNA sợi đơn dạng vòng.
+- Virus thuộc họ Geminiviridae và chi Begomovirus.
+- Theo nguồn Wikipedia được cung cấp, loài được ghi là Begomovirus coheni.
+- Bộ gen có kích thước khoảng 2.787 nucleotide.
+- Bộ gen chứa sáu vùng đọc mở V1, V2, C1, C2, C3 và C4.
+- Cà chua là cây ký chủ chính.
+- Vector truyền bệnh chính là bọ phấn Bemisia tabaci.
+- Bọ phấn có thể thu nhận virus trong khoảng 15 đến 20 phút.
+- Thời gian tiềm ẩn trong vector khoảng 8 đến 24 giờ.
+- Virus được truyền theo kiểu persistent-circulative nonpropagative.
+- Cây bệnh thường còi cọc mạnh.
+- Lá nhỏ hơn bình thường.
+- Lá cong hoặc cuộn lên.
+- Lá và hoa có thể bị vàng.
+- Số lượng quả giảm.
+- Trường hợp nặng có thể gây tổn thất năng suất rất lớn.
+- Bệnh đặc biệt nghiêm trọng ở vùng nhiệt đới và cận nhiệt đới.
+- Kiểm soát bọ phấn là biện pháp quan trọng.
+- Thuốc trừ côn trùng không chữa được virus.
+- Bọ phấn có thể phát triển tính kháng thuốc.
+- Cần luân phiên cơ chế tác động khi sử dụng thuốc.
+- Giống kháng hoặc chịu bệnh là biện pháp quản lý quan trọng.
+- Luân canh và quản lý cây ký chủ phụ có thể hỗ trợ giảm nguồn bệnh.
+- Nhà kính chỉ có tác dụng khi đồng thời ngăn bọ phấn xâm nhập.
+- Cây giống cần được kiểm tra kỹ trước khi trồng.
+- Cây nghi nhiễm cần được xử lý sớm kết hợp với quản lý vector.
+- PCR và các kỹ thuật chẩn đoán phân tử có thể được sử dụng để xác nhận TYLCV.

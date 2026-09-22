@@ -1,0 +1,137 @@
+TÊN TÀI LIỆU
+Bệnh ghẻ táo (Apple Scab)
+
+LOẠI TÀI LIỆU
+Tài liệu kiến thức dùng cho hệ thống RAG về bệnh cây.
+
+CÂY TRỒNG
+Táo (Apple)
+
+TÊN BỆNH
+Bệnh ghẻ táo
+Tên tiếng Anh: Apple scab
+Tên gọi khác trong tài liệu: bệnh sẹo táo
+
+TÁC NHÂN GÂY BỆNH
+Tác nhân gây bệnh là nấm Venturia inaequalis.
+Đây là một loài nấm túi có cả giai đoạn sinh sản hữu tính và vô tính.
+Nấm có thể tồn tại qua mùa đông trong tàn dư lá bệnh và phát tán bào tử khi điều kiện thuận lợi.
+
+BỘ PHẬN BỊ GÂY HẠI
+Bệnh có thể tấn công các bộ phận non của cây táo, gồm:
+- Lá, đặc biệt là lá non.
+- Quả, từ giai đoạn quả non đến gần thu hoạch.
+- Hoa, cuống hoa và đài hoa.
+- Cành non.
+
+TRIỆU CHỨNG TRÊN LÁ
+Triệu chứng ban đầu trên lá non là các đốm nhỏ màu xanh ô liu, giống những vết dầu mờ.
+Các đốm bệnh lớn dần, chuyển sang màu nâu đen hoặc đen và có bề mặt mịn như nhung.
+Vùng mô bị bệnh có thể dày lên.
+Khi bệnh nặng, các vết bệnh liên kết với nhau làm lá cong queo, biến dạng và rụng sớm.
+Rụng lá sớm làm giảm khả năng quang hợp của cây.
+
+TRIỆU CHỨNG TRÊN QUẢ
+Vết bệnh ban đầu trên quả tương tự vết bệnh trên lá.
+Khi quả phát triển, các vết bệnh tạo thành sẹo màu đen hoặc nâu, có bề mặt sần sùi, khô và cứng.
+Vỏ quả tại vùng bệnh phát triển không đồng đều với phần còn lại, làm quả biến dạng, còi cọc và có thể nứt.
+Các vết nứt có thể tạo điều kiện cho nấm hoặc vi khuẩn khác xâm nhập, dẫn đến thối thứ cấp và giảm khả năng bảo quản.
+
+TRIỆU CHỨNG TRÊN HOA VÀ CÀNH NON
+Trên cuống hoa và đài hoa, bệnh có thể tạo các đốm đen và làm hoa rụng sớm, giảm tỷ lệ đậu quả.
+Trên cành non, bệnh có thể tạo các mụn nhỏ, sần sùi và làm nứt vỏ.
+Cành bị bệnh có thể phát triển kém và suy yếu.
+
+PHÂN BIỆT VỚI MỘT SỐ BỆNH KHÁC
+Bệnh ghẻ táo:
+- Vết bệnh thường có màu xanh ô liu đến đen.
+- Bề mặt vết bệnh giống nhung.
+- Mô cây có thể dày và sần sùi.
+
+Bệnh phấn trắng:
+- Thường có lớp bột màu trắng xám phủ trên bề mặt.
+
+Bệnh đốm lá do vi khuẩn:
+- Vết bệnh có thể có quầng vàng xung quanh.
+
+CHU KỲ BỆNH
+
+Giai đoạn lây nhiễm sơ cấp:
+Sau mùa vụ, nấm tồn tại qua mùa đông trong lá bệnh rụng trên mặt đất.
+Vào mùa xuân, khi thời tiết ấm và ẩm, nấm hình thành quả thể và giải phóng bào tử túi.
+Bào tử được gió và nước mưa phát tán lên lá non và hoa, bắt đầu chu kỳ lây nhiễm mới.
+
+Giai đoạn lây nhiễm thứ cấp:
+Từ các vết bệnh sơ cấp, nấm sinh sản vô tính và tạo bào tử đính.
+Bào tử đính có thể lây lan từ lá này sang lá khác và từ cây này sang cây khác nhờ mưa và gió.
+Trong điều kiện ẩm thuận lợi, bệnh có thể bùng phát mạnh trong suốt mùa sinh trưởng.
+
+ĐIỀU KIỆN THUẬN LỢI CHO BỆNH
+Độ ẩm cao và thời gian bề mặt cây bị ướt kéo dài là các yếu tố quan trọng.
+Theo tài liệu nguồn, bào tử có thể nảy mầm và xâm nhập khi bề mặt lá, hoa hoặc quả có màng nước trong thời gian đủ dài, thường trên 9 giờ.
+Mưa phùn, sương mù dày và mưa kéo dài làm tăng nguy cơ bệnh phát sinh và lây lan.
+Theo tài liệu nguồn, nấm phát triển mạnh trong khoảng nhiệt độ 16-24°C.
+
+TÁC HẠI
+Bệnh có thể làm lá rụng sớm, giảm quang hợp và làm cây thiếu dinh dưỡng để nuôi quả.
+Quả có thể nhỏ, còi cọc, biến dạng, nứt và rụng non.
+Vết bệnh làm giảm chất lượng, giá trị thương phẩm và thời gian bảo quản của quả.
+Bệnh kéo dài có thể làm cây suy yếu, cành phát triển kém và giảm sức chống chịu với các tác nhân gây hại khác.
+Tài liệu nguồn nêu rằng thiệt hại có thể rất lớn nếu bệnh không được quản lý kịp thời; các con số cụ thể cần được kiểm chứng theo giống, vùng trồng và điều kiện sản xuất.
+
+QUẢN LÝ BỆNH THEO HƯỚNG TỔNG HỢP
+
+Biện pháp canh tác:
+- Thu gom và xử lý lá rụng, cành bệnh sau thu hoạch để giảm nguồn nấm tồn tại qua mùa đông.
+- Cắt tỉa cành và tạo tán thông thoáng để tăng lưu thông không khí và giúp lá khô nhanh sau mưa hoặc sương.
+- Cân nhắc sử dụng giống có khả năng kháng bệnh phù hợp với điều kiện địa phương.
+- Bón phân cân đối và chăm sóc cây hợp lý để duy trì sức sinh trưởng.
+
+Biện pháp sinh học:
+Tài liệu nguồn đề cập đến các vi sinh vật đối kháng như Trichoderma spp. và Bacillus subtilis.
+Hiệu quả thực tế phụ thuộc vào chủng vi sinh vật, sản phẩm, điều kiện vườn và hướng dẫn sử dụng.
+
+Biện pháp hóa học:
+Tài liệu nguồn đề cập các hoạt chất như Mancozeb, Propineb và Difenoconazole.
+Việc sử dụng thuốc bảo vệ thực vật phải tuân thủ nhãn sản phẩm, quy định địa phương, đúng cây trồng, đúng bệnh, đúng liều lượng, đúng thời điểm và thời gian cách ly.
+Không sử dụng danh sách hoạt chất này như một khuyến cáo mặc định cho mọi quốc gia hoặc vùng trồng.
+
+GỢI Ý QUẢN LÝ THEO GIAI ĐOẠN
+
+Cuối mùa vụ:
+- Thu gom và xử lý lá rụng, cành bệnh.
+- Giảm nguồn bệnh tồn tại trong vườn.
+
+Giai đoạn cây ngủ nghỉ:
+- Vệ sinh vườn và kiểm tra các vị trí có thể còn tàn dư bệnh.
+- Chỉ sử dụng sản phẩm xử lý được phép theo hướng dẫn và quy định địa phương.
+
+Giai đoạn nứt chồi và ra lộc non:
+- Theo dõi dự báo mưa, độ ẩm và thời gian lá bị ướt.
+- Tăng cường kiểm tra lá non.
+- Áp dụng biện pháp phòng ngừa phù hợp trước hoặc quanh các đợt thời tiết thuận lợi cho bệnh.
+
+Giai đoạn ra hoa và đậu quả:
+- Bảo vệ hoa và quả non.
+- Theo dõi bệnh sau các đợt mưa.
+- Ưu tiên biện pháp an toàn cho hoa, quả non, thiên địch và môi trường.
+
+TỪ KHÓA TRUY XUẤT
+apple scab
+bệnh ghẻ táo
+bệnh sẹo táo
+Venturia inaequalis
+olive green leaf spots
+black scab lesions
+fruit scarring
+leaf wetness
+primary infection
+secondary infection
+ascospores
+conidia
+apple disease management
+
+LƯU Ý NGUỒN
+Nội dung được biên tập lại từ tài liệu người dùng cung cấp.
+Các phần mang tính quảng cáo sản phẩm cụ thể đã được loại bỏ.
+Thông tin về thuốc, hoạt chất, hiệu quả và thời điểm xử lý cần được kiểm chứng bằng tài liệu kỹ thuật chính thống và quy định tại địa phương trước khi đưa ra khuyến cáo thực tế.

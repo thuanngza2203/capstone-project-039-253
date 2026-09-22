@@ -172,7 +172,7 @@ Desktop.ini
 !.vscode/settings.json
 !.vscode/extensions.json
 !.vscode/launch.json
-/detection-server-module
+
 /detection-module
 /RAG-module/agents
 /RAG-module/docs

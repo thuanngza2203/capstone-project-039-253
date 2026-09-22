@@ -1,0 +1,558 @@
+BỆNH PHẤN TRẮNG TRÊN CÂY BÍ
+
+Nguồn tham khảo chính:
+Pacific Northwest Plant Disease Management Handbook
+https://pnwhandbooks.org/plantdisease/host-disease/squash-cucurbita-spp-powdery-mildew
+
+Bệnh phấn trắng là một bệnh phổ biến trên các cây thuộc chi Cucurbita như bí đỏ, bí ngô, bí mùa hè, bí mùa đông và zucchini.
+
+Bệnh có thể xuất hiện trên lá và thân, tạo lớp nấm màu trắng dạng bột trên bề mặt mô cây.
+
+Khi bệnh phát triển mạnh, diện tích lá xanh giảm, lá có thể chuyển nâu và chết, làm quả bị phơi trực tiếp dưới ánh nắng và tăng nguy cơ cháy nắng.
+
+Đối với các loại bí thu hoạch để bảo quản, bệnh nặng cũng có thể ảnh hưởng đến màu vỏ và khả năng bảo quản của quả.
+
+
+TÁC NHÂN GÂY BỆNH
+
+Nhiều loài nấm có thể gây bệnh phấn trắng trên cây bí.
+
+Nguồn Pacific Northwest Plant Disease Management Handbook ghi nhận các tác nhân quan trọng gồm:
+
+- Golovinomyces cucurbitacearum.
+- Podosphaera xanthii.
+- Leveillula taurica.
+
+Golovinomyces cucurbitacearum có nhiệt độ tối ưu thấp hơn.
+
+Podosphaera xanthii thường được xem là tác nhân gây bệnh mạnh hơn trên cây họ bầu bí và có thể phát triển tốt trong những tháng mùa hè ấm hơn.
+
+Các loài nấm này phát triển chủ yếu trên bề mặt mô cây và tạo rất nhiều bào tử vô tính có khả năng phát tán bằng gió.
+
+
+ĐIỀU KIỆN NHIỆT ĐỘ THUẬN LỢI
+
+Nhiễm bệnh có thể xảy ra trong khoảng nhiệt độ khá rộng.
+
+Theo nguồn tài liệu:
+
+- Nấm có thể gây nhiễm trong khoảng 50 đến 90 độ F.
+- Tương đương khoảng 10 đến 32 độ C.
+- Khoảng thuận lợi nhất là 68 đến 81 độ F.
+- Tương đương khoảng 20 đến 27 độ C.
+
+Nhiệt độ trên khoảng 100 độ F, tương đương khoảng 38 độ C, được báo cáo có thể làm bệnh ngừng phát triển.
+
+
+VAI TRÒ CỦA ĐỘ ẨM
+
+Khác với nhiều bệnh nấm lá khác, nấm phấn trắng không cần một lớp nước tự do kéo dài trên bề mặt lá để phát triển.
+
+Độ ẩm tương đối cao tạo điều kiện thuận lợi cho quá trình nhiễm bệnh.
+
+Trong khi đó, điều kiện khô hơn lại có thể thúc đẩy:
+
+- Sự phát triển của các quần thể nấm trên bề mặt lá.
+- Quá trình hình thành bào tử.
+- Sự phát tán bào tử.
+
+Vì vậy, bệnh phấn trắng có thể phát triển mạnh ngay cả khi thời tiết không có mưa kéo dài.
+
+
+SƯƠNG VÀ THỜI TIẾT ẤM
+
+Nhiệt độ ấm kết hợp với sự hình thành sương trong mùa hè rất thuận lợi cho bệnh.
+
+Những đêm có độ ẩm cao hoặc có sương, sau đó là ban ngày khô và ấm, có thể tạo điều kiện tốt cho cả nhiễm bệnh và phát tán bào tử.
+
+
+ẢNH HƯỞNG CỦA MẬT ĐỘ TRỒNG VÀ ÁNH SÁNG
+
+Bệnh thường nghiêm trọng hơn khi cây được trồng quá dày.
+
+Mật độ cao làm:
+
+- Giảm lưu thông không khí.
+- Tăng độ ẩm trong tán.
+- Giảm ánh sáng đến các lá phía trong.
+- Tạo vi khí hậu thuận lợi cho nấm.
+
+Điều kiện ánh sáng thấp cũng thúc đẩy bệnh phát triển.
+
+Do đó, những lá nằm sâu bên trong tán hoặc ở khu vực bị che bóng thường có nguy cơ bị bệnh cao hơn.
+
+
+CÁCH NẤM TỒN TẠI VÀ LÂY LAN
+
+Ở vùng Tây Bắc Thái Bình Dương, giai đoạn sinh sản hữu tính tạo chasmothecia hiếm khi được quan sát.
+
+Tuy nhiên, các loài nấm phấn trắng có khả năng tạo rất nhiều bào tử vô tính gọi là conidia.
+
+Bào tử có thể được tạo ra trên cây nhiễm bệnh trong nhà kính hoặc ngoài đồng ruộng.
+
+Conidia rất nhẹ và có thể được gió mang đi trên khoảng cách xa.
+
+Do đó, ngay cả ruộng không có nguồn bệnh rõ ràng tại chỗ vẫn có thể nhận bào tử từ khu vực khác.
+
+
+CHASMOTHECIA
+
+Trong một số trường hợp, nấm tạo ra các cấu trúc nhỏ màu đen gọi là chasmothecia.
+
+Chúng có kích thước gần bằng đầu kim.
+
+Các cấu trúc này có thể hình thành trên lớp sợi nấm trắng khi bệnh đã phát triển lâu.
+
+Chasmothecia là cấu trúc sinh sản hữu tính và có thể giúp nấm tồn tại qua điều kiện bất lợi.
+
+Trong vùng mà chasmothecia được hình thành, chúng có thể góp phần tạo nguồn bệnh cho vụ tiếp theo.
+
+
+THỜI GIAN XUẤT HIỆN TRIỆU CHỨNG
+
+Sau khi nhiễm bệnh, các quần thể nấm có thể nhìn thấy bằng mắt thường trong khoảng:
+
+- 3 đến 7 ngày.
+
+Tốc độ xuất hiện phụ thuộc vào:
+
+- Nhiệt độ.
+- Độ ẩm.
+- Mức độ mẫn cảm của giống.
+- Tuổi lá.
+- Ánh sáng.
+- Mật độ trồng.
+
+
+CÁCH NHẬN BIẾT BỆNH PHẤN TRẮNG
+
+Triệu chứng ban đầu
+
+Triệu chứng đầu tiên thường là những chấm hoặc đốm trắng rất nhỏ trên bề mặt lá hoặc thân.
+
+Các đốm này nằm chủ yếu trên bề mặt mô cây.
+
+Ban đầu, chúng có thể xuất hiện rải rác và dễ bị bỏ sót.
+
+
+Triệu chứng khi bệnh phát triển
+
+Các đốm trắng tăng kích thước và chuyển thành các mảng trắng dạng bột.
+
+Mảng bệnh có thể tiếp tục lan rộng và hợp lại với nhau.
+
+Ở giai đoạn nặng, lớp nấm trắng có thể phủ phần lớn:
+
+- Mặt lá.
+- Cuống lá.
+- Thân.
+
+Bề mặt mô bị bệnh trông như được phủ một lớp bột trắng hoặc bột phấn.
+
+
+Triệu chứng trên lá bị bệnh nặng
+
+Khi nhiễm bệnh nghiêm trọng:
+
+- Lá mất diện tích xanh.
+- Khả năng quang hợp giảm.
+- Lá có thể chuyển vàng.
+- Lá dần chuyển nâu.
+- Lá có thể khô và chết.
+
+Khi nhiều lá chết, tán cây trở nên thưa hơn.
+
+
+ẢNH HƯỞNG ĐẾN QUẢ
+
+Nấm phấn trắng chủ yếu gây hại trên lá và thân hơn là trực tiếp làm thối quả.
+
+Tuy nhiên, khi lá chết nhiều, quả mất lớp che phủ tự nhiên của tán.
+
+Điều này có thể dẫn đến:
+
+- Cháy nắng trên quả.
+- Thay đổi màu vỏ.
+- Giảm chất lượng thương phẩm.
+- Ảnh hưởng đến khả năng bảo quản của một số loại bí mùa đông.
+
+Do đó, việc giữ tán lá khỏe mạnh có ý nghĩa quan trọng đối với chất lượng quả.
+
+
+MỨC ĐỘ PHÂN BỐ TRONG RUỘNG
+
+Bệnh thường bắt đầu từ các ổ nhỏ rải rác trong ruộng.
+
+Nếu điều kiện thuận lợi, bào tử tiếp tục được gió phát tán và bệnh lan rộng.
+
+Trong những vụ có áp lực bệnh cao, phần lớn ruộng có thể bị nhiễm.
+
+
+CÁC YẾU TỐ LÀM TĂNG NGUY CƠ BỆNH
+
+Nguy cơ bệnh tăng khi:
+
+- Giống mẫn cảm.
+- Mật độ cây quá cao.
+- Tán cây rậm.
+- Ánh sáng thấp.
+- Độ ẩm tương đối cao.
+- Có sương thường xuyên.
+- Nhiệt độ nằm trong khoảng thuận lợi.
+- Có nguồn bào tử từ cây bệnh gần đó.
+- Bệnh xuất hiện sớm trong vụ.
+
+
+CÁCH QUẢN LÝ BỆNH PHẤN TRẮNG
+
+Quản lý hiệu quả nên kết hợp:
+
+- Giống có khả năng chịu bệnh.
+- Mật độ trồng hợp lý.
+- Tăng ánh sáng và thông thoáng.
+- Luân canh.
+- Theo dõi ruộng thường xuyên.
+- Biện pháp sinh học.
+- Thuốc diệt nấm khi cần thiết.
+
+Không nên phụ thuộc hoàn toàn vào một nhóm thuốc.
+
+
+SỬ DỤNG GIỐNG CÓ KHẢ NĂNG CHỊU BỆNH
+
+Nếu có giống chịu bệnh phấn trắng phù hợp, nên ưu tiên sử dụng.
+
+Giống chịu bệnh không hoàn toàn miễn nhiễm.
+
+Tuy nhiên, bệnh thường:
+
+- Xuất hiện chậm hơn.
+- Phát triển chậm hơn.
+- Mức độ bao phủ của nấm thấp hơn.
+- Gây hại ít hơn so với giống mẫn cảm.
+
+Nguồn tài liệu liệt kê một số giống chịu bệnh trong điều kiện Hoa Kỳ.
+
+
+Một số giống bí đỏ và bí ngô chịu bệnh
+
+- Aladdin.
+- Gladiator.
+- Majic Lantern.
+- Merlin.
+- Pure Gold.
+
+
+Một số giống bí acorn chịu bệnh
+
+- Royal Ace.
+- Table Star.
+- Taybelle.
+
+
+Một số giống bí vàng mùa hè chịu bệnh
+
+- Patriot II.
+- Sunglo.
+- Sunray.
+
+
+Một số giống zucchini chịu bệnh
+
+- Payroll.
+- Sebring.
+
+Danh sách giống này phản ánh nguồn giống và điều kiện sản xuất tại Hoa Kỳ.
+
+Khi áp dụng tại Việt Nam, cần lựa chọn giống có thông tin chống chịu phù hợp với thị trường giống và điều kiện địa phương.
+
+
+LUÂN CANH CÂY TRỒNG
+
+Nguồn tài liệu khuyến nghị luân canh khỏi cây họ bầu bí trong khoảng hai năm.
+
+Biện pháp này đặc biệt hữu ích trong trường hợp nấm đã hình thành chasmothecia trên vụ cây trước.
+
+Luân canh giúp giảm khả năng nguồn bệnh tồn tại tại chỗ từ tàn dư cây trồng.
+
+Tuy nhiên, vì bào tử phấn trắng có thể được gió mang từ xa, luân canh không thể loại bỏ hoàn toàn nguy cơ bệnh.
+
+
+QUẢN LÝ MẬT ĐỘ TRỒNG
+
+Không nên trồng cây quá dày.
+
+Khoảng cách hợp lý giúp:
+
+- Tăng lưu thông không khí.
+- Giảm độ ẩm trong tán.
+- Tăng ánh sáng.
+- Dễ kiểm tra triệu chứng.
+- Cải thiện khả năng bao phủ của thuốc khi cần phun.
+
+Mật độ phù hợp cần được điều chỉnh theo giống, kiểu sinh trưởng và hệ thống canh tác.
+
+
+HẠN CHẾ BÓNG RÂM
+
+Không nên trồng bí ở những vị trí bị che bóng mạnh bởi:
+
+- Cây cao.
+- Công trình.
+- Hàng cây chắn.
+- Các tán cây khác.
+
+Ánh sáng tốt giúp hạn chế vi khí hậu thuận lợi cho bệnh.
+
+
+THEO DÕI RUỘNG
+
+Nên bắt đầu kiểm tra ruộng trước khi bệnh trở nên phổ biến.
+
+Khi kiểm tra:
+
+- Quan sát cả mặt trên và mặt dưới của lá.
+- Kiểm tra các lá già trước.
+- Kiểm tra khu vực tán rậm.
+- Tìm các đốm trắng rất nhỏ.
+- Ghi nhận tỷ lệ cây bị bệnh.
+- Theo dõi tốc độ lan bệnh sau vài ngày.
+
+Phát hiện sớm có ý nghĩa đặc biệt quan trọng vì nhiều thuốc phấn trắng có hiệu quả tốt nhất khi được sử dụng trước hoặc ngay khi bệnh mới xuất hiện.
+
+
+YÊU CẦU BAO PHỦ KHI PHUN THUỐC
+
+Nguồn tài liệu nhấn mạnh rằng độ bao phủ lá tốt là yếu tố rất quan trọng.
+
+Khi sử dụng thuốc:
+
+- Cần bảo vệ cả mặt dưới lá.
+- Cần đưa thuốc đến các lá nằm sâu trong tầng tán thấp.
+- Không chỉ phun lên mặt trên tán.
+
+Tán quá rậm sẽ làm giảm hiệu quả bao phủ.
+
+
+CÁC NHÓM THUỐC ĐƯỢC NGUỒN ĐỀ CẬP
+
+Nguồn Pacific Northwest Plant Disease Management Handbook liệt kê nhiều nhóm thuốc và vật liệu có thể được sử dụng trong hệ thống sản xuất tại Hoa Kỳ.
+
+Các nhóm chính gồm:
+
+- Bicarbonate.
+- Chlorothalonil, nhóm FRAC M5.
+- Các sản phẩm chứa đồng, nhóm FRAC M1.
+- Thuốc ức chế khử methyl, nhóm FRAC 3.
+- Thuốc nhóm FRAC 7.
+- Dầu khoáng hoặc dầu thực vật.
+- Nhóm FRAC 19.
+- Nhóm FRAC 13.
+- Chất kích hoạt cơ chế phòng vệ của cây, nhóm P5.
+- Strobilurin, nhóm FRAC 11.
+- Nhóm U6.
+- Các sản phẩm phối hợp nhiều nhóm FRAC.
+
+Danh sách này phản ánh đăng ký thuốc tại vùng Pacific Northwest và có thể không phù hợp với đăng ký tại Việt Nam.
+
+
+BICARBONATE
+
+Các sản phẩm bicarbonate được nguồn ghi nhận có thể sử dụng để quản lý bệnh phấn trắng.
+
+Điều kiện quan trọng là phải bao phủ kỹ bề mặt lá.
+
+Bicarbonate thường phát huy hiệu quả tốt nhất khi bệnh mới bắt đầu hoặc trong chương trình phòng ngừa.
+
+
+SẢN PHẨM CHỨA ĐỒNG
+
+Các sản phẩm chứa đồng được nguồn xếp vào nhóm FRAC M1.
+
+Nguồn không khuyến nghị sử dụng đồng như vật liệu duy nhất để quản lý bệnh phấn trắng.
+
+Do đó, đồng nên được xem là một phần của chương trình kết hợp nếu sản phẩm được đăng ký phù hợp.
+
+
+NHÓM FRAC 3
+
+Các thuốc ức chế khử methyl thuộc nhóm FRAC 3 được đăng ký trong nguồn.
+
+Nguồn nhấn mạnh cần:
+
+- Luân phiên với nhóm thuốc khác.
+- Hoặc phối hợp với thuốc không thuộc nhóm 3.
+
+Mục tiêu là giảm nguy cơ nấm hình thành tính kháng thuốc.
+
+
+NHÓM FRAC 7
+
+Một số thuốc nhóm FRAC 7 được đề cập.
+
+Nguồn khuyến cáo không nên sử dụng quá nhiều lần liên tiếp trước khi chuyển sang thuốc có cơ chế tác động khác.
+
+
+NHÓM FRAC 11
+
+Các thuốc strobilurin thuộc nhóm FRAC 11 có thể kiểm soát bệnh phấn trắng.
+
+Tuy nhiên, nhóm này có nguy cơ kháng thuốc cao.
+
+Nguồn đặc biệt nhấn mạnh:
+
+- Không nên sử dụng quá một lần liên tiếp thuốc nhóm 11.
+- Sau đó cần luân phiên với một nhóm cơ chế tác động khác.
+
+
+DẦU
+
+Một số loại dầu được đăng ký để hỗ trợ kiểm soát bệnh phấn trắng.
+
+Tuy nhiên, nguồn cảnh báo:
+
+- Không sử dụng dầu gần thời điểm sử dụng lưu huỳnh.
+- Không phun trong nhiệt độ quá thấp hoặc quá cao theo giới hạn trên nhãn.
+- Không phun khi cây đang bị stress nhiệt hoặc stress nước.
+- Không phun khi lá đang ướt nếu điều đó làm giảm độ bao phủ.
+
+Dầu thường không mang lại hiệu quả tốt nếu sử dụng đơn độc trong điều kiện áp lực bệnh cao.
+
+
+PHỐI HỢP NHIỀU CƠ CHẾ TÁC ĐỘNG
+
+Nguồn liệt kê nhiều sản phẩm phối hợp hai nhóm FRAC.
+
+Mục tiêu chính của các phối hợp này là:
+
+- Mở rộng phổ tác động.
+- Tăng hiệu quả kiểm soát.
+- Hỗ trợ quản lý tính kháng thuốc.
+
+Tuy nhiên, ngay cả khi dùng sản phẩm phối hợp, vẫn cần tuân thủ giới hạn số lần sử dụng liên tiếp của từng nhóm FRAC.
+
+
+QUẢN LÝ KHÁNG THUỐC
+
+Quản lý kháng thuốc là một phần rất quan trọng trong kiểm soát bệnh phấn trắng.
+
+Nấm phấn trắng có khả năng phát triển tính kháng nếu một cơ chế tác động được sử dụng lặp lại quá nhiều.
+
+Nguyên tắc chung:
+
+- Không sử dụng liên tục một nhóm FRAC.
+- Luân phiên các nhóm cơ chế tác động.
+- Hạn chế số lần phun liên tiếp.
+- Tuân thủ nhãn thuốc.
+- Không giảm liều dưới mức khuyến cáo.
+- Kết hợp thuốc với giống chịu bệnh và biện pháp canh tác.
+
+Nguồn đặc biệt khuyến nghị với nhóm FRAC 11 chỉ nên sử dụng một lần trước khi chuyển sang nhóm khác.
+
+Đối với nhiều nhóm khác, không nên sử dụng quá hai lần liên tiếp trước khi luân phiên.
+
+
+BIỆN PHÁP SINH HỌC
+
+Nguồn tài liệu liệt kê một số sản phẩm sinh học và chất kích hoạt sức đề kháng của cây.
+
+Các nhóm này gồm:
+
+- Vi sinh vật có lợi.
+- Các chế phẩm Bacillus.
+- Chất kích hoạt phản ứng phòng vệ của cây.
+- Một số sản phẩm sinh học khác dùng phòng bệnh.
+
+Biện pháp sinh học thường phù hợp nhất khi:
+
+- Dùng sớm.
+- Dùng phòng ngừa.
+- Áp lực bệnh chưa quá cao.
+- Kết hợp với giống chịu bệnh và điều kiện canh tác tốt.
+
+Không nên kỳ vọng sản phẩm sinh học có thể phục hồi lá đã bị bệnh nặng.
+
+
+BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI RUỘNG
+
+Khi nghi ngờ bệnh phấn trắng trên cây bí, có thể kiểm tra theo trình tự sau:
+
+- Quan sát các lá già.
+- Tìm các chấm trắng nhỏ trên bề mặt.
+- Kiểm tra cả hai mặt lá.
+- Dùng tay quan sát xem lớp trắng có dạng bột hay không.
+- Kiểm tra cuống lá và thân.
+- Quan sát khu vực tán rậm, thiếu sáng.
+- Kiểm tra xem các đốm trắng có đang lan thành mảng lớn.
+- Ghi nhận tỷ lệ lá đã chuyển vàng hoặc nâu.
+- Đánh giá mức độ lá chết và quả bị phơi nắng.
+- Theo dõi lại sau 3 đến 7 ngày để đánh giá tốc độ phát triển.
+
+Nếu triệu chứng không điển hình, cần phân biệt với cặn thuốc, bụi hoặc các lớp sáp tự nhiên trên lá.
+
+
+PHÂN BIỆT VỚI CẶN THUỐC HOẶC BỤI TRÊN LÁ
+
+Lớp trắng trên lá không phải lúc nào cũng là bệnh phấn trắng.
+
+Có thể kiểm tra:
+
+- Phấn trắng thường hình thành thành các quần thể nấm có rìa phát triển.
+- Các đốm tăng kích thước theo thời gian.
+- Nhiều đốm có thể nhập lại.
+- Bệnh thường xuất hiện trước ở một số lá rồi lan dần.
+
+Cặn thuốc hoặc bụi thường có phân bố liên quan đến hướng phun hoặc môi trường và không có dạng phát triển sinh học rõ.
+
+
+LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
+
+Nguồn Pacific Northwest Plant Disease Management Handbook liệt kê nhiều sản phẩm, liều lượng, thời gian cách ly và thời gian tái xâm nhập áp dụng cho hệ thống sản xuất tại Hoa Kỳ.
+
+Không nên tự động áp dụng các tên thương mại, liều lượng hoặc lịch phun này tại Việt Nam.
+
+Chỉ sử dụng sản phẩm:
+
+- Được đăng ký hợp pháp cho cây bí.
+- Được phép sử dụng để phòng trừ bệnh phấn trắng.
+- Có nhãn phù hợp với mục đích sản xuất.
+
+Luôn tuân thủ:
+
+- Liều lượng trên nhãn.
+- Khoảng cách giữa các lần phun.
+- Thời gian cách ly trước thu hoạch.
+- Thời gian tái xâm nhập ruộng.
+- Yêu cầu bảo hộ lao động.
+- Quy định về luân phiên nhóm FRAC.
+
+Không tự ý phối trộn sản phẩm nếu nhãn không cho phép.
+
+
+TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
+
+Bệnh phấn trắng trên cây bí có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
+
+- Bệnh do nhiều loài nấm phấn trắng gây ra.
+- Các tác nhân quan trọng gồm Golovinomyces cucurbitacearum, Podosphaera xanthii và Leveillula taurica.
+- Bệnh có thể phát triển trong khoảng khoảng 10 đến 32 độ C.
+- Khoảng 20 đến 27 độ C đặc biệt thuận lợi.
+- Nhiệt độ rất cao khoảng trên 38 độ C có thể làm bệnh ngừng phát triển.
+- Độ ẩm cao thuận lợi cho quá trình nhiễm.
+- Điều kiện khô hơn có thể thúc đẩy tạo và phát tán bào tử.
+- Bào tử được gió phát tán trên khoảng cách xa.
+- Triệu chứng có thể nhìn thấy sau khoảng 3 đến 7 ngày.
+- Triệu chứng đầu tiên là các đốm trắng nhỏ trên lá và thân.
+- Đốm phát triển thành lớp trắng dạng bột.
+- Bệnh nặng có thể làm lá vàng, nâu và chết.
+- Lá chết làm quả dễ bị cháy nắng.
+- Mật độ trồng dày và ánh sáng thấp làm tăng bệnh.
+- Ưu tiên giống có khả năng chịu bệnh.
+- Luân canh khoảng hai năm có thể giúp giảm nguồn bệnh tại chỗ.
+- Tránh trồng quá dày và tránh khu vực bị che bóng mạnh.
+- Khi phun thuốc, cần bao phủ cả mặt dưới lá và tầng tán thấp.
+- Nhiều nhóm FRAC có thể được sử dụng tùy đăng ký địa phương.
+- Không nên sử dụng lặp lại liên tục cùng một nhóm FRAC.
+- Nhóm FRAC 11 cần đặc biệt chú ý nguy cơ kháng thuốc.
+- Biện pháp sinh học phù hợp nhất khi dùng sớm và phòng ngừa.
+- Không tự động áp dụng sản phẩm, liều hoặc lịch phun từ nguồn Hoa Kỳ vào điều kiện Việt Nam.

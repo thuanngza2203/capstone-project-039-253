@@ -1,0 +1,510 @@
+BỆNH MỐC SƯƠNG MUỘN TRÊN CÂY CÀ CHUA
+
+Nguồn tham khảo chính:
+University of Wisconsin – Vegetable Pathology
+https://vegpath.plantpath.wisc.edu/diseases/tomato-late-blight/
+
+Bệnh mốc sương muộn trên cà chua, hay Tomato Late Blight, là một bệnh rất nguy hiểm có khả năng phát triển và lan truyền nhanh trong điều kiện thời tiết mát, ẩm và có độ ẩm không khí cao.
+
+Bệnh do Phytophthora infestans gây ra.
+
+Phytophthora infestans không phải là nấm thật mà thuộc nhóm oomycete, thường được gọi là nấm giả hoặc nấm nước.
+
+Bệnh có thể xuất hiện trên tất cả các bộ phận phía trên mặt đất của cây cà chua, bao gồm:
+
+- Lá.
+- Cuống lá.
+- Thân.
+- Hoa.
+- Quả.
+
+Khi điều kiện thuận lợi kéo dài, nhiều chu kỳ bệnh có thể xảy ra liên tiếp trong thời gian ngắn, khiến dịch bệnh phát triển rất nhanh trên diện rộng.
+
+
+TÁC NHÂN GÂY BỆNH
+
+Tác nhân gây bệnh là Phytophthora infestans.
+
+Đây là một oomycete có khả năng sinh sản vô tính thông qua:
+
+- Sporangia.
+- Zoospore.
+
+Sporangia có thể được phát tán trong không khí.
+
+Zoospore là các bào tử có khả năng di chuyển trong nước.
+
+Hai dạng này giúp tác nhân gây bệnh phát tán nhanh khi môi trường có độ ẩm cao và bề mặt cây bị ướt.
+
+
+CÁCH NHẬN BIẾT BỆNH MỐC SƯƠNG MUỘN
+
+Triệu chứng trên lá
+
+Triệu chứng có thể xuất hiện ở bất kỳ lá nào trên cây.
+
+Các lá bị nhiễm thường xuất hiện những vùng mô chết có màu từ xanh đến nâu.
+
+Xung quanh vùng bệnh có thể có:
+
+- Viền xanh nhạt.
+- Viền xám.
+
+Trong điều kiện thời tiết rất ẩm và ướt, vết bệnh có thể:
+
+- Trông như bị thấm nước.
+- Có màu nâu sẫm.
+- Có bề mặt giống như bị dầu hoặc mỡ.
+
+Đây là một đặc điểm thường được dùng để mô tả triệu chứng mốc sương muộn.
+
+
+LỚP NẤM TRẮNG DƯỚI LÁ
+
+Trong điều kiện ẩm cao, ở mặt dưới của lá có thể xuất hiện lớp phát triển màu trắng, mịn hoặc giống lông tơ.
+
+Lớp trắng này là cấu trúc sinh sản của tác nhân gây bệnh.
+
+Dấu hiệu này thường xuất hiện rõ hơn:
+
+- Vào sáng sớm.
+- Sau đêm có sương.
+- Sau mưa.
+- Khi độ ẩm không khí rất cao.
+
+Sự kết hợp giữa vết bệnh dạng thấm nước ở mặt trên và lớp trắng ở mặt dưới lá là dấu hiệu rất quan trọng khi nhận biết bệnh.
+
+
+TRIỆU CHỨNG TRÊN THÂN VÀ CUỐNG LÁ
+
+Trên thân và cuống lá, bệnh tạo các vết màu nâu.
+
+Các vết này thường:
+
+- Không có hình dạng rõ ràng.
+- Có thể kéo dài.
+- Có màu nâu từ nhạt đến sẫm.
+
+Trong điều kiện ẩm cao, lớp trắng của tác nhân gây bệnh đôi khi cũng có thể xuất hiện trên phần thân thấp hoặc vùng tổn thương.
+
+
+TRIỆU CHỨNG TRÊN HOA
+
+Hoa bị nhiễm có thể đổi màu.
+
+Sau đó:
+
+- Hoa bị tổn thương.
+- Hoa có thể rụng.
+
+Nếu bệnh xuất hiện trong giai đoạn cây đang ra hoa, khả năng đậu quả có thể bị ảnh hưởng.
+
+
+TRIỆU CHỨNG TRÊN QUẢ
+
+Quả cà chua bị bệnh thường có dạng loang lổ.
+
+Trên bề mặt quả có thể xuất hiện:
+
+- Các vùng màu vàng nâu.
+- Các vùng nâu sẫm.
+- Vết bệnh chắc.
+- Vết bệnh hơi lõm.
+
+Khác với nhiều bệnh thối mềm, mô bệnh của mốc sương muộn thường còn khá chắc trong giai đoạn đầu.
+
+Trong điều kiện ẩm cao, lớp phát triển màu trắng của tác nhân gây bệnh cũng có thể xuất hiện trên bề mặt vết bệnh của quả.
+
+
+PHÂN BIỆT KHÁI QUÁT VỚI BỆNH CHÁY SỚM
+
+Bệnh mốc sương muộn có thể bị nhầm với bệnh cháy sớm trên cà chua.
+
+Bệnh mốc sương muộn thường:
+
+- Có vết bệnh dạng thấm nước.
+- Màu xanh nâu đến nâu sẫm.
+- Có thể trông giống bị dầu mỡ.
+- Có lớp trắng ở mặt dưới lá khi ẩm.
+- Không có các vòng đồng tâm đặc trưng.
+
+Bệnh cháy sớm thường:
+
+- Bắt đầu nhiều ở lá già phía dưới.
+- Có các đốm nâu với vòng đồng tâm giống bia bắn.
+
+Việc phân biệt chính xác hai bệnh rất quan trọng vì tốc độ phát triển và chiến lược quản lý có thể khác nhau.
+
+
+NGUỒN BỆNH VÀ SỰ TỒN TẠI
+
+Theo nguồn University of Wisconsin, tại Hoa Kỳ, Phytophthora infestans chủ yếu tồn tại qua mùa bất lợi dưới dạng sợi nấm trong vật liệu thực vật nhiễm bệnh.
+
+Ở một số quốc gia thuộc châu Âu và Nam Mỹ, tác nhân này còn có thể tạo oospore, là dạng bào tử có khả năng tồn tại trong đất trong thời gian dài.
+
+Nguồn cho biết giai đoạn tạo oospore này chưa được ghi nhận là một phần phổ biến của chu kỳ bệnh tại Hoa Kỳ.
+
+
+CÁC DẠNG BÀO TỬ PHÁT TÁN
+
+Phytophthora infestans phát tán chủ yếu thông qua hai dạng vô tính:
+
+Sporangia
+
+- Có thể phát tán trong không khí.
+- Có thể được gió mang đến mô cây khỏe.
+- Trong điều kiện ấm phù hợp, sporangia có thể nảy mầm trực tiếp và gây nhiễm.
+
+Zoospore
+
+- Được hình thành và giải phóng trong điều kiện mát, ẩm.
+- Có khả năng di chuyển trong nước.
+- Có thể tiếp cận và xâm nhập mô cây khi bề mặt lá hoặc thân có nước.
+
+
+ĐIỀU KIỆN THUẬN LỢI CHO TẠO BÀO TỬ
+
+Sự hình thành bào tử được thúc đẩy mạnh trong điều kiện:
+
+- Độ ẩm tương đối khoảng 90 đến 100%.
+- Nhiệt độ trung bình.
+
+Theo nguồn:
+
+- Khoảng 60 đến 80 độ F thuận lợi cho quá trình tạo bào tử.
+- Tương đương khoảng 16 đến 27 độ C.
+
+
+NHIỆT ĐỘ NẢY MẦM CỦA SPORANGIA
+
+Sporangia có thể nảy mầm trực tiếp trong khoảng:
+
+- 64 đến 75 độ F.
+- Tương đương khoảng 18 đến 24 độ C.
+
+Trong khoảng nhiệt độ này, sporangia có thể trực tiếp hình thành ống mầm và gây nhiễm mô cây.
+
+
+NHIỆT ĐỘ GIẢI PHÓNG ZOOSPORE
+
+Ở nhiệt độ mát hơn, sporangia có thể giải phóng zoospore.
+
+Nguồn University of Wisconsin nêu khoảng:
+
+- 46 đến 64 độ F.
+- Tương đương khoảng 8 đến 18 độ C.
+
+Điều này giúp giải thích tại sao bệnh mốc sương muộn có thể phát triển đặc biệt mạnh trong điều kiện thời tiết mát và ẩm.
+
+
+NHIỆT ĐỘ TỐI ƯU CHO SỢI NẤM
+
+Sợi của tác nhân gây bệnh phát triển tốt nhất ở khoảng:
+
+- 73 độ F.
+- Tương đương khoảng 23 độ C.
+
+Vì vậy, điều kiện nhiệt độ vừa phải kết hợp với độ ẩm cao rất thuận lợi cho toàn bộ quá trình bệnh.
+
+
+CHU KỲ BỆNH
+
+Phytophthora infestans sinh sản vô tính bằng sporangia và zoospore.
+
+Trong thời tiết ấm, sporangia rơi lên mô cây mẫn cảm có thể nảy mầm trực tiếp và gây nhiễm.
+
+Trong thời tiết mát và ướt, sporangia giải phóng các zoospore có khả năng di chuyển trong nước.
+
+Zoospore tiếp xúc với mô cây và gây nhiễm.
+
+
+THỜI GIAN TỪ NHIỄM ĐẾN TẠO BÀO TỬ MỚI
+
+Trong điều kiện đủ ẩm và nhiệt độ vừa phải, chỉ khoảng:
+
+- 4 đến 5 ngày
+
+sau khi nhiễm ban đầu, tác nhân gây bệnh có thể bắt đầu một đợt tạo bào tử mới tại vị trí bệnh.
+
+Các sporangia mới sau đó được:
+
+- Gió mang đi.
+- Nước bắn phát tán.
+
+Chúng tiếp tục tạo những đợt nhiễm mới.
+
+
+TẠI SAO BỆNH CÓ THỂ BÙNG PHÁT RẤT NHANH?
+
+Mỗi vết bệnh có thể trở thành nguồn tạo ra nhiều sporangia mới.
+
+Khi thời tiết liên tục mát và ẩm:
+
+- Chu kỳ bệnh chỉ kéo dài vài ngày.
+- Nhiều thế hệ bào tử được tạo ra liên tục.
+- Bào tử di chuyển nhanh bằng gió và nước.
+- Số lượng cây nhiễm tăng theo cấp số nhân.
+
+Sự lặp lại nhanh của chu kỳ vô tính là nguyên nhân tạo ra các đợt dịch mốc sương muộn tiến triển rất nhanh trên diện rộng.
+
+
+CÁC YẾU TỐ LÀM TĂNG NGUY CƠ BỆNH
+
+Nguy cơ bệnh tăng khi:
+
+- Độ ẩm tương đối rất cao.
+- Mưa kéo dài.
+- Sương nhiều.
+- Lá giữ ướt lâu.
+- Nhiệt độ mát đến trung bình.
+- Trồng cây quá dày.
+- Tán cây thông khí kém.
+- Có cây nhiễm bệnh hoặc nguồn bào tử trong khu vực.
+- Có cây cà chua mọc tự nhiên từ vụ trước.
+
+
+CÁCH QUẢN LÝ BỆNH MỐC SƯƠNG MUỘN
+
+Quản lý bệnh cần tập trung mạnh vào phòng ngừa.
+
+Các biện pháp quan trọng gồm:
+
+- Trồng giống có khả năng kháng.
+- Loại bỏ cây cà chua mọc tự nhiên.
+- Tăng khoảng cách giữa các cây.
+- Tăng thông khí trong tán.
+- Theo dõi thời tiết.
+- Sử dụng mô hình dự báo bệnh.
+- Sử dụng thuốc phòng bệnh khi cần thiết.
+
+
+SỬ DỤNG GIỐNG KHÁNG
+
+Trồng giống cà chua có khả năng kháng bệnh giúp giảm nguy cơ dịch bệnh.
+
+Giống kháng có thể:
+
+- Làm quá trình nhiễm chậm hơn.
+- Giảm số lượng vết bệnh.
+- Giảm tốc độ phát triển của bệnh.
+
+Tuy nhiên, khả năng kháng không nhất thiết đồng nghĩa với miễn nhiễm hoàn toàn.
+
+Cần kết hợp với các biện pháp quản lý khác.
+
+
+LOẠI BỎ CÂY CÀ CHUA MỌC TỰ NHIÊN
+
+Cây cà chua mọc lại từ hạt của vụ trước có thể trở thành cầu nối duy trì nguồn bệnh.
+
+Các cây này nên được loại bỏ khỏi khu vực sản xuất.
+
+Mục tiêu là giảm số lượng cây ký chủ mà Phytophthora infestans có thể sử dụng để tồn tại và phát triển.
+
+
+QUẢN LÝ KHOẢNG CÁCH VÀ TÁN CÂY
+
+Trồng cây với khoảng cách hợp lý giúp:
+
+- Tăng lưu thông không khí.
+- Giảm độ ẩm trong tán.
+- Giúp lá khô nhanh hơn.
+- Giảm thời gian bề mặt cây duy trì nước.
+
+Điều này làm môi trường ít thuận lợi hơn cho nhiễm bệnh.
+
+
+SỬ DỤNG THUỐC DIỆT NẤM
+
+Nhiều loại thuốc được đăng ký để quản lý bệnh mốc sương muộn trong các hệ thống sản xuất khác nhau.
+
+Nguồn University of Wisconsin nhấn mạnh rằng dù trong sản xuất thông thường hay hữu cơ, thuốc cần được sử dụng theo hướng phòng ngừa.
+
+Thời điểm tốt nhất là:
+
+- Trước khi nhiễm bệnh ban đầu xảy ra.
+
+Khi bệnh đã phát triển rộng, hiệu quả kiểm soát giảm đáng kể.
+
+
+TẠI SAO PHUN PHÒNG QUAN TRỌNG?
+
+Phytophthora infestans có chu kỳ bệnh rất ngắn.
+
+Một khi vết bệnh xuất hiện:
+
+- Chỉ vài ngày sau có thể tạo bào tử mới.
+- Bào tử được gió phát tán nhanh.
+- Nhiều cây khác có thể bị nhiễm trước khi người trồng nhận thấy mức độ nghiêm trọng.
+
+Do đó, chương trình quản lý hiệu quả cần dựa trên nguy cơ thời tiết và dự báo bệnh chứ không chỉ chờ triệu chứng rõ ràng.
+
+
+BLITECAST
+
+Nguồn University of Wisconsin đề cập Blitecast như một công cụ dự báo bệnh được sử dụng bởi người trồng thương mại ở Wisconsin.
+
+Blitecast sử dụng điều kiện thời tiết thuận lợi cho bệnh để xác định thời điểm cần cân nhắc phun thuốc phòng.
+
+Mục tiêu là:
+
+- Phun khi nguy cơ thực sự tăng.
+- Giảm các lần phun theo lịch cố định không cần thiết.
+- Tăng hiệu quả của chương trình phòng bệnh.
+
+
+MÔ HÌNH DỰ BÁO BỆNH
+
+Nguồn University of Wisconsin cũng sử dụng mô hình dự báo bệnh trên hệ thống Vegetable Disease and Insect Forecasting Network, viết tắt là VDIFN.
+
+Mô hình sử dụng:
+
+- Nhiệt độ không khí.
+- Độ ẩm tương đối.
+- Dữ liệu thời tiết NOAA.
+
+Từ đó hệ thống tính các Disease Severity Values, hay DSV.
+
+
+DISEASE SEVERITY VALUES – DSV
+
+DSV là các giá trị thể hiện mức độ thời tiết thuận lợi cho Phytophthora infestans phát triển.
+
+Mô hình tính:
+
+- Tổng số DSV đã tích lũy trong mùa.
+- Số DSV tích lũy kể từ ngày bắt đầu theo dõi.
+
+Nguy cơ bệnh tăng khi các điều kiện nhiệt độ và độ ẩm thuận lợi tích lũy đủ mức.
+
+
+THỜI ĐIỂM BẮT ĐẦU MÔ HÌNH
+
+Nguồn hướng dẫn đặt ngày bắt đầu mô hình tại:
+
+- Ngày cây mọc.
+
+Hoặc nếu đã phun thuốc:
+
+- Ngày phun thuốc gần nhất,
+
+tùy thời điểm nào xảy ra sau.
+
+Sau đó, DSV được tích lũy để hỗ trợ quyết định khi nào nguy cơ bệnh tăng trở lại.
+
+
+ÁP DỤNG MÔ HÌNH NGOÀI WISCONSIN
+
+VDIFN và Blitecast được xây dựng dựa trên dữ liệu và hệ thống sản xuất tại Hoa Kỳ.
+
+Không nên tự động áp dụng các ngưỡng dự báo của Wisconsin cho Việt Nam nếu chưa được hiệu chỉnh.
+
+Tuy nhiên, nguyên tắc chung rất hữu ích:
+
+- Theo dõi nhiệt độ.
+- Theo dõi độ ẩm tương đối.
+- Theo dõi thời gian lá ướt.
+- Theo dõi mưa và sương.
+- Sử dụng dự báo thời tiết để xác định giai đoạn nguy cơ cao.
+
+
+BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI VƯỜN
+
+Khi nghi ngờ bệnh mốc sương muộn trên cà chua, có thể kiểm tra theo trình tự sau:
+
+- Tìm các vùng mô chết màu xanh nâu đến nâu trên lá.
+- Kiểm tra xem vết bệnh có vẻ thấm nước hoặc giống dầu mỡ.
+- Quan sát mép vết bệnh xem có màu xanh nhạt hoặc xám.
+- Lật mặt dưới lá vào sáng sớm để tìm lớp trắng mịn.
+- Kiểm tra thân và cuống lá để tìm các vết nâu không đều.
+- Quan sát hoa có hiện tượng đổi màu hoặc rụng.
+- Kiểm tra quả để tìm các vùng nâu vàng đến nâu sẫm, chắc và hơi lõm.
+- Tìm lớp trắng trên quả khi thời tiết ẩm.
+- Ghi nhận thời tiết trong 4 đến 5 ngày trước đó.
+- Kiểm tra xem khu vực có mưa, sương và độ ẩm rất cao hay không.
+
+Nếu triệu chứng không rõ ràng, nên xác nhận bằng chuyên gia bệnh cây hoặc phòng chẩn đoán vì bệnh có thể phát triển quá nhanh để dựa hoàn toàn vào quan sát bằng mắt.
+
+
+BỔ SUNG: PHÂN BIỆT VẾT BỆNH MỚI VÀ VẾT BỆNH GIÀ
+
+Vết bệnh mới thường:
+
+- Có vẻ thấm nước.
+- Màu xanh xám hoặc xanh nâu.
+- Mép chưa rõ.
+- Có thể có lớp trắng khi ẩm.
+
+Vết bệnh già hơn thường:
+
+- Chuyển nâu sẫm.
+- Mô chết rõ.
+- Có thể khô lại nếu thời tiết khô.
+
+Quan sát cả vết mới và vết cũ giúp đánh giá bệnh có đang tiếp tục lan hay không.
+
+
+QUẢN LÝ KHI PHÁT HIỆN BỆNH
+
+Nếu bệnh được xác nhận:
+
+- Đánh dấu khu vực bị bệnh.
+- Hạn chế thao tác khi cây đang ướt.
+- Tránh làm nước bắn từ cây bệnh sang cây khỏe.
+- Loại bỏ nguồn cây bệnh nặng khi phù hợp với hướng dẫn địa phương.
+- Theo dõi sát các cây xung quanh.
+- Cân nhắc biện pháp bảo vệ phần cây khỏe dựa trên khuyến cáo chuyên môn và thuốc được đăng ký.
+
+Do bệnh có thể tạo bào tử mới trong vài ngày, phản ứng sớm có ý nghĩa rất lớn.
+
+
+LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
+
+Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho cây cà chua và bệnh mốc sương muộn tại khu vực sản xuất.
+
+Luôn đọc và tuân thủ nhãn sản phẩm.
+
+Không tự động áp dụng danh sách thuốc hoặc lịch phun từ Wisconsin vào điều kiện Việt Nam.
+
+Không tăng liều hoặc tăng số lần sử dụng ngoài hướng dẫn.
+
+Thuốc phòng bệnh cần được kết hợp với:
+
+- Giống kháng.
+- Quản lý tán.
+- Loại bỏ cây mọc tự nhiên.
+- Theo dõi thời tiết.
+- Dự báo nguy cơ bệnh.
+
+Nếu sử dụng thuốc nhiều lần, cần luân phiên các nhóm cơ chế tác động phù hợp để hạn chế nguy cơ kháng thuốc.
+
+
+TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
+
+Bệnh mốc sương muộn trên cây cà chua có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
+
+- Bệnh do Phytophthora infestans gây ra.
+- Đây là oomycete, không phải nấm thật.
+- Bệnh có thể xuất hiện trên lá, thân, cuống lá, hoa và quả.
+- Vết bệnh trên lá thường có màu xanh nâu đến nâu.
+- Mép vết có thể xanh nhạt hoặc xám.
+- Trong điều kiện ẩm, vết bệnh có dạng thấm nước hoặc giống dầu mỡ.
+- Có thể xuất hiện lớp trắng mịn ở mặt dưới lá.
+- Thân và cuống có các vết nâu không đều.
+- Quả có các vùng vàng nâu đến nâu sẫm, chắc và hơi lõm.
+- Sporangia có thể phát tán trong không khí.
+- Zoospore có khả năng di chuyển trong nước.
+- Độ ẩm 90 đến 100% rất thuận lợi cho tạo bào tử.
+- Nhiệt độ khoảng 16 đến 27 độ C thuận lợi cho tạo bào tử.
+- Sporangia có thể nảy mầm trực tiếp ở khoảng 18 đến 24 độ C.
+- Zoospore thường được giải phóng trong khoảng 8 đến 18 độ C.
+- Sợi bệnh phát triển tối ưu quanh 23 độ C theo nguồn.
+- Chỉ khoảng 4 đến 5 ngày sau nhiễm, một đợt tạo bào tử mới có thể bắt đầu.
+- Chu kỳ bệnh lặp lại nhanh là nguyên nhân gây dịch lớn.
+- Trồng giống kháng giúp giảm nguy cơ.
+- Loại bỏ cây cà chua mọc tự nhiên giúp giảm nguồn bệnh.
+- Tăng khoảng cách cây giúp giảm độ ẩm trong tán.
+- Thuốc có hiệu quả tốt nhất khi được dùng phòng ngừa trước nhiễm.
+- Blitecast và DSV là các công cụ dự báo nguy cơ bệnh được nguồn sử dụng tại Wisconsin.
+- Mô hình dự báo không nên áp dụng máy móc ngoài khu vực nếu chưa hiệu chỉnh.
+- Theo dõi nhiệt độ, độ ẩm, mưa và thời gian lá ướt là nền tảng quan trọng của quản lý bệnh.

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlantGPT</title>
+  <link rel="stylesheet" href="/static/styles.css?v=public-ui-v6" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">🌿</div>
+        <div>
+          <strong>PlantGPT</strong>
+          <span>Trợ lý chăm sóc cây trồng</span>
+        </div>
+      </div>
+
+      <button id="newChatBtn" class="new-chat-btn">
+        <span>＋</span>
+        Cuộc chat mới
+      </button>
+
+      <div class="side-section conversation-section">
+        <div class="side-label">CUỘC TRÒ CHUYỆN</div>
+        <div id="conversationList" class="conversation-list">
+          <div class="conversation-empty">Chưa có cuộc trò chuyện.</div>
+        </div>
+      </div>
+
+      <div class="side-section">
+        <div class="side-label">KẾT QUẢ GẦN ĐÂY</div>
+        <div class="memory-card">
+          <div class="memory-row">
+            <span>Cây</span>
+            <strong id="memoryPlant">Chưa có</strong>
+          </div>
+          <div class="memory-row">
+            <span>Bệnh</span>
+            <strong id="memoryDisease">Chưa có</strong>
+          </div>
+          <div class="memory-row">
+            <span>Độ tin cậy</span>
+            <strong id="memoryConfidence">—</strong>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <strong>Plant Disease Assistant</strong>
+          <span>Tư vấn bệnh và chăm sóc cây trồng</span>
+        </div>
+      </header>
+
+      <section id="chatArea" class="chat-area">
+        <div id="welcome" class="welcome">
+          <div class="welcome-icon">🌱</div>
+          <h1>Hỏi mình về bệnh cây</h1>
+          <div class="suggestions">
+            <button data-example="bệnh này là bệnh gì?">
+              <span>🔍</span>
+              <div>
+                <strong>Nhận diện bệnh trên lá cây</strong>
+                <small>Gửi ảnh lá cây để bắt đầu</small>
+              </div>
+            </button>
+            <button data-example="bệnh đốm lá trên cây cà chua chữa sao?">
+              <span>💬</span>
+              <div>
+                <strong>Cách chữa bệnh trên cà chua</strong>
+                <small>Hỏi hướng xử lý cụ thể</small>
+              </div>
+            </button>
+            <button data-example="cà chua nhà tui bị đóm nâu chữa s?">
+              <span>🍅</span>
+              <div>
+                <strong>Lá cây có đốm nâu</strong>
+                <small>Mô tả triệu chứng bạn nhìn thấy</small>
+              </div>
+            </button>
+            <button data-example="bệnh này chữa s?">
+              <span>🧠</span>
+              <div>
+                <strong>Cách phòng bệnh này</strong>
+                <small>Tiếp tục cuộc trò chuyện</small>
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="composer-wrap">
+        <div id="attachmentPreview" class="attachment-preview hidden">
+          <img id="previewImage" alt="preview" />
+          <span id="previewName"></span>
+          <button id="removeImageBtn" title="Xóa ảnh">×</button>
+        </div>
+
+        <form id="chatForm" class="composer">
+          <input id="imageInput" type="file" accept="image/*" hidden />
+
+          <button id="attachBtn" type="button" class="composer-icon" title="Upload ảnh">
+            ＋
+          </button>
+
+          <textarea
+            id="messageInput"
+            rows="1"
+            placeholder="Nhắn về bệnh cây..."
+          ></textarea>
+
+          <button id="sendBtn" type="submit" class="send-btn" title="Gửi">
+            ↑
+          </button>
+        </form>
+
+      </footer>
+    </main>
+  </div>
+
+  <script src="/static/app.js?v=public-ui-v6"></script>
+</body>
+</html>
