@@ -7,6 +7,7 @@ request; Python process này được thay bằng vLLM khi khởi động thành
 from __future__ import annotations
 
 import argparse
+import json
 import math
 import os
 import shlex
@@ -19,6 +20,7 @@ from typing import Mapping
 from dotenv import dotenv_values
 
 MODULE_DIR = Path(__file__).resolve().parent
+DEFAULT_SERVED_MODEL_NAME = "rag-llm"
 
 
 def read_environment(path: Path) -> dict[str, str]:
@@ -43,6 +45,22 @@ def positive_int(env: Mapping[str, str], name: str, default: int) -> int:
     return value
 
 
+def chat_template_kwargs(env: Mapping[str, str]) -> dict:
+    """Đọc tùy chọn template của model; để trống thì dùng mặc định của vLLM."""
+    raw = env.get("LLM_CHAT_TEMPLATE_KWARGS", "").strip()
+    if not raw:
+        return {}
+    try:
+        value = json.loads(raw)
+        if not isinstance(value, dict):
+            raise ValueError("Cần JSON object.")
+        # json.loads mặc định chấp nhận NaN/Infinity dù JSON chuẩn không có.
+        json.dumps(value, allow_nan=False)
+    except ValueError as exc:
+        raise ValueError("LLM_CHAT_TEMPLATE_KWARGS phải là JSON object hợp lệ.") from exc
+    return value
+
+
 @dataclass(frozen=True)
 class ServerSettings:
     model_id: str
@@ -57,11 +75,14 @@ class ServerSettings:
     reasoning_parser: str
     language_model_only: bool
     cache_dir: Path
+    quantization: str
+    chat_template_file: Path | None
+    chat_template_kwargs: dict
 
     @classmethod
     def from_environment(cls, env: Mapping[str, str]) -> ServerSettings:
         model = env.get("LLM_MODEL_ID", "Qwen/Qwen3.5-4B").strip()
-        name = env.get("LLM_SERVED_MODEL_NAME", "qwen3.5-4b").strip()
+        name = env.get("LLM_SERVED_MODEL_NAME", DEFAULT_SERVED_MODEL_NAME).strip()
         key = env.get("LLM_API_KEY", "").strip()
         if not model or not name:
             raise ValueError("LLM_MODEL_ID và LLM_SERVED_MODEL_NAME không được để trống.")
@@ -76,12 +97,20 @@ class ServerSettings:
             raise ValueError("LLM_GPU_MEMORY_UTILIZATION phải nằm trong (0, 1].") from exc
         if not math.isfinite(memory) or not 0 < memory <= 1:
             raise ValueError("LLM_GPU_MEMORY_UTILIZATION phải nằm trong (0, 1].")
-        language_only = env.get("LLM_LANGUAGE_MODEL_ONLY", "true").strip().lower()
+        language_only = env.get("LLM_LANGUAGE_MODEL_ONLY", "false").strip().lower()
         if language_only not in {"true", "false"}:
             raise ValueError("LLM_LANGUAGE_MODEL_ONLY phải là true hoặc false.")
         cache = Path(env.get("LLM_CACHE_DIR", "models/huggingface").strip() or "models/huggingface")
         if not cache.is_absolute():
             cache = MODULE_DIR / cache
+        template_path = env.get("LLM_CHAT_TEMPLATE_FILE", "").strip()
+        template = Path(template_path) if template_path else None
+        if template is not None:
+            if not template.is_absolute():
+                template = MODULE_DIR / template
+            template = template.resolve()
+            if not template.is_file():
+                raise ValueError(f"LLM_CHAT_TEMPLATE_FILE không tìm thấy file: {template}")
         return cls(
             model_id=model,
             served_model_name=name,
@@ -92,9 +121,12 @@ class ServerSettings:
             tensor_parallel_size=positive_int(env, "LLM_TENSOR_PARALLEL_SIZE", 1),
             gpu_memory_utilization=memory,
             dtype=env.get("LLM_DTYPE", "auto").strip() or "auto",
-            reasoning_parser=env.get("LLM_REASONING_PARSER", "qwen3").strip(),
+            reasoning_parser=env.get("LLM_REASONING_PARSER", "").strip(),
             language_model_only=language_only == "true",
             cache_dir=cache.resolve(),
+            quantization=env.get("LLM_QUANTIZATION", "").strip(),
+            chat_template_file=template,
+            chat_template_kwargs=chat_template_kwargs(env),
         )
 
 
@@ -115,6 +147,15 @@ def build_command(settings: ServerSettings) -> list[str]:
         command.append("--language-model-only")
     if settings.reasoning_parser:
         command.extend(["--reasoning-parser", settings.reasoning_parser])
+    if settings.quantization:
+        command.extend(["--quantization", settings.quantization])
+    if settings.chat_template_file is not None:
+        command.extend(["--chat-template", str(settings.chat_template_file)])
+    if settings.chat_template_kwargs:
+        command.extend([
+            "--default-chat-template-kwargs",
+            json.dumps(settings.chat_template_kwargs, ensure_ascii=False, allow_nan=False),
+        ])
     return command
 
 

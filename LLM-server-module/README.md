@@ -9,7 +9,7 @@ Host của bạn                              Vast.ai / Linux
 RAG-module                                LLM-server-module
   câu hỏi + lịch sử
   → retrieval từ Chroma
-  → câu hỏi + các chunk ─── API ─────────→ vLLM → Qwen3.5 4B trên GPU
+  → câu hỏi + các chunk ─── API ─────────→ vLLM → model chọn trong .env
   ← câu trả lời có trích nguồn ──────────┘
 ```
 
@@ -72,8 +72,8 @@ Sau khi commit/push module mới từ host, trên Vast:
 ```bash
 mkdir -p /workspace
 cd /workspace
-git clone --filter=blob:none --sparse https://github.com/thuanngza2203/capstone-project-039-253.git Capstone_Project
-cd Capstone_Project
+git clone --filter=blob:none --sparse https://github.com/thuanngza2203/capstone-project-039-253.git
+cd capstone-project-039-253
 git sparse-checkout set LLM-server-module
 cd LLM-server-module
 bash install.sh
@@ -84,6 +84,9 @@ Nếu đã clone đầy đủ repository, chỉ cần `cd` vào `LLM-server-modu
 không cần sparse checkout. Nếu code nằm trên branch khác, `git switch TEN_BRANCH`
 trước khi cài. Repository private cần credential GitHub có quyền đọc; SSH key
 đăng nhập Vast không tự cấp quyền đọc repository.
+
+Các lệnh dưới dùng `/workspace/capstone-project-039-253`. Nếu bạn clone với tên
+thư mục khác, thay đường dẫn đó bằng thư mục thực tế; dùng `pwd` để kiểm tra.
 
 `install.sh` cài vLLM trong `.venv` của module này, dùng
 `uv pip install ... --torch-backend=auto` và lưu phiên bản đã cài vào
@@ -126,7 +129,7 @@ Các giá trị chính:
 
 ```dotenv
 LLM_MODEL_ID=Qwen/Qwen3.5-4B
-LLM_SERVED_MODEL_NAME=qwen3.5-4b
+LLM_SERVED_MODEL_NAME=rag-llm
 LLM_PORT=8000
 LLM_API_KEY=DIEN_KEY_BAN_VUA_TAO
 LLM_MAX_MODEL_LEN=8192
@@ -135,17 +138,18 @@ LLM_TENSOR_PARALLEL_SIZE=1
 LLM_GPU_MEMORY_UTILIZATION=0.80
 ```
 
-`LLM_MODEL_ID` là model tải từ Hugging Face. `LLM_SERVED_MODEL_NAME` là tên
-RAG gửi trong API request. Các cấu hình parser và chế độ văn bản trong file
-mẫu dành cho [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B). Khi đổi họ
-model, kiểm tra lại `LLM_REASONING_PARSER` và `LLM_LANGUAGE_MODEL_ONLY`.
+`LLM_MODEL_ID` là model tải từ Hugging Face, hoặc thư mục model đã tải trên
+server. `LLM_SERVED_MODEL_NAME` là tên RAG gửi trong API request. Giữ tên API
+`rag-llm` khi thay weights để phía RAG không phải đổi tên model theo.
+File mẫu dùng cấu hình [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B),
+tắt thinking mặc định ở server bằng `LLM_CHAT_TEMPLATE_KWARGS`.
 
 ## 2. Chạy LLM trên Vast
 
 Trong cửa sổ tmux dành cho server:
 
 ```bash
-cd /workspace/Capstone_Project/LLM-server-module
+cd /workspace/capstone-project-039-253/LLM-server-module
 source .venv/bin/activate
 python serve.py --dry-run
 python serve.py
@@ -159,22 +163,74 @@ weights vào GPU mỗi lần khởi động tiến trình.
 Để nguyên cửa sổ server, mở cửa sổ tmux khác và đợi server sẵn sàng rồi chạy:
 
 ```bash
-cd /workspace/Capstone_Project/LLM-server-module
+cd /workspace/capstone-project-039-253/LLM-server-module
 source .venv/bin/activate
 python check_api.py
 ```
 
-Kết quả thành công phải có `API hoạt động, model: qwen3.5-4b` và câu trả lời.
+Kết quả thành công phải có `API hoạt động, model: rag-llm` và câu trả lời.
 Lệnh này gửi GET `/v1/models` rồi POST `/v1/chat/completions` có Bearer key.
 Đây là kiểm tra kết nối/giao thức, không đánh giá chất lượng trả lời bệnh cây.
 File `.env` phải tồn tại; `--env-file` sai đường dẫn sẽ báo lỗi trước khi gọi
 API. File UTF-8 có BOM từ editor Windows cũng đọc được. Checker không theo
 redirect để tránh chuyển key sang endpoint khác; cấu hình URL đích trực tiếp.
 
+Checker dùng `LLM_CHECK_MAX_TOKENS` (mặc định 800); nếu đọc `.env` của RAG thì
+dùng `VLLM_MAX_TOKENS`, `VLLM_TIMEOUT` và `VLLM_THINK` tương ứng. Có thể ghi đè
+bằng `python check_api.py --max-tokens 2048 --timeout 180`. Checker báo lỗi
+khi output bị cắt vì hết token hoặc model chưa tạo câu trả lời cuối.
+
 `serve.py` giữ API tại `127.0.0.1:8000` và truyền key qua biến `VLLM_API_KEY`
 của vLLM. Host kết nối bằng tunnel hoặc proxy ở các mục dưới. Script khởi
 động vLLM trực tiếp; không có FastAPI trung gian tải thêm một bản model.
 [Biến môi trường vLLM](https://docs.vllm.ai/en/stable/configuration/env_vars/)
+
+### 2.1. Đổi model bằng `.env`
+
+Ví dụ đổi từ Qwen3.5-4B sang Qwen3.5-9B **khi GPU đủ bộ nhớ**, chỉ sửa:
+
+```dotenv
+LLM_MODEL_ID=Qwen/Qwen3.5-9B
+```
+
+Giữ `LLM_SERVED_MODEL_NAME=rag-llm` ở server và `VLLM_MODEL=rag-llm` ở RAG.
+Hai model cùng họ này dùng chung cấu hình parser/thinking trong file mẫu.
+
+1. Trong terminal đang chạy server, `Ctrl+C` để dừng model cũ.
+2. Sửa `.env`, chạy `python serve.py --dry-run` để xem đúng model và các tham số.
+3. Chạy `python serve.py`; đợi tải/nạp model và khởi động API xong.
+4. Ở terminal thứ hai, chạy `python check_api.py`, rồi thử `ask`/`chat` từ host.
+
+Đổi file `.env` không thay model trong process đang chạy. Model mới vẫn phải
+được vLLM hỗ trợ và vừa GPU/context đã chọn; `--dry-run` không xác nhận điều đó.
+Không cần index lại tài liệu khi chỉ đổi LLM.
+
+**Khi đổi sang họ model khác**, xem model card và kiểm tra các biến sau:
+
+| Biến server | Cách dùng |
+|---|---|
+| `LLM_REASONING_PARSER` | Chọn parser đúng họ reasoning model; để trống nếu không dùng. Parser tách suy luận khỏi câu trả lời, không tự bật/tắt thinking. |
+| `LLM_CHAT_TEMPLATE_KWARGS` | JSON object truyền cho chat template; ví dụ Qwen dùng `{"enable_thinking": false}`. Để trống để dùng mặc định model. |
+| `LLM_LANGUAGE_MODEL_ONLY` | `true` nếu dùng multimodal model chỉ cho văn bản; `false` để bỏ flag này. |
+| `LLM_QUANTIZATION` | Để trống để vLLM đọc cấu hình quantization từ model; chỉ điền khi hướng dẫn model yêu cầu, ví dụ `awq`. |
+| `LLM_CHAT_TEMPLATE_FILE` | Để trống để dùng template của tokenizer; nếu cần ghi đè, điền file `.jinja` có sẵn. Đường tương đối tính từ module. |
+| `LLM_DTYPE`, `LLM_MAX_MODEL_LEN`, `LLM_TENSOR_PARALLEL_SIZE` | Điều chỉnh theo GPU, số GPU và bộ nhớ cần cho model/context. |
+
+Python không đoán parser từ tên model. Nếu không cấu hình, launcher không
+thêm parser, template kwargs hay chế độ language-only. File `.env.example`
+chọn rõ các giá trị dành cho Qwen, nên cần kiểm tra chúng khi đổi họ model.
+[Reasoning và template defaults trong vLLM](https://docs.vllm.ai/en/stable/features/reasoning_outputs/)
+
+Để model quyết định các tùy chọn riêng tại server, đặt `VLLM_THINK=` trống
+trong `.env` RAG. `VLLM_THINK=true/false` ghi đè `enable_thinking` ở server;
+chỉ dùng với chat template hỗ trợ tùy chọn đó. Giới hạn output của RAG vẫn
+do `VLLM_MAX_TOKENS` điều khiển, độc lập với giới hạn checker.
+
+**Nếu đã dùng bản cũ:** `.env` hiện có không tự thay đổi khi lấy code mới.
+Bạn có thể giữ tên API `qwen3.5-4b`, miễn cả hai phía khớp nhau. Để dùng tên
+ổn định mới, sửa cả `LLM_SERVED_MODEL_NAME` và `VLLM_MODEL` thành `rag-llm`
+một lần. Với Qwen, thêm `LLM_CHAT_TEMPLATE_KWARGS='{"enable_thinking": false}'`
+ở server trước khi bỏ `VLLM_THINK=false` ở RAG, rồi khởi động lại server/RAG.
 
 ## 3. Kết nối RAG từ host bằng SSH tunnel
 
@@ -203,11 +259,11 @@ dùng. Không copy `.env` của server đè lên `.env` của RAG.
 ```dotenv
 LLM_PROVIDER=vllm
 VLLM_BASE_URL=http://127.0.0.1:8001/v1
-VLLM_MODEL=qwen3.5-4b
+VLLM_MODEL=rag-llm
 VLLM_API_KEY=DIEN_CUNG_KEY_VOI_SERVER
 VLLM_MAX_TOKENS=800
 VLLM_TIMEOUT=120
-VLLM_THINK=false
+VLLM_THINK=
 ```
 
 Sau đó, trong PowerShell mới:
@@ -259,7 +315,7 @@ Trên Linux, cài Nginx bằng root/sudo, rồi tạo cấu hình runtime:
 
 ```bash
 apt-get install -y nginx
-cd /workspace/Capstone_Project/LLM-server-module
+cd /workspace/capstone-project-039-253/LLM-server-module
 mkdir -p runtime /workspace/llm-tls
 if [ ! -f runtime/nginx.conf ]; then
   cp nginx.conf.example runtime/nginx.conf
@@ -272,8 +328,8 @@ config. Nếu đổi `LLM_PORT`, sửa cả hai `proxy_pass`. Kiểm tra và ch�
 trong cửa sổ tmux riêng:
 
 ```bash
-nginx -t -c /workspace/Capstone_Project/LLM-server-module/runtime/nginx.conf
-nginx -c /workspace/Capstone_Project/LLM-server-module/runtime/nginx.conf -g 'daemon off;'
+nginx -t -c /workspace/capstone-project-039-253/LLM-server-module/runtime/nginx.conf
+nginx -c /workspace/capstone-project-039-253/LLM-server-module/runtime/nginx.conf -g 'daemon off;'
 ```
 
 Thay URL trong `.env` RAG; giữ nguyên model và API key:
@@ -336,6 +392,6 @@ giả trong thư mục tạm, không tải packages. Không cần cài vLLM/GPU 
 riêng kiểm tra request thật của LangChain qua HTTP transport giả tới endpoint
 HTTPS remote.
 
-Đã đối chiếu source và tài liệu chính thức ngày 22/09/2026. Chưa kiểm thử tải
+Đã đối chiếu source và tài liệu chính thức ngày 23/09/2026. Chưa kiểm thử tải
 model/inference hoặc Nginx trên instance Vast.ai thực tế; `check_api.py` là bước
 kiểm tra môi trường thật sau khi bạn triển khai.

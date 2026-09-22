@@ -36,6 +36,65 @@ def local_http_server(handler):
 
 
 class ServerTests(unittest.TestCase):
+    def test_changing_weights_keeps_api_name_and_generic_defaults(self):
+        for model_id in ("organization/first-chat-model", "organization/second-chat-model"):
+            with self.subTest(model_id=model_id):
+                settings = serve.ServerSettings.from_environment({
+                    "LLM_MODEL_ID": model_id, "LLM_API_KEY": "test-key",
+                })
+                command = serve.build_command(settings)
+                self.assertEqual(command[:3], ["vllm", "serve", model_id])
+                self.assertEqual(command[command.index("--served-model-name") + 1], "rag-llm")
+                self.assertNotIn("--reasoning-parser", command)
+                self.assertNotIn("--language-model-only", command)
+                self.assertNotIn("--quantization", command)
+                self.assertNotIn("--chat-template", command)
+                self.assertNotIn("--default-chat-template-kwargs", command)
+
+    def test_existing_model_specific_settings_and_alias_are_preserved(self):
+        settings = serve.ServerSettings.from_environment({
+            "LLM_API_KEY": "test-key", "LLM_SERVED_MODEL_NAME": "qwen3.5-4b",
+            "LLM_REASONING_PARSER": "qwen3", "LLM_LANGUAGE_MODEL_ONLY": "true",
+        })
+        command = serve.build_command(settings)
+        self.assertEqual(command[command.index("--served-model-name") + 1], "qwen3.5-4b")
+        self.assertEqual(command[command.index("--reasoning-parser") + 1], "qwen3")
+        self.assertIn("--language-model-only", command)
+
+    def test_optional_model_settings_are_passed_as_separate_arguments(self):
+        with tempfile.TemporaryDirectory() as directory:
+            module_dir = Path(directory)
+            template = module_dir / "templates" / "custom chat.jinja"
+            template.parent.mkdir()
+            template.write_text("{{ messages }}", encoding="utf-8")
+            with patch.object(serve, "MODULE_DIR", module_dir):
+                settings = serve.ServerSettings.from_environment({
+                    "LLM_API_KEY": "test-key", "LLM_QUANTIZATION": "awq",
+                    "LLM_CHAT_TEMPLATE_FILE": "templates/custom chat.jinja",
+                    "LLM_CHAT_TEMPLATE_KWARGS": '{"enable_thinking": false, "custom": {"value": 2}}',
+                })
+            command = serve.build_command(settings)
+            self.assertEqual(command[command.index("--quantization") + 1], "awq")
+            self.assertEqual(command[command.index("--chat-template") + 1], str(template.resolve()))
+            kwargs = json.loads(command[command.index("--default-chat-template-kwargs") + 1])
+            self.assertEqual(kwargs, {"enable_thinking": False, "custom": {"value": 2}})
+
+    def test_missing_chat_template_is_rejected_before_launch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            missing = Path(directory) / "missing.jinja"
+            with self.assertRaises((ValueError, OSError)):
+                serve.ServerSettings.from_environment({
+                    "LLM_API_KEY": "test-key", "LLM_CHAT_TEMPLATE_FILE": str(missing),
+                })
+
+    def test_chat_template_kwargs_require_a_finite_json_object(self):
+        for value in ("broken", "[]", "null", "true", '{"value": NaN}',
+                      '{"nested": [Infinity]}', '{"nested": {"value": 1e999}}'):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                serve.ServerSettings.from_environment({
+                    "LLM_API_KEY": "test-key", "LLM_CHAT_TEMPLATE_KWARGS": value,
+                })
+
     def test_environment_overrides_file_and_does_not_load_rag_env(self):
         with tempfile.TemporaryDirectory() as directory:
             env_file = Path(directory) / ".env"
@@ -128,7 +187,42 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(post_request.get_header("Authorization"), "Bearer test-key")
         payload = json.loads(post_request.data)
         self.assertEqual(payload["model"], "plant-chat")
-        self.assertEqual(payload["chat_template_kwargs"], {"enable_thinking": False})
+        self.assertEqual(payload["max_tokens"], 800)
+        self.assertNotIn("chat_template_kwargs", payload)
+
+    def test_explicit_thinking_and_token_budget_are_sent_in_payload(self):
+        for think in (True, False):
+            with self.subTest(think=think), patch.object(check_api, "request_json", side_effect=[
+                {"data": [{"id": "plant-chat"}]},
+                {"choices": [{"message": {"content": "OK"}, "finish_reason": "stop"}]},
+            ]) as send:
+                check_api.check_api("http://localhost:8000/v1", "plant-chat", "test-key",
+                                    max_tokens=2048, think=think)
+            payload = send.call_args.kwargs["payload"]
+            self.assertEqual(payload["max_tokens"], 2048)
+            self.assertEqual(payload["chat_template_kwargs"], {"enable_thinking": think})
+
+    def test_invalid_token_budget_does_not_send_requests(self):
+        for max_tokens in (0, -1, "bad"):
+            with self.subTest(max_tokens=max_tokens), patch.object(check_api, "request_json") as send:
+                with self.assertRaises(ValueError):
+                    check_api.check_api("http://localhost:8000/v1", "plant-chat", "test-key",
+                                        max_tokens=max_tokens)
+            send.assert_not_called()
+
+    def test_truncated_or_reasoning_only_response_is_not_success(self):
+        responses = [
+            {"choices": [{"message": {"content": "Partial answer"}, "finish_reason": "length"}]},
+            {"choices": [{"message": {"content": None, "reasoning_content": "Thinking"},
+                          "finish_reason": "length"}]},
+            {"choices": [{"message": {"content": "", "reasoning": "Thinking"},
+                          "finish_reason": "stop"}]},
+        ]
+        for response in responses:
+            with self.subTest(response=response), patch.object(check_api, "request_json", side_effect=[
+                {"data": [{"id": "plant-chat"}]}, response,
+            ]), self.assertRaises(ValueError):
+                check_api.check_api("http://localhost:8000/v1", "plant-chat", "test-key")
 
     def test_wrong_model_is_detected_before_chat_request(self):
         with patch.object(check_api, "request_json", return_value={"data": [{"id": "another-model"}]}) as send:
@@ -149,7 +243,44 @@ class ApiTests(unittest.TestCase):
             "VLLM_MODEL": "remote-model", "VLLM_API_KEY": "remote-key",
         }), patch.object(check_api, "check_api", return_value="OK") as check, redirect_stdout(io.StringIO()):
             self.assertEqual(check_api.main(["--env-file", "host.env"]), 0)
-        check.assert_called_once_with("https://llm.example.com/v1", "remote-model", "remote-key", timeout=120)
+        check.assert_called_once_with("https://llm.example.com/v1", "remote-model", "remote-key",
+                                      timeout=120, max_tokens=800, think=None)
+
+    def test_server_env_uses_stable_alias_and_live_template_defaults(self):
+        with patch.object(check_api, "read_environment", return_value={
+            "LLM_API_KEY": "test-key", "LLM_CHECK_MAX_TOKENS": "512",
+            "LLM_CHAT_TEMPLATE_KWARGS": '{"enable_thinking": false}',
+        }), patch.object(check_api, "check_api", return_value="OK") as check, redirect_stdout(io.StringIO()):
+            self.assertEqual(check_api.main([]), 0)
+        check.assert_called_once_with("http://127.0.0.1:8000/v1", "rag-llm", "test-key",
+                                      timeout=120, max_tokens=512, think=None)
+
+    def test_checker_cli_overrides_rag_and_server_token_budgets(self):
+        env = {
+            "VLLM_API_KEY": "test-key", "VLLM_MAX_TOKENS": "1600",
+            "LLM_CHECK_MAX_TOKENS": "512", "VLLM_TIMEOUT": "240", "VLLM_THINK": "false",
+        }
+        cases = [([], 1600, 240), (["--max-tokens", "2048", "--timeout", "300"], 2048, 300)]
+        for argv, max_tokens, timeout in cases:
+            with self.subTest(argv=argv), patch.object(check_api, "read_environment", return_value=env), \
+                 patch.object(check_api, "check_api", return_value="OK") as check, redirect_stdout(io.StringIO()):
+                self.assertEqual(check_api.main(argv), 0)
+            self.assertEqual(check.call_args.kwargs,
+                             {"timeout": timeout, "max_tokens": max_tokens, "think": False})
+
+    def test_checker_accepts_rag_thinking_spellings_and_rejects_invalid_values(self):
+        for value, expected in (("", None), ("true", True), ("YES", True), ("1", True),
+                                ("on", True), ("false", False), ("no", False), ("0", False), ("off", False)):
+            with self.subTest(value=value), patch.object(check_api, "read_environment", return_value={
+                "VLLM_API_KEY": "test-key", "VLLM_THINK": value,
+            }), patch.object(check_api, "check_api", return_value="OK") as check, redirect_stdout(io.StringIO()):
+                self.assertEqual(check_api.main([]), 0)
+            self.assertIs(check.call_args.kwargs["think"], expected)
+        with patch.object(check_api, "read_environment", return_value={
+            "VLLM_API_KEY": "test-key", "VLLM_THINK": "sometimes",
+        }), patch.object(check_api, "check_api") as check, redirect_stderr(io.StringIO()):
+            self.assertEqual(check_api.main([]), 1)
+        check.assert_not_called()
 
     def test_unauthorized_response_has_clear_error_without_leaking_body(self):
         with patch.object(check_api, "read_environment", return_value={"LLM_API_KEY": "secret-key"}), \
