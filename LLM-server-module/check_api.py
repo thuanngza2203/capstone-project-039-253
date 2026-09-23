@@ -90,6 +90,42 @@ def check_api(
     return content.strip()
 
 
+def client_base_url(env: dict[str, str]) -> str:
+    """Cùng thứ tự với RAG-module: VLLM_BASE_URL, rồi VLLM_SCHEME/HOST/PORT.
+
+    Chép lại thay vì import vì module server không phụ thuộc RAG. Không có biến
+    phía client nào thì dùng LLM_PORT của .env server như trước.
+    """
+    explicit = env.get("VLLM_BASE_URL", "").strip()
+    host = env.get("VLLM_HOST", "").strip()
+    port = env.get("VLLM_PORT", "").strip()
+    if explicit:
+        if host or port:
+            raise ValueError(
+                "Chỉ dùng một cách: điền VLLM_HOST/VLLM_PORT, hoặc điền VLLM_BASE_URL "
+                "đầy đủ. Để trống cách còn lại trong .env."
+            )
+        return explicit
+    if not host:
+        if port:
+            raise ValueError("Đã điền VLLM_PORT thì phải điền cả VLLM_HOST.")
+        return f"http://127.0.0.1:{env.get('LLM_PORT', '8000')}/v1"
+    scheme = env.get("VLLM_SCHEME", "").strip().casefold() or "http"
+    if scheme not in {"http", "https"}:
+        raise ValueError("VLLM_SCHEME phải là http hoặc https.")
+    if "://" in host:
+        raise ValueError("VLLM_HOST chỉ là IP hoặc tên miền, không kèm http://.")
+    if ":" in host:
+        raise ValueError("VLLM_HOST không kèm cổng. Cổng đặt ở VLLM_PORT.")
+    if any(character.isspace() or character in "/@?#" for character in host):
+        raise ValueError("VLLM_HOST chỉ là IP hoặc tên miền, ví dụ 203.0.113.10.")
+    if not port:
+        return f"{scheme}://{host}/v1"
+    if not port.isdigit() or not 1 <= int(port) <= 65535:
+        raise ValueError("VLLM_PORT phải là số nguyên trong 1–65535.")
+    return f"{scheme}://{host}:{int(port)}/v1"
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Gọi thử API LLM, không chạy RAG.")
     parser.add_argument("--env-file", type=Path, default=MODULE_DIR / ".env",
@@ -100,7 +136,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         env = read_environment(args.env_file)
-        base_url = args.base_url or env.get("VLLM_BASE_URL") or f"http://127.0.0.1:{env.get('LLM_PORT', '8000')}/v1"
+        base_url = args.base_url or client_base_url(env)
         model = env.get("VLLM_MODEL") or env.get("LLM_SERVED_MODEL_NAME", DEFAULT_SERVED_MODEL_NAME)
         api_key = env.get("VLLM_API_KEY") or env.get("LLM_API_KEY", "")
         timeout = args.timeout if args.timeout is not None else positive_int(env, "VLLM_TIMEOUT", 120)

@@ -178,3 +178,6 @@ Desktop.ini
 /RAG-module/docs
 /RAG-module/artifacts/
 /RAG-module/chroma_db_structure/
+# Câu trả lời thí nghiệm, khóa giải mã khảo sát, phản hồi Google Form (có thể có email).
+/RAG-module/experiments/runs/
+/RAG-module/experiments/surveys/

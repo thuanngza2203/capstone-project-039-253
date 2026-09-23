@@ -16,7 +16,8 @@ from pathlib import Path
 import requests
 import streamlit as st
 
-from serve import MODULE_DIR, read_environment
+from check_api import client_base_url
+from serve import DEFAULT_SERVED_MODEL_NAME, MODULE_DIR, read_environment
 
 DEFAULT_SYSTEM = "Bạn là trợ lý hữu ích. Trả lời ngắn gọn bằng tiếng Việt."
 # Prompt thật của RAG-module, để thử model trước khi ghép cả pipeline.
@@ -42,9 +43,9 @@ def load_env(path: Path) -> dict[str, str]:
 
 def resolve_defaults(env: dict[str, str]) -> tuple[str, str, str]:
     """Ưu tiên biến phía client (VLLM_*) rồi mới tới biến phía server (LLM_*)."""
-    base_url = env.get("VLLM_BASE_URL") or f"http://127.0.0.1:{env.get('LLM_PORT', '8000')}/v1"
-    model = env.get("VLLM_MODEL") or env.get("LLM_SERVED_MODEL_NAME", "qwen3.8-27b-fp8")
-    api_key = env.get("VLLM_API_KEY") or env.get("LLM_API_KEY", "thuanlocalmodel")
+    base_url = client_base_url(env)
+    model = env.get("VLLM_MODEL") or env.get("LLM_SERVED_MODEL_NAME", DEFAULT_SERVED_MODEL_NAME)
+    api_key = env.get("VLLM_API_KEY") or env.get("LLM_API_KEY", "")
     return base_url.strip().rstrip("/"), model.strip(), api_key.strip()
 
 
@@ -141,7 +142,11 @@ def main() -> None:
     st.caption("Thử riêng LLM. Không retrieval, không Chroma, không embedding.")
 
     env = load_env(MODULE_DIR / ".env")
-    default_url, default_model, default_key = resolve_defaults(env)
+    try:
+        default_url, default_model, default_key = resolve_defaults(env)
+    except ValueError as exc:
+        st.error(f"Cấu hình kết nối không hợp lệ: {exc}")
+        return
 
     with st.sidebar:
         st.header("Kết nối")

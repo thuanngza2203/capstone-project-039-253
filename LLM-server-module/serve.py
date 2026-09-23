@@ -81,7 +81,7 @@ class ServerSettings:
 
     @classmethod
     def from_environment(cls, env: Mapping[str, str]) -> ServerSettings:
-        model = env.get("LLM_MODEL_ID", "Qwen/Qwen3.5-4B").strip()
+        model = env.get("LLM_MODEL_ID", "Qwen/Qwen3.8-27B-FP8").strip()
         name = env.get("LLM_SERVED_MODEL_NAME", DEFAULT_SERVED_MODEL_NAME).strip()
         key = env.get("LLM_API_KEY", "").strip()
         if not model or not name:

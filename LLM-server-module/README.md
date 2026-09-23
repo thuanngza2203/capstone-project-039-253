@@ -43,6 +43,10 @@ context 8192, tối đa một sequence đồng thời và 90% VRAM cho vLLM khi 
 riêng cho LLM. Đây là cấu hình khởi đầu, không phải cam kết model sẽ vừa mọi
 GPU; giảm tỷ lệ nếu GPU còn chạy tiến trình khác.
 
+File mẫu hiện chọn **Qwen3.8-27B-FP8 cho GPU 48 GiB**. Giữ hậu tố `-FP8`;
+bản không có hậu tố này có yêu cầu bộ nhớ khác. Tổng context 8192 bao gồm câu
+hỏi, lịch sử, tài liệu truy xuất và token trả lời.
+
 Thêm SSH public key vào Vast và dùng lệnh Connect/SSH của instance để đăng
 nhập. Instance dạng container không cần chạy Docker lồng bên trong.
 [SSH Vast.ai](https://docs.vast.ai/guides/instances/connect/ssh),
@@ -129,7 +133,7 @@ Trong nano: `Ctrl+O`, Enter để lưu; `Ctrl+X` để thoát.
 Các giá trị chính:
 
 ```dotenv
-LLM_MODEL_ID=Qwen/Qwen3.5-4B
+LLM_MODEL_ID=Qwen/Qwen3.8-27B-FP8
 LLM_SERVED_MODEL_NAME=rag-llm
 LLM_PORT=8000
 LLM_API_KEY=DIEN_KEY_BAN_VUA_TAO
@@ -137,13 +141,24 @@ LLM_MAX_MODEL_LEN=8192
 LLM_MAX_NUM_SEQS=1
 LLM_TENSOR_PARALLEL_SIZE=1
 LLM_GPU_MEMORY_UTILIZATION=0.90
+LLM_REASONING_PARSER=qwen3
+LLM_LANGUAGE_MODEL_ONLY=true
+LLM_CHAT_TEMPLATE_KWARGS='{"enable_thinking": false}'
+LLM_QUANTIZATION=
 ```
 
 `LLM_MODEL_ID` là model tải từ Hugging Face, hoặc thư mục model đã tải trên
 server. `LLM_SERVED_MODEL_NAME` là tên RAG gửi trong API request. Giữ tên API
 `rag-llm` khi thay weights để phía RAG không phải đổi tên model theo.
-File mẫu dùng cấu hình [Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B),
-tắt thinking mặc định ở server bằng `LLM_CHAT_TEMPLATE_KWARGS`.
+File mẫu dùng [Qwen3.8-27B-FP8](https://huggingface.co/Qwen/Qwen3.8-27B-FP8),
+tắt thinking mặc định ở server bằng `LLM_CHAT_TEMPLATE_KWARGS`; vLLM tự đọc
+định dạng FP8 từ checkpoint khi `LLM_QUANTIZATION` trống. Theo
+[recipe Qwen3.8](https://recipes.vllm.ai/Qwen/Qwen3.8-27B), runtime cần
+`transformers>=5.8.0`; kiểm tra stack trong venv nếu đã cài từ trước.
+
+**Nâng cấu hình cũ từ 4B lên 27B:** sửa `LLM_MODEL_ID` và các biến GPU/parser
+như trên trong `.env` của Vast. Giữ API key và alias đang khớp với RAG, dừng
+server cũ rồi chạy lại theo mục 2. Lấy code mới không cập nhật `.env` có sẵn.
 
 ## 2. Chạy LLM trên Vast
 
@@ -188,14 +203,17 @@ của vLLM. Host kết nối bằng tunnel hoặc proxy ở các mục dưới. 
 
 ### 2.1. Đổi model bằng `.env`
 
-Ví dụ đổi từ Qwen3.5-4B sang Qwen3.5-9B **khi GPU đủ bộ nhớ**, chỉ sửa:
+Ví dụ chuyển từ cấu hình Qwen3.8-27B-FP8 sang Qwen3.6-35B-A3B-FP8 để so sánh
+trên GPU 48 GiB, sửa:
 
 ```dotenv
-LLM_MODEL_ID=Qwen/Qwen3.5-9B
+LLM_MODEL_ID=Qwen/Qwen3.6-35B-A3B-FP8
 ```
 
 Giữ `LLM_SERVED_MODEL_NAME=rag-llm` ở server và `VLLM_MODEL=rag-llm` ở RAG.
-Hai model cùng họ này dùng chung cấu hình parser/thinking trong file mẫu.
+Hai model này dùng chung cấu hình parser/thinking trong file mẫu. Kiểm tra
+bộ nhớ và thời gian trả lời sau khi đổi; dung lượng tham số lớn hơn không tự
+đồng nghĩa với chất lượng tốt hơn.
 
 1. Trong terminal đang chạy server, `Ctrl+C` để dừng model cũ.
 2. Sửa `.env`, chạy `python serve.py --dry-run` để xem đúng model và các tham số.
@@ -367,6 +385,8 @@ dùng. Không copy `.env` của server đè lên `.env` của RAG.
 ```dotenv
 LLM_PROVIDER=vllm
 VLLM_BASE_URL=http://127.0.0.1:8001/v1
+VLLM_HOST=
+VLLM_PORT=
 VLLM_MODEL=rag-llm
 VLLM_API_KEY=DIEN_CUNG_KEY_VOI_SERVER
 VLLM_MAX_TOKENS=800

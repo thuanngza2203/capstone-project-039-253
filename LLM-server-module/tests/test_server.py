@@ -246,6 +246,29 @@ class ApiTests(unittest.TestCase):
         check.assert_called_once_with("https://llm.example.com/v1", "remote-model", "remote-key",
                                       timeout=120, max_tokens=800, think=None)
 
+    def test_rag_env_with_host_and_port_targets_the_same_address_as_rag(self):
+        """RAG .env mới để trống VLLM_BASE_URL; check_api phải ghép host/port như RAG."""
+        with patch.object(check_api, "read_environment", return_value={
+            "VLLM_SCHEME": "http", "VLLM_HOST": "203.0.113.10", "VLLM_PORT": "41234",
+            "VLLM_BASE_URL": "", "VLLM_MODEL": "rag-llm", "VLLM_API_KEY": "test-key",
+        }), patch.object(check_api, "check_api", return_value="OK") as check, redirect_stdout(io.StringIO()):
+            self.assertEqual(check_api.main(["--env-file", "host.env"]), 0)
+        self.assertEqual(check.call_args.args[0], "http://203.0.113.10:41234/v1")
+
+    def test_client_address_rejects_ambiguous_or_malformed_input(self):
+        cases = [
+            ({"VLLM_BASE_URL": "http://a:8000/v1", "VLLM_HOST": "b"}, "Chỉ dùng một cách"),
+            ({"VLLM_PORT": "8001"}, "VLLM_HOST"),
+            ({"VLLM_HOST": "http://203.0.113.10"}, "http://"),
+            ({"VLLM_HOST": "203.0.113.10:8001"}, "không kèm cổng"),
+            ({"VLLM_HOST": "203.0.113.10", "VLLM_PORT": "70000"}, "VLLM_PORT"),
+        ]
+        for env, message in cases:
+            with self.subTest(env=env), self.assertRaisesRegex(ValueError, message):
+                check_api.client_base_url(env)
+        self.assertEqual(check_api.client_base_url({"VLLM_SCHEME": "https", "VLLM_HOST": "llm.example.com"}),
+                         "https://llm.example.com/v1")
+
     def test_server_env_uses_stable_alias_and_live_template_defaults(self):
         with patch.object(check_api, "read_environment", return_value={
             "LLM_API_KEY": "test-key", "LLM_CHECK_MAX_TOKENS": "512",
