@@ -39,8 +39,9 @@ Các khối `bash` chạy trong **terminal Linux sau khi SSH vào Vast**. Các k
 
 Hướng dẫn dùng instance Ubuntu 24.04 x86_64, Python 3.12, GPU NVIDIA và quyền
 root/sudo. Chọn GPU có đủ VRAM cho model/context; mặc định script dùng một GPU,
-context 8192, tối đa một sequence đồng thời và 80% VRAM cho vLLM. Đây là cấu
-hình khởi đầu, không phải cam kết model sẽ vừa mọi GPU.
+context 8192, tối đa một sequence đồng thời và 90% VRAM cho vLLM khi GPU dành
+riêng cho LLM. Đây là cấu hình khởi đầu, không phải cam kết model sẽ vừa mọi
+GPU; giảm tỷ lệ nếu GPU còn chạy tiến trình khác.
 
 Thêm SSH public key vào Vast và dùng lệnh Connect/SSH của instance để đăng
 nhập. Instance dạng container không cần chạy Docker lồng bên trong.
@@ -135,7 +136,7 @@ LLM_API_KEY=DIEN_KEY_BAN_VUA_TAO
 LLM_MAX_MODEL_LEN=8192
 LLM_MAX_NUM_SEQS=1
 LLM_TENSOR_PARALLEL_SIZE=1
-LLM_GPU_MEMORY_UTILIZATION=0.80
+LLM_GPU_MEMORY_UTILIZATION=0.90
 ```
 
 `LLM_MODEL_ID` là model tải từ Hugging Face, hoặc thư mục model đã tải trên
@@ -231,6 +232,113 @@ Bạn có thể giữ tên API `qwen3.5-4b`, miễn cả hai phía khớp nhau. 
 ổn định mới, sửa cả `LLM_SERVED_MODEL_NAME` và `VLLM_MODEL` thành `rag-llm`
 một lần. Với Qwen, thêm `LLM_CHAT_TEMPLATE_KWARGS='{"enable_thinking": false}'`
 ở server trước khi bỏ `VLLM_THINK=false` ở RAG, rồi khởi động lại server/RAG.
+
+### 2.2. Dùng khoảng 43 GiB trên GPU 48 GiB dành riêng cho LLM
+
+Đặt trong `.env` **server**:
+
+```dotenv
+LLM_GPU_MEMORY_UTILIZATION=0.90
+```
+
+Với GPU báo tổng 49140 MiB, tỷ lệ này tương ứng ngân sách khoảng **43.19 GiB**,
+chừa khoảng **4.80 GiB** ngoài ngân sách. Đây là tỷ lệ trên **tổng VRAM**, không
+phải phần đang trống. vLLM dùng ngân sách cho weights, bộ nhớ chạy model và
+phần cache suy luận được tính sau khi đo bộ nhớ lúc khởi động. Số VRAM hiển thị
+trên `nvidia-smi` có thể khác ngân sách vì cách cấp phát và các tiến trình khác.
+
+`0.90` không giới hạn GPU ở 90% sức tính toán. Tăng từ `0.80` chủ yếu cho thêm
+bộ nhớ cache; nó không tự tăng chất lượng model hoặc bảo đảm sinh từng token
+nhanh hơn. Cache lưu kết quả tính toán của các token để phục vụ context dài
+hơn, nhiều request đồng thời hoặc tái sử dụng phần đầu prompt khi có hỗ trợ.
+[Tham số bộ nhớ vLLM](https://docs.vllm.ai/en/v0.29.0/cli/serve/#--gpu-memory-utilization),
+[giới hạn của prefix caching](https://docs.vllm.ai/en/stable/features/automatic_prefix_caching/)
+
+Để áp dụng cho instance đã chạy:
+
+1. `Ctrl+C` trong terminal server cũ và chờ tiến trình nhả VRAM.
+2. Sửa `.env`; giá trị `0.80` hoặc `0.70` đã ghi trong file vẫn ghi đè mặc định
+   mới. Nếu đã export biến này trong shell, sửa hoặc unset nó vì shell ưu tiên.
+3. Chạy `python serve.py --dry-run`, kiểm tra có `--gpu-memory-utilization 0.9`.
+4. Chạy `python serve.py`. Ở terminal khác, chờ API sẵn sàng rồi chạy
+   `python check_api.py` và `nvidia-smi`.
+
+Giữ context 8192 và một request đồng thời cho lần đo đầu. Nếu cần lịch sử hoặc
+tài liệu dài hơn, có thể thử `LLM_MAX_MODEL_LEN=16384`. Nếu thực sự có nhiều
+request cùng lúc, thử `LLM_MAX_NUM_SEQS=4`. Thay từng biến và so thời gian trả
+lời trên cùng bộ câu hỏi; tăng các giới hạn này không tự làm một request nhanh
+hơn. Đo cả giai đoạn khởi động và khi nhận prompt dài để kiểm tra đủ bộ nhớ.
+
+Nếu muốn chừa thêm bộ nhớ cho các đợt tải cao, `0.88` cho ngân sách khoảng
+42.23 GiB trên GPU này. Không cần cố đạt đúng một con số trên `nvidia-smi` khi
+tốc độ và khả năng phục vụ đã đáp ứng nhu cầu.
+
+### 2.3. Model đáng thử trên một GPU 48 GiB
+
+Danh sách tham khảo ngày **23/09/2026**, cho RAG văn bản tiếng Việt, context
+8192 và một request đồng thời. Dung lượng dưới đây là **file trong repository**,
+không phải tổng VRAM khi chạy; vẫn cần bộ nhớ cho cache và các buffer của vLLM.
+
+| Model ID | Dung lượng tải xấp xỉ | Mục đích thử |
+|---|---|---|
+| [`Qwen/Qwen3.8-27B-FP8`](https://huggingface.co/Qwen/Qwen3.8-27B-FP8/tree/main) | 30.9 GB | Làm mốc so sánh chất lượng trong họ Qwen. Nếu đã chạy bản này, giữ lại kết quả trước khi đổi model. |
+| [`google/gemma-4-31B-it-qat-w4a16-ct`](https://huggingface.co/google/gemma-4-31B-it-qat-w4a16-ct/tree/main) | 23.3 GB | Thử một họ model khác cho tiếng Việt; bản QAT 4-bit chính thức, định dạng compressed-tensors. |
+| [`Qwen/Qwen3.6-35B-A3B-FP8`](https://huggingface.co/Qwen/Qwen3.6-35B-A3B-FP8/tree/main) | 37.5 GB | So sánh tốc độ/chất lượng với model dense 27B; cần đo trên GPU thực tế. |
+
+Qwen 35B-A3B là MoE: khoảng 35B tham số tổng, khoảng 3B được kích hoạt mỗi
+token. Weights của toàn bộ model vẫn cần được nạp; số 35B không có nghĩa nó
+tự động trả lời tốt hơn model dense 27B.
+[Kiến trúc Qwen3.6-35B-A3B](https://huggingface.co/Qwen/Qwen3.6-35B-A3B-FP8)
+
+Gemma 4 31B có kết quả tiếng Việt tốt trên
+[SEA-HELM ngày 18/09/2026](https://leaderboard.sea-lion.ai/detailed/VI).
+Benchmark đó không xác nhận chất lượng của riêng bản QAT này trên dữ liệu bệnh
+cây, và chưa có Qwen3.8 để đối chiếu. Vì vậy, dùng nó để chọn ứng viên thử,
+không kết luận model nào tốt nhất cho RAG của dự án.
+
+**Cấu hình chung để bắt đầu so sánh:**
+
+```dotenv
+LLM_GPU_MEMORY_UTILIZATION=0.90
+LLM_MAX_MODEL_LEN=8192
+LLM_MAX_NUM_SEQS=1
+LLM_TENSOR_PARALLEL_SIZE=1
+LLM_DTYPE=auto
+LLM_LANGUAGE_MODEL_ONLY=true
+LLM_QUANTIZATION=
+LLM_CHAT_TEMPLATE_FILE=
+LLM_CHAT_TEMPLATE_KWARGS='{"enable_thinking": false}'
+```
+
+Với Qwen3.8-27B-FP8:
+
+```dotenv
+LLM_MODEL_ID=Qwen/Qwen3.8-27B-FP8
+LLM_REASONING_PARSER=qwen3
+```
+
+Với Qwen3.6-35B-A3B-FP8, thay `LLM_MODEL_ID`; giữ parser `qwen3`.
+Với Gemma 4 31B QAT, thay cả hai dòng:
+
+```dotenv
+LLM_MODEL_ID=google/gemma-4-31B-it-qat-w4a16-ct
+LLM_REASONING_PARSER=gemma4
+```
+
+Giữ nguyên API key và tên `LLM_SERVED_MODEL_NAME` đang khớp với `VLLM_MODEL`
+của RAG. Để trống quantization cho vLLM đọc định dạng từ checkpoint. Các ví dụ
+dùng template đi kèm model, tắt thinking cho câu trả lời RAG thông thường.
+Đặt `VLLM_THINK=` trống ở RAG để dùng mặc định server; giá trị `true` ở client
+sẽ bật thinking lại cho request đó.
+Tham khảo hướng dẫn runtime khi phiên bản vLLM hiện tại chưa hỗ trợ model:
+[Qwen3.8](https://recipes.vllm.ai/Qwen/Qwen3.8-27B),
+[Gemma 4](https://github.com/vllm-project/recipes/blob/main/Google/Gemma4.md).
+
+Sau mỗi lần đổi, dừng server cũ rồi dry-run, khởi động và kiểm tra API như mục
+2.1. Các cấu hình này chưa được benchmark trên instance Vast của bạn. Dùng cùng
+20–30 câu hỏi, cùng các chunk truy xuất và giới hạn output để so sánh: đúng tài
+liệu, không thêm thông tin ngoài nguồn, xử lý khi thiếu dữ liệu, thời gian chờ
+token đầu và tốc độ sinh câu trả lời. Không tăng số chunk chỉ để dùng hết VRAM.
 
 ## 3. Kết nối RAG từ host bằng SSH tunnel
 

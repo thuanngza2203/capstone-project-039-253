@@ -92,7 +92,7 @@ class ServerSettings:
         if port > 65535:
             raise ValueError("LLM_PORT phải nằm trong 1–65535.")
         try:
-            memory = float(env.get("LLM_GPU_MEMORY_UTILIZATION", "0.80"))
+            memory = float(env.get("LLM_GPU_MEMORY_UTILIZATION", "0.90"))
         except ValueError as exc:
             raise ValueError("LLM_GPU_MEMORY_UTILIZATION phải nằm trong (0, 1].") from exc
         if not math.isfinite(memory) or not 0 < memory <= 1:
