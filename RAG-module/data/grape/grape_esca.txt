@@ -1,13 +1,13 @@
 # BỆNH ESCA TRÊN CÂY NHO
 
-Nguồn tham khảo chính:
-MSBIOTECH – Vine pests and diseases: cures and treatments
-https://www.msbiotech.net/en/vine-pests-and-diseases-cures-and-treatments/
+## CÂY TRỒNG
+Nho (Grape)
 
-Nguồn bổ sung tham khảo:
-American Phytopathological Society (APS)
-University of California Integrated Pest Management (UC IPM)
+## TÊN BỆNH
+Bệnh Esca trên cây nho
+Tên tiếng Anh: Esca
 
+## TỔNG QUAN
 Bệnh Esca là một trong những bệnh thân gỗ quan trọng trên cây nho và có thể gây thiệt hại đáng kể cho vườn nho.
 
 Esca không phải là bệnh do một tác nhân duy nhất gây ra mà được xem là một phức hợp bệnh liên quan đến nhiều loài nấm sống và phát triển trong mô gỗ của cây nho.
@@ -22,9 +22,7 @@ Các loài nấm này có thể cùng tồn tại trong cây và tham gia vào n
 
 Bệnh thường phát triển chậm trong nhiều năm. Cây bị nhiễm có thể không biểu hiện triệu chứng rõ ràng trong một thời gian dài, sau đó xuất hiện triệu chứng trên lá, quả, thân hoặc đột ngột suy kiệt.
 
-
 ## TÁC NHÂN LIÊN QUAN ĐẾN BỆNH ESCA
-
 Phaeomoniella chlamydospora và Phaeoacremonium minimum thường liên quan đến hiện tượng đổi màu và hoại tử hệ thống mạch dẫn trong thân nho.
 
 Fomitiporia mediterranea liên quan đặc biệt đến hiện tượng mục trắng của phần gỗ bên trong thân cây.
@@ -33,9 +31,9 @@ Trong cây bị bệnh lâu năm, nhiều dạng tổn thương gỗ khác nhau 
 
 Vì vậy, Esca nên được hiểu là một hội chứng phức tạp của bệnh thân gỗ, thay vì một bệnh đơn giản do một loài nấm riêng lẻ gây ra.
 
+## CHU KỲ BỆNH VÀ CƠ CHẾ LÂY LAN
 
-## NẤM XÂM NHẬP VÀO CÂY NHO NHƯ THẾ NÀO?
-
+### Nấm xâm nhập vào cây nho như thế nào?
 Một con đường xâm nhập quan trọng của các nấm gây bệnh thân gỗ là các vết thương trên cây.
 
 Các vết cắt khi cắt tỉa là vị trí đặc biệt quan trọng.
@@ -55,9 +53,20 @@ Sau khi xâm nhập, nấm có thể phát triển trong hệ thống mạch và
 
 Quá trình này thường diễn ra chậm và có thể kéo dài nhiều năm trước khi triệu chứng rõ ràng xuất hiện.
 
+### Bệnh Esca lây lan như thế nào?
+Các nấm liên quan đến Esca có thể sản sinh bào tử trong môi trường.
+
+Bào tử có thể được phát tán bằng gió và nước mưa.
+
+Khi bào tử tiếp xúc với vết thương mới trên cây nho, đặc biệt là vết cắt tỉa, chúng có thể xâm nhập vào mô gỗ.
+
+Dụng cụ cắt tỉa bị nhiễm bẩn cũng có thể góp phần làm tăng nguy cơ đưa vật liệu nhiễm bệnh từ cây này sang cây khác.
+
+Tuy nhiên, sự lan truyền của bệnh thường không đơn giản như một bệnh lá lây trực tiếp nhanh chóng giữa các cây.
+
+Esca thường phát triển trong mô gỗ trong thời gian dài.
 
 ## VAI TRÒ CỦA CÁC VẾT CẮT TỈA
-
 Cắt tỉa là một hoạt động cần thiết trong sản xuất nho nhưng đồng thời tạo ra các vết thương trên thân và cành.
 
 Những vết thương mới là cửa ngõ thuận lợi để bào tử của nhiều nấm gây bệnh thân gỗ xâm nhập.
@@ -73,9 +82,7 @@ Nguy cơ nhiễm bệnh có thể tăng khi:
 
 Việc giảm số lượng vết thương không cần thiết và bảo vệ vết cắt là một phần quan trọng trong chiến lược phòng bệnh.
 
-
-## CÁCH NHẬN BIẾT BỆNH ESCA
-
+## TRIỆU CHỨNG
 Triệu chứng của bệnh Esca rất đa dạng.
 
 Không phải tất cả cây nhiễm bệnh đều biểu hiện cùng một loại triệu chứng.
@@ -84,9 +91,7 @@ Một cây có thể biểu hiện triệu chứng trên lá trong một năm nh
 
 Vì vậy, việc chẩn đoán cần dựa trên nhiều dấu hiệu kết hợp.
 
-
-### TRIỆU CHỨNG TRÊN LÁ
-
+### Trên lá
 Một trong những triệu chứng điển hình nhất của Esca là các vùng đổi màu nằm giữa các gân lá.
 
 Trên các giống nho quả trắng, mô lá giữa các gân có thể chuyển màu vàng.
@@ -110,9 +115,7 @@ Trong khi phần mô giữa các gân bị tổn thương, một dải mô xanh 
 
 Triệu chứng có thể chỉ xuất hiện trên một số chồi của cây thay vì toàn bộ tán.
 
-
-### TRIỆU CHỨNG TRÊN CHỒI VÀ CÀNH
-
+### Trên chồi và cành
 Cây bị Esca có thể biểu hiện:
 
 - Chồi sinh trưởng yếu.
@@ -123,9 +126,7 @@ Cây bị Esca có thể biểu hiện:
 
 Ở cây bệnh nặng, một phần thân hoặc cành lâu năm có thể chết.
 
-
-### TRIỆU CHỨNG BÊN TRONG THÂN VÀ GỖ
-
+### Bên trong thân và gỗ
 Triệu chứng trong mô gỗ là dấu hiệu rất quan trọng của bệnh Esca.
 
 Khi cắt ngang thân hoặc cành bị bệnh, có thể quan sát thấy các vùng gỗ đổi màu.
@@ -148,9 +149,7 @@ Phần gỗ bị mục trắng thường:
 
 Các vùng gỗ khỏe và gỗ bệnh đôi khi nằm xen kẽ nhau.
 
-
-### TRIỆU CHỨNG TRÊN QUẢ
-
+### Trên quả
 Esca cũng có thể ảnh hưởng đến quả nho.
 
 Một số quả có thể xuất hiện các đốm nhỏ, tròn và sẫm màu.
@@ -167,9 +166,7 @@ Khi bệnh nặng:
 - Chất lượng chùm quả giảm.
 - Giá trị thương phẩm giảm đáng kể.
 
-
-### HIỆN TƯỢNG SUY KIỆT ĐỘT NGỘT
-
+### Hiện tượng suy kiệt đột ngột
 Một trong những biểu hiện nghiêm trọng nhất liên quan đến Esca là hiện tượng cây hoặc một phần lớn của cây suy kiệt rất nhanh.
 
 Hiện tượng này thường được gọi là apoplexy.
@@ -185,9 +182,7 @@ Hiện tượng này có thể xảy ra trong thời tiết nóng hoặc khi câ
 
 Việc cây suy kiệt đột ngột mà trước đó ít biểu hiện triệu chứng khiến Esca trở thành bệnh khó dự đoán.
 
-
 ## TẠI SAO BỆNH ESCA KHÓ PHÁT HIỆN?
-
 Esca có thời gian phát triển dài và triệu chứng không ổn định.
 
 Một cây bị nhiễm có thể:
@@ -199,24 +194,22 @@ Một cây bị nhiễm có thể:
 
 Do đó, không thể khẳng định cây hoàn toàn khỏe chỉ vì không thấy triệu chứng lá trong một mùa.
 
+## PHÂN BIỆT ESCA VỚI THIẾU DINH DƯỠNG
+Vàng lá hoặc đỏ lá không phải lúc nào cũng là Esca.
 
-## BỆNH ESCA LÂY LAN NHƯ THẾ NÀO?
+Thiếu dinh dưỡng cũng có thể gây đổi màu giữa các gân.
 
-Các nấm liên quan đến Esca có thể sản sinh bào tử trong môi trường.
+Tuy nhiên, Esca thường có:
 
-Bào tử có thể được phát tán bằng gió và nước mưa.
+- Các dải hoại tử đặc trưng giữa gân.
+- Dạng vằn hổ.
+- Triệu chứng chỉ trên một phần của cây.
+- Tổn thương hoặc đổi màu trong thân gỗ.
+- Tiền sử chết cành hoặc suy kiệt.
 
-Khi bào tử tiếp xúc với vết thương mới trên cây nho, đặc biệt là vết cắt tỉa, chúng có thể xâm nhập vào mô gỗ.
-
-Dụng cụ cắt tỉa bị nhiễm bẩn cũng có thể góp phần làm tăng nguy cơ đưa vật liệu nhiễm bệnh từ cây này sang cây khác.
-
-Tuy nhiên, sự lan truyền của bệnh thường không đơn giản như một bệnh lá lây trực tiếp nhanh chóng giữa các cây.
-
-Esca thường phát triển trong mô gỗ trong thời gian dài.
-
+Nếu chỉ dựa vào màu lá mà không kiểm tra thân gỗ, nguy cơ chẩn đoán nhầm khá cao.
 
 ## CÁC YẾU TỐ LÀM TĂNG NGUY CƠ BỆNH
-
 Nguy cơ bệnh có thể tăng khi:
 
 - Vườn nho có tuổi cao.
@@ -232,35 +225,12 @@ Nguy cơ bệnh có thể tăng khi:
 
 Cây khỏe không hoàn toàn miễn nhiễm với Esca, nhưng duy trì sức khỏe tổng thể giúp cây chịu đựng tổn thương tốt hơn.
 
-
-## CÁCH QUẢN LÝ BỆNH ESCA
-
+## PHÒNG NGỪA
 Esca là một bệnh thân gỗ lâu năm và rất khó chữa khỏi khi nấm đã lan sâu vào thân.
 
 Do đó, chiến lược quản lý quan trọng nhất là phòng ngừa nhiễm bệnh mới, phát hiện sớm cây bệnh và hạn chế nguồn bệnh trong vườn.
 
-
-### THEO DÕI VƯỜN NHO THƯỜNG XUYÊN
-
-Nên kiểm tra vườn trong suốt mùa sinh trưởng.
-
-Các dấu hiệu cần chú ý gồm:
-
-- Lá có dạng vằn hổ.
-- Lá vàng hoặc đỏ bất thường giữa các gân.
-- Chồi suy yếu.
-- Cành chết.
-- Cây phát triển không đều.
-- Đốm đen trên quả.
-- Cây hoặc một phần tán héo đột ngột.
-
-Nên đánh dấu các cây nghi nhiễm để kiểm tra lại vào mùa cắt tỉa.
-
-Việc ghi chép vị trí cây bệnh qua nhiều năm giúp xác định xu hướng phát triển của bệnh trong vườn.
-
-
-### VỆ SINH DỤNG CỤ CẮT TỈA
-
+### Vệ sinh dụng cụ cắt tỉa
 Dụng cụ cắt tỉa nên được giữ sạch.
 
 Trong những vườn có cây bệnh rõ ràng, nên vệ sinh dụng cụ khi chuyển từ cây bệnh sang cây khỏe.
@@ -269,9 +239,7 @@ Việc vệ sinh dụng cụ giúp giảm nguy cơ mang mô hoặc vật liệu 
 
 Dụng cụ cũng nên được giữ sắc để tạo vết cắt gọn và giảm tổn thương mô.
 
-
-### QUẢN LÝ VẾT CẮT TỈA
-
+### Quản lý vết cắt tỉa
 Vết cắt tỉa là một trong những vị trí xâm nhập quan trọng của các nấm gây bệnh thân gỗ.
 
 Để giảm nguy cơ:
@@ -284,44 +252,7 @@ Vết cắt tỉa là một trong những vị trí xâm nhập quan trọng c�
 
 Ở những khu vực Esca và các bệnh thân gỗ phổ biến, bảo vệ vết cắt là một phần quan trọng của chương trình quản lý.
 
-
-### LOẠI BỎ MÔ GỖ BỊ BỆNH
-
-Khi bệnh mới giới hạn ở một phần thân hoặc cành, trong một số trường hợp có thể cắt bỏ phần gỗ bị bệnh.
-
-Cần cắt vào phần gỗ khỏe bên dưới vùng hoại tử.
-
-Phần gỗ bị bệnh đã cắt ra nên được đưa khỏi vườn hoặc xử lý phù hợp.
-
-Không nên để các đoạn thân hoặc cành bệnh nằm lâu trong vườn vì chúng có thể tiếp tục chứa nấm.
-
-
-### PHỤC HỒI CÂY BẰNG TẠO THÂN MỚI
-
-Ở một số cây mà phần thân trên bị bệnh nhưng gốc và phần thấp của thân vẫn khỏe, có thể cân nhắc tạo một thân mới từ chồi khỏe.
-
-Biện pháp này chỉ có ý nghĩa nếu phần mô được giữ lại không bị tổn thương nghiêm trọng.
-
-Cần kiểm tra mặt cắt gỗ để đánh giá phạm vi hoại tử trước khi quyết định phục hồi cây.
-
-
-### LOẠI BỎ CÂY BỆNH NẶNG
-
-Những cây có:
-
-- Mục gỗ nghiêm trọng.
-- Nhiều phần thân chết.
-- Suy kiệt lặp lại.
-- Năng suất rất thấp.
-- Hiện tượng apoplexy nghiêm trọng.
-
-có thể không còn khả năng phục hồi kinh tế.
-
-Trong trường hợp này, loại bỏ cây và xử lý vật liệu bệnh có thể là lựa chọn phù hợp hơn.
-
-
-### QUẢN LÝ ĐẤT VÀ BỘ RỄ
-
+### Quản lý đất và bộ rễ
 Duy trì bộ rễ khỏe giúp cây chịu đựng stress tốt hơn.
 
 Cần:
@@ -335,9 +266,7 @@ Cần:
 
 Quản lý đất và rễ không thể loại bỏ nấm Esca đã có trong thân nhưng giúp duy trì sức khỏe tổng thể của cây.
 
-
-### VAI TRÒ CỦA TRICHODERMA
-
+### Vai trò của Trichoderma
 Trichoderma là một chi nấm có nhiều loài được sử dụng trong kiểm soát sinh học bệnh cây.
 
 Một số chủng Trichoderma có khả năng:
@@ -362,9 +291,57 @@ Hiệu quả phụ thuộc vào:
 
 Chỉ sử dụng chế phẩm sinh học được đăng ký hợp pháp cho mục đích tương ứng tại khu vực sản xuất.
 
+## THEO DÕI VÀ RA QUYẾT ĐỊNH
 
-### VỀ THUỐC DIỆT NẤM VÀ THUỐC DIỆT KHUẨN
+### Theo dõi vườn nho thường xuyên
+Nên kiểm tra vườn trong suốt mùa sinh trưởng.
 
+Các dấu hiệu cần chú ý gồm:
+
+- Lá có dạng vằn hổ.
+- Lá vàng hoặc đỏ bất thường giữa các gân.
+- Chồi suy yếu.
+- Cành chết.
+- Cây phát triển không đều.
+- Đốm đen trên quả.
+- Cây hoặc một phần tán héo đột ngột.
+
+Nên đánh dấu các cây nghi nhiễm để kiểm tra lại vào mùa cắt tỉa.
+
+Việc ghi chép vị trí cây bệnh qua nhiều năm giúp xác định xu hướng phát triển của bệnh trong vườn.
+
+## XỬ LÝ KHI CÂY ĐÃ BỊ BỆNH
+
+### Loại bỏ mô gỗ bị bệnh
+Khi bệnh mới giới hạn ở một phần thân hoặc cành, trong một số trường hợp có thể cắt bỏ phần gỗ bị bệnh.
+
+Cần cắt vào phần gỗ khỏe bên dưới vùng hoại tử.
+
+Phần gỗ bị bệnh đã cắt ra nên được đưa khỏi vườn hoặc xử lý phù hợp.
+
+Không nên để các đoạn thân hoặc cành bệnh nằm lâu trong vườn vì chúng có thể tiếp tục chứa nấm.
+
+### Phục hồi cây bằng tạo thân mới
+Ở một số cây mà phần thân trên bị bệnh nhưng gốc và phần thấp của thân vẫn khỏe, có thể cân nhắc tạo một thân mới từ chồi khỏe.
+
+Biện pháp này chỉ có ý nghĩa nếu phần mô được giữ lại không bị tổn thương nghiêm trọng.
+
+Cần kiểm tra mặt cắt gỗ để đánh giá phạm vi hoại tử trước khi quyết định phục hồi cây.
+
+### Loại bỏ cây bệnh nặng
+Những cây có:
+
+- Mục gỗ nghiêm trọng.
+- Nhiều phần thân chết.
+- Suy kiệt lặp lại.
+- Năng suất rất thấp.
+- Hiện tượng apoplexy nghiêm trọng.
+
+có thể không còn khả năng phục hồi kinh tế.
+
+Trong trường hợp này, loại bỏ cây và xử lý vật liệu bệnh có thể là lựa chọn phù hợp hơn.
+
+### Về thuốc diệt nấm và thuốc diệt khuẩn
 Nguồn MSBIOTECH đề cập việc sử dụng các biện pháp hóa học nhằm hạn chế bệnh.
 
 Tuy nhiên, Esca là bệnh nằm sâu trong mô gỗ nên việc kiểm soát bằng thuốc sau khi cây đã nhiễm nặng rất khó.
@@ -382,9 +359,7 @@ Chiến lược hiệu quả hơn thường tập trung vào:
 
 Không nên tự ý sử dụng thuốc diệt khuẩn chỉ vì Esca được một số nguồn thương mại mô tả như một bệnh phức hợp có vi khuẩn tham gia. Các tài liệu bệnh học hiện nay chủ yếu xem Esca là một phức hợp bệnh thân gỗ liên quan đến nhiều loài nấm.
 
-
 ## LƯU Ý KHI SỬ DỤNG SẢN PHẨM BẢO VỆ THỰC VẬT
-
 Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho cây nho và mục đích cần xử lý tại khu vực sản xuất.
 
 Luôn tuân thủ nhãn sản phẩm.
@@ -397,9 +372,7 @@ Không áp dụng trực tiếp hướng dẫn liều lượng từ tài liệu 
 
 Kết hợp biện pháp hóa học hoặc sinh học với vệ sinh và quản lý vết cắt để đạt hiệu quả tốt hơn.
 
-
-## BỔ SUNG: CÁCH KIỂM TRA NHANH CÂY NGHI BỊ ESCA
-
+## KIỂM TRA NHANH CÂY NGHI BỊ ESCA
 Khi nghi ngờ một cây nho bị Esca, có thể kiểm tra theo trình tự sau:
 
 - Quan sát lá để tìm dạng vằn hổ.
@@ -415,26 +388,7 @@ Khi nghi ngờ một cây nho bị Esca, có thể kiểm tra theo trình tự s
 
 Triệu chứng trên lá có thể giống một số rối loạn khác nên chẩn đoán chính xác nhất cần kết hợp triệu chứng ngoài tán và tổn thương trong mô gỗ.
 
-
-## PHÂN BIỆT ESCA VỚI THIẾU DINH DƯỠNG
-
-Vàng lá hoặc đỏ lá không phải lúc nào cũng là Esca.
-
-Thiếu dinh dưỡng cũng có thể gây đổi màu giữa các gân.
-
-Tuy nhiên, Esca thường có:
-
-- Các dải hoại tử đặc trưng giữa gân.
-- Dạng vằn hổ.
-- Triệu chứng chỉ trên một phần của cây.
-- Tổn thương hoặc đổi màu trong thân gỗ.
-- Tiền sử chết cành hoặc suy kiệt.
-
-Nếu chỉ dựa vào màu lá mà không kiểm tra thân gỗ, nguy cơ chẩn đoán nhầm khá cao.
-
-
 ## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
-
 Bệnh Esca trên cây nho có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 
 - Esca là một phức hợp bệnh thân gỗ trên nho.
@@ -461,3 +415,12 @@ Bệnh Esca trên cây nho có thể được nhận biết và quản lý dựa
 - Trichoderma không thể phục hồi phần gỗ đã mục nặng.
 - Không có biện pháp phun đơn giản nào có thể chữa khỏi hoàn toàn Esca khi bệnh đã lan sâu trong thân.
 - Quản lý tổng hợp và phòng ngừa nhiễm mới là chiến lược quan trọng nhất.
+
+## NGUỒN THAM KHẢO
+Nguồn tham khảo chính:
+MSBIOTECH – Vine pests and diseases: cures and treatments
+https://www.msbiotech.net/en/vine-pests-and-diseases-cures-and-treatments/
+
+Nguồn bổ sung tham khảo:
+American Phytopathological Society (APS)
+University of California Integrated Pest Management (UC IPM)

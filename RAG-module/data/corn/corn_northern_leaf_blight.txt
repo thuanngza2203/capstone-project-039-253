@@ -1,20 +1,24 @@
 # BỆNH CHÁY LÁ NGÔ PHƯƠNG BẮC
 
-Nguồn tham khảo chính:
-Wikipedia – Northern corn leaf blight
-https://en.wikipedia.org/wiki/Northern_corn_leaf_blight
+## CÂY TRỒNG
+Ngô (Corn)
 
+## TÊN BỆNH
+Bệnh cháy lá ngô phương Bắc
+Tên tiếng Anh: Northern Corn Leaf Blight (NCLB)
+Tên gọi khác: Turcicum Leaf Blight (TLB)
+
+## TỔNG QUAN
 Bệnh cháy lá ngô phương Bắc, còn được gọi là Northern Corn Leaf Blight (NCLB) hoặc Turcicum Leaf Blight (TLB), là một bệnh lá quan trọng trên cây ngô.
-
-Bệnh do nấm Exserohilum turcicum gây ra. Tên giai đoạn hữu tính của nấm là Setosphaeria turcica.
 
 Dấu hiệu điển hình của bệnh là các vết bệnh kéo dài có hình dạng giống điếu xì gà trên lá. Trên các giống ngô mẫn cảm, bệnh có thể gây giảm năng suất đáng kể nếu xuất hiện sớm và phát triển mạnh trong giai đoạn cây đang ra hoa và tích lũy chất khô cho hạt.
 
 Bệnh gây thiệt hại chủ yếu bằng cách phá hủy mô lá, làm giảm diện tích lá xanh và giảm khả năng quang hợp của cây.
 
+## TÁC NHÂN GÂY BỆNH
+Bệnh do nấm Exserohilum turcicum gây ra. Tên giai đoạn hữu tính của nấm là Setosphaeria turcica.
 
-## CÁCH NHẬN BIẾT BỆNH CHÁY LÁ NGÔ PHƯƠNG BẮC
-
+## TRIỆU CHỨNG
 ### Triệu chứng ban đầu
 
 Các vết bệnh ban đầu có thể xuất hiện dưới dạng những vệt hẹp màu nâu nhạt chạy song song với gân lá.
@@ -24,7 +28,6 @@ Khi bệnh tiếp tục phát triển, các vết bệnh mở rộng và kéo d�
 Vết bệnh trưởng thành thường có hình bầu dục dài hoặc hình dạng giống điếu xì gà.
 
 Màu sắc thường từ xanh xám đến xám nâu hoặc nâu nhạt tùy theo tuổi của vết bệnh và điều kiện môi trường.
-
 
 ### Đặc điểm vết bệnh điển hình
 
@@ -41,7 +44,6 @@ Trong điều kiện ẩm, bề mặt vết bệnh có thể có màu sẫm ho�
 
 Đây là kết quả của quá trình nấm tạo bào tử trên mô bệnh.
 
-
 ### Vết bệnh khi bệnh phát triển nặng
 
 Khi số lượng vết bệnh tăng lên, các vết có thể liên kết với nhau.
@@ -51,7 +53,6 @@ Nhiều vết bệnh hợp lại tạo thành các vùng mô chết lớn trên 
 Nếu bệnh rất nặng, toàn bộ lá có thể bị phá hủy.
 
 Cuối vụ, những cây bị nhiễm bệnh nghiêm trọng có thể trông giống như đã bị chết do sương giá sớm.
-
 
 ### Triệu chứng trên các giống có mức độ kháng khác nhau
 
@@ -77,9 +78,7 @@ Trên giống có mức độ kháng cao:
 
 Một số giống mang gen kháng có thể hình thành các vệt dài màu vàng nhạt. Những triệu chứng này đôi khi có thể bị nhầm với các bệnh hoặc rối loạn khác trên ngô.
 
-
 ## VỊ TRÍ BỆNH VÀ NGUY CƠ MẤT NĂNG SUẤT
-
 Vị trí của vết bệnh trên cây có ảnh hưởng lớn đến mức độ thiệt hại.
 
 Bệnh đặc biệt nguy hiểm nếu các lá phía trên bắp bị nhiễm trong hoặc ngay sau giai đoạn ra hoa.
@@ -95,9 +94,7 @@ Nếu các lá này bị phá hủy sớm:
 
 Ở những cây bị bệnh nặng, vết bệnh cũng có thể xuất hiện trên lá bi hoặc bẹ lá.
 
-
-## CHU KỲ BỆNH
-
+## CHU KỲ BỆNH VÀ CƠ CHẾ LÂY LAN
 Trong điều kiện tự nhiên, nấm Exserohilum turcicum chủ yếu sinh sản bằng bào tử vô tính.
 
 Ở các vùng khí hậu ôn đới, nấm có thể tồn tại qua mùa đông trong tàn dư cây ngô bị nhiễm bệnh.
@@ -109,7 +106,6 @@ Nấm có thể tồn tại dưới các dạng:
 - Bào tử nghỉ có thành dày.
 
 Khi điều kiện môi trường trở nên thuận lợi vào vụ sau, nấm bắt đầu tạo ra bào tử trên tàn dư cây bệnh.
-
 
 ### Nguồn bệnh đầu vụ
 
@@ -123,7 +119,6 @@ Sau đó, bào tử được phát tán bằng:
 
 Bào tử có thể được đưa từ tàn dư lên các lá khỏe của cây ngô đang phát triển.
 
-
 ### Quá trình nhiễm bệnh
 
 Khi bào tử rơi lên bề mặt lá và gặp điều kiện thích hợp, bào tử nảy mầm.
@@ -133,7 +128,6 @@ Nấm có thể xâm nhập trực tiếp vào mô lá.
 Sau khi xâm nhập, nấm phát triển trong mô và làm các tế bào bị tổn thương.
 
 Các đốm hoại tử có thể bắt đầu hình thành khoảng 48 giờ sau quá trình nhiễm trong điều kiện thích hợp, mặc dù vết bệnh điển hình cần thêm thời gian để phát triển rõ ràng.
-
 
 ### Lây nhiễm thứ cấp
 
@@ -151,9 +145,7 @@ Các chu kỳ lặp lại nhiều lần khiến bệnh tăng nhanh khi thời ti
 
 Cuối vụ, nấm trở lại trạng thái tồn tại trong tàn dư ngô và trở thành nguồn bệnh cho vụ sau.
 
-
-## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH PHÁT TRIỂN
-
+## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH
 Bệnh cháy lá ngô phương Bắc phát triển tốt nhất trong điều kiện tương đối mát và ẩm.
 
 Theo nguồn Wikipedia, điều kiện đặc biệt thuận lợi gồm:
@@ -164,7 +156,6 @@ Theo nguồn Wikipedia, điều kiện đặc biệt thuận lợi gồm:
 - Có mưa hoặc sương kéo dài.
 
 Ánh sáng mạnh và nhiệt độ cao có thể hạn chế quá trình nhiễm và phát triển bệnh.
-
 
 ### Điều kiện thuận lợi cho tạo bào tử
 
@@ -178,7 +169,6 @@ Khi độ ẩm tăng trở lại, quá trình tạo bào tử có thể tiếp t
 
 Vì lý do này, nấm thường tạo nhiều bào tử vào ban đêm khi độ ẩm cao và giảm hoạt động vào ban ngày khi không khí khô hơn.
 
-
 ### Ảnh hưởng của mưa
 
 Sau các đợt mưa, độ ẩm tăng lên và số lượng bào tử được tạo ra trong ruộng có thể tăng đáng kể.
@@ -187,9 +177,7 @@ Mưa cũng hỗ trợ việc phát tán bào tử giữa các lá và cây.
 
 Những giai đoạn có mưa thường xuyên, sương nhiều và nhiệt độ vừa phải có thể dẫn đến sự gia tăng nhanh của bệnh.
 
-
 ## CÁC YẾU TỐ LÀM TĂNG NGUY CƠ BỆNH
-
 Nguy cơ bệnh tăng khi:
 
 - Trồng giống ngô mẫn cảm.
@@ -202,9 +190,9 @@ Nguy cơ bệnh tăng khi:
 - Bệnh xuất hiện sớm trong vụ.
 - Bệnh đã xuất hiện phổ biến trong khu vực ở các vụ trước.
 
-
 ## MỨC ĐỘ GÂY HẠI
 
+### Ảnh hưởng đến năng suất
 Bệnh cháy lá ngô phương Bắc có thể gây giảm năng suất đáng kể khi bệnh xuất hiện sớm và phát triển mạnh.
 
 Thiệt hại chủ yếu xảy ra do vết bệnh phá hủy mô lá.
@@ -227,9 +215,7 @@ Mức thiệt hại thực tế phụ thuộc vào:
 - Điều kiện thời tiết.
 - Thời gian bệnh tiếp tục phát triển.
 
-
-## NGUY CƠ THỐI THÂN VÀ ĐỔ NGÃ
-
+### Nguy cơ thối thân và đổ ngã
 Cây bị bệnh cháy lá ngô phương Bắc thường có nguy cơ mắc bệnh thối thân cao hơn cây khỏe.
 
 Khi các lá bị phá hủy, khả năng quang hợp giảm.
@@ -245,9 +231,7 @@ Khi các lá bị phá hủy, khả năng quang hợp giảm.
 
 Những ruộng bị bệnh nặng nên được theo dõi khả năng đứng cây khi gần đến thời điểm thu hoạch.
 
-
-## CÁCH QUẢN LÝ BỆNH CHÁY LÁ NGÔ PHƯƠNG BẮC
-
+## PHÒNG NGỪA
 Quản lý bệnh nên dựa trên nhiều biện pháp kết hợp.
 
 Không nên phụ thuộc hoàn toàn vào một phương pháp duy nhất.
@@ -261,9 +245,7 @@ Các biện pháp quan trọng gồm:
 - Quản lý cỏ dại và độ ẩm trong tán.
 - Sử dụng thuốc diệt nấm khi nguy cơ kinh tế đủ cao.
 
-
-## LỰA CHỌN GIỐNG KHÁNG BỆNH
-
+### Lựa chọn giống kháng bệnh
 Trồng giống ngô kháng bệnh là biện pháp quản lý quan trọng nhất.
 
 Một số giống ngô có các gen kháng đặc hiệu như:
@@ -277,18 +259,14 @@ Các gen Ht1, Ht2 và Ht3 thường làm vết bệnh nhỏ hơn, có màu vàng
 
 Gen HtN có thể làm chậm quá trình xuất hiện triệu chứng cho đến sau giai đoạn tung phấn.
 
-
-### Hạn chế của tính kháng đơn gen
-
+**Hạn chế của tính kháng đơn gen:**
 Một gen kháng riêng lẻ không phải lúc nào cũng có hiệu quả lâu dài.
 
 Nấm có nhiều chủng sinh lý khác nhau và một số chủng có thể vượt qua một gen kháng cụ thể.
 
 Vì vậy, nếu cùng một gen kháng được sử dụng rộng rãi trong thời gian dài, quần thể nấm có khả năng thích nghi và các chủng có khả năng gây bệnh trên giống đó có thể trở nên phổ biến hơn.
 
-
-### Kháng đa gen
-
+**Kháng đa gen:**
 Các chương trình chọn giống hiện đại thường hướng đến việc kết hợp nhiều gen kháng trong cùng một giống.
 
 Kháng đa gen thường bền vững hơn so với phụ thuộc vào một gen duy nhất.
@@ -297,9 +275,7 @@ Tuy nhiên, ngay cả giống có khả năng kháng vẫn có thể xuất hi�
 
 Do đó, giống kháng nên được kết hợp với các biện pháp canh tác khác.
 
-
-## QUẢN LÝ TÀN DƯ NGÔ
-
+### Quản lý tàn dư ngô
 Nấm tồn tại trong tàn dư cây ngô bị bệnh.
 
 Vì vậy, tàn dư ngô trên ruộng là nguồn bệnh quan trọng cho vụ sau.
@@ -315,9 +291,7 @@ Có thể cân nhắc:
 
 Tuy nhiên, việc làm đất cần cân nhắc đồng thời nguy cơ xói mòn và mục tiêu bảo tồn đất.
 
-
-## LUÂN CANH CÂY TRỒNG
-
+### Luân canh cây trồng
 Luân canh giúp giảm lượng tàn dư ngô nhiễm bệnh trong ruộng.
 
 Trong hệ thống làm đất thông thường, luân canh khỏi ngô trong khoảng một năm có thể giúp giảm nguồn bệnh.
@@ -326,9 +300,7 @@ Trong hệ thống ít làm đất hoặc canh tác bảo tồn, tàn dư phân 
 
 Việc kết hợp luân canh và quản lý tàn dư thường hiệu quả hơn chỉ áp dụng một biện pháp riêng lẻ.
 
-
-## QUẢN LÝ CỎ DẠI VÀ ĐỘ ẨM TRONG RUỘNG
-
+### Quản lý cỏ dại và độ ẩm trong ruộng
 Cỏ dại dày có thể làm giảm sự lưu thông không khí trong tán cây và duy trì độ ẩm cao lâu hơn.
 
 Quản lý cỏ dại tốt giúp:
@@ -339,9 +311,7 @@ Quản lý cỏ dại tốt giúp:
 
 Nếu có thể, nên hạn chế trồng ở các khu vực thấp thường xuyên có sương dày hoặc sương mù kéo dài vì những điều kiện này làm tăng thời gian lá ướt.
 
-
-## THEO DÕI ĐỒNG RUỘNG
-
+## THEO DÕI VÀ RA QUYẾT ĐỊNH
 Theo dõi ruộng thường xuyên là rất quan trọng.
 
 Khi kiểm tra:
@@ -357,18 +327,16 @@ Khi kiểm tra:
 
 Bệnh xuất hiện trên các lá phía trên vào giai đoạn quanh ra hoa cần được chú ý nhiều hơn bệnh chỉ xuất hiện ở các lá già phía dưới vào cuối vụ.
 
+## XỬ LÝ KHI BỆNH ĐÃ XUẤT HIỆN
 
-## SỬ DỤNG THUỐC DIỆT NẤM
-
+### Sử dụng thuốc diệt nấm
 Thuốc diệt nấm phun qua lá có thể được sử dụng để hạn chế bệnh cháy lá ngô phương Bắc.
 
 Mục tiêu của việc phun là bảo vệ các lá quan trọng khỏi bị nhiễm mới và duy trì diện tích lá xanh trong giai đoạn tạo năng suất.
 
 Nguồn tham khảo cho thấy việc duy trì phần lớn tán lá phía trên không bị bệnh trong phần lớn giai đoạn tích lũy hạt có thể giúp hạn chế mất năng suất.
 
-
-### Thời điểm phun
-
+**Thời điểm phun:**
 Trước giai đoạn trổ cờ, cây vẫn đang tiếp tục tạo lá mới.
 
 Do đó, thời điểm sử dụng thuốc cần tính đến việc bảo vệ các mô lá mới hình thành.
@@ -387,9 +355,7 @@ Quyết định sử dụng thuốc nên dựa trên:
 
 Không nên phun thuốc chỉ vì phát hiện một vài vết bệnh ở lá thấp.
 
-
 ## LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
-
 Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho cây ngô và bệnh cần xử lý tại khu vực sản xuất.
 
 Luôn đọc và tuân thủ hướng dẫn trên nhãn.
@@ -402,9 +368,7 @@ Nếu phải sử dụng thuốc nhiều lần, nên luân phiên các nhóm cơ
 
 Kết hợp biện pháp hóa học với giống kháng, luân canh và quản lý tàn dư để đạt hiệu quả bền vững hơn.
 
-
-## BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI ĐỒNG RUỘNG
-
+## KIỂM TRA NHANH NGOÀI ĐỒNG RUỘNG
 Khi nghi ngờ bệnh cháy lá ngô phương Bắc, có thể kiểm tra theo trình tự sau:
 
 - Tìm các vết bệnh kéo dài trên lá.
@@ -420,9 +384,7 @@ Khi nghi ngờ bệnh cháy lá ngô phương Bắc, có thể kiểm tra theo t
 
 Nếu triệu chứng không điển hình hoặc nhiều bệnh lá xuất hiện đồng thời, nên xác nhận bằng chuyên gia bệnh cây hoặc phòng chẩn đoán.
 
-
 ## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
-
 Bệnh cháy lá ngô phương Bắc có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 
 - Bệnh do nấm Exserohilum turcicum gây ra.
@@ -447,3 +409,15 @@ Bệnh cháy lá ngô phương Bắc có thể được nhận biết và quản
 - Cần theo dõi ruộng và đặc biệt chú ý bệnh trên các lá quanh bắp và phía trên bắp.
 - Thuốc diệt nấm chỉ nên được cân nhắc khi áp lực bệnh và nguy cơ kinh tế đủ cao.
 - Chỉ sử dụng thuốc bảo vệ thực vật được đăng ký hợp pháp và tuân thủ đúng nhãn.
+
+## NGUỒN THAM KHẢO
+Nguồn gốc:
+Wikipedia – Northern corn leaf blight
+https://en.wikipedia.org/wiki/Northern_corn_leaf_blight
+
+Nguồn đối chiếu bổ sung:
+University of Minnesota Extension — Northern corn leaf blight
+https://extension.umn.edu/agriculture/crop-production/corn/northern-corn-leaf-blight
+
+Crop Protection Network — An Overview of Northern Corn Leaf Blight
+https://cropprotectionnetwork.org/publications/an-overview-of-northern-corn-leaf-blight

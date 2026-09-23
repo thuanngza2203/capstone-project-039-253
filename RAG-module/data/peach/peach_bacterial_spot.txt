@@ -1,9 +1,14 @@
 # BỆNH ĐỐM VI KHUẨN TRÊN CÂY ĐÀO
 
-Nguồn tham khảo chính:
-Alabama Cooperative Extension System
-https://www.aces.edu/blog/topics/crop-production/bacterial-spot-treatment-in-peaches/
+## CÂY TRỒNG
+Đào (Peach)
 
+## TÊN BỆNH
+Bệnh đốm vi khuẩn trên cây đào
+Tên tiếng Anh: Bacterial spot of peach
+Tác nhân: Xanthomonas arboricola pv. pruni
+
+## TỔNG QUAN
 Bệnh đốm vi khuẩn trên cây đào là một bệnh quan trọng về kinh tế, đặc biệt trong những năm có điều kiện thời tiết thuận lợi cho vi khuẩn phát triển.
 
 Bệnh do vi khuẩn Xanthomonas arboricola pv. pruni gây ra.
@@ -18,9 +23,7 @@ Bệnh cũng làm giảm tỷ lệ quả đạt chất lượng thương phẩm,
 
 Những cây bị rụng lá nghiêm trọng còn dễ bị tổn thương do lạnh vào mùa đông hơn.
 
-
 ## TÁC NHÂN GÂY BỆNH
-
 Bệnh đốm vi khuẩn trên cây đào do Xanthomonas arboricola pv. pruni gây ra.
 
 Đây là vi khuẩn gây bệnh có khả năng tồn tại trên mô cây bị nhiễm và tạo nguồn bệnh cho vụ sau.
@@ -33,11 +36,9 @@ Vi khuẩn có thể gây tổn thương trên:
 
 Khi gặp điều kiện ẩm và nhiệt độ thuận lợi, vi khuẩn có thể tăng nhanh và lan từ mô bệnh sang mô khỏe.
 
+## TRIỆU CHỨNG
 
-## CÁCH NHẬN BIẾT BỆNH ĐỐM VI KHUẨN
-
-### Triệu chứng trên lá
-
+### Trên lá
 Triệu chứng đầu tiên thường xuất hiện trên lá.
 
 Ban đầu, trên lá hình thành các đốm nhỏ có vẻ như bị thấm nước.
@@ -65,9 +66,7 @@ Khi bệnh tiếp tục phát triển, phần mô chết trong vết bệnh có 
 
 Nếu cây mất nhiều lá trong giai đoạn đầu mùa, khả năng nuôi quả giảm và kích thước quả có thể bị ảnh hưởng.
 
-
 ### Ảnh hưởng của rụng lá
-
 Lá là cơ quan quang hợp chính của cây.
 
 Khi bệnh gây rụng lá đáng kể:
@@ -80,9 +79,37 @@ Khi bệnh gây rụng lá đáng kể:
 
 Cây bị rụng lá nặng cũng có thể suy yếu và dễ bị tổn thương bởi điều kiện lạnh sau đó.
 
+### Trên quả
+Trong trường hợp bệnh nặng hơn, vi khuẩn có thể gây nhiễm trên quả.
 
-## PHÂN BIỆT VỚI TỔN THƯƠNG DO ĐỒNG
+Các đốm nhỏ có vẻ thấm nước có thể xuất hiện trên quả ở bất kỳ thời điểm nào trong quá trình phát triển.
 
+**Nhiễm bệnh sớm trên quả:**
+Nhiễm bệnh ở giai đoạn quả còn non là trường hợp đáng lo ngại nhất.
+
+Khi vi khuẩn xâm nhập, mô quả tại vị trí nhiễm có thể bị phá hủy và chết.
+
+Trong khi đó, mô sống xung quanh vẫn tiếp tục phát triển khi quả lớn lên.
+
+Do sự khác biệt trong tốc độ phát triển giữa mô sống và mô chết, bề mặt quả có thể hình thành:
+
+- Vết lõm.
+- Hố nhỏ.
+- Vùng nứt.
+- Bề mặt gồ ghề.
+
+Hiện tượng này làm quả mất hình thức và giảm mạnh giá trị thương phẩm.
+
+**Nhiễm bệnh muộn trên quả:**
+Nếu nhiễm bệnh xảy ra sau khi quả đã hoàn thành phần lớn quá trình tăng kích thước, tổn thương thường nông hơn.
+
+Các vết bệnh chủ yếu nằm trên bề mặt.
+
+Do đó, nhiễm muộn thường gây tổn thương bề mặt thay vì tạo các vết lõm sâu như nhiễm sớm.
+
+## PHÂN BIỆT VỚI CÁC VẤN ĐỀ TƯƠNG TỰ
+
+### Phân biệt với tổn thương do đồng
 Các sản phẩm có chứa đồng thường được sử dụng trong chương trình quản lý bệnh đốm vi khuẩn.
 
 Tuy nhiên, đồng cũng có thể gây tổn thương trên lá nếu cây nhạy cảm hoặc điều kiện sử dụng không phù hợp.
@@ -105,43 +132,7 @@ Tổn thương do đồng:
 
 Nếu vừa phun sản phẩm chứa đồng và sau đó xuất hiện nhiều vết đốm bất thường, cần cân nhắc khả năng tổn thương do thuốc trước khi kết luận bệnh tăng nặng.
 
-
-## TRIỆU CHỨNG TRÊN QUẢ
-
-Trong trường hợp bệnh nặng hơn, vi khuẩn có thể gây nhiễm trên quả.
-
-Các đốm nhỏ có vẻ thấm nước có thể xuất hiện trên quả ở bất kỳ thời điểm nào trong quá trình phát triển.
-
-
-### Nhiễm bệnh sớm trên quả
-
-Nhiễm bệnh ở giai đoạn quả còn non là trường hợp đáng lo ngại nhất.
-
-Khi vi khuẩn xâm nhập, mô quả tại vị trí nhiễm có thể bị phá hủy và chết.
-
-Trong khi đó, mô sống xung quanh vẫn tiếp tục phát triển khi quả lớn lên.
-
-Do sự khác biệt trong tốc độ phát triển giữa mô sống và mô chết, bề mặt quả có thể hình thành:
-
-- Vết lõm.
-- Hố nhỏ.
-- Vùng nứt.
-- Bề mặt gồ ghề.
-
-Hiện tượng này làm quả mất hình thức và giảm mạnh giá trị thương phẩm.
-
-
-### Nhiễm bệnh muộn trên quả
-
-Nếu nhiễm bệnh xảy ra sau khi quả đã hoàn thành phần lớn quá trình tăng kích thước, tổn thương thường nông hơn.
-
-Các vết bệnh chủ yếu nằm trên bề mặt.
-
-Do đó, nhiễm muộn thường gây tổn thương bề mặt thay vì tạo các vết lõm sâu như nhiễm sớm.
-
-
-## PHÂN BIỆT VỚI BỆNH GHẺ ĐÀO
-
+### Phân biệt với bệnh ghẻ đào
 Bệnh đốm vi khuẩn có thể bị nhầm với bệnh ghẻ đào.
 
 Bệnh ghẻ đào do nấm Cladosporium carpophilum gây ra.
@@ -161,18 +152,14 @@ Khác với bệnh đốm vi khuẩn, bệnh ghẻ đào thường không gây:
 
 Do đó, sự hiện diện của vết lõm hoặc nứt trên quả kết hợp với triệu chứng đặc trưng trên lá hỗ trợ chẩn đoán bệnh đốm vi khuẩn.
 
-
-## CHU KỲ BỆNH
-
+## CHU KỲ BỆNH VÀ CƠ CHẾ LÂY LAN
 Vi khuẩn có thể tồn tại qua mùa bất lợi trong các vết loét hình thành trên cành từ mùa trước.
 
 Vào mùa xuân, vi khuẩn bắt đầu rỉ ra từ các vết loét này.
 
 Đây là một trong những nguồn bệnh ban đầu quan trọng.
 
-
 ### Sự phát tán của vi khuẩn
-
 Vi khuẩn có thể được lan truyền từ nguồn bệnh đến lá và quả non bằng:
 
 - Nước mưa.
@@ -181,9 +168,7 @@ Vi khuẩn có thể được lan truyền từ nguồn bệnh đến lá và qu
 
 Khi vi khuẩn tiếp xúc với mô non và điều kiện môi trường thuận lợi, các đợt nhiễm mới có thể xảy ra.
 
-
-## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH PHÁT TRIỂN
-
+## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH
 Bệnh phát triển mạnh trong điều kiện độ ẩm cao.
 
 Các yếu tố thuận lợi gồm:
@@ -197,9 +182,12 @@ Các năm có lượng mưa đặc biệt cao hoặc độ ẩm kéo dài thư�
 
 Ngay cả những giống có mức độ kháng tương đối tốt vẫn có thể bị bệnh trong những năm rất ẩm.
 
+### Giai đoạn quả có nguy cơ cao sau nở hoa
+Bổ sung từ NC State Extension (2026): mức độ bệnh trên quả thường nghiêm trọng hơn khi các đợt mưa xảy ra thường xuyên quanh thời điểm cánh hoa rụng (petal fall) và trong khoảng 3 đến 4 tuần tiếp theo.
+
+Thông tin này nên được dùng như một chỉ báo về giai đoạn nguy cơ trong điều kiện sản xuất tương tự nguồn tham khảo, không phải lịch cố định cho mọi vùng khí hậu. Khi áp dụng tại Việt Nam cần kết hợp với thời tiết thực tế, giống đào và điều kiện vườn.
 
 ## CÁC YẾU TỐ LÀM TĂNG NGUY CƠ BỆNH
-
 Một số điều kiện làm cây đào dễ bị bệnh hơn.
 
 Nguy cơ có thể tăng khi:
@@ -217,18 +205,14 @@ Nguy cơ có thể tăng khi:
 
 Những vết thương này có thể trở thành cửa ngõ cho vi khuẩn xâm nhập.
 
-
-## CÁCH QUẢN LÝ BỆNH ĐỐM VI KHUẨN
-
+## PHÒNG NGỪA
 Quản lý bệnh cần kết hợp nhiều biện pháp.
 
 Các chương trình phun phòng bệnh có tác dụng chủ yếu theo hướng phòng ngừa chứ không chữa khỏi mô đã bị nhiễm.
 
 Vì vậy, thời điểm thực hiện biện pháp quản lý rất quan trọng.
 
-
-### LỰA CHỌN GIỐNG ÍT MẪN CẢM
-
+### Lựa chọn giống ít mẫn cảm
 Trồng giống kháng hoặc ít mẫn cảm là một trong những biện pháp bền vững nhất.
 
 Các giống khác nhau có mức độ mẫn cảm không giống nhau.
@@ -239,9 +223,7 @@ Tuy nhiên, ngay cả giống có khả năng kháng tương đối vẫn có th
 
 Do đó, giống kháng nên được xem là một phần của chương trình quản lý tổng hợp.
 
-
-### CẮT TỈA ĐÚNG CÁCH
-
+### Cắt tỉa đúng cách
 Cắt tỉa hợp lý có thể hỗ trợ quản lý bệnh.
 
 Cắt tỉa đầu mùa giúp kiểm soát sức sinh trưởng của cây.
@@ -256,9 +238,7 @@ Cắt tỉa mùa hè có thể:
 
 Tán cây thông thoáng làm giảm thời gian lá duy trì ẩm và hạn chế điều kiện thuận lợi cho vi khuẩn phát triển.
 
-
-### GIẢM STRESS CHO CÂY
-
+### Giảm stress cho cây
 Cây bị stress thường dễ bị bệnh nặng hơn.
 
 Cần duy trì sức khỏe cây bằng cách:
@@ -272,9 +252,7 @@ Cần duy trì sức khỏe cây bằng cách:
 
 Cây khỏe mạnh thường có khả năng chịu đựng bệnh tốt hơn.
 
-
-### QUẢN LÝ DINH DƯỠNG
-
+### Quản lý dinh dưỡng
 Cây nên được bón phân theo khuyến cáo phù hợp với đất, tuổi cây và năng suất dự kiến.
 
 Mục tiêu là duy trì cây có sức sinh trưởng cân đối.
@@ -285,9 +263,9 @@ Không nên để cây quá yếu do thiếu dinh dưỡng.
 
 Quản lý dinh dưỡng cần dựa trên điều kiện thực tế của vườn.
 
+## XỬ LÝ VÀ HẠN CHẾ BỆNH KHI ĐÃ XUẤT HIỆN
 
-### SỬ DỤNG ĐỒNG
-
+### Sử dụng đồng
 Theo nguồn Alabama Extension, các sản phẩm chứa đồng là nhóm vật liệu chính thường được sử dụng trong chương trình quản lý bệnh đốm vi khuẩn.
 
 Các chương trình phòng bệnh có thể bắt đầu từ thời kỳ cây ngủ nghỉ muộn và tiếp tục vào mùa xuân tùy theo hệ thống sản xuất và sản phẩm được đăng ký.
@@ -307,9 +285,7 @@ Tuy nhiên, đồng có thể gây độc cho lá nếu:
 
 Vì vậy, việc sử dụng đồng phải dựa hoàn toàn trên nhãn sản phẩm và hướng dẫn tại địa phương.
 
-
-### VỀ THUỐC KHÁNG SINH TRONG QUẢN LÝ BỆNH
-
+### Về thuốc kháng sinh trong quản lý bệnh
 Nguồn Alabama Extension có đề cập đến thuốc kháng sinh trong các chương trình sản xuất thương mại.
 
 Tuy nhiên, việc sử dụng thuốc kháng sinh trong nông nghiệp được quản lý rất khác nhau giữa các quốc gia.
@@ -320,9 +296,7 @@ Việc sử dụng không đúng còn có thể góp phần làm tăng nguy cơ 
 
 Do đó, mọi quyết định liên quan đến thuốc kháng sinh phải tuân thủ quy định pháp luật và hướng dẫn của cơ quan chuyên môn.
 
-
-### PHÒNG BỆNH QUAN TRỌNG HƠN CHỮA BỆNH
-
+### Phòng bệnh quan trọng hơn chữa bệnh
 Các biện pháp hóa học trong quản lý bệnh đốm vi khuẩn chủ yếu mang tính phòng ngừa.
 
 Một khi mô lá hoặc quả đã bị vi khuẩn phá hủy:
@@ -333,9 +307,7 @@ Một khi mô lá hoặc quả đã bị vi khuẩn phá hủy:
 
 Vì vậy, mục tiêu quản lý là ngăn các đợt nhiễm mới và hạn chế bệnh phát triển trước khi tổn thương lớn xảy ra.
 
-
-## BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI VƯỜN
-
+## KIỂM TRA NHANH NGOÀI VƯỜN
 Khi nghi ngờ bệnh đốm vi khuẩn trên cây đào, có thể kiểm tra theo trình tự sau:
 
 - Quan sát lá để tìm các đốm nhỏ thấm nước.
@@ -352,9 +324,7 @@ Khi nghi ngờ bệnh đốm vi khuẩn trên cây đào, có thể kiểm tra t
 
 Nếu triệu chứng không rõ ràng hoặc quyết định xử lý có giá trị kinh tế lớn, nên xác nhận bằng chuyên gia bệnh cây hoặc phòng chẩn đoán.
 
-
 ## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
-
 Bệnh đốm vi khuẩn trên cây đào có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 
 - Bệnh do Xanthomonas arboricola pv. pruni gây ra.
@@ -379,3 +349,20 @@ Bệnh đốm vi khuẩn trên cây đào có thể được nhận biết và q
 - Sản phẩm chứa đồng có thể hỗ trợ quản lý nhưng cũng có thể gây tổn thương lá nếu sử dụng không phù hợp.
 - Không nên tự ý sử dụng thuốc kháng sinh nếu không được đăng ký hợp pháp.
 - Chỉ sử dụng thuốc bảo vệ thực vật theo nhãn và quy định địa phương.
+
+## NGUỒN THAM KHẢO
+Nguồn gốc:
+Alabama Cooperative Extension System
+https://www.aces.edu/blog/topics/crop-production/bacterial-spot-treatment-in-peaches/
+
+Nguồn bổ sung:
+NC State Extension — 2026 North Carolina Peach and Nectarine Disease and Pest Management Guide
+https://content.ces.ncsu.edu/north-carolina-peach-and-nectarine-disease-and-pest-management-guide
+
+Penn State Extension — Stone Fruit Disease: Bacterial Spot, Refining Disease Management
+https://extension.psu.edu/stone-fruit-disease-bacterial-spot-refining-disease-management
+
+University of Georgia Cooperative Extension — An update of bacterial spot in peaches
+https://site.extension.uga.edu/peaches/2025/09/an-update-of-bacterial-spot-in-peaches/
+
+Ghi chú: Các hướng dẫn về sản phẩm bảo vệ thực vật trong nguồn Hoa Kỳ không thay thế nhãn sản phẩm và quy định hiện hành tại Việt Nam.

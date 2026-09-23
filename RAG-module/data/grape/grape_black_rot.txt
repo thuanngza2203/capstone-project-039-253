@@ -1,0 +1,283 @@
+# BỆNH THỐI ĐEN TRÊN CÂY NHO
+
+## CÂY TRỒNG
+Nho (Grape, Vitis spp.)
+
+## TÊN BỆNH
+Bệnh thối đen trên cây nho
+Tên tiếng Anh: Grape Black Rot
+Tên khoa học hiện hành thường dùng trong tài liệu phân loại: Phyllosticta ampelicida
+Tên khoa học truyền thống vẫn được sử dụng rộng rãi trong tài liệu khuyến nông: Guignardia bidwellii
+
+## TỔNG QUAN
+Bệnh thối đen là một bệnh nấm quan trọng trên cây nho, đặc biệt ở những vùng có mùa xuân và đầu mùa hè ấm, ẩm và thường xuyên có mưa.
+
+Bệnh có thể tấn công nhiều mô xanh đang phát triển của cây, gồm lá, chồi non, cuống lá, tua cuốn, cuống chùm và quả.
+
+Thiệt hại nghiêm trọng nhất xảy ra trên quả. Nếu bệnh xuất hiện sớm và điều kiện thời tiết tiếp tục thuận lợi, tỷ lệ quả bị hư có thể rất cao và trong những trường hợp nặng có thể làm mất phần lớn hoặc gần như toàn bộ sản lượng.
+
+## TÁC NHÂN GÂY BỆNH
+Tác nhân gây bệnh hiện được nhiều tài liệu phân loại gọi là Phyllosticta ampelicida.
+
+Tên Guignardia bidwellii vẫn được sử dụng rất phổ biến trong tài liệu khuyến nông, bệnh học cây trồng và các hướng dẫn quản lý bệnh trên nho.
+
+Đây là một nấm thuộc nhóm Ascomycota.
+
+Do cả hai tên khoa học đều còn xuất hiện nhiều trong tài liệu, hệ thống truy xuất nên coi Phyllosticta ampelicida và Guignardia bidwellii là các tên tương đương khi tìm kiếm thông tin về bệnh thối đen trên nho.
+
+## BỘ PHẬN BỊ GÂY HẠI
+Nấm có thể gây bệnh trên các mô xanh của cây nho, bao gồm:
+
+- Lá.
+- Cuống lá.
+- Chồi non.
+- Tua cuốn.
+- Cuống chùm.
+- Hoa và mô non quanh chùm.
+- Quả non.
+
+Quả là bộ phận thường chịu thiệt hại kinh tế nghiêm trọng nhất.
+
+## TRIỆU CHỨNG
+
+### Trên lá
+Triệu chứng ban đầu thường là các đốm nhỏ tương đối tròn, màu nâu nhạt hoặc nâu vàng trên lá.
+
+Khi vết bệnh phát triển:
+
+- Trung tâm vết bệnh chuyển màu nâu nhạt đến nâu.
+- Mép vết bệnh thường sẫm màu hơn.
+- Bên trong vết bệnh xuất hiện nhiều chấm đen nhỏ.
+
+Các chấm đen này là pycnidia, tức cấu trúc sinh bào tử của nấm.
+
+Sự hiện diện của nhiều pycnidia đen nằm trong một vết bệnh màu nâu nhạt là dấu hiệu rất hữu ích để phân biệt bệnh thối đen với nhiều dạng đốm lá khác trên nho.
+
+### Trên chồi, cuống lá và tua cuốn
+Trên chồi non, cuống lá và tua cuốn, bệnh có thể hình thành các tổn thương màu nâu đến đen.
+
+Các vết bệnh thường:
+
+- Có dạng kéo dài.
+- Có thể hơi lõm.
+- Chuyển màu sẫm khi già.
+- Có thể hình thành pycnidia trên bề mặt.
+
+Trong điều kiện bệnh nặng, các tổn thương kéo dài trên chồi có thể làm suy yếu mô và góp phần làm chết một phần chồi.
+
+### Trên quả
+Triệu chứng trên quả thường bắt đầu bằng một vùng nhỏ màu nâu nhạt hoặc nâu.
+
+Vết bệnh nhanh chóng mở rộng và quả bắt đầu:
+
+- Chuyển từ nâu sang nâu sẫm hoặc đen.
+- Co lại.
+- Khô dần.
+- Xuất hiện rất nhiều pycnidia màu đen trên bề mặt.
+
+Cuối cùng quả bị nhiễm có thể khô cứng thành một khối nhỏ màu xanh đen hoặc đen, giống quả nho khô cứng. Dạng quả này thường được gọi là quả xác hoặc "mummy".
+
+Quả xác là nguồn bệnh rất quan trọng cho các vụ sau, đặc biệt khi chúng còn treo trên giàn.
+
+## PHÂN BIỆT VỚI MỘT SỐ BỆNH KHÁC
+
+### Phân biệt với bệnh thối đắng
+Bệnh thối đắng có thể gây thối quả gần giai đoạn chín, trong khi bệnh thối đen thường gây nhiễm mạnh hơn trên quả còn non.
+
+Quả bị thối đen thường:
+
+- Chuyển nâu rồi đen.
+- Khô cứng thành quả xác.
+- Có nhiều pycnidia đen trên bề mặt.
+
+Bệnh thối đắng thường liên quan nhiều hơn đến quả đang chín và có kiểu cấu trúc sinh bào tử khác.
+
+### Phân biệt với Phomopsis trên quả
+Phomopsis có thể gây vết bệnh và thối quả, nhưng quả bị Phomopsis gần thu hoạch có xu hướng dễ tách khỏi cuống hơn.
+
+Trong bệnh thối đen, quả xác thường có thể vẫn bám trên chùm và trở thành nguồn bệnh quan trọng cho mùa sau.
+
+## CHU KỲ BỆNH VÀ CƠ CHẾ LÂY LAN
+Nấm có thể tồn tại qua mùa bất lợi trong:
+
+- Quả xác còn treo trên giàn.
+- Quả xác nằm trên mặt đất.
+- Các vết bệnh trên chồi hoặc cành.
+
+Vào mùa xuân, khi có mưa và nhiệt độ phù hợp, nấm tạo và giải phóng bào tử.
+
+Bào tử có thể được phát tán bằng:
+
+- Gió.
+- Mưa.
+- Nước bắn.
+
+Bào tử rơi lên mô nho non và gây nhiễm khi bề mặt cây giữ ẩm đủ lâu.
+
+Sau khi các vết bệnh trên lá hình thành, pycnidia trong vết bệnh có thể tiếp tục tạo bào tử và gây các đợt nhiễm thứ cấp trong cùng mùa.
+
+Quả xác còn treo trên tán đặc biệt nguy hiểm vì có thể tiếp tục cung cấp nguồn bào tử ngay trong vùng tán nơi các mô non và chùm quả đang phát triển.
+
+## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH
+Bệnh phát triển thuận lợi trong điều kiện ấm và ẩm.
+
+Theo tài liệu Cornell, khoảng nhiệt độ khoảng 70 đến 80 độ F, tương đương khoảng 21 đến 27 độ C, đặc biệt thuận lợi cho quá trình nhiễm.
+
+Ở khoảng nhiệt độ này, chỉ cần khoảng 6 đến 7 giờ lá bị ướt liên tục cũng có thể đủ cho quá trình nhiễm xảy ra.
+
+Ở nhiệt độ thấp hơn, thời gian bề mặt cây cần giữ ẩm thường dài hơn.
+
+Nguy cơ bệnh tăng khi:
+
+- Mưa xuất hiện thường xuyên.
+- Sương giữ lâu trên lá.
+- Tán nho quá rậm.
+- Quả xác từ vụ trước còn treo trên giàn.
+- Có nhiều mô bệnh hoặc chồi nhiễm bệnh chưa được loại bỏ.
+- Giống nho có mức độ mẫn cảm cao.
+
+## GIAI ĐOẠN QUẢ MẪN CẢM
+Quả nho non đặc biệt mẫn cảm với bệnh trong giai đoạn từ ra hoa đến vài tuần sau ra hoa.
+
+Khả năng mẫn cảm giảm dần khi quả phát triển.
+
+Thời điểm quả trở nên kháng hơn phụ thuộc vào giống. Các tài liệu Cornell cho thấy nhiều giống bắt đầu giảm mẫn cảm khoảng 4 đến 6 tuần sau nở hoa.
+
+Vì vậy, giai đoạn trước nở hoa và những tuần đầu sau nở hoa là thời kỳ rất quan trọng để hạn chế các đợt nhiễm mới trên chùm quả.
+
+## MỨC ĐỘ GÂY HẠI
+Bệnh thối đen có thể gây thiệt hại rất lớn khi:
+
+- Nguồn bệnh đầu vụ cao.
+- Giống nho mẫn cảm.
+- Bệnh xuất hiện sớm.
+- Thời tiết ấm và ẩm kéo dài.
+- Không thực hiện vệ sinh vườn.
+- Không bảo vệ được chùm quả trong giai đoạn mẫn cảm.
+
+Các nguồn khuyến nông tại Hoa Kỳ ghi nhận mức tổn thất có thể dao động rất rộng, từ thiệt hại nhẹ đến mất phần lớn sản lượng trong những vườn bị bệnh nặng.
+
+## PHÒNG NGỪA
+
+### Vệ sinh vườn nho
+Vệ sinh là một trong những biện pháp quan trọng nhất để giảm nguồn bệnh.
+
+Cần:
+
+- Loại bỏ quả xác còn treo trên giàn.
+- Loại bỏ các chùm quả bệnh còn sót lại.
+- Cắt bỏ chồi hoặc cành có vết bệnh nặng.
+- Đưa vật liệu bệnh ra khỏi khu vực sản xuất hoặc xử lý phù hợp.
+- Không để nhiều quả xác tồn tại ngay trong vùng tán qua mùa bất lợi.
+
+Nếu không thể loại bỏ hoàn toàn quả xác, việc đưa chúng xuống mặt đất có thể giúp làm giảm thời gian chúng phát tán bào tử so với khi còn treo trên tán.
+
+### Quản lý tán
+Duy trì tán nho thông thoáng giúp:
+
+- Tăng lưu thông không khí.
+- Giảm thời gian lá và quả giữ ẩm.
+- Tăng ánh sáng trong tán.
+- Cải thiện khả năng tiếp xúc của sản phẩm bảo vệ thực vật với mô cần bảo vệ.
+
+Các biện pháp như tỉa chồi, định vị chồi, tỉa lá và quản lý mật độ tán có thể hỗ trợ giảm nguy cơ bệnh.
+
+## THEO DÕI VÀ RA QUYẾT ĐỊNH
+Nên bắt đầu theo dõi sớm từ giai đoạn chồi non phát triển.
+
+Khi kiểm tra vườn:
+
+- Quan sát các lá non để tìm đốm nâu có pycnidia đen.
+- Kiểm tra chồi non, cuống lá và tua cuốn.
+- Kiểm tra các chùm quả đang phát triển.
+- Tìm và loại bỏ quả xác còn sót lại từ vụ trước.
+- Ghi nhận mưa, nhiệt độ và thời gian lá bị ướt.
+- Chú ý đặc biệt từ trước nở hoa đến vài tuần sau nở hoa.
+
+Một vài vết bệnh trên lá có thể là dấu hiệu cho thấy nguồn bào tử đã hiện diện trong vườn và chùm quả đang có nguy cơ nếu thời tiết tiếp tục thuận lợi.
+
+## XỬ LÝ KHI BỆNH ĐÃ XUẤT HIỆN
+
+### Loại bỏ nguồn bệnh
+Khi phát hiện quả hoặc chồi bị bệnh:
+
+- Loại bỏ mô bệnh khi có thể.
+- Không để quả bệnh khô thành quả xác rồi tồn tại trên tán.
+- Tiếp tục kiểm tra các cây lân cận để phát hiện các ổ bệnh mới.
+
+Biện pháp này không phục hồi phần mô đã bị nhiễm nhưng giúp giảm lượng nguồn bệnh có thể tiếp tục phát tán.
+
+### Sử dụng thuốc diệt nấm
+Thuốc diệt nấm có vai trò chủ yếu trong việc bảo vệ mô khỏe khỏi các đợt nhiễm mới.
+
+Theo Cornell và NC State Extension, giai đoạn từ ngay trước nở hoa đến những tuần đầu sau nở hoa là một trong những thời kỳ quan trọng nhất đối với chương trình phòng bệnh thối đen.
+
+Thuốc không thể làm cho quả đã khô thành quả xác trở lại bình thường.
+
+Không nên lấy tên sản phẩm hoặc hoạt chất trong tài liệu nước ngoài làm khuyến cáo trực tiếp cho Việt Nam.
+
+Chỉ sử dụng sản phẩm:
+
+- Được đăng ký hợp pháp cho cây nho và bệnh cần xử lý.
+- Đúng liều và thời điểm ghi trên nhãn.
+- Phù hợp với chương trình quản lý tính kháng thuốc tại địa phương.
+
+## LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
+Luôn đọc và tuân thủ nhãn sản phẩm.
+
+Không tự ý:
+
+- Tăng liều.
+- Tăng số lần phun.
+- Rút ngắn khoảng cách phun.
+- Phối trộn sản phẩm khi chưa có hướng dẫn phù hợp.
+
+Nếu sử dụng nhiều lần trong mùa, cần luân phiên các nhóm cơ chế tác động theo hướng dẫn quản lý kháng thuốc.
+
+Tuân thủ thời gian cách ly, thời gian tái xâm nhập vườn và các yêu cầu bảo hộ lao động.
+
+## KIỂM TRA NHANH NGOÀI VƯỜN
+Khi nghi ngờ bệnh thối đen, có thể kiểm tra:
+
+- Lá có đốm nâu nhạt gần tròn hay không.
+- Trong vết lá có nhiều chấm đen nhỏ hay không.
+- Quả có đang chuyển nâu rồi đen hay không.
+- Bề mặt quả có nhiều pycnidia đen hay không.
+- Quả có co lại thành quả xác cứng hay không.
+- Chồi hoặc cuống có vết dài màu nâu đen hay không.
+- Trong tán có còn quả xác từ vụ trước hay không.
+
+Sự kết hợp giữa đốm lá màu nâu có pycnidia và quả khô cứng thành "mummy" là dấu hiệu rất phù hợp với bệnh thối đen.
+
+## TỪ KHÓA TRUY XUẤT
+grape black rot
+bệnh thối đen nho
+thối đen trên cây nho
+Phyllosticta ampelicida
+Guignardia bidwellii
+black rot grape leaf
+black rot grape berry
+grape mummy
+mummified berries
+pycnidia grape
+black rot lesions
+grape fungal disease
+black rot management
+
+## NGUỒN THAM KHẢO
+Penn State Extension — Grape Disease: Black Rot
+https://extension.psu.edu/grape-disease-black-rot
+
+Cornell CALS — Grapes 101: Managing Black Rot
+https://cals.cornell.edu/news/2014/03/grapes-101-managing-black-rot
+
+Cornell Grape Disease — Black Rot
+https://blogs.cornell.edu/grapedisease/research/black-rot/
+
+NC State Extension — North Carolina Winegrape Grower's Guide, Chapter 8: Pest Management
+https://content.ces.ncsu.edu/north-carolina-winegrape-growers-guide/chapter-8-pest-management
+
+American Phytopathological Society, Phytopathology — Genetic Variability of Phyllosticta ampelicida, the Agent of Black Rot Disease of Grapevine
+https://doi.org/10.1094/PHYTO-11-16-0404-R
+
+Ghi chú: Thông tin về thời điểm và thuốc bảo vệ thực vật trong các nguồn Hoa Kỳ phản ánh hệ thống sản xuất và đăng ký thuốc tại khu vực nguồn; khi áp dụng tại Việt Nam cần ưu tiên nhãn sản phẩm và quy định hiện hành trong nước.

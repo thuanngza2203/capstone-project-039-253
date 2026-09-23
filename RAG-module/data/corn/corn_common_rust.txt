@@ -1,18 +1,20 @@
 # BỆNH GỈ SẮT THÔNG THƯỜNG TRÊN CÂY NGÔ
 
-Nguồn tham khảo chính:
-Bayer Crop Science
-https://www.cropscience.bayer.us/articles/bayer/common-corn-rust
+## CÂY TRỒNG
+Ngô (Corn)
 
+## TÊN BỆNH
+Bệnh gỉ sắt thông thường trên cây ngô
+Tên tiếng Anh: Common corn rust
+
+## TỔNG QUAN
 Bệnh gỉ sắt thông thường trên ngô, hay common corn rust, là một bệnh nấm thường xuất hiện ở các vùng khí hậu ôn đới đến cận nhiệt đới.
 
 Trong nhiều trường hợp, bệnh không gây thiệt hại kinh tế nghiêm trọng và có thể được quản lý tốt bằng cách trồng giống ngô có mức độ chống chịu cao. Tuy nhiên, nếu bệnh xuất hiện sớm, cây còn nhỏ và điều kiện thời tiết tiếp tục thuận lợi cho nấm phát triển, mức độ gây hại có thể tăng lên.
 
 Việc nhận biết sớm triệu chứng, theo dõi diễn biến bệnh trên đồng ruộng và phân biệt bệnh gỉ sắt thông thường với các bệnh lá tương tự là rất quan trọng để tránh xử lý không cần thiết hoặc xử lý sai thời điểm.
 
-
 ## TÁC NHÂN GÂY BỆNH
-
 Bệnh gỉ sắt thông thường trên ngô do nấm Puccinia sorghi gây ra.
 
 Đây là một loại nấm gỉ sắt có khả năng tạo ra số lượng lớn bào tử trên lá ngô.
@@ -21,9 +23,7 @@ Bào tử có thể được gió phát tán trên khoảng cách rất xa và t
 
 Ở những khu vực có mùa đông lạnh, nấm thường không thể tồn tại qua mùa đông trên cây ngô. Nguồn bào tử gây bệnh có thể được gió đưa đến từ những vùng ấm hơn nơi nấm có khả năng tồn tại.
 
-
 ## CHU KỲ BỆNH VÀ CƠ CHẾ LÂY LAN
-
 Bệnh gỉ sắt thông thường xuất hiện khá thường xuyên tại nhiều vùng trồng ngô.
 
 Bào tử nấm được phát tán chủ yếu nhờ gió.
@@ -40,9 +40,7 @@ Những bào tử này tiếp tục được gió phát tán sang các lá khác
 
 Do khả năng tạo bào tử nhanh và phát tán bằng gió, bệnh có thể tăng nhanh khi điều kiện thời tiết thuận lợi.
 
-
-## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH PHÁT TRIỂN
-
+## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH
 Bệnh gỉ sắt thông thường phát triển thuận lợi trong điều kiện thời tiết tương đối mát và ẩm.
 
 Theo tài liệu Bayer, nhiệt độ thuận lợi cho bệnh nằm trong khoảng:
@@ -66,9 +64,7 @@ Những lá non nằm trong nõn thường dễ bị bệnh vì nước có th�
 
 Nếu quá trình nhiễm bệnh xảy ra khi lá còn cuộn trong nõn, các mụn gỉ sau đó có thể xuất hiện thành từng dải ngang trên lá khi lá mở ra.
 
-
-## CÁCH NHẬN BIẾT BỆNH GỈ SẮT THÔNG THƯỜNG
-
+## TRIỆU CHỨNG
 ### Triệu chứng ban đầu trên lá
 
 Triệu chứng sớm có thể xuất hiện dưới dạng những chấm nhỏ màu vàng nhạt hoặc mất màu trên cả mặt trên và mặt dưới của lá.
@@ -86,7 +82,6 @@ Mụn gỉ có thể xuất hiện rải rác hoặc tập trung thành từng c
 
 Một đặc điểm nhận biết quan trọng là các bào tử dạng bột bên trong mụn gỉ có thể bị lau hoặc chà ra khỏi bề mặt lá.
 
-
 ### Triệu chứng trên cả hai mặt lá
 
 Khác với một số bệnh gỉ sắt khác trên ngô, bệnh gỉ sắt thông thường có thể tạo mụn gỉ trên cả mặt trên và mặt dưới của lá.
@@ -94,7 +89,6 @@ Khác với một số bệnh gỉ sắt khác trên ngô, bệnh gỉ sắt th�
 Các mụn thường phân bố khá rải rác thay vì chỉ tập trung dày đặc trên một mặt lá.
 
 Quan sát cả hai mặt lá là một bước hữu ích khi chẩn đoán ngoài đồng ruộng.
-
 
 ### Tổn thương mô xung quanh mụn gỉ
 
@@ -106,7 +100,6 @@ Trong một số trường hợp, nhiều tổn thương nằm gần nhau có th
 
 Nếu bệnh rất nặng, toàn bộ lá có thể bị chết.
 
-
 ### Mụn gỉ khi già
 
 Khi mụn gỉ già đi, các bào tử màu đỏ dần chuyển sang màu đen.
@@ -114,7 +107,6 @@ Khi mụn gỉ già đi, các bào tử màu đỏ dần chuyển sang màu đen
 Do đó, các mụn gỉ già có thể trông giống các chấm hoặc mụn màu đen trên lá.
 
 Các mụn này vẫn có thể tiếp tục phá vỡ bề mặt lá.
-
 
 ### Triệu chứng trên các bộ phận khác
 
@@ -126,9 +118,7 @@ Ngoài phiến lá, bệnh đôi khi cũng có thể xuất hiện trên:
 
 Tuy nhiên, lá vẫn là bộ phận thường được sử dụng để nhận biết và đánh giá mức độ bệnh trên đồng ruộng.
 
-
-## ẢNH HƯỞNG CỦA BỆNH ĐẾN CÂY NGÔ
-
+## MỨC ĐỘ GÂY HẠI
 Nếu bệnh xuất hiện muộn trong mùa sinh trưởng, nguy cơ gây thiệt hại năng suất kinh tế thường thấp.
 
 Ngược lại, nguy cơ thiệt hại có thể tăng khi:
@@ -149,11 +139,75 @@ Trong thời tiết nóng và khô, cây bị bệnh nặng có thể biểu hi�
 
 Bổ sung: Mức độ ảnh hưởng thực tế đến năng suất phụ thuộc vào tỷ lệ diện tích lá bị bệnh, vị trí lá bị nhiễm, thời điểm bệnh xuất hiện và khả năng chống chịu của giống. Các lá phía trên và quanh bắp thường quan trọng đối với quá trình tích lũy vật chất cho hạt, vì vậy bệnh xuất hiện sớm và lan mạnh lên các tầng lá này cần được theo dõi kỹ hơn.
 
+## PHÂN BIỆT VỚI CÁC BỆNH TƯƠNG TỰ
+### Phân biệt với bệnh gỉ sắt phương Nam
 
-## CÁCH QUẢN LÝ BỆNH GỈ SẮT THÔNG THƯỜNG
+Bệnh gỉ sắt phương Nam có thể bị nhầm với bệnh gỉ sắt thông thường.
+
+Đặc điểm của bệnh gỉ sắt thông thường:
+
+- Mụn gỉ xuất hiện trên cả mặt trên và mặt dưới của lá.
+- Mụn thường phân bố rải rác.
+- Bào tử có màu đỏ đến đỏ nâu.
+
+Đặc điểm thường gặp của bệnh gỉ sắt phương Nam:
+
+- Mụn gỉ tập trung chủ yếu ở mặt trên của lá.
+- Các mụn thường tập trung dày hơn.
+- Bào tử có màu cam rõ hơn.
+
+Bệnh gỉ sắt phương Nam thường lan nhanh hơn và có khả năng gây thiệt hại kinh tế lớn hơn khi thời tiết nóng và ẩm kéo dài.
+
+Vì vậy, việc phân biệt đúng hai bệnh có ý nghĩa quan trọng trong quyết định quản lý.
+
+### Phân biệt với bệnh đốm nâu Physoderma
+
+Bệnh đốm nâu Physoderma tạo ra các đốm nhỏ, tròn, màu vàng nâu.
+
+Các đốm có thể xuất hiện thành dải ngang trên lá.
+
+Một dấu hiệu quan trọng là các tổn thương hình tròn màu tím sẫm đến đen có thể xuất hiện trên gân giữa của lá.
+
+Khác với bệnh gỉ sắt thông thường:
+
+- Đốm Physoderma không tạo lớp bào tử dạng bột có thể chà ra khỏi lá.
+- Bệnh gỉ sắt thông thường không tạo các đốm tím đen đặc trưng trên gân giữa giống Physoderma.
+
+### Phân biệt với bệnh đốm mắt
+
+Bệnh đốm mắt tạo ra các đốm nhỏ hình tròn, thường có đường kính khoảng 3 đến 6 milimét.
+
+Trung tâm đốm có màu nâu nhạt hoặc nâu.
+
+Xung quanh đốm có quầng màu vàng trong mờ.
+
+Có thể quan sát quầng này rõ hơn khi đưa lá lên trước ánh sáng.
+
+Khi nhiều đốm liên kết với nhau, một vùng lớn của lá có thể chết.
+
+Khác với bệnh gỉ sắt thông thường, bệnh đốm mắt không tạo các mụn gỉ đỏ nổi lên trên bề mặt lá.
+
+### Phân biệt với bệnh đốm hắc ín
+
+Bệnh đốm hắc ín tạo ra các cấu trúc nấm nhỏ, tròn, nổi lên và có màu đen bóng.
+
+Các cấu trúc này có thể được bao quanh bởi một quầng hẹp màu nâu nhạt.
+
+Khi chạm vào, bề mặt các đốm có cảm giác gồ ghề.
+
+Trên lá có thể chỉ xuất hiện một vài đốm hoặc rất nhiều đốm phủ dày.
+
+Một đặc điểm giúp phân biệt là các cấu trúc màu đen của bệnh đốm hắc ín không thể chà ra khỏi bề mặt lá.
+
+Ngược lại, bào tử của mụn gỉ thông thường có thể bị chà hoặc lau ra.
+
+Các mụn gỉ già của bệnh gỉ sắt thông thường có thể chuyển sang màu đen và đôi khi bị nhầm với bệnh đốm hắc ín.
+
+Nếu triệu chứng không rõ ràng, có thể cần chẩn đoán chuyên môn hoặc xét nghiệm phòng thí nghiệm để xác định chính xác bệnh.
+
+## PHÒNG NGỪA
 
 ### Lựa chọn giống có khả năng chống chịu
-
 Biện pháp quản lý quan trọng nhất là sử dụng giống hoặc sản phẩm ngô có mức độ chống chịu bệnh gỉ sắt thông thường cao.
 
 Khả năng chống chịu giúp:
@@ -166,9 +220,9 @@ Khả năng chống chịu giúp:
 
 Khi khu vực thường xuyên xuất hiện bệnh, nên ưu tiên giống có thông tin rõ ràng về khả năng chống chịu.
 
+## THEO DÕI VÀ RA QUYẾT ĐỊNH
 
 ### Theo dõi đồng ruộng thường xuyên
-
 Việc kiểm tra ruộng theo lịch thường xuyên giúp phát hiện bệnh sớm và đánh giá xem có cần cân nhắc biện pháp hóa học hay không.
 
 Khi kiểm tra ruộng:
@@ -183,9 +237,9 @@ Khi kiểm tra ruộng:
 
 Bổ sung: Không nên quyết định phun thuốc chỉ dựa trên việc tìm thấy một vài mụn gỉ. Thời điểm xuất hiện bệnh, mức độ bệnh, độ mẫn cảm của giống, giá trị ruộng ngô, điều kiện thời tiết dự báo và chi phí xử lý đều cần được xem xét.
 
+## XỬ LÝ KHI BỆNH ĐÃ XUẤT HIỆN
 
 ### Sử dụng thuốc diệt nấm
-
 Thuốc diệt nấm có thể kiểm soát bệnh gỉ sắt thông thường hiệu quả nếu được sử dụng đủ sớm.
 
 Theo tài liệu Bayer, hiệu quả tốt nhất thường đạt được khi lần xử lý đầu tiên được thực hiện lúc mới chỉ có một vài mụn gỉ trên mỗi lá.
@@ -207,9 +261,7 @@ Tuy nhiên, có thể cân nhắc xử lý khi:
 
 Không nên chờ đến khi phần lớn lá đã bị bệnh nặng mới bắt đầu phun vì thuốc diệt nấm thường có hiệu quả phòng bệnh và hạn chế nhiễm mới tốt hơn là phục hồi mô lá đã bị tổn thương.
 
-
 ## LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
-
 Chỉ sử dụng các sản phẩm được đăng ký hợp pháp cho cây ngô và bệnh cần xử lý tại khu vực sản xuất.
 
 Luôn đọc và tuân thủ nhãn thuốc.
@@ -222,80 +274,7 @@ Nếu phải sử dụng thuốc nhiều lần, nên luân phiên các nhóm cơ
 
 Cân nhắc hiệu quả kinh tế trước khi xử lý, đặc biệt đối với ngô lấy hạt vì bệnh gỉ sắt thông thường thường không gây thiệt hại đủ lớn để bù chi phí phun thuốc.
 
-
-## PHÂN BIỆT BỆNH GỈ SẮT THÔNG THƯỜNG VỚI CÁC BỆNH TƯƠNG TỰ
-
-### Phân biệt với bệnh gỉ sắt phương Nam
-
-Bệnh gỉ sắt phương Nam có thể bị nhầm với bệnh gỉ sắt thông thường.
-
-Đặc điểm của bệnh gỉ sắt thông thường:
-
-- Mụn gỉ xuất hiện trên cả mặt trên và mặt dưới của lá.
-- Mụn thường phân bố rải rác.
-- Bào tử có màu đỏ đến đỏ nâu.
-
-Đặc điểm thường gặp của bệnh gỉ sắt phương Nam:
-
-- Mụn gỉ tập trung chủ yếu ở mặt trên của lá.
-- Các mụn thường tập trung dày hơn.
-- Bào tử có màu cam rõ hơn.
-
-Bệnh gỉ sắt phương Nam thường lan nhanh hơn và có khả năng gây thiệt hại kinh tế lớn hơn khi thời tiết nóng và ẩm kéo dài.
-
-Vì vậy, việc phân biệt đúng hai bệnh có ý nghĩa quan trọng trong quyết định quản lý.
-
-
-### Phân biệt với bệnh đốm nâu Physoderma
-
-Bệnh đốm nâu Physoderma tạo ra các đốm nhỏ, tròn, màu vàng nâu.
-
-Các đốm có thể xuất hiện thành dải ngang trên lá.
-
-Một dấu hiệu quan trọng là các tổn thương hình tròn màu tím sẫm đến đen có thể xuất hiện trên gân giữa của lá.
-
-Khác với bệnh gỉ sắt thông thường:
-
-- Đốm Physoderma không tạo lớp bào tử dạng bột có thể chà ra khỏi lá.
-- Bệnh gỉ sắt thông thường không tạo các đốm tím đen đặc trưng trên gân giữa giống Physoderma.
-
-
-### Phân biệt với bệnh đốm mắt
-
-Bệnh đốm mắt tạo ra các đốm nhỏ hình tròn, thường có đường kính khoảng 3 đến 6 milimét.
-
-Trung tâm đốm có màu nâu nhạt hoặc nâu.
-
-Xung quanh đốm có quầng màu vàng trong mờ.
-
-Có thể quan sát quầng này rõ hơn khi đưa lá lên trước ánh sáng.
-
-Khi nhiều đốm liên kết với nhau, một vùng lớn của lá có thể chết.
-
-Khác với bệnh gỉ sắt thông thường, bệnh đốm mắt không tạo các mụn gỉ đỏ nổi lên trên bề mặt lá.
-
-
-### Phân biệt với bệnh đốm hắc ín
-
-Bệnh đốm hắc ín tạo ra các cấu trúc nấm nhỏ, tròn, nổi lên và có màu đen bóng.
-
-Các cấu trúc này có thể được bao quanh bởi một quầng hẹp màu nâu nhạt.
-
-Khi chạm vào, bề mặt các đốm có cảm giác gồ ghề.
-
-Trên lá có thể chỉ xuất hiện một vài đốm hoặc rất nhiều đốm phủ dày.
-
-Một đặc điểm giúp phân biệt là các cấu trúc màu đen của bệnh đốm hắc ín không thể chà ra khỏi bề mặt lá.
-
-Ngược lại, bào tử của mụn gỉ thông thường có thể bị chà hoặc lau ra.
-
-Các mụn gỉ già của bệnh gỉ sắt thông thường có thể chuyển sang màu đen và đôi khi bị nhầm với bệnh đốm hắc ín.
-
-Nếu triệu chứng không rõ ràng, có thể cần chẩn đoán chuyên môn hoặc xét nghiệm phòng thí nghiệm để xác định chính xác bệnh.
-
-
-## BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI ĐỒNG RUỘNG
-
+## KIỂM TRA NHANH NGOÀI ĐỒNG RUỘNG
 Khi nghi ngờ bệnh gỉ sắt thông thường, có thể kiểm tra theo trình tự sau:
 
 - Quan sát xem tổn thương có nổi lên khỏi bề mặt lá hay không.
@@ -311,9 +290,7 @@ Khi nghi ngờ bệnh gỉ sắt thông thường, có thể kiểm tra theo tr�
 
 Phương pháp kiểm tra này chỉ hỗ trợ nhận biết ngoài đồng ruộng. Nếu triệu chứng không điển hình hoặc quyết định quản lý có giá trị kinh tế lớn, nên xác nhận bệnh bằng chuyên gia bảo vệ thực vật hoặc phòng chẩn đoán bệnh cây.
 
-
 ## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
-
 Bệnh gỉ sắt thông thường trên ngô có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 
 - Bệnh do nấm Puccinia sorghi gây ra.
@@ -335,3 +312,12 @@ Bệnh gỉ sắt thông thường trên ngô có thể được nhận biết v
 - Không nên quyết định phun chỉ vì phát hiện một vài mụn gỉ.
 - Cần phân biệt bệnh gỉ sắt thông thường với gỉ sắt phương Nam, đốm nâu Physoderma, đốm mắt và đốm hắc ín.
 - Chỉ sử dụng thuốc bảo vệ thực vật được đăng ký hợp pháp và tuân thủ đúng nhãn.
+
+## NGUỒN THAM KHẢO
+Nguồn gốc:
+Bayer Crop Science
+https://www.cropscience.bayer.us/articles/bayer/common-corn-rust
+
+Nguồn đối chiếu bổ sung:
+University of Minnesota Extension — Common rust on corn
+https://extension.umn.edu/agriculture/crop-production/corn/common-rust-on-corn

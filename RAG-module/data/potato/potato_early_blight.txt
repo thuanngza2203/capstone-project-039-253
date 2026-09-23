@@ -1,9 +1,14 @@
 # BỆNH CHÁY SỚM TRÊN CÂY KHOAI TÂY
 
-Nguồn tham khảo chính:
-Bayer Crop Science
-https://www.cropscience.bayer.us/articles/cp/early-blight-potatoes
+## CÂY TRỒNG
+Khoai tây (Potato, Solanum tuberosum)
 
+## TÊN BỆNH
+Bệnh cháy sớm trên cây khoai tây
+Tên tiếng Anh: Potato Early Blight
+Tác nhân: Alternaria solani
+
+## TỔNG QUAN
 Bệnh cháy sớm trên khoai tây, hay Early Blight, là một bệnh phổ biến do nấm Alternaria solani gây ra.
 
 Bệnh có thể gây hại trên lá, thân và củ, làm giảm năng suất, kích thước củ, khả năng bảo quản, chất lượng chế biến và giá trị thương phẩm của khoai tây.
@@ -12,9 +17,7 @@ Trong nhiều vùng sản xuất, triệu chứng trên lá là giai đoạn gâ
 
 Bệnh thường phát triển mạnh hơn trên các mô già hoặc đang suy yếu. Vì vậy, cây càng trưởng thành thì nguy cơ bị bệnh càng tăng.
 
-
 ## TÁC NHÂN GÂY BỆNH
-
 Bệnh cháy sớm trên khoai tây do nấm Alternaria solani gây ra.
 
 Nấm có thể tồn tại từ vụ này sang vụ khác trong:
@@ -28,11 +31,9 @@ Nấm tạo bào tử có khả năng tồn tại trong nhiều điều kiện m
 
 Khi gặp điều kiện thuận lợi vào vụ mới, các bào tử này trở thành nguồn bệnh ban đầu.
 
+## TRIỆU CHỨNG
 
-## CÁCH NHẬN BIẾT BỆNH CHÁY SỚM
-
-### Triệu chứng trên lá
-
+### Trên lá
 Triệu chứng đầu tiên thường xuất hiện trên các lá già ở tầng thấp.
 
 Ban đầu, các vết bệnh là những đốm nhỏ, màu nâu sẫm đến đen.
@@ -44,9 +45,7 @@ Hình dạng ban đầu có thể:
 
 Khi vết bệnh lớn dần, sự phát triển có thể bị giới hạn bởi các gân lá lớn nên vết bệnh trở nên góc cạnh hơn.
 
-
 ### Dấu hiệu vòng đồng tâm
-
 Một trong những dấu hiệu điển hình nhất của bệnh cháy sớm là các vòng đồng tâm bên trong vết bệnh.
 
 Vết bệnh trưởng thành thường có:
@@ -57,9 +56,7 @@ Vết bệnh trưởng thành thường có:
 
 Đặc điểm vòng đồng tâm giúp phân biệt bệnh cháy sớm với nhiều bệnh đốm lá khác trên khoai tây.
 
-
 ### Vết bệnh liên kết
-
 Khi nhiều vết bệnh xuất hiện trên cùng một lá, chúng có thể phát triển lan rộng và nhập lại với nhau.
 
 Kết quả là hình thành các vùng mô hoại tử lớn.
@@ -72,9 +69,7 @@ Lá bị bệnh nặng có thể:
 
 Lá chết đôi khi vẫn còn bám trên cây trong một thời gian.
 
-
-### Triệu chứng trên cuống lá và thân
-
+### Trên cuống lá và thân
 Bệnh cũng có thể xuất hiện trên cuống lá và thân.
 
 Các vết bệnh trên thân thường:
@@ -85,24 +80,7 @@ Các vết bệnh trên thân thường:
 
 Sự xuất hiện của nhiều vết bệnh trên thân là dấu hiệu cho thấy bệnh đang phát triển nghiêm trọng trong ruộng.
 
-
-## THỜI GIAN XUẤT HIỆN TRIỆU CHỨNG
-
-Khoảng thời gian từ khi nấm xâm nhập đến khi vết bệnh xuất hiện phụ thuộc vào:
-
-- Điều kiện môi trường.
-- Tuổi lá.
-- Mức độ mẫn cảm của giống.
-
-Trong điều kiện ấm và ẩm thuận lợi, triệu chứng trên lá già có thể xuất hiện trong khoảng 5 đến 7 ngày sau nhiễm.
-
-Bệnh chủ yếu tấn công mô cây già hóa.
-
-Do đó, lá già thường xuất hiện triệu chứng trước lá non.
-
-
-## TRIỆU CHỨNG TRÊN CỦ
-
+### Trên củ
 Củ khoai tây có thể bị nhiễm trong quá trình thu hoạch.
 
 Khi củ được đào hoặc nhấc khỏi đất, bào tử nấm có thể tiếp xúc với các vết thương trên bề mặt củ.
@@ -111,9 +89,7 @@ Nếu có đủ độ ẩm, bào tử có thể nảy mầm và xâm nhập.
 
 Bệnh phát triển trên củ trong quá trình bảo quản thường được gọi là bệnh cháy củ do Alternaria.
 
-
-### Dấu hiệu bên ngoài trên củ
-
+**Dấu hiệu bên ngoài trên củ:**
 Vết bệnh trên củ thường:
 
 - Có hình tròn hoặc không đều.
@@ -121,9 +97,7 @@ Vết bệnh trên củ thường:
 - Hơi lõm xuống.
 - Có thể được bao quanh bởi một đường viền nhô lên màu tím đến nâu sẫm.
 
-
-### Dấu hiệu bên trong củ
-
+**Dấu hiệu bên trong củ:**
 Phần mô ngay bên dưới vết bệnh thường:
 
 - Khô.
@@ -143,18 +117,34 @@ Triệu chứng trên củ thường phát triển chậm.
 
 Trong một số trường hợp, bệnh chỉ trở nên nghiêm trọng sau nhiều tháng bảo quản.
 
+### Phân biệt tổn thương củ với bệnh mốc sương muộn
+Bổ sung từ Cornell Vegetables: tổn thương củ do Early Blight thường là các đốm nâu đen hơi lõm, có ranh giới khá rõ với mô khỏe nhờ một lớp mô bần và phần thối bên dưới thường khô, màu nâu sẫm.
 
-## CHU KỲ BỆNH
+Trong khi đó, củ bị Late Blight thường có vùng vỏ nâu đến tím với mép sẫm; phần mô bên dưới có màu nâu đỏ hoặc màu gỗ gụ, chắc, dạng hạt và ranh giới với mô khỏe kém rõ hơn. Tổn thương Late Blight cũng có thể bị vi khuẩn xâm nhập thứ cấp và chuyển thành dạng thối ướt.
 
+Các dấu hiệu này chỉ hỗ trợ nhận biết. Khi triệu chứng không điển hình hoặc lô củ có giá trị cao, nên xác nhận bằng chẩn đoán chuyên môn.
+
+## THỜI GIAN XUẤT HIỆN TRIỆU CHỨNG
+Khoảng thời gian từ khi nấm xâm nhập đến khi vết bệnh xuất hiện phụ thuộc vào:
+
+- Điều kiện môi trường.
+- Tuổi lá.
+- Mức độ mẫn cảm của giống.
+
+Trong điều kiện ấm và ẩm thuận lợi, triệu chứng trên lá già có thể xuất hiện trong khoảng 5 đến 7 ngày sau nhiễm.
+
+Bệnh chủ yếu tấn công mô cây già hóa.
+
+Do đó, lá già thường xuất hiện triệu chứng trước lá non.
+
+## CHU KỲ BỆNH VÀ CƠ CHẾ LÂY LAN
 Giữa các vụ trồng, nấm Alternaria solani có thể tồn tại trong tàn dư cây bệnh, trong đất và trên củ nhiễm bệnh.
 
 Khi điều kiện thuận lợi xuất hiện, nấm tạo bào tử vô tính gọi là conidia.
 
 Các conidia là nguồn bệnh ban đầu quan trọng trong vụ mới.
 
-
 ### Quá trình nhiễm bệnh
-
 Nhiễm bệnh xảy ra khi bào tử tiếp xúc với mô lá mẫn cảm và có đủ độ ẩm tự do trên bề mặt lá.
 
 Bào tử nảy mầm và nấm có thể:
@@ -165,9 +155,7 @@ Bào tử nảy mầm và nấm có thể:
 
 Sau khi xâm nhập, nấm phát triển trong mô và hình thành vết bệnh mới.
 
-
 ### Nhiều chu kỳ bệnh trong một vụ
-
 Trong một vụ trồng, nấm có thể trải qua nhiều chu kỳ:
 
 - Tạo bào tử.
@@ -178,9 +166,7 @@ Trong một vụ trồng, nấm có thể trải qua nhiều chu kỳ:
 
 Do đó, nếu thời tiết thuận lợi kéo dài, bệnh có thể tăng nhanh từ mức nhẹ thành nghiêm trọng.
 
-
 ## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH
-
 Bệnh cháy sớm phát triển thuận lợi khi có sự luân phiên giữa thời kỳ ẩm và khô.
 
 Theo nguồn Bayer, bào tử phát triển tốt trong khoảng nhiệt độ:
@@ -203,9 +189,9 @@ Các điều kiện làm tăng nguy cơ gồm:
 - Thời gian lá ẩm kéo dài.
 - Các chu kỳ ẩm và khô xen kẽ.
 
+## THỜI ĐIỂM VÀ GIAI ĐOẠN CÂY MẪN CẢM
 
-## THỜI ĐIỂM BỆNH TĂNG NHANH
-
+### Thời điểm bệnh tăng nhanh
 Trong giai đoạn đầu vụ, tốc độ nhiễm bệnh thường tương đối thấp.
 
 Sau khi cây ra hoa, bệnh thường tăng nhanh hơn.
@@ -214,9 +200,7 @@ Giai đoạn nguy cơ cao nhất thường trùng với thời kỳ củ đang p
 
 Nguyên nhân là cây lúc này bước vào giai đoạn trưởng thành hơn, trong khi nấm đặc biệt thuận lợi trên mô già.
 
-
-## VAI TRÒ CỦA TUỔI CÂY
-
+### Vai trò của tuổi cây
 Khoai tây ở giai đoạn sinh trưởng sinh dưỡng thường tương đối ít mẫn cảm hơn với bệnh cháy sớm.
 
 Sau khi cây bắt đầu hình thành củ và tiến vào giai đoạn trưởng thành, mức độ mẫn cảm tăng dần.
@@ -225,9 +209,7 @@ Cây già và mô lá già đặc biệt dễ bị nhiễm.
 
 Do đó, bệnh cháy sớm thường được xem là bệnh gắn liền với quá trình già hóa của cây.
 
-
-## ẢNH HƯỞNG CỦA BỆNH ĐẾN NĂNG SUẤT
-
+## MỨC ĐỘ GÂY HẠI
 Bệnh cháy sớm làm giảm diện tích lá xanh có khả năng quang hợp.
 
 Khi nhiều lá bị tổn thương:
@@ -245,9 +227,7 @@ Bệnh cũng có thể làm giảm:
 - Giá trị khoai tây tươi.
 - Chất lượng khoai dùng chế biến.
 
-
 ## CÁC YẾU TỐ LÀM BỆNH NẶNG HƠN
-
 Bệnh thường nghiêm trọng hơn khi cây chịu stress.
 
 Các yếu tố có thể làm tăng nguy cơ gồm:
@@ -262,9 +242,21 @@ Các yếu tố có thể làm tăng nguy cơ gồm:
 
 Duy trì sức khỏe tổng thể của cây giúp giảm mức độ nghiêm trọng của bệnh.
 
+## PHÂN BIỆT KHÁI QUÁT VỚI BỆNH MỐC SƯƠNG MUỘN
+Bệnh cháy sớm và bệnh mốc sương muộn trên khoai tây có thể bị nhầm lẫn.
 
-## CÁCH QUẢN LÝ BỆNH CHÁY SỚM
+Bệnh cháy sớm thường:
 
+- Xuất hiện trước trên lá già.
+- Tạo vết nâu sẫm hoặc đen.
+- Có các vòng đồng tâm rõ.
+- Tiến triển mạnh khi cây già hóa.
+
+Bệnh mốc sương muộn thường không tạo các vòng đồng tâm điển hình.
+
+Do hai bệnh có cách quản lý và mức độ nguy hiểm khác nhau, khi triệu chứng không rõ ràng cần chẩn đoán chính xác trước khi quyết định xử lý.
+
+## PHÒNG NGỪA
 Quản lý hiệu quả cần kết hợp nhiều biện pháp.
 
 Hai nhóm biện pháp chính là:
@@ -274,9 +266,7 @@ Hai nhóm biện pháp chính là:
 
 Không nên phụ thuộc hoàn toàn vào thuốc.
 
-
-### LUÂN CANH CÂY TRỒNG
-
+### Luân canh cây trồng
 Nấm có thể tồn tại trong tàn dư cây bệnh từ vụ này sang vụ khác.
 
 Luân canh giúp giảm lượng nguồn bệnh còn lại trong ruộng.
@@ -287,9 +277,7 @@ Theo nguồn Bayer, nên luân canh khoai tây với cây không phải ký ch�
 
 Mục tiêu là tạo đủ thời gian để tàn dư cây khoai tây phân hủy và làm giảm lượng bào tử có thể gây nhiễm cho vụ sau.
 
-
-### QUẢN LÝ TÀN DƯ
-
+### Quản lý tàn dư
 Tàn dư khoai tây nhiễm bệnh là một nguồn bệnh quan trọng.
 
 Các biện pháp hỗ trợ gồm:
@@ -302,18 +290,14 @@ Nguồn Bayer đề cập làm đất vào mùa thu để chôn tàn dư, từ �
 
 Tuy nhiên, quyết định làm đất cần cân nhắc đồng thời các yếu tố bảo vệ đất và nguy cơ xói mòn.
 
-
-### SỬ DỤNG CỦ GIỐNG SẠCH BỆNH
-
+### Sử dụng củ giống sạch bệnh
 Nên sử dụng củ giống được chứng nhận và không mang bệnh.
 
 Củ giống nhiễm bệnh có thể đưa nguồn nấm trực tiếp vào ruộng mới.
 
 Sử dụng nguồn giống sạch giúp giảm lượng nguồn bệnh ban đầu.
 
-
-### QUẢN LÝ NƯỚC TƯỚI
-
+### Quản lý nước tưới
 Cần bố trí tưới sao cho hạn chế thời gian lá bị ướt kéo dài.
 
 Nếu điều kiện cho phép:
@@ -324,9 +308,7 @@ Nếu điều kiện cho phép:
 
 Mục tiêu là giảm số giờ thuận lợi để bào tử nảy mầm và xâm nhập.
 
-
-### QUẢN LÝ DINH DƯỠNG
-
+### Quản lý dinh dưỡng
 Bệnh cháy sớm thường nghiêm trọng hơn trên cây thiếu đạm, đặc biệt vào cuối vụ.
 
 Cần duy trì dinh dưỡng cân đối theo nhu cầu của cây.
@@ -337,9 +319,7 @@ Tuy nhiên, bón thừa đạm cũng không phải biện pháp kiểm soát b�
 
 Quản lý dinh dưỡng nên dựa trên phân tích đất, tình trạng cây và mục tiêu năng suất.
 
-
-### QUẢN LÝ CÁC BỆNH VÀ STRESS KHÁC
-
+### Quản lý các bệnh và stress khác
 Các bệnh hoặc điều kiện bất lợi khác có thể làm cây suy yếu.
 
 Cây bị stress thường dễ bị bệnh cháy sớm nặng hơn.
@@ -354,9 +334,7 @@ Do đó, cần đồng thời quản lý:
 
 Mục tiêu là duy trì cây khỏe trong suốt giai đoạn tạo củ.
 
-
-### QUẢN LÝ CỦ SAU THU HOẠCH
-
+### Quản lý củ sau thu hoạch
 Củ có thể bị nhiễm trong quá trình thu hoạch, đặc biệt khi bào tử tiếp xúc với các vết thương.
 
 Để giảm bệnh sau thu hoạch:
@@ -368,9 +346,7 @@ Củ có thể bị nhiễm trong quá trình thu hoạch, đặc biệt khi bà
 
 Quá trình tạo lớp bần nhanh giúp giảm khả năng nấm xâm nhập sâu vào mô củ.
 
-
-### MỨC ĐỘ MẪN CẢM CỦA GIỐNG
-
+### Mức độ mẫn cảm của giống
 Các giống khoai tây có mức độ mẫn cảm khác nhau.
 
 Theo nguồn Bayer, hiện không có giống khoai tây thương mại nào hoàn toàn kháng bệnh cháy sớm.
@@ -386,9 +362,9 @@ Do đó, khi chọn giống cần cân nhắc:
 - Điều kiện vùng trồng.
 - Lịch sử bệnh trên ruộng.
 
+## THEO DÕI VÀ RA QUYẾT ĐỊNH
 
-### THEO DÕI RUỘNG
-
+### Theo dõi ruộng
 Nguồn Bayer khuyến nghị bắt đầu theo dõi thường xuyên khi cây cao khoảng:
 
 - 12 inch.
@@ -404,9 +380,7 @@ Khi kiểm tra ruộng:
 - Ghi nhận điều kiện thời tiết.
 - Theo dõi giai đoạn sinh trưởng của cây.
 
-
-### CHỈ SỐ P-DAY
-
+### Chỉ số P-Day
 Nguồn Bayer đề cập việc sử dụng chỉ số ngày sinh lý P-Day để dự đoán quá trình phát triển của cây và nguy cơ bệnh.
 
 Nguy cơ bệnh cháy sớm được xem là tăng sau khi tích lũy khoảng:
@@ -419,9 +393,9 @@ Chỉ số P-Day là công cụ được phát triển cho hệ thống sản xu
 
 Khi áp dụng ngoài khu vực nguồn, cần sử dụng mô hình phù hợp với điều kiện địa phương.
 
+## XỬ LÝ KHI BỆNH ĐÃ XUẤT HIỆN
 
-### SỬ DỤNG THUỐC DIỆT NẤM
-
+### Sử dụng thuốc diệt nấm
 Thuốc diệt nấm phun trên lá là một biện pháp phổ biến trong quản lý bệnh cháy sớm.
 
 Thuốc thường có hiệu quả tốt nhất khi được sử dụng theo hướng phòng ngừa hoặc khi bệnh mới bắt đầu xuất hiện.
@@ -435,9 +409,7 @@ Mục tiêu của thuốc là:
 - Làm chậm tốc độ bệnh phát triển.
 - Duy trì diện tích lá xanh trong giai đoạn nuôi củ.
 
-
-### THÔNG TIN VỀ CÁC HOẠT CHẤT TRONG NGUỒN BAYER
-
+### Thông tin về các hoạt chất trong nguồn Bayer
 Nguồn Bayer đề cập một số sản phẩm thương mại có chứa hoạt chất fluopyram và một số hoạt chất khác.
 
 Fluopyram thuộc nhóm FRAC 7.
@@ -459,9 +431,7 @@ Không nên tự động áp dụng tên thương mại, hoạt chất, thời g
 
 Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho khoai tây và bệnh cháy sớm tại địa phương.
 
-
-### PHÒNG NGỪA KHÁNG THUỐC
-
+### Phòng ngừa kháng thuốc
 Nấm Alternaria solani có khả năng phát triển tính kháng với thuốc nếu một nhóm cơ chế tác động được sử dụng lặp lại quá nhiều.
 
 Để giảm nguy cơ:
@@ -473,9 +443,7 @@ Nấm Alternaria solani có khả năng phát triển tính kháng với thuốc
 - Kết hợp thuốc với luân canh, quản lý tàn dư và dinh dưỡng.
 - Chỉ sử dụng thuốc khi nguy cơ bệnh đủ cao.
 
-
-## BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI RUỘNG
-
+## KIỂM TRA NHANH NGOÀI RUỘNG
 Khi nghi ngờ bệnh cháy sớm trên khoai tây, có thể kiểm tra theo trình tự sau:
 
 - Bắt đầu từ các lá già phía dưới.
@@ -491,25 +459,7 @@ Khi nghi ngờ bệnh cháy sớm trên khoai tây, có thể kiểm tra theo tr
 
 Nếu triệu chứng không điển hình, nên xác nhận bằng chuyên gia bệnh cây vì một số bệnh khác trên khoai tây cũng có thể gây đốm lá màu nâu.
 
-
-## PHÂN BIỆT KHÁI QUÁT VỚI BỆNH MỐC SƯƠNG MUỘN
-
-Bệnh cháy sớm và bệnh mốc sương muộn trên khoai tây có thể bị nhầm lẫn.
-
-Bệnh cháy sớm thường:
-
-- Xuất hiện trước trên lá già.
-- Tạo vết nâu sẫm hoặc đen.
-- Có các vòng đồng tâm rõ.
-- Tiến triển mạnh khi cây già hóa.
-
-Bệnh mốc sương muộn thường không tạo các vòng đồng tâm điển hình.
-
-Do hai bệnh có cách quản lý và mức độ nguy hiểm khác nhau, khi triệu chứng không rõ ràng cần chẩn đoán chính xác trước khi quyết định xử lý.
-
-
 ## LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
-
 Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho cây khoai tây và bệnh cần xử lý.
 
 Luôn đọc và tuân thủ nhãn sản phẩm.
@@ -522,9 +472,7 @@ Luân phiên nhóm cơ chế tác động khi phải sử dụng thuốc nhiều
 
 Kết hợp biện pháp hóa học với quản lý canh tác để giảm nguy cơ kháng thuốc và tăng hiệu quả lâu dài.
 
-
 ## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
-
 Bệnh cháy sớm trên cây khoai tây có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 
 - Bệnh do nấm Alternaria solani gây ra.
@@ -552,3 +500,17 @@ Bệnh cháy sớm trên cây khoai tây có thể được nhận biết và qu
 - Thuốc diệt nấm nên được sử dụng theo hướng phòng ngừa và dựa trên nguy cơ thực tế.
 - Cần luân phiên nhóm FRAC để giảm nguy cơ kháng thuốc.
 - Không tự động áp dụng sản phẩm thương mại hoặc liều dùng từ tài liệu Bayer tại Hoa Kỳ vào điều kiện Việt Nam.
+
+## NGUỒN THAM KHẢO
+Nguồn gốc:
+Bayer Crop Science
+https://www.cropscience.bayer.us/articles/cp/early-blight-potatoes
+
+Nguồn bổ sung:
+North Dakota State University Potato Extension — Early Blight in Potato
+https://www.ag.ndsu.edu/potatoextension/early-blight-in-potato
+
+Cornell Vegetables — Detection of Potato Tuber Diseases and Defects
+https://www.vegetables.cornell.edu/pest-management/disease-factsheets/detection-of-potato-tuber-diseases-defects/
+
+Ghi chú: Phần bổ sung về phân biệt tổn thương củ sử dụng Cornell Vegetables. Thông tin về thuốc trong nguồn Hoa Kỳ không thay thế nhãn sản phẩm hoặc quy định hiện hành tại Việt Nam.

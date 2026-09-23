@@ -1,9 +1,14 @@
 # BỆNH ĐỐM LÁ VI KHUẨN TRÊN CÂY ỚT
 
-Nguồn tham khảo chính:
-West Virginia University Extension
-https://extension.wvu.edu/lawn-gardening-pests/plant-disease/fruit-vegetable-diseases/bacterial-leaf-spot-of-pepper
+## CÂY TRỒNG
+Ớt chuông / ớt ngọt (Bell pepper, sweet pepper)
 
+## TÊN BỆNH
+Bệnh đốm lá vi khuẩn trên cây ớt
+Tên tiếng Anh: Bacterial spot of pepper
+Tên thường gặp trong tài liệu cũ: Xanthomonas campestris pv. vesicatoria
+
+## TỔNG QUAN
 Bệnh đốm lá vi khuẩn trên cây ớt là một trong những bệnh vi khuẩn phổ biến và gây hại nghiêm trọng trên ớt trong điều kiện thời tiết nóng ẩm.
 
 Nguồn WVU Extension mô tả tác nhân gây bệnh là Xanthomonas campestris pv. vesicatoria. Vi khuẩn có dạng hình que, Gram âm và có khả năng tồn tại trong hạt giống cũng như tàn dư cây bệnh từ vụ này sang vụ khác.
@@ -14,9 +19,7 @@ Bệnh có thể gây thiệt hại nghiêm trọng do làm rụng lá sớm, gi
 
 Khi bệnh đã phát triển mạnh, việc kiểm soát rất khó. Vì vậy, phòng ngừa và ngăn bệnh xâm nhập vào ruộng hoặc nhà kính là chiến lược quan trọng nhất.
 
-
 ## TÁC NHÂN GÂY BỆNH
-
 Bệnh đốm lá vi khuẩn trên cây ớt do vi khuẩn thuộc nhóm Xanthomonas gây ra.
 
 Theo nguồn WVU Extension, tác nhân được ghi là Xanthomonas campestris pv. vesicatoria.
@@ -31,11 +34,15 @@ Vi khuẩn có thể tồn tại trong:
 
 Hạt giống là một nguồn lan truyền bệnh đặc biệt quan trọng vì vi khuẩn có thể tồn tại trong hoặc trên hạt trong thời gian dài.
 
+Bổ sung đối chiếu phân loại hiện hành: nguồn WVU Extension sử dụng tên Xanthomonas campestris pv. vesicatoria. Các tài liệu Extension mới hơn từ NC State và University of Minnesota mô tả bacterial spot trên cà chua và ớt là một nhóm bệnh do bốn loài Xanthomonas gần nhau gây ra: Xanthomonas vesicatoria, X. euvesicatoria, X. gardneri và X. perforans.
 
-## CÁCH NHẬN BIẾT BỆNH ĐỐM LÁ VI KHUẨN
+Trong đó, NC State Extension ghi nhận X. euvesicatoria là loài chủ yếu liên quan đến bacterial spot trên ớt tại North Carolina. UF/IFAS cũng mô tả X. euvesicatoria là tác nhân chính trên ớt ở Florida và trên thế giới, đồng thời lưu ý X. perforans cũng đã được ghi nhận gây bệnh trên ớt trong một số trường hợp.
 
-### Triệu chứng trên lá
+Vì vậy, tên Xanthomonas campestris pv. vesicatoria trong tài liệu gốc nên được giữ để bảo toàn nguồn và hỗ trợ truy xuất tài liệu cũ, nhưng khi trả lời theo phân loại hiện nay cần hiểu bệnh có thể liên quan đến nhiều loài Xanthomonas.
 
+## TRIỆU CHỨNG
+
+### Trên lá
 Triệu chứng sớm thường xuất hiện dưới dạng các đốm nhỏ có vẻ như bị thấm nước.
 
 Các đốm ban đầu có màu xanh hoặc xanh sẫm.
@@ -54,9 +61,7 @@ Các đốm thường có hình dạng:
 
 Kích thước vết bệnh có thể khác nhau đáng kể giữa các giống ớt.
 
-
 ### Sự khác biệt triệu chứng giữa các giống
-
 Trên một số giống, lá có thể xuất hiện rất nhiều vết bệnh nhỏ.
 
 Các đốm nhỏ có thể có kích thước khoảng 1/4 đến 1/2 centimét và bao phủ hơn 80% diện tích lá khi bệnh nặng.
@@ -65,9 +70,7 @@ Trên một số giống khác, chỉ có một số ít vết bệnh nhưng kí
 
 Cũng có trường hợp trên cùng một lá xuất hiện cả vết bệnh nhỏ và vết bệnh lớn.
 
-
 ### Lá bị rách và thủng
-
 Trong điều kiện ít ẩm hơn, mô bị bệnh có thể khô lại.
 
 Phần mô chết sau đó có thể rơi ra khỏi phiến lá.
@@ -80,9 +83,7 @@ Khi nhiều phần mô bị rơi ra, lá có hình dạng:
 
 Đây là một dấu hiệu thường gặp khi bệnh đã phát triển một thời gian.
 
-
 ### Vàng lá và rụng lá
-
 Lá bị bệnh nặng có thể chuyển vàng.
 
 Sau đó, lá rụng sớm.
@@ -97,9 +98,7 @@ Khi cây mất nhiều lá:
 - Năng suất có thể giảm đáng kể.
 - Quả mất lớp lá che phủ và dễ bị cháy nắng.
 
-
-## TRIỆU CHỨNG TRÊN QUẢ
-
+### Trên quả
 Bệnh cũng có thể gây vết bệnh trên quả ớt.
 
 Các vết bệnh trên quả thường nổi lên và có dạng giống vảy hoặc ghẻ.
@@ -112,18 +111,16 @@ Tuy nhiên, các vết thương và tổn thương trên quả có thể tạo c
 
 Khi đó, quả có thể tiếp tục bị phân hủy và thối sau nhiễm thứ cấp.
 
-
-## TRIỆU CHỨNG TRÊN THÂN
-
+### Trên thân
 Bệnh có thể xuất hiện trên toàn bộ phần trên mặt đất của cây.
 
 Ngoài lá và quả, vi khuẩn có thể gây các vết bệnh hoặc vết loét trên thân.
 
 Trong trường hợp bệnh nặng, tổn thương trên thân cùng với rụng lá và suy yếu tổng thể có thể làm cây sinh trưởng rất kém hoặc chết.
 
+## CHU KỲ BỆNH VÀ CƠ CHẾ LÂY LAN
 
-## CHU KỲ BỆNH
-
+### Chu kỳ bệnh
 Vi khuẩn có thể tồn tại từ vụ này sang vụ khác.
 
 Những nguồn bệnh quan trọng gồm:
@@ -138,9 +135,7 @@ Vi khuẩn có thể tồn tại trong tàn dư cây bệnh ít nhất khoảng 
 
 Tuy nhiên, khi tàn dư bị phân hủy hoàn toàn và vi khuẩn bị phơi trực tiếp trong đất, khả năng tồn tại giảm mạnh và thường chỉ kéo dài thêm vài tuần.
 
-
-## VAI TRÒ CỦA HẠT GIỐNG
-
+### Vai trò của hạt giống
 Hạt giống là con đường quan trọng giúp vi khuẩn tồn tại và lan truyền.
 
 Nguồn WVU Extension cho biết ngay cả hạt nhiễm bệnh đã được làm khô và bảo quản lạnh trong thời gian rất dài vẫn có thể tạo cây con xuất hiện triệu chứng.
@@ -149,9 +144,7 @@ Nguồn WVU Extension cho biết ngay cả hạt nhiễm bệnh đã được l�
 
 Trong vùng khí hậu lạnh, hạt giống nhiễm bệnh có thể là một trong những nguồn khởi phát bệnh chính trong vụ mới.
 
-
-## CÁCH VI KHUẨN LÂY LAN TRONG RUỘNG
-
+### Cách vi khuẩn lây lan trong ruộng
 Vi khuẩn có thể di chuyển trong ruộng thông qua:
 
 - Mưa kèm gió.
@@ -163,9 +156,9 @@ Vi khuẩn có thể di chuyển trong ruộng thông qua:
 
 Thời gian cây giữ ẩm càng lâu, nguy cơ nhiễm bệnh càng tăng.
 
-
 ## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH
 
+### Điều kiện nóng và ẩm
 Bệnh phát triển nhanh nhất trong điều kiện nóng và ẩm kéo dài.
 
 Các điều kiện thuận lợi gồm:
@@ -177,9 +170,7 @@ Các điều kiện thuận lợi gồm:
 
 Khi nhiều ngày nóng ẩm liên tiếp xuất hiện, bệnh có thể lan rất nhanh.
 
-
-## ẢNH HƯỞNG CỦA ĐỘ ẨM THẤP
-
+### Ảnh hưởng của độ ẩm thấp
 Theo nguồn WVU Extension, những giai đoạn ngắn khoảng ba ngày hoặc lâu hơn với độ ẩm tương đối dưới 40% có thể làm giảm mức độ bệnh và làm chậm quá trình phát triển.
 
 Nếu độ ẩm thấp kéo dài nhiều tuần, sự phát triển và lây lan của bệnh có thể bị chặn mạnh.
@@ -188,9 +179,7 @@ Thông tin này cho thấy độ ẩm là yếu tố rất quan trọng trong d�
 
 Tuy nhiên, trong thực tế sản xuất, người trồng thường không thể kiểm soát độ ẩm môi trường ngoài trời. Vì vậy, các biện pháp như tăng thông thoáng và hạn chế làm ướt tán cây vẫn có ý nghĩa hơn.
 
-
 ## NGUYÊN TẮC QUẢN LÝ BỆNH
-
 Nguồn WVU Extension trình bày nguyên tắc quản lý bệnh theo công thức:
 
 DM = S²IR
@@ -204,9 +193,9 @@ DM = S²IR
 
 Đối với bệnh đốm lá vi khuẩn trên ớt, chiến lược hiệu quả nhất là kết hợp nhiều biện pháp thay vì phụ thuộc vào một phương pháp duy nhất.
 
+## PHÒNG NGỪA
 
-## SỬ DỤNG GIỐNG KHÁNG
-
+### Sử dụng giống kháng
 Sử dụng giống có khả năng kháng bệnh là một biện pháp quan trọng.
 
 Tuy nhiên, có nhiều chủng vi khuẩn khác nhau.
@@ -237,9 +226,7 @@ Danh sách giống trên phản ánh nguồn tham khảo tại Hoa Kỳ.
 
 Khi áp dụng tại Việt Nam, cần ưu tiên giống có thông tin kháng bệnh phù hợp với nguồn giống, vùng trồng và các chủng vi khuẩn đang phổ biến tại địa phương.
 
-
-## SỬ DỤNG HẠT GIỐNG VÀ CÂY CON SẠCH BỆNH
-
+### Sử dụng hạt giống và cây con sạch bệnh
 Một trong những biện pháp phòng bệnh hiệu quả nhất là sử dụng:
 
 - Hạt giống được chứng nhận sạch bệnh.
@@ -255,23 +242,17 @@ Không nên đưa cây con có triệu chứng vào ruộng.
 
 Nếu tự sản xuất cây giống, cần duy trì điều kiện vệ sinh tốt để giảm nguy cơ lây nhiễm.
 
-
-## XỬ LÝ HẠT GIỐNG
-
+### Xử lý hạt giống
 Nguồn WVU Extension mô tả hai phương pháp xử lý hạt giống.
 
-
-### Xử lý bằng dung dịch chứa chlorine
-
+**Xử lý bằng dung dịch chứa chlorine:**
 Nguồn đề cập việc ngâm hạt khoảng 40 phút trong dung dịch thuốc tẩy được pha loãng với tỷ lệ hai phần Clorox và tám phần nước.
 
 Phương pháp này có thể làm giảm số lượng vi khuẩn trên bề mặt hạt.
 
 Tuy nhiên, vi khuẩn nằm bên trong hạt ít bị ảnh hưởng.
 
-
-### Xử lý bằng nước nóng
-
+**Xử lý bằng nước nóng:**
 Nguồn cũng đề cập phương pháp ngâm hạt trong nước đã được làm nóng đến khoảng 125 độ F, tương đương khoảng 51 độ C, trong khoảng 30 phút.
 
 Phương pháp này có thể làm giảm vi khuẩn cả trên bề mặt và bên trong hạt.
@@ -282,9 +263,7 @@ Do đó, xử lý nước nóng đòi hỏi kiểm soát nhiệt độ và thờ
 
 Bổ sung thực hành: nếu không có thiết bị kiểm soát nhiệt độ ổn định, người trồng không nên tự xử lý nước nóng theo cách ước lượng vì chỉ cần nhiệt độ hoặc thời gian sai lệch cũng có thể làm giảm sức nảy mầm.
 
-
-## QUẢN LÝ CÂY CON TRONG NHÀ KÍNH
-
+### Quản lý cây con trong nhà kính
 Kiểm soát bệnh trên cây con là bước quan trọng để tránh đưa vi khuẩn ra ruộng.
 
 Cần:
@@ -297,39 +276,7 @@ Cần:
 
 Luôn bắt đầu vụ cây con mới bằng vật tư sạch hoặc đã được khử vệ sinh phù hợp.
 
-
-## SỬ DỤNG STREPTOMYCIN
-
-Nguồn WVU Extension có đề cập việc sử dụng streptomycin trên cây con nếu bệnh được phát hiện rất sớm.
-
-Tuy nhiên, nguồn cũng cảnh báo rằng vi khuẩn kháng streptomycin có thể xuất hiện khi sản phẩm này được sử dụng nhiều lần.
-
-Việc sử dụng kháng sinh trong nông nghiệp được quản lý khác nhau giữa các quốc gia.
-
-Không nên tự ý sử dụng streptomycin hoặc bất kỳ thuốc kháng sinh nào trên cây ớt nếu sản phẩm không được đăng ký hợp pháp tại địa phương.
-
-Sử dụng kháng sinh không đúng còn có nguy cơ góp phần vào vấn đề kháng kháng sinh.
-
-
-## SỬ DỤNG ĐỒNG
-
-Các sản phẩm chứa đồng có thể được sử dụng để hỗ trợ kiểm soát bệnh đốm lá vi khuẩn.
-
-Tuy nhiên, nguồn WVU Extension lưu ý rằng sử dụng đồng liên tục một mình thường không mang lại hiệu quả tối ưu.
-
-Hiệu quả có thể giảm nếu quần thể vi khuẩn có mức độ chịu đồng cao.
-
-Nguồn đề cập việc phối hợp đồng với một số chất kích hoạt cơ chế kháng của cây trong chương trình quản lý.
-
-Tuy nhiên, tên sản phẩm và liều lượng cụ thể trong nguồn được xây dựng cho điều kiện và đăng ký tại Hoa Kỳ.
-
-Không nên tự động áp dụng liều hoặc tên thương mại này tại Việt Nam.
-
-Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho cây ớt và bệnh đốm vi khuẩn tại địa phương.
-
-
-## CHẾ PHẨM VI SINH CÓ LỢI
-
+### Chế phẩm vi sinh có lợi
 Nguồn WVU Extension đề cập một số sản phẩm chứa vi sinh vật có lợi có thể giúp giảm bệnh nếu được sử dụng chủ động từ sớm.
 
 Các sản phẩm sinh học thường có hiệu quả tốt hơn trong chương trình phòng ngừa.
@@ -338,9 +285,7 @@ Khi bệnh đã lan rộng trên tỷ lệ lớn cây, hiệu quả của chúng
 
 Do đó, chế phẩm sinh học không nên được xem là biện pháp có khả năng chữa khỏi ruộng đã bị bệnh nặng.
 
-
-## QUẢN LÝ TÀN DƯ CÂY BỆNH
-
+### Quản lý tàn dư cây bệnh
 Tàn dư cây nhiễm bệnh là nguồn vi khuẩn quan trọng.
 
 Sau thu hoạch cần:
@@ -353,9 +298,7 @@ Nguồn WVU Extension đề cập việc làm đất hoặc cày vùi sau thu ho
 
 Việc lựa chọn phương pháp xử lý cần phù hợp với hệ thống sản xuất và mục tiêu bảo vệ đất.
 
-
-## QUẢN LÝ CỎ DẠI VÀ CÂY MỌC TỰ NHIÊN
-
+### Quản lý cỏ dại và cây mọc tự nhiên
 Một số cây mọc dại có thể đóng vai trò nguồn tồn tại của vi khuẩn.
 
 Do đó, cần kiểm soát các cây ký chủ mọc dại trong và xung quanh ruộng.
@@ -364,9 +307,7 @@ Cây ớt mọc tự nhiên từ hạt của vụ trước cũng cần được 
 
 Việc giảm nguồn cây ký chủ giúp làm gián đoạn chu kỳ bệnh giữa các vụ.
 
-
-## LUÂN CANH CÂY TRỒNG
-
+### Luân canh cây trồng
 Luân canh là một biện pháp quan trọng để giảm lượng vi khuẩn tồn tại trên tàn dư cây bệnh.
 
 Nguồn WVU Extension khuyến nghị luân canh ít nhất ba năm trong ruộng có nguy cơ.
@@ -381,9 +322,7 @@ Nguồn đặc biệt khuyến cáo tránh luân canh hoặc trồng gần:
 
 Mục tiêu là để tàn dư cây bệnh có đủ thời gian phân hủy hoàn toàn trước khi quay lại trồng ớt.
 
-
-## QUẢN LÝ NƯỚC TƯỚI
-
+### Quản lý nước tưới
 Vi khuẩn lan rất hiệu quả bằng nước bắn.
 
 Vì vậy, tưới phun trên tán có thể làm tăng nguy cơ bệnh lan trong ruộng.
@@ -397,9 +336,7 @@ Tưới nhỏ giọt giúp:
 - Giảm thời gian lá ẩm.
 - Giảm cơ hội vi khuẩn phát tán.
 
-
-## TRÁNH LÀM VIỆC KHI CÂY ĐANG ƯỚT
-
+### Tránh làm việc khi cây đang ướt
 Việc đi lại, cắt tỉa, thu hái hoặc chạm vào cây khi lá đang ướt có thể làm vi khuẩn phát tán cơ học.
 
 Do đó, nếu có thể:
@@ -410,9 +347,35 @@ Do đó, nếu có thể:
 
 Đây là biện pháp đơn giản nhưng có thể giúp hạn chế lan bệnh.
 
+## XỬ LÝ VÀ HẠN CHẾ BỆNH KHI ĐÃ XUẤT HIỆN
+
+### Sử dụng streptomycin
+Nguồn WVU Extension có đề cập việc sử dụng streptomycin trên cây con nếu bệnh được phát hiện rất sớm.
+
+Tuy nhiên, nguồn cũng cảnh báo rằng vi khuẩn kháng streptomycin có thể xuất hiện khi sản phẩm này được sử dụng nhiều lần.
+
+Việc sử dụng kháng sinh trong nông nghiệp được quản lý khác nhau giữa các quốc gia.
+
+Không nên tự ý sử dụng streptomycin hoặc bất kỳ thuốc kháng sinh nào trên cây ớt nếu sản phẩm không được đăng ký hợp pháp tại địa phương.
+
+Sử dụng kháng sinh không đúng còn có nguy cơ góp phần vào vấn đề kháng kháng sinh.
+
+### Sử dụng đồng
+Các sản phẩm chứa đồng có thể được sử dụng để hỗ trợ kiểm soát bệnh đốm lá vi khuẩn.
+
+Tuy nhiên, nguồn WVU Extension lưu ý rằng sử dụng đồng liên tục một mình thường không mang lại hiệu quả tối ưu.
+
+Hiệu quả có thể giảm nếu quần thể vi khuẩn có mức độ chịu đồng cao.
+
+Nguồn đề cập việc phối hợp đồng với một số chất kích hoạt cơ chế kháng của cây trong chương trình quản lý.
+
+Tuy nhiên, tên sản phẩm và liều lượng cụ thể trong nguồn được xây dựng cho điều kiện và đăng ký tại Hoa Kỳ.
+
+Không nên tự động áp dụng liều hoặc tên thương mại này tại Việt Nam.
+
+Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho cây ớt và bệnh đốm vi khuẩn tại địa phương.
 
 ## QUẢN LÝ TỔNG HỢP
-
 Nguồn WVU Extension nhấn mạnh rằng một biện pháp riêng lẻ, chẳng hạn chỉ xử lý hạt giống, thường không đủ để kiểm soát bệnh.
 
 Quản lý hiệu quả cần kết hợp:
@@ -432,9 +395,7 @@ Quản lý hiệu quả cần kết hợp:
 
 Mục tiêu là làm gián đoạn nhiều bước trong chu kỳ bệnh cùng lúc.
 
-
-## BỔ SUNG: CÁCH KIỂM TRA NHANH NGOÀI RUỘNG
-
+## KIỂM TRA NHANH NGOÀI RUỘNG
 Khi nghi ngờ bệnh đốm lá vi khuẩn trên cây ớt, có thể kiểm tra theo trình tự sau:
 
 - Tìm các đốm nhỏ có vẻ thấm nước trên lá.
@@ -452,9 +413,7 @@ Khi nghi ngờ bệnh đốm lá vi khuẩn trên cây ớt, có thể kiểm tr
 
 Nếu triệu chứng không điển hình, nên xác nhận bằng phòng chẩn đoán bệnh cây vì nhiều bệnh lá trên ớt có thể tạo triệu chứng gần giống nhau.
 
-
 ## LƯU Ý KHI SỬ DỤNG SẢN PHẨM BẢO VỆ THỰC VẬT
-
 Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho cây ớt và bệnh cần xử lý.
 
 Luôn đọc và tuân thủ nhãn sản phẩm.
@@ -469,9 +428,7 @@ Nếu sử dụng sản phẩm chứa đồng, cần chú ý nguy cơ giảm hi�
 
 Kết hợp sản phẩm bảo vệ thực vật với biện pháp vệ sinh, giống kháng, cây giống sạch và quản lý nước để đạt hiệu quả bền vững hơn.
 
-
 ## TÓM TẮT CÁCH NHẬN BIẾT VÀ QUẢN LÝ
-
 Bệnh đốm lá vi khuẩn trên cây ớt có thể được nhận biết và quản lý dựa trên các đặc điểm chính sau:
 
 - Bệnh do vi khuẩn thuộc nhóm Xanthomonas gây ra.
@@ -498,3 +455,20 @@ Bệnh đốm lá vi khuẩn trên cây ớt có thể được nhận biết v�
 - Một biện pháp đơn lẻ thường không đủ.
 - Quản lý tổng hợp là chiến lược hiệu quả nhất.
 - Không tự ý sử dụng kháng sinh hoặc thuốc bảo vệ thực vật không được đăng ký.
+
+## NGUỒN THAM KHẢO
+Nguồn gốc:
+West Virginia University Extension
+https://extension.wvu.edu/lawn-gardening-pests/plant-disease/fruit-vegetable-diseases/bacterial-leaf-spot-of-pepper
+
+Nguồn bổ sung:
+NC State Extension — Bacterial Spot of Pepper and Tomato
+https://content.ces.ncsu.edu/bacterial-spot-of-pepper-and-tomato
+
+University of Minnesota Extension — Bacterial spot of tomato and pepper
+https://extension.umn.edu/agriculture/specialty-crops/vegetable-farming/disease-management/bacterial-spot-of-tomato-and-pepper
+
+UF/IFAS Extension — Bacterial Spot of Pepper (PP362)
+https://edis.ifas.ufl.edu/publication/PP362
+
+Ghi chú: Phần bổ sung về taxonomy dùng để đối chiếu tên tác nhân hiện hành với tên cũ trong nguồn WVU. Các hướng dẫn về thuốc, kháng sinh hoặc xử lý hạt giống trong nguồn nước ngoài không thay thế nhãn sản phẩm, quy định pháp luật hoặc hướng dẫn kỹ thuật tại Việt Nam.

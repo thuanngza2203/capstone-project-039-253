@@ -1,0 +1,273 @@
+# BỆNH CHÁY LÁ NHO – ISARIOPSIS LEAF SPOT
+
+## CÂY TRỒNG
+Nho (Grape, Vitis spp.)
+
+## TÊN BỆNH
+Bệnh cháy lá nho
+Tên tiếng Anh: Grape Leaf Blight
+Tên gọi khác: Isariopsis Leaf Spot
+Tên gọi khác: Pseudocercospora Leaf Blight
+
+## TỔNG QUAN
+Bệnh cháy lá nho, còn thường được gọi là Isariopsis leaf spot, là một bệnh nấm gây hại chủ yếu trên lá nho.
+
+Bệnh thường xuất hiện rõ hơn vào giai đoạn cuối mùa sinh trưởng và trong những vùng có điều kiện nóng, ẩm.
+
+Trong nhiều vườn được quản lý tốt, bệnh thường có mức độ nhẹ hơn các bệnh chính như mốc sương hoặc thối quả. Tuy nhiên, khi điều kiện thuận lợi và bệnh phát triển mạnh, cây có thể bị vàng lá và rụng lá sớm.
+
+Rụng lá sớm làm giảm diện tích quang hợp và khả năng tích lũy carbohydrate của cây, từ đó có thể ảnh hưởng đến sinh trưởng, chất lượng quả và khả năng tích lũy dự trữ cho vụ sau.
+
+## TÁC NHÂN GÂY BỆNH
+Tác nhân gây bệnh là nấm Pseudocercospora vitis.
+
+Tên cũ thường gặp trong tài liệu:
+
+- Isariopsis clavispora.
+- Isariopsis vitis.
+
+Do tên Isariopsis từng được sử dụng cho tác nhân này, bệnh vẫn thường được gọi là Isariopsis leaf spot trong các tài liệu và bộ dữ liệu hình ảnh bệnh cây.
+
+American Phytopathological Society liệt kê bệnh dưới tên "Leaf blight (Pseudocercospora leaf blight, Isariopsis leaf spot)" với tác nhân Pseudocercospora vitis.
+
+## BỘ PHẬN BỊ GÂY HẠI
+Bệnh chủ yếu gây hại trên lá.
+
+Triệu chứng thường xuất hiện trước ở các lá già và có thể tiến dần lên các tầng lá phía trên khi bệnh tiếp tục phát triển.
+
+Thiệt hại chính là làm giảm diện tích lá xanh và gây rụng lá sớm khi bệnh nặng.
+
+## TRIỆU CHỨNG
+Triệu chứng ban đầu thường là các đốm nhỏ trên phiến lá.
+
+Các vết bệnh có thể:
+
+- Có hình tròn, bất định hoặc hơi góc cạnh.
+- Có màu đỏ nâu, nâu hoặc nâu tím.
+- Có kích thước từ vài milimét và có thể lớn dần.
+- Có quầng vàng quanh vết bệnh trong một số trường hợp.
+
+Theo tài liệu bệnh học của Universidade Federal de Viçosa, các vết bệnh ban đầu thường khoảng 2 đến 8 milimét nhưng có thể mở rộng, trở nên góc cạnh và liên kết với nhau.
+
+Khi vết bệnh già:
+
+- Màu có thể chuyển đen hơn.
+- Mô bệnh trở nên khô và giòn.
+- Nhiều vết bệnh có thể liên kết thành vùng cháy lá lớn.
+
+Trong điều kiện ẩm, mặt dưới lá tại vị trí vết bệnh có thể xuất hiện lớp nấm hoặc cấu trúc sinh bào tử màu ô liu đến nâu nhạt.
+
+Khi bệnh phát triển mạnh:
+
+- Lá chuyển vàng.
+- Các vùng cháy lá mở rộng.
+- Lá khô.
+- Lá rụng sớm.
+
+## DẤU HIỆU HỮU ÍCH ĐỂ NHẬN BIẾT
+Các đặc điểm hỗ trợ nhận biết bệnh gồm:
+
+- Bệnh xuất hiện chủ yếu trên lá.
+- Các đốm thường màu nâu đến nâu đen.
+- Hình dạng vết bệnh có thể không đều hoặc góc cạnh.
+- Vết bệnh có thể liên kết thành vùng lớn.
+- Mặt dưới lá có thể có lớp nấm màu ô liu hoặc nâu khi ẩm.
+- Bệnh thường rõ hơn ở các lá già và vào giai đoạn muộn của mùa.
+
+Không nên chỉ dựa vào một đặc điểm riêng lẻ vì nhiều bệnh nho khác cũng có thể tạo đốm nâu hoặc cháy lá.
+
+## PHÂN BIỆT VỚI MỘT SỐ BỆNH KHÁC
+
+### Phân biệt với bệnh thối đen
+Bệnh thối đen trên lá thường tạo các vết tương đối tròn, màu nâu nhạt với nhiều pycnidia đen nhỏ nằm trong vết bệnh.
+
+Bệnh cháy lá do Pseudocercospora vitis thường có các vết nâu không đều hoặc góc cạnh, có thể liên kết thành vùng lớn và có lớp nấm màu ô liu ở mặt dưới khi độ ẩm cao.
+
+### Phân biệt với Phomopsis cane and leaf spot
+Phomopsis thường tạo nhiều đốm rất nhỏ màu đen hoặc nâu sẫm, thường có quầng vàng, và đồng thời có thể gây các vết đen kéo dài trên chồi, cuống chùm hoặc cuống lá.
+
+Bệnh cháy lá Isariopsis chủ yếu thể hiện bằng các vết nâu lớn hơn trên phiến lá và có thể làm lá khô giòn khi bệnh già.
+
+### Phân biệt với mốc sương
+Mốc sương có thể tạo vùng vàng trên mặt trên lá nhưng trong điều kiện ẩm thường hình thành lớp mốc trắng đặc trưng ở mặt dưới.
+
+Pseudocercospora leaf blight thường tạo lớp nấm màu ô liu đến nâu chứ không phải lớp mốc trắng điển hình của mốc sương.
+
+## CHU KỲ BỆNH VÀ CƠ CHẾ LÂY LAN
+Pseudocercospora vitis có thể tồn tại qua mùa bất lợi trên vật liệu thực vật bị nhiễm.
+
+Một số tài liệu bệnh học và cơ quan nông nghiệp ghi nhận nấm có thể tồn tại trên lá bệnh rụng và trên các bộ phận của cây.
+
+Khi điều kiện trở nên thuận lợi, nấm hình thành bào tử.
+
+Bào tử có thể được phát tán bằng:
+
+- Gió.
+- Mưa.
+- Nước bắn.
+
+Sau khi bào tử tiếp xúc với lá và độ ẩm đủ cao, nấm có thể gây nhiễm.
+
+Bệnh thường bắt đầu trên các lá già hoặc lá phía dưới rồi lan dần lên các phần khác của tán.
+
+## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH
+Bệnh được thúc đẩy bởi:
+
+- Nhiệt độ tương đối cao.
+- Độ ẩm không khí cao.
+- Thời tiết mưa nhiều.
+- Lá giữ ẩm lâu.
+- Tán cây rậm.
+- Thông khí kém.
+
+Các nguồn từ Universidade Federal de Viçosa và các nghiên cứu bệnh học trên nho cho thấy bệnh thường phát triển mạnh hơn trong điều kiện nóng và ẩm.
+
+Bệnh cũng thường được ghi nhận rõ hơn vào cuối chu kỳ sinh trưởng, đặc biệt khi việc bảo vệ tán lá bằng chương trình quản lý bệnh đã giảm hoặc dừng lại.
+
+## MỨC ĐỘ GÂY HẠI
+Trong nhiều hệ thống sản xuất, Isariopsis leaf spot được xem là bệnh thứ cấp.
+
+Tuy nhiên, khi bệnh phát triển mạnh có thể gây:
+
+- Vàng lá.
+- Cháy lá.
+- Rụng lá sớm.
+- Giảm diện tích quang hợp.
+- Giảm tích lũy carbohydrate.
+- Giảm chất lượng quả trong một số điều kiện.
+- Ảnh hưởng đến sức sinh trưởng và khả năng chuẩn bị dự trữ cho vụ tiếp theo.
+
+Một nghiên cứu tại Hàn Quốc trên các vườn bị bệnh nặng ghi nhận mối liên hệ giữa mức độ bệnh cao, rụng lá và giảm hàm lượng đường của quả. Mức độ ảnh hưởng thực tế phụ thuộc giống, khí hậu và hệ thống canh tác, nên không nên áp dụng trực tiếp số liệu của một vùng cho mọi vườn nho.
+
+## PHÒNG NGỪA
+
+### Duy trì tán thông thoáng
+Các biện pháp giúp tăng lưu thông không khí và làm lá khô nhanh hơn gồm:
+
+- Cắt tỉa phù hợp.
+- Định vị chồi.
+- Tỉa bớt phần tán quá rậm.
+- Duy trì khoảng cách cây hợp lý.
+- Quản lý cỏ dại trong và quanh hàng nho.
+
+University of Kentucky khuyến nghị tăng lưu thông không khí và thúc đẩy mô cây khô nhanh như một phần quan trọng trong quản lý nhóm bệnh đốm lá trên nho.
+
+### Duy trì sức khỏe cây
+Cây sinh trưởng khỏe và có tán được quản lý tốt thường có khả năng duy trì diện tích lá chức năng tốt hơn.
+
+Cần:
+
+- Tưới nước phù hợp.
+- Tránh để cây bị stress nước kéo dài.
+- Bón phân cân đối.
+- Hạn chế tán quá rậm do bón thừa đạm.
+- Theo dõi bệnh trên các lá già vào cuối mùa.
+
+### Quản lý lá bệnh
+Vì nấm có thể tồn tại trên lá bị nhiễm, việc giảm lượng lá bệnh tồn tại trong vườn sau mùa có thể hỗ trợ giảm nguồn bệnh cho vụ sau.
+
+Tùy hệ thống sản xuất, có thể cân nhắc thu gom, cắt nhỏ hoặc thúc đẩy phân hủy lá bệnh theo hướng dẫn kỹ thuật địa phương.
+
+## THEO DÕI VÀ RA QUYẾT ĐỊNH
+Nên theo dõi đặc biệt các lá già và phần trong của tán.
+
+Khi kiểm tra:
+
+- Tìm các đốm nâu đỏ hoặc nâu đen.
+- Quan sát hình dạng vết bệnh có góc cạnh hoặc không đều.
+- Kiểm tra xem nhiều vết có đang liên kết với nhau hay không.
+- Lật mặt dưới lá để tìm lớp nấm màu ô liu hoặc nâu.
+- Ghi nhận mức độ vàng lá và rụng lá.
+- Ghi nhận thời tiết nóng, ẩm hoặc mưa kéo dài.
+
+Nếu chỉ có một số ít vết bệnh cuối mùa và tán lá vẫn khỏe, bệnh có thể không cần biện pháp can thiệp mạnh.
+
+Nếu bệnh đang tăng nhanh và gây vàng lá hoặc rụng lá rõ rệt, cần xem lại toàn bộ chương trình quản lý tán và bệnh foliar trong vườn.
+
+## XỬ LÝ KHI BỆNH ĐÃ XUẤT HIỆN
+Mô lá đã hoại tử sẽ không phục hồi.
+
+Mục tiêu quản lý khi bệnh đã xuất hiện là:
+
+- Làm chậm sự phát triển của bệnh.
+- Hạn chế các đợt nhiễm mới.
+- Bảo vệ phần lá còn khỏe.
+- Hạn chế rụng lá sớm.
+
+Các chương trình phun thuốc được sử dụng để quản lý các bệnh nấm chính trên nho thường cũng có thể góp phần hạn chế Isariopsis leaf spot.
+
+Việc lựa chọn sản phẩm cụ thể phải căn cứ vào:
+
+- Đăng ký tại địa phương.
+- Giống nho.
+- Giai đoạn sinh trưởng.
+- Thời điểm thu hoạch.
+- Lịch sử sử dụng thuốc trong vườn.
+- Chiến lược quản lý kháng thuốc.
+
+Không nên sử dụng danh sách hoạt chất từ tài liệu nước ngoài như khuyến cáo trực tiếp cho Việt Nam.
+
+## LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
+Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho cây nho và mục tiêu sử dụng tương ứng.
+
+Luôn tuân thủ:
+
+- Nhãn sản phẩm.
+- Liều lượng.
+- Khoảng cách giữa các lần xử lý.
+- Thời gian cách ly.
+- Thời gian tái xâm nhập.
+- Yêu cầu bảo hộ lao động.
+
+Nếu cần sử dụng nhiều lần, nên luân phiên nhóm cơ chế tác động phù hợp để hạn chế nguy cơ kháng thuốc.
+
+## KIỂM TRA NHANH NGOÀI VƯỜN
+Khi nghi ngờ bệnh cháy lá Isariopsis:
+
+- Bắt đầu kiểm tra ở các lá già.
+- Tìm vết màu nâu đỏ đến nâu đen.
+- Quan sát xem vết bệnh có dạng không đều hoặc góc cạnh hay không.
+- Kiểm tra xem nhiều vết bệnh có nhập lại với nhau hay không.
+- Lật mặt dưới lá.
+- Tìm lớp nấm màu ô liu hoặc nâu tại vùng tương ứng với vết bệnh.
+- Đánh giá xem cây có đang vàng lá hoặc rụng lá sớm hay không.
+- Ghi nhận độ ẩm, mưa và tình trạng thông thoáng của tán.
+
+Nếu triệu chứng không điển hình hoặc cần quyết định quản lý có giá trị kinh tế lớn, nên xác nhận bằng chuyên gia bệnh cây hoặc phòng chẩn đoán.
+
+## TỪ KHÓA TRUY XUẤT
+grape leaf blight
+Isariopsis leaf spot
+Pseudocercospora leaf blight
+bệnh cháy lá nho
+bệnh đốm lá nho
+Pseudocercospora vitis
+Isariopsis clavispora
+Isariopsis vitis
+grape brown leaf spot
+grape foliar disease
+grape leaf spot
+brown spots grape leaves
+olive mold underside grape leaf
+grape premature defoliation
+
+## NGUỒN THAM KHẢO
+American Phytopathological Society — Common Names of Plant Diseases: Diseases of Grape
+https://www.apsnet.org/edcenter/resources/commonnames/Pages/Grape.aspx
+
+NC State Extension — North Carolina Winegrape Grower's Guide, Chapter 8: Pest Management
+https://content.ces.ncsu.edu/north-carolina-winegrape-growers-guide/chapter-8-pest-management
+
+University of Kentucky — Scouting Guide for Problems of Fruit: Leaf Spots of Grapes
+https://fruitscout.mgcafe.uky.edu/leaf-spots-grapes
+
+Universidade Federal de Viçosa, Departamento de Fitopatologia — Doenças da Videira
+https://www.infectario.ufv.br/doencas-da-videira/
+
+Ibaraki Prefectural Government, Agricultural Research Center — Grapevine brown leaf spot (Pseudocercospora vitis)
+https://www.pref.ibaraki.jp/nourinsuisan/nosose/byobo/boujosidou/shiryoshitsu/shiryo-budokappan.html
+
+Park J.H. et al. — Occurrence Tendency and Decrease of Fruits Brix According to Increasing Grapevine Leaf Spot Disease Caused by Pseudocercospora vitis, Research in Plant Disease, 2004
+https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART000937532
+
+Ghi chú: Các thông tin về thuốc bảo vệ thực vật trong nguồn nước ngoài không thay thế nhãn sản phẩm và quy định hiện hành tại Việt Nam.

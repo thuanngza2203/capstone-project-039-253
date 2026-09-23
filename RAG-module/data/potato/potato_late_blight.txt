@@ -1,0 +1,362 @@
+# BỆNH MỐC SƯƠNG MUỘN TRÊN CÂY KHOAI TÂY
+
+## CÂY TRỒNG
+Khoai tây (Potato, Solanum tuberosum)
+
+## TÊN BỆNH
+Bệnh mốc sương muộn trên cây khoai tây
+Tên tiếng Anh: Potato Late Blight
+Tên gọi khác: Late blight
+Tác nhân: Phytophthora infestans
+
+## TỔNG QUAN
+Bệnh mốc sương muộn là một trong những bệnh nguy hiểm nhất trên khoai tây.
+
+Bệnh do Phytophthora infestans gây ra. Tác nhân này không phải là nấm thật mà là một oomycete, thường được gọi là nấm giả hoặc nấm nước.
+
+Khi nguồn bệnh hiện diện và thời tiết mát, ẩm kéo dài, bệnh có thể phát triển rất nhanh, gây cháy tán trên diện rộng và làm giảm nghiêm trọng năng suất.
+
+Ngoài lá và thân, tác nhân còn có thể gây bệnh trên củ. Củ bị nhiễm có thể tiếp tục hư hỏng trong bảo quản và dễ bị các vi sinh vật khác xâm nhập thứ cấp.
+
+## TÁC NHÂN GÂY BỆNH
+Tác nhân là Phytophthora infestans.
+
+Đây là một oomycete có khả năng tạo các cấu trúc sinh sản vô tính gọi là sporangia.
+
+Trong điều kiện thích hợp, sporangia có thể:
+
+- Nảy mầm trực tiếp.
+- Hoặc giải phóng zoospore có khả năng di chuyển trong nước.
+
+Sporangia có thể được gió phát tán trên khoảng cách lớn, giúp bệnh lan nhanh giữa các ruộng khi điều kiện môi trường thuận lợi.
+
+## CÂY KÝ CHỦ
+Khoai tây là một trong những cây ký chủ quan trọng nhất.
+
+Phytophthora infestans cũng có thể gây bệnh trên:
+
+- Cà chua.
+- Một số cây khác thuộc họ Cà.
+- Một số loài cỏ dại họ Cà như nightshade.
+
+Các cây ký chủ này có thể góp phần duy trì hoặc phát tán nguồn bệnh trong khu vực.
+
+## TRIỆU CHỨNG
+
+### Trên lá
+Triệu chứng ban đầu thường là các vùng nhỏ màu xanh nhạt đến xanh sẫm có vẻ như bị thấm nước.
+
+Vết bệnh thường:
+
+- Có hình dạng không đều.
+- Mở rộng nhanh trong điều kiện mát và ẩm.
+- Chuyển dần sang nâu hoặc nâu tím khi mô chết.
+- Có thể được bao quanh bởi vùng mô xanh nhạt hoặc vàng nhạt.
+
+Khi bệnh phát triển mạnh, nhiều vết bệnh có thể liên kết và làm toàn bộ lá hoặc phần lớn tán bị cháy.
+
+### Lớp bào tử trắng ở mặt dưới lá
+Trong điều kiện độ ẩm cao, ở rìa vết bệnh, đặc biệt ở mặt dưới lá, có thể xuất hiện một lớp trắng mịn hoặc giống lông tơ.
+
+Đây là vùng tác nhân đang tạo cấu trúc sinh sản.
+
+Dấu hiệu này thường dễ quan sát hơn:
+
+- Vào sáng sớm.
+- Sau đêm có sương.
+- Sau mưa.
+- Khi độ ẩm không khí rất cao.
+
+Sự kết hợp giữa vết bệnh dạng thấm nước và lớp bào tử trắng ở mép vết bệnh là dấu hiệu rất hữu ích để nhận biết mốc sương muộn.
+
+### Trên cuống lá và thân
+Trên cuống lá và thân có thể xuất hiện các vết màu nâu đến đen.
+
+Các vết này thường:
+
+- Không đều.
+- Có thể kéo dài dọc thân.
+- Làm mô phía trên nhanh chóng héo hoặc sụp nếu tổn thương phát triển mạnh.
+
+Trong điều kiện ẩm, lớp bào tử trắng cũng có thể xuất hiện trên bề mặt các vết bệnh.
+
+### Trên củ
+Củ bị nhiễm thường xuất hiện các vùng màu nâu đến tím nâu trên vỏ.
+
+Các vùng này có thể:
+
+- Hơi lõm.
+- Có mép sẫm màu.
+- Mở rộng dần trong bảo quản.
+
+Khi cắt qua vùng bệnh, phần mô bên dưới thường:
+
+- Có màu nâu đỏ hoặc màu gỗ gụ.
+- Chắc.
+- Có dạng hạt.
+- Lan không đều vào phần thịt củ.
+- Không có ranh giới thật rõ với mô khỏe.
+
+Theo Cornell và UC IPM, tổn thương có thể ăn sâu từ vài milimét đến khoảng hơn một centimet tùy trường hợp.
+
+Củ bị Late Blight có thể bị vi khuẩn xâm nhập thứ cấp và chuyển thành dạng thối ướt.
+
+## PHÂN BIỆT VỚI BỆNH CHÁY SỚM
+
+### Trên lá
+Early Blight thường:
+
+- Xuất hiện trước trên lá già phía dưới.
+- Có các vết nâu sẫm.
+- Có vòng đồng tâm rõ giống bia bắn.
+
+Late Blight thường:
+
+- Có thể xuất hiện trên nhiều tầng lá.
+- Vết bệnh có vẻ thấm nước.
+- Hình dạng không đều.
+- Không có vòng đồng tâm điển hình.
+- Có thể tạo lớp trắng ở mặt dưới vết bệnh khi ẩm.
+
+### Trên củ
+Early Blight trên củ thường tạo tổn thương khô, sẫm màu, hơi lõm và có ranh giới tương đối rõ với mô khỏe nhờ lớp mô bần.
+
+Late Blight thường tạo vùng đổi màu nâu tím trên vỏ và phần mô bên dưới có màu nâu đỏ, chắc, dạng hạt, với ranh giới không rõ bằng Early Blight.
+
+## NGUỒN BỆNH VÀ SỰ TỒN TẠI
+Tại Bắc Mỹ và nhiều vùng sản xuất, nguồn bệnh quan trọng gồm:
+
+- Củ giống bị nhiễm.
+- Củ bỏ đi hoặc đống củ loại.
+- Cây khoai tây mọc lại từ củ sót.
+- Ruộng khoai tây hoặc cà chua bị bệnh ở gần.
+- Một số cỏ dại họ Cà.
+
+Củ bị nhiễm có thể sống qua giai đoạn giữa hai vụ và tạo cây mang bệnh trong vụ tiếp theo.
+
+Khi cây bệnh bắt đầu tạo sporangia, nguồn bệnh có thể tăng rất nhanh và phát tán sang những cây khác.
+
+## CHU KỲ BỆNH VÀ CƠ CHẾ LÂY LAN
+Sporangia được tạo trên mô bệnh trong điều kiện ẩm.
+
+Chúng có thể được:
+
+- Gió phát tán.
+- Mưa mang đi.
+- Nước bắn đưa sang mô khỏe.
+
+Khi sporangia rơi lên mô khoai tây và điều kiện đủ ẩm, chúng có thể nảy mầm trực tiếp hoặc giải phóng zoospore.
+
+Sau khi nhiễm, triệu chứng trên lá có thể xuất hiện chỉ sau vài ngày. Cornell ghi nhận triệu chứng có thể trở nên rõ trong khoảng 3 đến 6 ngày sau nhiễm.
+
+Các vết bệnh mới lại tiếp tục tạo sporangia, tạo ra nhiều chu kỳ bệnh liên tiếp trong cùng một vụ.
+
+Vì vậy, trong điều kiện thời tiết thuận lợi, bệnh có thể tăng từ một ổ nhỏ thành dịch trên diện rộng trong thời gian ngắn.
+
+## CƠ CHẾ NHIỄM CỦ
+Củ có thể bị nhiễm khi sporangia hoặc zoospore từ tán lá bị nước mưa rửa xuống đất.
+
+Tác nhân có thể tiếp cận củ qua:
+
+- Các khe nứt trong đất.
+- Nước di chuyển qua luống.
+- Đất nhiễm bám vào củ.
+
+Củ cũng có nguy cơ nhiễm trong thu hoạch nếu:
+
+- Tán bệnh chưa chết hoàn toàn.
+- Củ tiếp xúc với mô bệnh.
+- Điều kiện đất hoặc tán còn ẩm.
+
+## ĐIỀU KIỆN THUẬN LỢI CHO BỆNH
+Bệnh phát triển mạnh trong điều kiện mát và ẩm.
+
+UC IPM ghi nhận điều kiện thuận lợi gồm:
+
+- Độ ẩm cao, thường trên khoảng 90%.
+- Nhiệt độ trung bình khoảng 50 đến 78 độ F.
+- Tương đương khoảng 10 đến 26 độ C.
+- Lá hoặc tán duy trì ẩm.
+- Mưa, sương hoặc tưới làm ướt tán.
+- Không khí lưu thông kém.
+
+Khi thời tiết mát, mưa và độ ẩm cao kéo dài, bệnh có thể phát triển rất nhanh.
+
+## MỨC ĐỘ GÂY HẠI
+Late Blight có thể gây:
+
+- Cháy lá nhanh.
+- Sụp tán.
+- Giảm mạnh quang hợp.
+- Giảm quá trình tạo và lớn củ.
+- Giảm năng suất.
+- Nhiễm củ trong đất.
+- Hư hỏng trong bảo quản.
+- Tăng nguy cơ thối thứ cấp.
+
+Trong dịch bệnh nghiêm trọng, phần lớn hoặc toàn bộ tán khoai tây có thể bị phá hủy trong thời gian ngắn.
+
+## PHÒNG NGỪA
+
+### Sử dụng củ giống sạch bệnh
+Sử dụng củ giống được chứng nhận và không mang bệnh là một trong những biện pháp nền tảng.
+
+Củ giống nhiễm bệnh có thể đưa Phytophthora infestans trực tiếp vào ruộng ngay từ đầu vụ.
+
+### Loại bỏ nguồn bệnh
+Cần kiểm soát:
+
+- Đống củ loại.
+- Củ bỏ đi.
+- Cây khoai tây mọc lại từ vụ trước.
+- Cây ký chủ họ Cà mọc dại khi có nguy cơ.
+- Cây bệnh rõ ràng trong ruộng khi việc loại bỏ còn khả thi.
+
+Không nên để đống củ loại mọc thành các cây khoai tây tự phát vì chúng có thể trở thành nguồn bào tử lớn.
+
+### Luân canh
+Luân canh khỏi các cây họ Cà có thể hỗ trợ làm giảm nguồn bệnh và các vấn đề dịch hại khác.
+
+Tuy nhiên, vì bào tử Late Blight có thể di chuyển xa theo gió, luân canh một mình không thể bảo vệ ruộng nếu nguồn bệnh từ khu vực khác vẫn tồn tại.
+
+### Quản lý tán và nước tưới
+Cần tạo điều kiện để tán lá khô nhanh:
+
+- Duy trì lưu thông không khí tốt.
+- Kiểm soát cỏ dại làm tán ẩm.
+- Hạn chế tưới phun khi điều kiện đã rất thuận lợi cho bệnh.
+- Quản lý thời điểm tưới phù hợp với hệ thống địa phương.
+
+## THEO DÕI VÀ RA QUYẾT ĐỊNH
+Cần kiểm tra ruộng thường xuyên, đặc biệt khi thời tiết mát và ẩm.
+
+Nên chú ý trước tiên ở:
+
+- Khu vực trũng.
+- Vùng tán rậm.
+- Khu vực có bóng râm kéo dài.
+- Gần hàng cây chắn gió.
+- Vị trí giữ ẩm lâu.
+- Gần cây khoai tây tự mọc hoặc nguồn củ loại.
+
+Khi kiểm tra:
+
+- Tìm các vết thấm nước bất thường.
+- Kiểm tra mặt dưới lá để tìm lớp trắng ở rìa vết bệnh.
+- Quan sát thân và cuống lá.
+- Theo dõi tốc độ bệnh phát triển qua vài ngày.
+
+Nếu nghi ngờ Late Blight, nên xác nhận nhanh bằng chuyên gia bệnh cây hoặc phòng chẩn đoán vì bệnh có thể lan rất nhanh và dễ bị nhầm với một số bệnh lá khác.
+
+## XỬ LÝ KHI BỆNH ĐÃ XUẤT HIỆN
+
+### Loại bỏ ổ bệnh khi còn khu trú
+Nếu bệnh mới xuất hiện trong một vùng nhỏ và điều kiện sản xuất cho phép, có thể cân nhắc tiêu hủy cây bệnh và mô cây xung quanh để giảm nguồn bào tử.
+
+Cần tránh thao tác làm phát tán mô bệnh hoặc bào tử sang khu vực khỏe.
+
+### Quản lý tán trước thu hoạch
+Khi Late Blight đã xuất hiện trên tán và củ có nguy cơ nhiễm, UC IPM và Cornell khuyến nghị bảo đảm phần thân lá đã chết hoàn toàn một khoảng thời gian trước khi đào củ.
+
+UC IPM nêu khoảng 2 đến 3 tuần; Cornell nêu tối thiểu khoảng 2 tuần trong bối cảnh có bệnh trên tán.
+
+Mục tiêu là:
+
+- Giảm lượng sporangia còn sống trên tán.
+- Giảm nguy cơ củ tiếp xúc với nguồn bệnh trong quá trình thu hoạch.
+
+Thời gian cụ thể cần điều chỉnh theo giống, điều kiện ruộng và hướng dẫn địa phương.
+
+### Sử dụng thuốc phòng trừ
+Thuốc có hiệu quả tốt nhất khi được sử dụng theo hướng phòng ngừa hoặc rất sớm khi bệnh mới xuất hiện.
+
+Quyết định xử lý nên dựa trên:
+
+- Nguy cơ bệnh trong vùng.
+- Điều kiện thời tiết.
+- Mức độ bệnh trong ruộng hoặc ruộng lân cận.
+- Giai đoạn sinh trưởng.
+- Khuyến cáo kỹ thuật và đăng ký sản phẩm tại địa phương.
+
+Phytophthora infestans có khả năng phát triển tính kháng với một số hoạt chất. UC IPM ghi nhận các quần thể kháng mefenoxam đã từng xuất hiện.
+
+Do đó cần tuân thủ chiến lược luân phiên nhóm cơ chế tác động và giới hạn số lần sử dụng trên nhãn.
+
+Không nên tự động áp dụng tên thương mại, hoạt chất hoặc lịch phun từ tài liệu Hoa Kỳ vào điều kiện Việt Nam.
+
+## QUẢN LÝ CỦ SAU THU HOẠCH
+Củ có triệu chứng Late Blight không nên đưa vào kho chung với củ khỏe nếu có thể tránh.
+
+Cần:
+
+- Loại bỏ củ có triệu chứng rõ.
+- Hạn chế tổn thương cơ học.
+- Duy trì thông gió phù hợp.
+- Theo dõi kho thường xuyên.
+- Loại bỏ sớm các củ đang thối.
+
+Nhiễm Late Blight có thể tạo điều kiện cho vi khuẩn gây thối mềm xâm nhập, làm tốc độ hư hỏng trong kho tăng mạnh.
+
+## LƯU Ý KHI SỬ DỤNG THUỐC BẢO VỆ THỰC VẬT
+Chỉ sử dụng sản phẩm được đăng ký hợp pháp cho khoai tây và Late Blight tại khu vực sản xuất.
+
+Luôn tuân thủ:
+
+- Nhãn sản phẩm.
+- Liều lượng.
+- Khoảng cách phun.
+- Thời gian cách ly.
+- Thời gian tái xâm nhập.
+- Yêu cầu bảo hộ lao động.
+
+Không tăng liều hoặc số lần xử lý ngoài hướng dẫn.
+
+Nếu phải xử lý nhiều lần, cần luân phiên hoặc phối hợp nhóm cơ chế tác động theo đúng nhãn và khuyến cáo quản lý kháng thuốc.
+
+## KIỂM TRA NHANH NGOÀI RUỘNG
+Khi nghi ngờ Late Blight trên khoai tây:
+
+- Tìm các đốm có vẻ thấm nước trên lá.
+- Quan sát hình dạng không đều của vết bệnh.
+- Kiểm tra mặt dưới lá vào sáng sớm hoặc sau thời tiết ẩm.
+- Tìm lớp bào tử trắng ở rìa vết bệnh.
+- Kiểm tra cuống lá và thân để tìm vùng nâu đen.
+- Xem bệnh có đang lan rất nhanh hay không.
+- Ghi nhận thời tiết mát, mưa, sương và độ ẩm cao.
+- Kiểm tra các khu vực trũng hoặc giữ ẩm lâu trước.
+- Kiểm tra củ để tìm vùng nâu tím và phần mô nâu đỏ bên dưới.
+
+Không nên dựa vào một dấu hiệu duy nhất. Khi kết quả chẩn đoán ảnh hưởng đến quyết định xử lý trên diện tích lớn, nên xác nhận bằng phòng chẩn đoán.
+
+## TỪ KHÓA TRUY XUẤT
+potato late blight
+bệnh mốc sương muộn khoai tây
+mốc sương khoai tây
+Phytophthora infestans
+potato blight
+water soaked lesions potato
+white sporulation potato leaf
+late blight potato tuber
+brown purple potato tuber
+mahogany tuber rot
+sporangia
+zoospore
+potato late blight management
+
+## NGUỒN THAM KHẢO
+North Dakota State University Extension — Late Blight in Potato
+https://www.ag.ndsu.edu/varietytrials/potatoes/late-blight-in-potato
+
+UC Statewide Integrated Pest Management Program — Late Blight / Potato
+https://ipm.ucanr.edu/agriculture/potato/late-blight/
+
+Cornell Vegetables — Late Blight
+https://www.vegetables.cornell.edu/crops/tomatoes/late-blight/
+
+Cornell Vegetables — Detection of Potato Tuber Diseases and Defects
+https://www.vegetables.cornell.edu/pest-management/disease-factsheets/detection-of-potato-tuber-diseases-defects/
+
+Penn State Extension — Tomato-Potato Late Blight in the Home Garden
+https://extension.psu.edu/tomato-potato-late-blight-in-the-home-garden
+
+Ghi chú: Những số liệu về nhiệt độ, thời gian quản lý tán và thuốc bảo vệ thực vật phản ánh các nguồn kỹ thuật tại Hoa Kỳ. Khi áp dụng tại Việt Nam cần ưu tiên điều kiện địa phương, nhãn sản phẩm và quy định hiện hành.
