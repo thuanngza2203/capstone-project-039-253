@@ -43,7 +43,7 @@ from taxonomy import ResolvedScope, taxonomy_table
 
 logger = logging.getLogger("rag.server")
 
-API_VERSION = "1.1.0"
+API_VERSION = "1.2.0"
 
 DESCRIPTION = """
 API tra cứu kiến thức bệnh cây: tìm tài liệu (hybrid semantic + BM25) và sinh câu
@@ -64,6 +64,11 @@ xác thực tắt và server chỉ được nghe `127.0.0.1`. Bấm **Authorize*
 
 `unsupported_disease` và `unknown_disease` cố ý không tìm theo cây: tìm theo cây lúc
 đó dễ lấy nhầm tài liệu của bệnh khác cùng cây và trả lời sai bệnh.
+
+**Tìm bằng nhiều câu.** `extra_queries` (tối đa 3) được tìm y như câu chính; mọi bảng xếp
+hạng gộp bằng RRF. `meta.search_queries` ghi lại các câu đã thật sự dùng. Detection gửi câu
+đã chuẩn hóa trong `retrieval_query`; gửi kèm câu gốc ở đây là tùy chọn, tắt mặc định vì đo
+24/09 không thấy lợi.
 
 **So sánh thí nghiệm.** `index` chọn index `recursive`/`structure`, `llm_provider` chọn LLM
 cho từng request; `meta` trong response ghi lại cấu hình thật đã dùng, token và thời gian.
@@ -241,6 +246,7 @@ def create_app(runtime: RAGRuntime | None = None, *, api_key: str | None = None)
         outcome = app.state.runtime.retrieve(
             request.query, plant_type=request.plant_type, disease=request.disease,
             top_k=request.top_k, mode=request.mode, rerank=request.rerank, index=request.index,
+            extra_queries=request.extra_queries,
         )
         debug = outcome.result.to_debug_dict() if request.debug and outcome.result else None
         return RetrieveResponse(scope=_scope(outcome.scope), chunks=_chunks(outcome.result),
@@ -265,6 +271,7 @@ def create_app(runtime: RAGRuntime | None = None, *, api_key: str | None = None)
             retrieval_query=request.retrieval_query,
             top_k=request.top_k, mode=request.mode, rerank=request.rerank,
             index=request.index, llm_provider=request.llm_provider,
+            extra_queries=request.extra_queries,
         )
         return _answer_response(outcome, request.debug)
 

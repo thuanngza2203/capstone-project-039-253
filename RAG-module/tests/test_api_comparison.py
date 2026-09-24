@@ -123,6 +123,33 @@ def test_refusal_meta_has_no_llm_and_no_retrieval(two_indexes: RAGRuntime) -> No
     meta = body["meta"]
     assert meta["index"] == "structure" and meta["llm"] is None
     assert meta["retrieval_mode"] is None and meta["timing_ms"]["retrieve"] is None
+    assert meta["search_queries"] == []
+
+
+# --- Tìm bằng nhiều câu -------------------------------------------------------
+
+def test_extra_queries_are_searched_and_reported_in_meta(two_indexes: RAGRuntime) -> None:
+    client = make_client(two_indexes)
+    retrieved = client.post("/v1/retrieve", headers=AUTH, json={
+        "query": "xử lý ghẻ táo", "extra_queries": ["XỬ LÝ  GHẺ TÁO", "xu ly ghe tao"],
+    }).json()
+    assert retrieved["meta"]["search_queries"] == ["xử lý ghẻ táo", "xu ly ghe tao"]
+
+    # /v1/answer: câu chính là retrieval_query (câu chuẩn hóa), câu gốc đi kèm.
+    answered = client.post("/v1/answer", headers=AUTH, json={
+        "query": "xu ly ghe tao", "retrieval_query": "Xử lý bệnh ghẻ táo (bệnh apple_scab)",
+        "extra_queries": ["xu ly ghe tao"],
+    }).json()
+    assert answered["retrieval_query"] == "Xử lý bệnh ghẻ táo (bệnh apple_scab)"
+    assert answered["meta"]["search_queries"] == [
+        "Xử lý bệnh ghẻ táo (bệnh apple_scab)", "xu ly ghe tao"]
+
+
+@pytest.mark.parametrize("extra", [["a", "b", "c", "d"], [""], ["x" * 2001]])
+def test_bad_extra_queries_are_422(two_indexes: RAGRuntime, extra: list[str]) -> None:
+    response = make_client(two_indexes).post(
+        "/v1/retrieve", headers=AUTH, json={"query": "x", "extra_queries": extra})
+    assert response.status_code == 422
 
 
 # --- Trạng thái index ---------------------------------------------------------

@@ -115,6 +115,64 @@ def test_rrf_deduplicates_per_branch_but_keeps_different_chunks() -> None:
     assert chunk_key(first) != chunk_key(second)
 
 
+def test_extra_queries_skip_blanks_and_duplicates_of_main_query() -> None:
+    queries = retrieval.search_queries(
+        "Bệnh ghẻ táo", ["  bệnh GHẺ  táo ", "", "benh ghe tao", "benh ghe tao"])
+    # Câu không dấu khác câu có dấu: giữ lại, đó là lý do tìm bằng nhiều câu.
+    assert queries == ["Bệnh ghẻ táo", "benh ghe tao"]
+
+
+def test_extra_query_rescues_chunk_the_main_query_misses() -> None:
+    """Câu chuẩn hóa làm rơi chi tiết (tên nấm) thì câu gốc vẫn kéo được chunk đúng."""
+    correct = document("Venturia inaequalis gây bệnh ghẻ táo.", "scab.txt")
+    other = document("Xử lý bệnh gỉ sắt: cắt cành bệnh.", "rust.txt")
+    settings = RetrievalSettings(mode="bm25")
+    store = Store([correct, other])
+
+    alone = retrieval.search_store("xử lý", store, k=2, settings=settings)
+    assert alone.documents == [other]
+
+    fused = retrieval.search_store("xử lý", store, k=2, settings=settings,
+                                   extra_queries=["venturia xu ly"])
+    assert {doc.metadata["source"] for doc in fused.documents} == {"scab.txt", "rust.txt"}
+    assert fused.queries == ["xử lý", "venturia xu ly"]
+    # Đếm và hạng BM25 là của câu chính; chunk chỉ câu phụ tìm thấy không có hạng.
+    assert fused.bm25_count == 1
+    rescued = next(hit for hit in fused.hits if hit.document == correct)
+    assert rescued.bm25_rank is None and rescued.rrf_score > 0
+
+
+def test_every_query_runs_every_branch_and_ranks_come_from_main_query() -> None:
+    a = document("alpha", "a.txt")
+    b = document("beta", "b.txt")
+    store = Store([a, b], semantic_results=[a, b])
+    result = retrieval.search_store(
+        "alpha", store, k=2, settings=RetrievalSettings(mode="hybrid"), extra_queries=["beta"])
+    assert [question for question, _ in store.semantic_calls] == ["alpha", "beta"]
+    first, second = result.hits
+    # a: semantic hạng 1 ở cả hai câu + BM25 hạng 1 ở câu chính; b: semantic hạng 2 ×2 + BM25 câu phụ.
+    assert first.document == a and first.rrf_score == pytest.approx(3 / 61)
+    assert second.document == b and second.rrf_score == pytest.approx(2 / 62 + 1 / 61)
+    assert (first.semantic_rank, first.bm25_rank) == (1, 1)
+    assert (second.semantic_rank, second.bm25_rank) == (2, None)
+    assert result.to_debug_dict()["queries"] == ["alpha", "beta"]
+
+
+def test_reranker_scores_against_main_query_only(monkeypatch: pytest.MonkeyPatch) -> None:
+    received = []
+
+    class Reranker:
+        def predict(self, pairs, **kwargs):
+            received.extend(pairs)
+            return [1.0] * len(pairs)
+
+    monkeypatch.setattr(retrieval, "load_reranker", lambda *args: Reranker())
+    retrieval.search_store(
+        "alpha", Store([document("alpha"), document("beta", start=1)]), k=2,
+        settings=RetrievalSettings(mode="hybrid", reranker_enabled=True), extra_queries=["beta"])
+    assert received and {question for question, _ in received} == {"alpha"}
+
+
 def test_hybrid_recovers_candidate_missing_from_semantic_results() -> None:
     correct = document("Tác nhân Venturia inaequalis gây bệnh ghẻ táo.", "scab.txt")
     wrong = document("Bệnh phấn trắng trên cherry.", "mildew.txt")

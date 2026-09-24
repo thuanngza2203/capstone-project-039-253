@@ -12,7 +12,7 @@ import re
 import unicodedata
 from dataclasses import dataclass, field, replace
 from functools import lru_cache
-from typing import Any, Callable
+from typing import Any, Callable, Sequence
 from weakref import WeakKeyDictionary
 
 from langchain_core.documents import Document
@@ -74,6 +74,8 @@ class SearchResult:
     merged_count: int
     reranked: bool
     scope: MetadataScope | None = None
+    # Các câu đã dùng để tìm, câu chính trước; semantic/bm25 count là của câu chính.
+    queries: list[str] = field(default_factory=list)
 
     @property
     def documents(self) -> list[Document]:
@@ -84,6 +86,7 @@ class SearchResult:
         selected = {hit.chunk_id for hit in self.hits}
         return {
             "mode": self.mode,
+            "queries": self.queries,
             "semantic_candidates": self.semantic_count,
             "bm25_candidates": self.bm25_count,
             "merged_candidates": self.merged_count,
@@ -290,12 +293,17 @@ def semantic_search(
     ]
 
 
-def reciprocal_rank_fusion(
-    semantic_hits: list[SearchHit], bm25_hits: list[SearchHit], rrf_k: int
+def fuse_rankings(
+    rankings: Sequence[list[SearchHit]], rrf_k: int, *, primary: int | None = None,
 ) -> list[SearchHit]:
-    """Mỗi nhánh góp 1 / (rrf_k + rank); không cộng hai loại raw score."""
+    """RRF trên nhiều bảng xếp hạng (mỗi câu tìm × mỗi nhánh); không cộng raw score.
+
+    Mỗi bảng góp 1 / (rrf_k + rank). Hạng semantic/BM25 ghi vào kết quả chỉ lấy
+    từ `primary` bảng đầu (của câu tìm chính); các bảng sau chỉ cộng điểm.
+    """
+    primary = len(rankings) if primary is None else primary
     merged: dict[str, SearchHit] = {}
-    for branch in (semantic_hits, bm25_hits):
+    for position, branch in enumerate(rankings):
         seen: set[str] = set()
         for hit in branch:
             if hit.chunk_id in seen:
@@ -307,12 +315,38 @@ def reciprocal_rank_fusion(
             )
             # Dùng thứ hạng sau khi loại trùng trong chính nhánh này.
             combined.rrf_score += 1.0 / (rrf_k + len(seen))
+            if position >= primary:
+                continue
             if hit.semantic_rank is not None:
                 combined.semantic_rank = hit.semantic_rank
             if hit.bm25_rank is not None:
                 combined.bm25_rank = hit.bm25_rank
                 combined.bm25_score = hit.bm25_score
     return sorted(merged.values(), key=lambda hit: (-hit.rrf_score, hit.chunk_id))
+
+
+def reciprocal_rank_fusion(
+    semantic_hits: list[SearchHit], bm25_hits: list[SearchHit], rrf_k: int
+) -> list[SearchHit]:
+    """Mỗi nhánh góp 1 / (rrf_k + rank); không cộng hai loại raw score."""
+    return fuse_rankings([semantic_hits, bm25_hits], rrf_k)
+
+
+def search_queries(question: str, extra_queries: Sequence[str] = ()) -> list[str]:
+    """Câu tìm chính trước, rồi các câu bổ sung; bỏ câu rỗng hoặc trùng.
+
+    Trùng = giống nhau khi bỏ khác biệt hoa/thường và khoảng trắng. Câu có dấu và
+    không dấu được giữ cả hai: đó chính là lý do tìm bằng nhiều câu.
+    """
+    queries = [question]
+    seen = {" ".join(question.split()).casefold()}
+    for extra in extra_queries:
+        text = str(extra).strip()
+        key = " ".join(text.split()).casefold()
+        if key and key not in seen:
+            seen.add(key)
+            queries.append(text)
+    return queries
 
 
 @lru_cache(maxsize=1)
@@ -348,27 +382,37 @@ def rerank_hits(
 
 def search_store(
     question: str, store: Any, *, k: int, settings: RetrievalSettings,
-    scope: MetadataScope | None = None,
+    scope: MetadataScope | None = None, extra_queries: Sequence[str] = (),
 ) -> SearchResult:
-    """Luồng chính: lấy ứng viên → gộp → rerank tùy chọn → chọn top-k."""
+    """Luồng chính: lấy ứng viên → gộp → rerank tùy chọn → chọn top-k.
+
+    `extra_queries` (ví dụ câu gốc người dùng gõ, khi `question` là câu đã chuẩn
+    hóa) được tìm y như câu chính; mọi bảng xếp hạng gộp chung bằng RRF.
+    """
     limit = max(k, settings.candidate_k)
-    semantic_hits = []
-    bm25_hits = []
     active = scope if scope is not None and scope.active else None
+    queries = search_queries(question, extra_queries)
+    use_semantic = settings.mode in {"semantic", "hybrid"}
+    use_bm25 = settings.mode in {"bm25", "hybrid"}
+    index = corpus_index(store) if use_bm25 else None
 
-    if settings.mode in {"semantic", "hybrid"}:
-        semantic_hits = semantic_search(question, store, limit, active)
-    if settings.mode in {"bm25", "hybrid"}:
-        bm25_hits = bm25_search_index(
-            question, corpus_index(store), limit, active.matches if active else None,
-        )
+    # Thứ tự bảng: [semantic, bm25] của câu chính, rồi của từng câu bổ sung.
+    rankings: list[list[SearchHit]] = []
+    for query in queries:
+        if use_semantic:
+            rankings.append(semantic_search(query, store, limit, active))
+        if use_bm25:
+            rankings.append(bm25_search_index(
+                query, index, limit, active.matches if active else None,
+            ))
+    per_query = int(use_semantic) + int(use_bm25)
+    semantic_hits = rankings[0] if use_semantic else []
+    bm25_hits = rankings[per_query - 1] if use_bm25 else []
 
-    if settings.mode == "hybrid":
-        candidates = reciprocal_rank_fusion(semantic_hits, bm25_hits, settings.rrf_k)
-    elif settings.mode == "bm25":
-        candidates = bm25_hits
-    else:
-        candidates = semantic_hits
+    # Một câu, một nhánh: giữ nguyên thứ tự của nhánh đó, không tính RRF.
+    candidates = rankings[0] if len(rankings) == 1 else fuse_rankings(
+        rankings, settings.rrf_k, primary=per_query,
+    )
 
     merged_count = len(candidates)
     if settings.reranker_enabled:
@@ -384,4 +428,5 @@ def search_store(
         merged_count=merged_count,
         reranked=settings.reranker_enabled and bool(candidates),
         scope=active,
+        queries=queries,
     )

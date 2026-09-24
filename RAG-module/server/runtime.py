@@ -13,7 +13,7 @@ from __future__ import annotations
 import os
 import threading
 import time
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -99,6 +99,7 @@ class RunMeta:
     chunking_strategy: str | None = None
     retrieval_mode: str | None = None  # None: không tìm (scope chặn).
     reranker_enabled: bool | None = None
+    search_queries: list[str] = field(default_factory=list)  # Câu chính trước; rỗng: không tìm.
     llm: dict[str, Any] | None = None  # None: không gọi LLM.
     timing_ms: dict[str, int | None] = field(default_factory=lambda: {
         "rewrite": None, "retrieve": None, "generate": None, "total": None,
@@ -460,7 +461,7 @@ class RAGRuntime:
 
     def _search(
         self, query: str, scope: ResolvedScope, meta: RunMeta, *,
-        mode: str | None, rerank: bool | None,
+        mode: str | None, rerank: bool | None, extra_queries: Sequence[str] = (),
     ) -> SearchResult:
         handle = self.load(meta.index)
         meta.chunking_strategy = handle.strategy
@@ -470,11 +471,12 @@ class RAGRuntime:
             meta.retrieval_mode, meta.reranker_enabled = settings.mode, settings.reranker_enabled
             result = search_store(
                 query, handle.store, k=meta.top_k, settings=settings,
-                scope=scope.metadata_scope(),
+                scope=scope.metadata_scope(), extra_queries=extra_queries,
             )
         except (RuntimeError, ValueError) as exc:
             raise RetrievalFailed(f"Retrieval lỗi: {exc}") from exc
         meta.timing_ms["retrieve"] = _elapsed_ms(started)
+        meta.search_queries = list(result.queries)
         return result
 
     def _new_meta(self, index: str | None, top_k: int | None) -> RunMeta:
@@ -486,14 +488,15 @@ class RAGRuntime:
     def retrieve(
         self, query: str, *, plant_type: str | None = None, disease: str | None = None,
         top_k: int | None = None, mode: str | None = None, rerank: bool | None = None,
-        index: str | None = None,
+        index: str | None = None, extra_queries: Sequence[str] = (),
     ) -> RetrievalOutcome:
         started = time.perf_counter()
         meta = self._new_meta(index, top_k)
         scope = resolve_scope(plant_type, disease)
         result = None
         if scope.searchable:
-            result = self._search(query, scope, meta, mode=mode, rerank=rerank)
+            result = self._search(query, scope, meta, mode=mode, rerank=rerank,
+                                  extra_queries=extra_queries)
         meta.timing_ms["total"] = _elapsed_ms(started)
         return RetrievalOutcome(scope, result, meta)
 
@@ -503,6 +506,7 @@ class RAGRuntime:
         rewrite_query: bool = False, retrieval_query: str | None = None,
         top_k: int | None = None, mode: str | None = None, rerank: bool | None = None,
         index: str | None = None, llm_provider: str | None = None,
+        extra_queries: Sequence[str] = (),
     ) -> AnswerOutcome:
         started = time.perf_counter()
         meta = self._new_meta(index, top_k)
@@ -531,7 +535,8 @@ class RAGRuntime:
                 raise LLMFailed(f"Không viết lại được câu hỏi: {exc}") from exc
             meta.timing_ms["rewrite"] = _elapsed_ms(rewrite_started)
 
-        result = self._search(retrieval_query, scope, meta, mode=mode, rerank=rerank)
+        result = self._search(retrieval_query, scope, meta, mode=mode, rerank=rerank,
+                              extra_queries=extra_queries)
         documents = result.documents
         if not documents:
             return finish(NO_CONTEXT_ANSWER, [], False, retrieval_query, result)

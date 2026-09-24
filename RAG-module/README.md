@@ -184,6 +184,12 @@ thì chỉ tìm trong đúng tài liệu của bệnh đó. Bệnh chưa có tà
 **không tìm và không gọi LLM**, `scope.status` cho biết lý do. Không gửi nhãn thì
 tìm như CLI.
 
+Câu dùng để tìm: `retrieval_query` (detection gửi câu Groq đã chuẩn hóa), không có thì
+`query`. `extra_queries` (tối đa 3) được tìm y như câu đó, mọi bảng xếp hạng gộp bằng
+RRF; `meta.search_queries` ghi các câu đã thật sự dùng. Detection không gửi câu gốc ở
+đây trừ khi bật `RAG_SEARCH_ORIGINAL_QUERY`: đo trên câu có nhiễu không thấy lợi
+([reports/2026-09-24-query-normalization](reports/2026-09-24-query-normalization)).
+
 Xác thực bằng `Authorization: Bearer <RAG_API_KEY>`. Để trống `RAG_API_KEY` thì tắt
 xác thực và server từ chối nghe ngoài `127.0.0.1`. Thiết kế và các bước tích hợp:
 [agents/2026-09-23-rag-api-server-integration-plan.md](agents/2026-09-23-rag-api-server-integration-plan.md).

@@ -87,6 +87,11 @@ class RetrieveRequest(BaseModel):
         "Index theo cách chunk, để so sánh `recursive` và `structure`. Bỏ trống = index mặc "
         "định (CHUNKING_STRATEGY). Luồng detection không cần gửi."
     ))
+    extra_queries: list[Query] = Field(default_factory=list, max_length=3, description=(
+        "Câu tìm bổ sung, tìm y như câu chính rồi gộp mọi kết quả bằng RRF, ví dụ câu gốc người "
+        "dùng gõ khi câu chính là câu đã chuẩn hóa. Câu trùng câu chính (khác hoa/thường, khoảng "
+        "trắng) bị bỏ. Detection chỉ gửi khi bật RAG_SEARCH_ORIGINAL_QUERY."
+    ))
     debug: bool = Field(False, description="Trả thêm toàn bộ ứng viên và điểm từng nhánh.")
 
 
@@ -103,8 +108,8 @@ class AnswerRequest(RetrieveRequest):
         extra="forbid",
         json_schema_extra={"examples": [
             {
-                "query": "Lá táo nhà tôi bị vậy có cần nhổ cây không?",
-                "retrieval_query": "Cách điều trị bệnh apple_scab trên cây apple",
+                "query": "la tao nha toi bi vay co can nho cay ko",
+                "retrieval_query": "Lá táo nhà tôi bị như vậy có cần nhổ cây không?",
                 "plant_type": "apple",
                 "disease": "apple_scab",
                 "subject_context": "plant=Apple; disease=Scab; confidence=0.93; source=plant_ai_pipeline",
@@ -181,6 +186,9 @@ class ResponseMeta(BaseModel):
     retrieval_mode: str | None = Field(description="null khi scope không cho tìm.")
     reranker_enabled: bool | None = None
     top_k: int
+    search_queries: list[str] = Field(default_factory=list, description=(
+        "Các câu thật sự dùng để tìm, câu chính trước, đã bỏ câu trùng. Rỗng khi scope không cho tìm."
+    ))
     llm: LLMMeta | None = Field(description="null khi không gọi LLM (câu từ chối dựng sẵn).")
     timing_ms: TimingMeta
 
