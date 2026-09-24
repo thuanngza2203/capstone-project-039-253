@@ -24,7 +24,8 @@ APPLE_SUBJECT = "plant=Apple; disease=Apple___Apple_scab; confidence=0.93; sourc
 def analysis(**values) -> QueryAnalysis:
     base = dict(
         normalized_query=values.get("normalized_query", "q"),
-        plant=None, disease=None, symptoms=[], intent=Intent.TREATMENT, focus=None,
+        plant=None, disease=None, disease_named=values.get("disease") is not None,
+        symptoms=[], intent=Intent.TREATMENT, focus=None,
         refers_to_previous_context=False, is_plant_related=True,
     )
     base.update(values)
@@ -63,7 +64,7 @@ class RecordingBackend(AnswerBackend):
 
 
 class Harness:
-    def __init__(self, detection=APPLE_SCAB, error=None):
+    def __init__(self, detection=APPLE_SCAB, error=None, search_original_query=False):
         self.normalizer = FakeNormalizer()
         self.backend = RecordingBackend(error)
         self.sessions = InMemorySessionStore()
@@ -80,7 +81,7 @@ class Harness:
             sessions=self.sessions,
             resolver=ContextResolver(),
             router=QueryRouter(),
-            query_builder=RetrievalQueryBuilder(),
+            query_builder=RetrievalQueryBuilder(search_original_query=search_original_query),
             feedback_recorder=record,
         )
 
@@ -95,15 +96,16 @@ class Harness:
         return self.backend.requests[index].model_dump(mode="json", exclude_none=True)
 
 
-def test_text_only_payload():
+def test_text_only_payload_searches_with_normalized_query():
     h = Harness()
     response = h.chat(
         "Bệnh ghẻ táo xử lý thế nào?",
-        analysis(plant="apple", disease="apple_scab", intent=Intent.TREATMENT),
+        analysis(normalized_query="Bệnh ghẻ táo xử lý thế nào?", plant="apple", disease="apple_scab"),
     )
+    # Câu gốc trùng câu chuẩn hóa: không gửi extra_queries.
     assert h.payload() == {
         "query": "Bệnh ghẻ táo xử lý thế nào?",
-        "retrieval_query": "Cách điều trị bệnh apple_scab trên cây apple",
+        "retrieval_query": "Bệnh ghẻ táo xử lý thế nào?",
         "plant_type": "apple",
         "disease": "apple_scab",
         "history": [],
@@ -114,12 +116,40 @@ def test_text_only_payload():
     assert h.feedback[0]["metadata"]["scope_status"] == "document"
 
 
-def test_image_payload_sends_raw_labels_and_canonical_retrieval_query():
+def test_raw_query_is_not_an_extra_search_query_by_default():
+    """Đo 24/09: gửi kèm câu gốc không giúp retrieval, nên tắt mặc định."""
     h = Harness()
-    h.chat("Lá táo nhà tôi bị vậy có cần nhổ cây không?", analysis(intent=Intent.TREATMENT), image=b"img")
+    h.chat("ghe tao tri sao", analysis(normalized_query="Ghẻ táo trị thế nào?",
+                                        plant="apple", disease="apple_scab"))
+    assert "extra_queries" not in h.payload()
+
+
+def test_raw_query_is_sent_as_extra_search_query_when_enabled_and_different():
+    h = Harness(search_original_query=True)
+    h.chat(
+        "benh ghe tao xu ly sao, co can nho cay ko",
+        analysis(normalized_query="Bệnh ghẻ táo xử lý thế nào, có cần nhổ cây không?",
+                 plant="apple", disease="apple_scab"),
+    )
+    payload = h.payload()
+    assert payload["query"] == "benh ghe tao xu ly sao, co can nho cay ko"
+    assert payload["retrieval_query"] == "Bệnh ghẻ táo xử lý thế nào, có cần nhổ cây không?"
+    assert payload["extra_queries"] == ["benh ghe tao xu ly sao, co can nho cay ko"]
+
+    h.chat("Ghẻ táo trị thế nào?", analysis(normalized_query="ghẻ táo  trị thế nào?",
+                                              plant="apple", disease="apple_scab"))
+    assert "extra_queries" not in h.payload()
+
+
+def test_image_payload_sends_raw_labels_and_normalized_search_query():
+    h = Harness()
+    h.chat("Lá nhà tôi bị vậy có cần nhổ cây không?",
+           analysis(normalized_query="Lá nhà tôi bị như vậy có cần nhổ cây không?"), image=b"img")
+    # Cây/bệnh của ảnh chỉ đi trong plant_type/disease (RAG khoanh đúng tài liệu),
+    # không gắn vào câu tìm: đo 24/09 thấy gắn tên làm thứ hạng trong tài liệu kém đi.
     assert h.payload() == {
-        "query": "Lá táo nhà tôi bị vậy có cần nhổ cây không?",
-        "retrieval_query": "Cách điều trị bệnh apple_scab trên cây apple",
+        "query": "Lá nhà tôi bị vậy có cần nhổ cây không?",
+        "retrieval_query": "Lá nhà tôi bị như vậy có cần nhổ cây không?",
         "plant_type": "Apple",
         "disease": "Apple___Apple_scab",
         "subject_context": APPLE_SUBJECT,
@@ -129,17 +159,21 @@ def test_image_payload_sends_raw_labels_and_canonical_retrieval_query():
 
 def test_image_only_uses_default_question():
     h = Harness()
-    h.chat("", analysis(intent=Intent.DIAGNOSIS), image=b"img")
-    assert h.payload()["query"] == "Ảnh này đang bị bệnh gì?"
+    h.chat("", analysis(normalized_query="Ảnh này đang bị bệnh gì?", intent=Intent.DIAGNOSIS),
+           image=b"img")
+    payload = h.payload()
+    assert payload["query"] == "Ảnh này đang bị bệnh gì?"
+    assert "extra_queries" not in payload
 
 
 def test_follow_up_carries_session_detection_and_history():
     h = Harness()
     h.chat("Lá táo nhà tôi bị vậy có cần nhổ cây không?", analysis(intent=Intent.TREATMENT), image=b"img")
     h.chat("Vậy phòng bệnh này thế nào?",
-           analysis(intent=Intent.PREVENTION, refers_to_previous_context=True))
+           analysis(normalized_query="Vậy phòng bệnh này thế nào?",
+                    intent=Intent.PREVENTION, refers_to_previous_context=True))
     payload = h.payload()
-    assert payload["retrieval_query"] == "Cách phòng ngừa bệnh apple_scab trên cây apple"
+    assert payload["retrieval_query"] == "Vậy phòng bệnh này thế nào?"
     assert payload["plant_type"] == "Apple"
     assert payload["disease"] == "Apple___Apple_scab"
     assert payload["subject_context"] == APPLE_SUBJECT
@@ -148,6 +182,44 @@ def test_follow_up_carries_session_detection_and_history():
         {"role": "assistant", "content": "Trả lời."},
     ]
     assert "rewrite_query" not in payload
+
+
+def test_guessed_disease_does_not_narrow_rag_scope():
+    """"Bệnh đốm trên cây táo" → black_rot chỉ là quy ước: RAG tìm trong mọi tài liệu táo."""
+    h = Harness()
+    response = h.chat(
+        "cach chua benh dom tren cay tao",
+        analysis(normalized_query="Cách chữa bệnh đốm trên cây táo", plant="apple",
+                 disease="black_rot", disease_named=False),
+    )
+    assert response.action == Action.ACCEPT_QUERY
+    payload = h.payload()
+    assert payload["plant_type"] == "apple" and "disease" not in payload
+    assert payload["retrieval_query"] == "Cách chữa bệnh đốm trên cây táo"
+    assert response.debug.suspected_disease == "black_rot"
+    assert response.debug.resolved_disease is None
+
+
+def test_image_disease_replaces_guessed_disease():
+    h = Harness()
+    response = h.chat(
+        "bệnh đốm trên lá táo này chữa sao",
+        analysis(normalized_query="Bệnh đốm trên lá táo này chữa thế nào?", plant="apple",
+                 disease="black_rot", disease_named=False),
+        image=b"img",
+    )
+    payload = h.payload()
+    assert payload["disease"] == "Apple___Apple_scab"
+    assert payload["retrieval_query"] == "Bệnh đốm trên lá táo này chữa thế nào?"
+    assert response.debug.suspected_disease is None
+
+
+def test_guessed_disease_without_plant_still_asks_for_clarification():
+    h = Harness()
+    response = h.chat("bệnh đốm chữa sao",
+                      analysis(disease="black_rot", disease_named=False))
+    assert response.action == Action.ASK_CLARIFICATION
+    assert h.backend.requests == []
 
 
 def test_request_image_does_not_call_backend():
@@ -230,13 +302,26 @@ def test_backend_error_after_image_saves_no_detection():
     assert snapshot.turns == [] and snapshot.last_detection is None
 
 
-def test_normalizer_error_after_image_saves_no_detection():
+async def broken_normalizer(raw_query, session_context):
+    raise RuntimeError("Groq down")
+
+
+def test_normalizer_error_sends_raw_query_to_rag():
+    """Groq lỗi: không trả 500; RAG tìm bằng câu gốc và tự viết lại câu nối tiếp."""
     h = Harness()
+    h.normalizer.analyze = broken_normalizer
+    response = asyncio.run(h.service.chat(session_id="s1", raw_query="ghe tao chua sao"))
+    assert response.action == Action.ACCEPT_QUERY
+    assert response.debug.normalizer_failed is True
+    assert h.payload() == {"query": "ghe tao chua sao", "rewrite_query": True, "history": []}
 
-    async def broken(raw_query, session_context):
-        raise RuntimeError("Groq down")
 
-    h.normalizer.analyze = broken
-    with pytest.raises(RuntimeError):
-        asyncio.run(h.service.chat(session_id="s1", raw_query="", image_bytes=b"img"))
-    assert asyncio.run(h.sessions.get_last_detection("s1")) is None
+def test_normalizer_error_with_image_uses_detection_and_completes_the_turn():
+    h = Harness()
+    h.normalizer.analyze = broken_normalizer
+    asyncio.run(h.service.chat(session_id="s1", raw_query="", image_bytes=b"img"))
+    payload = h.payload()
+    assert payload["query"] == "Ảnh này đang bị bệnh gì?" and payload["rewrite_query"] is True
+    assert payload["plant_type"] == "Apple" and payload["disease"] == "Apple___Apple_scab"
+    assert "retrieval_query" not in payload
+    assert asyncio.run(h.sessions.get_last_detection("s1")) == APPLE_SCAB

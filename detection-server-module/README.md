@@ -72,16 +72,22 @@ Pipeline chỉ dựng một payload đúng hợp đồng
 | `RAG_API_URL` | Địa chỉ RAG server, mặc định `http://127.0.0.1:8010`. |
 | `RAG_API_KEY` | Khớp `RAG_API_KEY` bên RAG-module; gửi qua `Authorization: Bearer`. |
 | `RAG_API_TIMEOUT` | Giây, mặc định 150 (lớn hơn timeout LLM 120 bên RAG). |
+| `RAG_SEARCH_ORIGINAL_QUERY` | `false` (mặc định); `true` = gửi kèm câu gốc trong `extra_queries`. Đo 24/09 không thấy lợi. |
 
 Payload gửi sang RAG:
 
 | Trường | Lấy từ |
 | --- | --- |
 | `query` | Câu gốc của người dùng (hoặc `"Ảnh này đang bị bệnh gì?"` khi chỉ gửi ảnh). |
-| `retrieval_query` | `RetrievalQueryBuilder`, nhãn detector đã đưa về key chuẩn (`apple_scab`). |
-| `plant_type`, `disease` | Nguyên giá trị đã resolve (ví dụ `Apple`, `Apple___Apple_scab`). |
+| `retrieval_query` | Câu Groq đã chuẩn hóa (`RetrievalQueryBuilder`). Cây/bệnh lấy từ ảnh hoặc lượt trước không gắn vào câu: `plant_type`/`disease` đã khoanh đúng tài liệu. |
+| `extra_queries` | Chỉ khi `RAG_SEARCH_ORIGINAL_QUERY=true`: `[câu gốc]` khi khác câu chuẩn hóa; RAG tìm cả hai câu rồi gộp bằng RRF. |
+| `plant_type`, `disease` | Nguyên giá trị đã resolve (ví dụ `Apple`, `Apple___Apple_scab`). Bệnh Groq chỉ đoán từ cách gọi chung chung (`disease_named=false`) không được gửi: RAG tìm theo cây. |
 | `history` | Tối đa 12 message gần nhất `{role, content}`, mỗi content ≤ 8000 ký tự. |
 | `subject_context` | Kết quả nhận diện dạng chữ, khi có ảnh hoặc câu hỏi nối tiếp. |
+| `rewrite_query` | Chỉ `true` khi Groq lỗi: không có câu chuẩn hóa, RAG tìm bằng câu gốc và tự viết lại câu nối tiếp. |
+
+Groq lỗi (hết quota, mạng, JSON sai) không làm `/api/chat` trả 500: câu gốc được gửi thẳng
+sang RAG, chỉ kèm cây/bệnh từ ảnh của lượt này, và `debug.normalizer_failed=true`.
 
 `sources`, `scope_status`, `grounded` được lưu vào `metadata` của bản ghi feedback và
 trả thêm trong `POST /api/chat` (trường `sources`). Khi RAG lỗi, route trả `503`

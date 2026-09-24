@@ -11,9 +11,12 @@ from app.llm.base import AnswerLLM, QueryNormalizerLLM
 
 
 class GroqQueryNormalizer(QueryNormalizerLLM):
-    def __init__(self, api_key: str, model: str):
+    def __init__(self, api_key: str, model: str, reasoning_effort: str | None = "low"):
         self.client = AsyncGroq(api_key=api_key)
         self.model = model
+        # Giá trị hợp lệ tùy model: openai/gpt-oss-* nhận low/medium/high (gửi "none"
+        # thì Groq trả 400), qwen/qwen3-32b nhận none/default. None = không gửi.
+        self.reasoning_effort = reasoning_effort
 
     async def analyze(
         self,
@@ -45,6 +48,7 @@ JSON phải luôn có đầy đủ các field:
   "normalized_query": "string",
   "plant": null,
   "disease": null,
+  "disease_named": false,
   "symptoms": [],
   "intent": "treatment",
   "focus": null,
@@ -65,6 +69,8 @@ Nếu không biết plant:
 
 Nếu không biết disease:
 "disease": null
+
+"disease_named" là true hoặc false (false khi disease là null).
 
 Nếu không có symptoms:
 "symptoms": []
@@ -100,9 +106,7 @@ CURRENT USER QUERY:
             ],
             temperature=0,
             max_tokens=800,
-
-            # Normalizer của bạn hiện đang chạy được với none
-            reasoning_effort="none",
+            **({"reasoning_effort": self.reasoning_effort} if self.reasoning_effort else {}),
         )
 
         message = response.choices[0].message

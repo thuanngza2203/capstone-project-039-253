@@ -214,6 +214,7 @@ def get_chat_service() -> ChatService:
         normalizer=GroqQueryNormalizer(
             api_key=settings.groq_api_key,
             model=settings.normalizer_model,
+            reasoning_effort=settings.normalizer_reasoning_effort.strip() or None,
         ),
         # Retrieval + final answer generation
         answer_backend=build_answer_backend(settings),
@@ -222,7 +223,9 @@ def get_chat_service() -> ChatService:
         sessions=get_session_store(),
         resolver=ContextResolver(),
         router=QueryRouter(),
-        query_builder=RetrievalQueryBuilder(),
+        query_builder=RetrievalQueryBuilder(
+            search_original_query=settings.rag_search_original_query,
+        ),
     )
 
 

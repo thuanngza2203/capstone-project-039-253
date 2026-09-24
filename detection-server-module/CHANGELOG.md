@@ -1,5 +1,30 @@
 # Changelog
 
+## 2026-09-24 — Câu tìm tài liệu dùng câu Groq đã chuẩn hóa
+
+- **Sửa lỗi làm mọi lượt chat trả 500:** normalizer gửi `reasoning_effort="none"`, nhưng
+  `openai/gpt-oss-120b` (model mặc định trong `.env`) chỉ nhận `low`/`medium`/`high` nên Groq trả
+  400 ở mọi lần gọi. Thêm `NORMALIZER_REASONING_EFFORT` (mặc định `low`; qwen/qwen3-32b dùng `none`).
+- **Câu tìm (`retrieval_query`) là câu Groq đã chuẩn hóa**, không còn câu mẫu theo intent ("Cách
+  điều trị bệnh apple_scab trên cây apple"). Câu mẫu làm rơi chi tiết người dùng hỏi: đo trên 58 câu
+  có nhiễu, Recall@4 0,138 (câu mẫu) → 0,793 (câu chuẩn hóa). Cây/bệnh lấy từ ảnh hoặc lượt trước
+  chỉ đi trong `plant_type`/`disease`, không gắn vào câu: đo cho thấy gắn "(bệnh …, cây …)" làm
+  Hit@1 giảm 0,649 → 0,491. Chi tiết: `RAG-module/reports/2026-09-24-query-normalization/`.
+- **Tùy chọn gửi kèm câu gốc** trong `extra_queries` (RAG API 1.2.0 tìm cả hai câu, gộp bằng RRF):
+  `RAG_SEARCH_ORIGINAL_QUERY`, **tắt mặc định** vì đo không thấy lợi.
+- **Bệnh đoán không khoanh phạm vi:** `QueryAnalysis` có thêm `disease_named`. Bệnh Groq chỉ suy từ
+  cách gọi chung chung (ví dụ "bệnh đốm trên cây táo" → `black_rot`) nằm ở
+  `ResolvedQuery.suspected_disease`, không gửi sang RAG; RAG tìm trong mọi tài liệu của cây. Router
+  vẫn trả lời (`ACCEPT_QUERY`) khi có cây + bệnh đoán. Ảnh cho bệnh thì dùng bệnh của ảnh.
+- **Groq lỗi không còn trả 500:** hết quota, lỗi mạng, JSON sai → câu gốc đi thẳng sang RAG với
+  `rewrite_query=true` (RAG tự viết lại câu nối tiếp), chỉ kèm cây/bệnh từ ảnh của lượt này;
+  `debug.normalizer_failed=true`.
+- Prompt normalizer: quy tắc `normalized_query` nhắm vào việc tìm tài liệu (đủ dấu, bỏ teencode,
+  giữ mọi chi tiết, không chèn tên bệnh đoán), thêm `disease_named` và ví dụ câu không dấu/teencode.
+- Test: 84 pass, 1 skip như cũ (thêm `tests/test_normalizer.py`; sửa test đang kiểm tra câu mẫu).
+- Còn mở (xem báo cáo): Groq khôi phục dấu sai ở tên cây/bệnh ("phan trang" → "phân trang"), và router
+  không cho 21/58 câu hợp lệ đi tiếp. Nên thêm tên tiếng Việt có dấu của cây/bệnh vào prompt và nới router.
+
 ## 2026-09-23 — Từ chối ảnh không phải lá cây
 
 - Ảnh gửi lên đi qua GenYOLO trước tiên. Không thấy lá thì `/api/chat` trả **HTTP 400**

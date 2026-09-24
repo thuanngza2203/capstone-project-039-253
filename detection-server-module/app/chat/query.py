@@ -1,98 +1,35 @@
-from app.chat.labels import canonical_disease, canonical_plant
-from app.schemas import Action, Intent, ResolvedQuery, RouteDecision
+from app.schemas import Action, QueryAnalysis, RouteDecision
 
 
 class RetrievalQueryBuilder:
     """
-    Đây là normalize lần 2:
-    sau khi đã resolve plant/disease từ query + ảnh + session.
+    Câu tìm tài liệu gửi sang RAG là câu Groq đã chuẩn hóa.
 
-    Output là câu đầy đủ để đưa vào RAG.
+    Groq sửa dấu, chính tả, viết tắt và giữ đủ chi tiết user hỏi ("có cần nhổ
+    cây không"). Câu mẫu theo intent trước đây ("Cách điều trị bệnh X trên cây Y")
+    làm rơi các chi tiết đó.
+
+    Không gắn tên cây/bệnh lấy từ ảnh hay lượt trước vào câu ("Bệnh này chữa sao?"
+    giữ nguyên): `plant_type`/`disease` gửi kèm đã khoanh RAG vào đúng tài liệu, và
+    đo 24/09 cho thấy gắn thêm "(bệnh …, cây …)" làm Hit@1 trong tài liệu giảm
+    0,65 → 0,49 vì kéo chunk tổng quan lên đầu (RAG-module/reports/2026-09-24-query-normalization).
     """
 
-    def build(
-        self,
-        *,
-        resolved: ResolvedQuery,
-        decision: RouteDecision,
-        fallback_normalized_query: str,
-    ) -> str | None:
+    def __init__(self, *, search_original_query: bool = False):
+        # Gửi kèm câu gốc làm câu tìm phụ (RAG gộp hai câu bằng RRF). Tắt mặc định:
+        # đo 24/09 không thấy lợi, câu không dấu làm nhánh semantic kéo thứ hạng xuống.
+        self.search_original_query = search_original_query
+
+    def build(self, *, analysis: QueryAnalysis, decision: RouteDecision) -> str | None:
         if decision.action != Action.ACCEPT_QUERY:
             return None
+        return " ".join(analysis.normalized_query.split()) or None
 
-        # Nhãn detector (`Apple___Apple_scab`) làm câu tìm kém hơn key chuẩn
-        # (`apple_scab`), nên đưa về key normalizer trước khi ghép câu.
-        plant = canonical_plant(resolved.plant)
-        disease = canonical_disease(resolved.disease)
-        focus = self._clean(resolved.focus)
-
-        if resolved.intent == Intent.TREATMENT:
-            base = self._with_entity(
-                "Cách điều trị",
-                disease=disease,
-                plant=plant,
-            )
-            if focus:
-                return f"{base}; tập trung vào {focus}"
-            return base
-
-        if resolved.intent == Intent.CAUSE:
-            base = self._with_entity(
-                "Nguyên nhân",
-                disease=disease,
-                plant=plant,
-            )
-            if focus:
-                return f"{base}; tập trung vào {focus}"
-            return base
-
-        if resolved.intent == Intent.PREVENTION:
-            base = self._with_entity(
-                "Cách phòng ngừa",
-                disease=disease,
-                plant=plant,
-            )
-            if focus:
-                return f"{base}; tập trung vào {focus}"
-            return base
-
-        if resolved.intent == Intent.DIAGNOSIS:
-            return self._with_entity(
-                "Thông tin nhận diện",
-                disease=disease,
-                plant=plant,
-            )
-
-        if resolved.intent == Intent.GENERAL_INFO:
-            base = self._with_entity(
-                "Thông tin",
-                disease=disease,
-                plant=plant,
-            )
-            if focus:
-                return f"{base}; tập trung vào {focus}"
-            return base
-
-        return fallback_normalized_query.strip() or None
-
-    @staticmethod
-    def _with_entity(
-        prefix: str,
-        *,
-        disease: str | None,
-        plant: str | None,
-    ) -> str:
-        if disease and plant:
-            return f"{prefix} bệnh {disease} trên cây {plant}"
-        if disease:
-            return f"{prefix} bệnh {disease}"
-        if plant:
-            return f"{prefix} về cây {plant}"
-        return prefix
-
-    @staticmethod
-    def _clean(value: str | None) -> str | None:
-        if value is None:
-            return None
-        value = value.strip()
-        return value or None
+    def extra_queries(self, *, raw_query: str, analysis: QueryAnalysis) -> list[str]:
+        """Câu gốc, khi bật và khi khác câu chuẩn hóa (bỏ qua hoa/thường, khoảng trắng)."""
+        raw = " ".join(raw_query.split())
+        if not self.search_original_query or not raw:
+            return []
+        if raw.casefold() == " ".join(analysis.normalized_query.split()).casefold():
+            return []
+        return [raw]

@@ -5,7 +5,7 @@ import pytest
 
 from app.chat.labels import NORMALIZER_DISEASE_KEYS, canonical_disease, canonical_plant
 from app.chat.query import RetrievalQueryBuilder
-from app.schemas import Action, Intent, ResolvedQuery, RouteDecision
+from app.schemas import Action, Intent, QueryAnalysis, RouteDecision
 
 # class_names của checkpoint IEViT, đọc từ HF ngày 23/09.
 IEVIT_CLASSES = {
@@ -66,10 +66,13 @@ def test_normalizer_keys_are_unchanged():
             assert canonical_disease(disease) == disease
 
 
-def test_retrieval_query_uses_canonical_labels():
-    query = RetrievalQueryBuilder().build(
-        resolved=ResolvedQuery(plant="Apple", disease="Apple___Apple_scab", intent=Intent.TREATMENT),
-        decision=RouteDecision(action=Action.ACCEPT_QUERY),
-        fallback_normalized_query="x",
+def test_search_query_is_the_normalized_query():
+    """Không còn câu mẫu, không gắn nhãn detector: RAG khoanh phạm vi bằng plant_type/disease."""
+    analysis = QueryAnalysis(
+        normalized_query="  Chữa   thế nào? ", plant=None, disease=None, disease_named=False,
+        symptoms=[], intent=Intent.TREATMENT, focus=None,
+        refers_to_previous_context=False, is_plant_related=True,
     )
-    assert query == "Cách điều trị bệnh apple_scab trên cây apple"
+    builder = RetrievalQueryBuilder()
+    assert builder.build(analysis=analysis, decision=RouteDecision(action=Action.ACCEPT_QUERY)) == "Chữa thế nào?"
+    assert builder.build(analysis=analysis, decision=RouteDecision(action=Action.REQUEST_IMAGE)) is None

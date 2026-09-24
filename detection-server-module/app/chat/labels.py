@@ -1,7 +1,8 @@
-"""Đưa nhãn thô của detector về key trong prompt normalizer.
+"""Đưa nhãn thô của detector về key trong prompt normalizer: `Apple___Apple_scab` -> `apple_scab`.
 
-Chỉ dùng để dựng `retrieval_query` (câu tìm tài liệu): `Apple___Apple_scab`
--> `apple_scab`. Trường `plant_type`/`disease` gửi sang RAG vẫn giữ nguyên nhãn gốc.
+Từ 24/09 câu tìm tài liệu không còn ghép key này (xem `query.py`); `plant_type`/`disease`
+gửi sang RAG vẫn giữ nguyên nhãn gốc. Bảng được giữ để `tests/test_labels.py` kiểm tra
+taxonomy trong prompt normalizer khớp class của IEViT.
 """
 
 import re

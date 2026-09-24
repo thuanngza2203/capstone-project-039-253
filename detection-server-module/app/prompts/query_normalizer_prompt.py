@@ -69,8 +69,15 @@ QUY TẮC CHUẨN HÓA
 ==================================================
 
 1) normalized_query
-- Sửa typo, viết tắt, ngữ pháp và làm câu rõ nghĩa.
-- Có thể chuẩn hóa tên bệnh phổ thông sang tên bệnh chuẩn nếu xác định được.
+Câu này được dùng để TÌM TÀI LIỆU, nên phải là câu tiếng Việt chuẩn và đủ ý:
+- Viết đủ dấu, đúng chính tả, đúng ngữ pháp. Bỏ teencode, viết tắt
+  ("ko", "k" -> "không"; "j" -> "gì"; "dc", "đc" -> "được").
+- Giữ MỌI chi tiết user hỏi: bộ phận cây (lá, quả, củ, thân), thời điểm, câu hỏi phụ
+  như "có lây không", "có cần nhổ cây không", "củ có ăn được không".
+- Giữ tên cây, tên bệnh bằng tiếng Việt như user gọi; user viết sai hoặc viết tắt tên
+  bệnh thì sửa thành tên tiếng Việt đúng.
+- Nếu disease_named=false thì KHÔNG chèn tên bệnh đã đoán vào câu.
+- Không chép cây/bệnh từ SESSION CONTEXT vào câu; giữ "bệnh này", "nó" như user viết.
 - Không tự thêm thông tin không có căn cứ.
 
 2) plant
@@ -110,7 +117,15 @@ QUERY: "cách chữa bệnh đốm trên cây táo"
 Trong taxonomy Apple, cách gọi này được hệ thống quy ước map về black_rot.
 => plant="apple"
 => disease="black_rot"
+=> disease_named=false (cách gọi quy ước, không phải tên bệnh)
 => intent="treatment"
+
+3b) disease_named
+- true: user gọi đúng tên một bệnh, bằng tiếng Việt, tiếng Anh, tên khoa học hoặc tên
+  thông dụng chỉ đúng bệnh đó: "ghẻ táo", "thối đen", "black rot", "mốc sương",
+  "cháy lá sớm", "gỉ sắt", "Venturia".
+- false: disease=null, hoặc disease chỉ suy từ cách gọi chung chung / quy ước của
+  hệ thống như "bệnh đốm trên cây táo". Vẫn điền disease theo quy ước như trên.
 
 4) Không chẩn đoán bệnh mới chỉ từ triệu chứng không đủ đặc hiệu.
 
@@ -119,7 +134,7 @@ Phân biệt:
 A. TÊN BỆNH / CÁCH GỌI BỆNH:
 "bệnh đốm trên cây táo"
 => có thể map theo taxonomy/rule của hệ thống
-=> disease="black_rot"
+=> disease="black_rot", disease_named=false
 
 B. TRIỆU CHỨNG:
 "lá táo có vài đốm đen, đây là bệnh gì?"
@@ -170,9 +185,38 @@ QUERY:
 OUTPUT:
 plant="apple"
 disease="black_rot"
+disease_named=false
 symptoms=[]
 intent="treatment"
-normalized_query="Cách chữa bệnh Black Rot trên cây táo"
+normalized_query="Cách chữa bệnh đốm trên cây táo"
+refers_to_previous_context=false
+
+
+QUERY:
+"la ca chua bi moc suong xit thuoc j"
+
+OUTPUT:
+plant="tomato"
+disease="late_blight"
+disease_named=true
+symptoms=[]
+intent="treatment"
+focus="thuốc xịt"
+normalized_query="Lá cà chua bị bệnh mốc sương thì xịt thuốc gì?"
+refers_to_previous_context=false
+
+
+QUERY:
+"khoai tay bi chay la muon thi cu co an dc ko"
+
+OUTPUT:
+plant="potato"
+disease="late_blight"
+disease_named=true
+symptoms=[]
+intent="general_info"
+focus="củ có ăn được không"
+normalized_query="Khoai tây bị bệnh cháy lá muộn thì củ có ăn được không?"
 refers_to_previous_context=false
 
 
@@ -182,8 +226,10 @@ QUERY:
 OUTPUT:
 plant="apple"
 disease=null
+disease_named=false
 symptoms=["đốm đen trên lá"]
 intent="diagnosis"
+normalized_query="Lá táo có đốm đen, nó bị bệnh gì?"
 refers_to_previous_context=false
 
 
@@ -193,8 +239,10 @@ QUERY:
 OUTPUT:
 plant="tomato"
 disease=null
+disease_named=false
 symptoms=["đốm lá"]
 intent="treatment"
+normalized_query="Cà chua bị đốm lá chữa thế nào?"
 refers_to_previous_context=false
 
 Lý do:
@@ -210,8 +258,9 @@ QUERY:
 OUTPUT:
 plant=null
 disease=null
+disease_named=false
 symptoms=[]
 intent="treatment"
-normalized_query="Bệnh này chữa sao?"
+normalized_query="Bệnh này chữa thế nào?"
 refers_to_previous_context=true
 """

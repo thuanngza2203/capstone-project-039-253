@@ -1,6 +1,6 @@
 from datetime import datetime
 from enum import Enum
-from typing import Any, Literal, Optional
+from typing import Annotated, Any, Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -34,8 +34,8 @@ class QueryAnalysis(BaseModel):
 
     normalized_query: str = Field(
         description=(
-            "Câu user đã được sửa typo, viết tắt và chuẩn hóa. "
-            "Không tự lấy cây hoặc bệnh từ ảnh/session."
+            "Câu user đã được sửa dấu, typo, viết tắt; giữ đủ chi tiết user hỏi. "
+            "Dùng làm câu tìm tài liệu. Không tự lấy cây hoặc bệnh từ ảnh/session."
         )
     )
 
@@ -51,6 +51,14 @@ class QueryAnalysis(BaseModel):
             "Tên bệnh được nêu trực tiếp hoặc được ánh xạ từ "
             "cách gọi phổ thông theo taxonomy của hệ thống. "
             "Không suy bệnh từ triệu chứng mơ hồ."
+        )
+    )
+
+    disease_named: bool = Field(
+        description=(
+            "True nếu user gọi đúng tên bệnh (tiếng Việt, tiếng Anh, tên khoa học). "
+            "False nếu disease là null hoặc chỉ suy từ cách gọi chung chung theo "
+            "quy ước, ví dụ 'bệnh đốm trên cây táo' -> black_rot."
         )
     )
 
@@ -100,6 +108,9 @@ class DetectionResult(BaseModel):
 class ResolvedQuery(BaseModel):
     plant: Optional[str] = None
     disease: Optional[str] = None
+    # Bệnh Groq đoán từ cách gọi chung chung (disease_named=false) khi không có bệnh
+    # nào khác. Chỉ để log: không khoanh phạm vi tìm, không gửi sang RAG.
+    suspected_disease: Optional[str] = None
     symptoms: list[str] = Field(default_factory=list)
     intent: Intent
     focus: Optional[str] = None
@@ -127,9 +138,12 @@ class RagDocument(BaseModel):
 # ======================================================
 
 RAG_QUERY_MAX_CHARS = 2000
+RAG_EXTRA_QUERIES_MAX = 3
 RAG_HISTORY_MAX_MESSAGES = 12
 RAG_HISTORY_CONTENT_MAX_CHARS = 8000
 RAG_SUBJECT_CONTEXT_MAX_CHARS = 1000
+
+RagQueryText = Annotated[str, Field(min_length=1, max_length=RAG_QUERY_MAX_CHARS)]
 
 
 class RagChatMessage(BaseModel):
@@ -148,6 +162,14 @@ class RagAnswerRequest(BaseModel):
     retrieval_query: Optional[str] = Field(
         default=None, min_length=1, max_length=RAG_QUERY_MAX_CHARS
     )
+    # Câu tìm bổ sung (câu gốc khi khác câu chuẩn hóa); RAG gộp kết quả bằng RRF.
+    # None thay cho [] để payload không đổi khi không dùng.
+    extra_queries: Optional[list[RagQueryText]] = Field(
+        default=None, max_length=RAG_EXTRA_QUERIES_MAX
+    )
+    # Chỉ bật khi Groq lỗi: RAG tự viết lại câu hỏi nối tiếp theo lịch sử.
+    # RAG không nhận cùng lúc với retrieval_query.
+    rewrite_query: Optional[bool] = None
     plant_type: Optional[str] = Field(default=None, max_length=100)
     disease: Optional[str] = Field(default=None, max_length=100)
     history: list[RagChatMessage] = Field(
@@ -194,6 +216,11 @@ class PipelineDebug(BaseModel):
 
     explicit_plant: Optional[str] = None
     explicit_disease: Optional[str] = None
+    disease_named: Optional[bool] = None
+    suspected_disease: Optional[str] = None
+
+    # Groq lỗi: câu gốc được gửi thẳng sang RAG (rewrite_query=true), không qua router.
+    normalizer_failed: bool = False
 
     symptoms: list[str] = Field(default_factory=list)
 

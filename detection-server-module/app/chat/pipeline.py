@@ -5,7 +5,10 @@ from app.schemas import (
     Action,
     ChatResponse,
     ChatTurn,
+    Intent,
     PipelineDebug,
+    QueryAnalysis,
+    RAG_EXTRA_QUERIES_MAX,
     RAG_HISTORY_CONTENT_MAX_CHARS,
     RAG_HISTORY_MAX_MESSAGES,
     RAG_QUERY_MAX_CHARS,
@@ -14,6 +17,7 @@ from app.schemas import (
     RagAnswerRequest,
     RagChatMessage,
     ResolvedQuery,
+    RouteDecision,
 )
 
 from app.answer.base import AnswerBackend, AnswerContext
@@ -108,16 +112,27 @@ class ChatService:
 
         # ==================================================
         # 3. QUERY NORMALIZATION
+        # Groq lỗi/hết quota thì không trả 500: câu gốc đi thẳng sang RAG (bước 5–6).
         # ==================================================
 
-        analysis = await self.normalizer.analyze(
-            raw_query=effective_query,
-            session_context=session_context,
-        )
+        normalizer_failed = False
+        try:
+            analysis = await self.normalizer.analyze(
+                raw_query=effective_query,
+                session_context=session_context,
+            )
+        except Exception:  # noqa: BLE001 - lỗi mạng, quota, JSON sai đều xử lý như nhau.
+            logger.exception("Normalizer failed; sending the raw query to RAG")
+            analysis = self.fallback_analysis(effective_query)
+            normalizer_failed = True
+
+        if not analysis.normalized_query.strip():
+            analysis = analysis.model_copy(update={"normalized_query": effective_query})
 
         logger.info(
-            "Normalized query=%r intent=%s plant=%r disease=%r",
+            "Normalized query=%r intent=%s plant=%r disease=%r named=%s",
             analysis.normalized_query, analysis.intent.value, analysis.plant, analysis.disease,
+            analysis.disease_named,
         )
 
         active_detection = (
@@ -140,21 +155,34 @@ class ChatService:
         # 5. ROUTER
         # ==================================================
 
-        decision = self.router.decide(
-            analysis=analysis,
-            resolved=resolved,
-            has_current_image=current_detection is not None,
-        )
+        if normalizer_failed:
+            # Không có intent/cây/bệnh để route: để RAG tự tìm bằng câu gốc.
+            decision = RouteDecision(action=Action.ACCEPT_QUERY)
+        else:
+            decision = self.router.decide(
+                analysis=analysis,
+                resolved=resolved,
+                has_current_image=current_detection is not None,
+            )
 
         # ==================================================
         # 6. RETRIEVAL QUERY
+        # Câu chuẩn hóa là câu tìm; cây/bệnh (kể cả từ ảnh/session) đi riêng trong
+        # plant_type/disease để RAG khoanh phạm vi. Groq lỗi: không có câu chuẩn
+        # hóa, RAG tìm bằng câu gốc và tự viết lại câu nối tiếp (rewrite_query).
         # ==================================================
 
-        retrieval_query = self.query_builder.build(
-            resolved=resolved,
-            decision=decision,
-            fallback_normalized_query=analysis.normalized_query,
-        )
+        retrieval_query = None
+        extra_queries: list[str] = []
+        if not normalizer_failed:
+            retrieval_query = self.query_builder.build(
+                analysis=analysis,
+                decision=decision,
+            )
+            extra_queries = self.query_builder.extra_queries(
+                raw_query=effective_query,
+                analysis=analysis,
+            )
 
         logger.info(
             "Route action=%s resolved_plant=%r resolved_disease=%r retrieval_query=%r",
@@ -185,7 +213,7 @@ class ChatService:
         rag_request: RagAnswerRequest | None = None
         result: RagAnswer | None = None
 
-        if decision.action == Action.ACCEPT_QUERY and retrieval_query:
+        if decision.action == Action.ACCEPT_QUERY and (retrieval_query or normalizer_failed):
             history = await self.sessions.recent_messages(
                 session_id,
                 limit=RAG_HISTORY_MAX_MESSAGES,
@@ -193,6 +221,8 @@ class ChatService:
             rag_request = self.build_rag_request(
                 query=effective_query,
                 retrieval_query=retrieval_query,
+                extra_queries=extra_queries,
+                rewrite_query=normalizer_failed,
                 resolved=resolved,
                 history=history,
                 subject_context=detector_context,
@@ -258,6 +288,9 @@ class ChatService:
             intent=analysis.intent,
             explicit_plant=analysis.plant,
             explicit_disease=analysis.disease,
+            disease_named=analysis.disease_named,
+            suspected_disease=resolved.suspected_disease,
+            normalizer_failed=normalizer_failed,
             symptoms=analysis.symptoms,
             focus=analysis.focus,
             refers_to_previous_context=analysis.refers_to_previous_context,
@@ -312,15 +345,18 @@ class ChatService:
     def build_rag_request(
         *,
         query: str,
-        retrieval_query: str,
+        retrieval_query: str | None,
         resolved: ResolvedQuery,
         history: list[dict],
         subject_context: str,
+        extra_queries: list[str] | None = None,
+        rewrite_query: bool = False,
     ) -> RagAnswerRequest:
         """Payload đúng `AnswerRequest` của RAG; cắt theo giới hạn của hợp đồng.
 
         plant_type/disease gửi nguyên nhãn (RAG tự nhận `Apple___Apple_scab`...).
-        Không gửi rewrite_query: normalizer ở đây đã giải quyết "bệnh này", "nó".
+        rewrite_query chỉ bật khi Groq lỗi; bình thường normalizer ở đây đã giải
+        quyết "bệnh này", "nó" nên RAG không cần viết lại.
         """
         messages = [
             RagChatMessage(
@@ -329,13 +365,34 @@ class ChatService:
             )
             for message in history[-RAG_HISTORY_MAX_MESSAGES:]
         ]
+        extras = [text[:RAG_QUERY_MAX_CHARS] for text in extra_queries or []][:RAG_EXTRA_QUERIES_MAX]
         return RagAnswerRequest(
             query=query[:RAG_QUERY_MAX_CHARS],
-            retrieval_query=retrieval_query[:RAG_QUERY_MAX_CHARS],
+            retrieval_query=retrieval_query[:RAG_QUERY_MAX_CHARS] if retrieval_query else None,
+            extra_queries=extras or None,
+            rewrite_query=True if rewrite_query else None,
             plant_type=resolved.plant[:100] if resolved.plant else None,
             disease=resolved.disease[:100] if resolved.disease else None,
             history=messages,
             subject_context=subject_context[:RAG_SUBJECT_CONTEXT_MAX_CHARS] or None,
+        )
+
+    @staticmethod
+    def fallback_analysis(query: str) -> QueryAnalysis:
+        """Thay kết quả Groq khi Groq lỗi: không đoán cây/bệnh, không dùng session.
+
+        Cây/bệnh chỉ còn từ ảnh của lượt này (ContextResolver); RAG tìm bằng câu gốc.
+        """
+        return QueryAnalysis(
+            normalized_query=query,
+            plant=None,
+            disease=None,
+            disease_named=False,
+            symptoms=[],
+            intent=Intent.GENERAL_INFO,
+            focus=None,
+            refers_to_previous_context=False,
+            is_plant_related=True,
         )
 
     @staticmethod

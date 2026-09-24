@@ -14,6 +14,9 @@ class Settings(BaseSettings):
     groq_api_key: str
 
     normalizer_model: str = "openai/gpt-oss-120b"
+    # Theo model: openai/gpt-oss-* nhận low/medium/high; qwen/qwen3-32b nhận none/default.
+    # Để trống = không gửi tham số (model không hỗ trợ reasoning).
+    normalizer_reasoning_effort: str = "low"
     answer_model: str = "openai/gpt-oss-120b"
 
     # Số message gần nhất đưa vào normalizer/answer LLM. 6 = giống trước refactor.
@@ -36,6 +39,9 @@ class Settings(BaseSettings):
     rag_api_key: str = ""
     # Giây; phải lớn hơn timeout LLM bên RAG (VLLM_TIMEOUT=120).
     rag_api_timeout: float = 150.0
+    # Gửi kèm câu gốc làm câu tìm phụ (extra_queries) bên cạnh câu Groq đã chuẩn hóa.
+    # Tắt: đo 24/09 không thấy lợi (RAG-module/reports/2026-09-24-query-normalization).
+    rag_search_original_query: bool = False
 
     # Đăng nhập HTTP Basic cho /admin và /admin/*. Mật khẩu trống = không bảo vệ (cảnh báo trong log).
     admin_username: str = "admin"

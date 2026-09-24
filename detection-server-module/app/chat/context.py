@@ -10,6 +10,11 @@ class ContextResolver:
 
     Query hiện tại được ưu tiên.
     Session chỉ được dùng khi query phụ thuộc context trước.
+
+    Bệnh Groq chỉ đoán từ cách gọi chung chung (disease_named=false, ví dụ
+    "bệnh đốm trên cây táo") không được dùng làm bệnh: RAG khoanh phạm vi theo
+    bệnh, đoán sai thì chỉ đọc tài liệu của bệnh khác. Bệnh đó nằm ở
+    `suspected_disease`, RAG tìm theo cây.
     """
 
     def resolve(
@@ -20,7 +25,7 @@ class ContextResolver:
         session_detection: DetectionResult | None,
     ) -> ResolvedQuery:
         plant = analysis.plant
-        disease = analysis.disease
+        disease = analysis.disease if analysis.disease_named else None
         source_parts = []
 
         if plant or disease:
@@ -45,6 +50,8 @@ class ContextResolver:
         return ResolvedQuery(
             plant=plant,
             disease=disease,
+            # Ảnh/session đã cho bệnh thì bỏ bệnh đoán.
+            suspected_disease=analysis.disease if disease is None else None,
             symptoms=analysis.symptoms,
             intent=analysis.intent,
             focus=analysis.focus,

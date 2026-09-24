@@ -35,6 +35,11 @@ class QueryRouter:
             if resolved.disease:
                 return RouteDecision(action=Action.ACCEPT_QUERY)
 
+            # Bệnh chỉ đoán từ cách gọi chung chung ("bệnh đốm trên cây táo"): vẫn trả
+            # lời, RAG tìm trong tài liệu của cây nên mọi bệnh hợp mô tả đều có cơ hội.
+            if resolved.suspected_disease and resolved.plant:
+                return RouteDecision(action=Action.ACCEPT_QUERY)
+
             # Có symptom nhưng chưa biết disease -> cần ảnh.
             if resolved.symptoms:
                 return RouteDecision(
