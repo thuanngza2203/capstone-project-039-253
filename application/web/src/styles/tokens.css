@@ -1,0 +1,81 @@
+/* Hallmark tokens · theme: Garden (field notebook) · paper-band: light · display: high-contrast-serif · accent: chromatic-green
+ * Every colour and font in styles.css reads from here. Add a token before using a new value.
+ */
+:root {
+  color-scheme: light;
+
+  /* Paper — warm herbarium sheet, tinted toward leaf green */
+  --color-sheet:        oklch(99%   0.006 105);
+  --color-paper:        oklch(97.5% 0.010 105);
+  --color-paper-2:      oklch(95%   0.014 108);
+  --color-paper-3:      oklch(92%   0.018 112);
+  --color-rule:         oklch(88%   0.016 112);
+  --color-rule-2:       oklch(64%   0.020 118);
+
+  /* Ink */
+  --color-ink:          oklch(24%   0.028 142);
+  --color-ink-2:        oklch(38%   0.024 138);
+  --color-muted:        oklch(49%   0.020 125);
+
+  /* Accent — one leaf green, used for state, focus and small marks only */
+  --color-accent:       oklch(47%   0.110 146);
+  --color-accent-soft:  oklch(93.5% 0.040 140);
+  --color-accent-ink:   oklch(98.5% 0.008 105);
+  --color-focus:        oklch(46%   0.120 150);
+
+  /* Status */
+  --color-error:        oklch(51%   0.150 35);
+  --color-error-soft:   oklch(95.5% 0.025 45);
+  --color-warn:         oklch(49%   0.090 75);
+
+  /* Overlays and depth (alpha is a modifier here, not a palette colour) */
+  --color-scrim:        oklch(24%   0.028 142 / 0.38);
+  --shadow-whisper:     0 1px 2px oklch(24% 0.028 142 / 0.07);
+  --shadow-lift:        0 6px 24px oklch(24% 0.028 142 / 0.08);
+
+  /* Type — every face below ships a Vietnamese subset */
+  --font-display: "Fraunces", "Noto Serif", Georgia, serif;
+  --font-body:    "Be Vietnam Pro", "Segoe UI", system-ui, sans-serif;
+  --font-outlier: "IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+
+  --text-xs:      0.75rem;
+  --text-sm:      0.875rem;
+  --text-base:    1rem;
+  --text-md:      1.25rem;
+  --text-display: clamp(1.875rem, 2.2vw + 1.2rem, 2.625rem);
+
+  /* Space — 4pt scale */
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+
+  /* Shape */
+  --radius-sm:   0.5rem;
+  --radius-md:   0.75rem;
+  --radius-lg:   1.125rem;
+  --radius-pill: 999px;
+
+  --size-control: 2.75rem;  /* 44px — touch floor, shared by inputs and buttons */
+  --size-icon:    1.25rem;
+  --width-sidebar: 17.5rem;
+  --width-column:  46rem;
+
+  /* Motion — Garden runs calm (1.2× base durations) */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 140ms;
+  --dur-short: 260ms;
+  --dur-long:  480ms;
+
+  /* Stacking */
+  --z-raised:  10;
+  --z-sticky:  200;
+  --z-overlay: 300;
+  --z-modal:   400;
+}
