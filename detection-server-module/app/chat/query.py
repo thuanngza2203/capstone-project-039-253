@@ -1,3 +1,4 @@
+from app.chat.labels import canonical_disease, canonical_plant
 from app.schemas import Action, Intent, ResolvedQuery, RouteDecision
 
 
@@ -19,8 +20,10 @@ class RetrievalQueryBuilder:
         if decision.action != Action.ACCEPT_QUERY:
             return None
 
-        plant = self._clean(resolved.plant)
-        disease = self._clean(resolved.disease)
+        # Nhãn detector (`Apple___Apple_scab`) làm câu tìm kém hơn key chuẩn
+        # (`apple_scab`), nên đưa về key normalizer trước khi ghép câu.
+        plant = canonical_plant(resolved.plant)
+        disease = canonical_disease(resolved.disease)
         focus = self._clean(resolved.focus)
 
         if resolved.intent == Intent.TREATMENT:

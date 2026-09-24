@@ -39,6 +39,15 @@ class PlantAIDetector(DiseaseDetector):
         plant = result["plant"]
         disease = result["disease"]
 
+        # Không có model bệnh cho cây này: giữ tên cây, độ tin cậy của cây.
+        if disease is None:
+            return DetectionResult(
+                plant=plant["name"],
+                disease=None,
+                confidence=float(plant["confidence"]),
+                source="plant_ai_pipeline"
+            )
+
         return DetectionResult(
             plant=plant["name"],
             disease=disease["name"],

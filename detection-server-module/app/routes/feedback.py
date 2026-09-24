@@ -5,6 +5,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 from app.feedback.database import feedback_collection
+from app.schemas import FeedbackUpdateResponse
 
 router = APIRouter(prefix="/feedback", tags=["Feedback"])
 
@@ -15,7 +16,7 @@ class FeedbackUpdate(BaseModel):
     reasons: list[str] = Field(default_factory=list)
 
 
-@router.put("")
+@router.put("", response_model=FeedbackUpdateResponse)
 async def update_feedback(data: FeedbackUpdate):
     if data.rating not in {"like", "unlike"}:
         raise HTTPException(status_code=400, detail="rating phải là like hoặc unlike")

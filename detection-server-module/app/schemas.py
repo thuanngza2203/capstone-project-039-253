@@ -1,6 +1,6 @@
 from datetime import datetime
 from enum import Enum
-from typing import Optional
+from typing import Any, Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -91,7 +91,8 @@ class QueryAnalysis(BaseModel):
 
 class DetectionResult(BaseModel):
     plant: str
-    disease: str
+    # None khi cây không có model bệnh (Orange, Squash): chỉ nhận diện được cây.
+    disease: Optional[str] = None
     confidence: float = Field(ge=0.0, le=1.0)
     source: str = "plant_ai_pipeline"
 
@@ -117,6 +118,54 @@ class RagDocument(BaseModel):
     content: str
     source: str
     score: float | None = None
+
+
+# ======================================================
+# HỢP ĐỒNG VỚI RAG SERVER
+# Khớp `AnswerRequest` trong 2026-09-23-rag-api-openapi.json. RAG từ chối trường
+# lạ (HTTP 422), nên extra="forbid" để lỗi lộ ra ở phía detection trước.
+# ======================================================
+
+RAG_QUERY_MAX_CHARS = 2000
+RAG_HISTORY_MAX_MESSAGES = 12
+RAG_HISTORY_CONTENT_MAX_CHARS = 8000
+RAG_SUBJECT_CONTEXT_MAX_CHARS = 1000
+
+
+class RagChatMessage(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    role: Literal["user", "assistant"]
+    content: str = Field(min_length=1, max_length=RAG_HISTORY_CONTENT_MAX_CHARS)
+
+
+class RagAnswerRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    # Câu LLM nhìn thấy và trả lời.
+    query: str = Field(min_length=1, max_length=RAG_QUERY_MAX_CHARS)
+    # Câu dùng để tìm tài liệu.
+    retrieval_query: Optional[str] = Field(
+        default=None, min_length=1, max_length=RAG_QUERY_MAX_CHARS
+    )
+    plant_type: Optional[str] = Field(default=None, max_length=100)
+    disease: Optional[str] = Field(default=None, max_length=100)
+    history: list[RagChatMessage] = Field(
+        default_factory=list, max_length=RAG_HISTORY_MAX_MESSAGES
+    )
+    subject_context: Optional[str] = Field(
+        default=None, max_length=RAG_SUBJECT_CONTEXT_MAX_CHARS
+    )
+
+
+class RagAnswer(BaseModel):
+    answer: str
+    sources: list[str] = Field(default_factory=list)
+    grounded: bool
+    scope_status: str
+    # Chỉ GroqAnswerBackend điền: để debug như trước refactor.
+    rag_documents: list[RagDocument] = Field(default_factory=list)
+    feedback_examples: list[dict] = Field(default_factory=list)
 
 
 class ChatTurn(BaseModel):
@@ -173,6 +222,16 @@ class PipelineDebug(BaseModel):
     # Only the final reranked examples that are allowed into Answer LLM context.
     feedback_rag_examples: list[dict] = Field(default_factory=list)
 
+    # groq = rag/ nội bộ + Groq; rag = RAG-module server.
+    answer_backend: Optional[str] = None
+
+    # Payload đã gửi sang AnswerBackend (None với REQUEST_IMAGE/ASK_CLARIFICATION...).
+    rag_request: Optional[dict] = None
+
+    rag_sources: list[str] = Field(default_factory=list)
+    rag_grounded: Optional[bool] = None
+    rag_scope_status: Optional[str] = None
+
 
 class ChatResponse(BaseModel):
     session_id: str
@@ -181,3 +240,99 @@ class ChatResponse(BaseModel):
     memory: Optional[DetectionResult] = None
     debug: PipelineDebug
     feedback_id: str | None = None
+    # Trường mới; frontend hiện chỉ đọc 5 trường ở trên và bỏ qua trường này.
+    sources: list[str] = Field(default_factory=list)
+
+
+# ======================================================
+# RESPONSE MODELS CHO SWAGGER
+# Các document Mongo có thể có thêm trường: extra="allow" để không làm rơi dữ liệu
+# frontend đang đọc (feedback_rating, image_filename...).
+# ======================================================
+
+
+class HealthResponse(BaseModel):
+    status: str = "ok"
+
+
+class OkResponse(BaseModel):
+    ok: bool = True
+
+
+class ConversationSummary(BaseModel):
+    session_id: str
+    title: str
+    last_message: str = ""
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+
+class ConversationDetail(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
+    session_id: str
+    title: Optional[str] = None
+    messages: list[dict[str, Any]] = Field(default_factory=list)
+    last_detection: Optional[DetectionResult] = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+
+class FeedbackUpdateResponse(BaseModel):
+    success: bool
+    feedback_id: str
+    rating: str
+    reasons: list[str] = Field(default_factory=list)
+
+
+class AdminStatus(BaseModel):
+    answer_backend: str
+    feedback_examples_used: bool
+
+
+class ReviewItem(BaseModel):
+    """Một bản ghi chat_feedback; `_id` giữ nguyên tên vì trang admin đọc trường này."""
+
+    model_config = ConfigDict(extra="allow", populate_by_name=True)
+
+    id: str = Field(alias="_id")
+    session_id: Optional[str] = None
+    question: Optional[str] = None
+    answer: Optional[str] = None
+    action: Optional[str] = None
+    metadata: dict[str, Any] = Field(default_factory=dict)
+    user_feedback: dict[str, Any] = Field(default_factory=dict)
+    admin_feedback: dict[str, Any] = Field(default_factory=dict)
+    training: dict[str, Any] = Field(default_factory=dict)
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+
+class DeleteReviewResponse(BaseModel):
+    success: bool
+    deleted_id: str
+
+
+class TrainingResponse(BaseModel):
+    success: bool
+    trained_count: int
+    indexed_count: int
+    mode: str
+
+
+class TrainingExample(BaseModel):
+    """Một ví dụ trong feedback_training_vectors (không kèm embedding)."""
+
+    model_config = ConfigDict(extra="allow", populate_by_name=True)
+
+    id: str = Field(alias="_id")
+    feedback_id: str
+    question: str
+    preferred_answer: str
+    planttype: Optional[str] = None
+    disease: Optional[str] = None
+    rating: Optional[str] = None
+    reasons: list[str] = Field(default_factory=list)
+    active: bool = True
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None

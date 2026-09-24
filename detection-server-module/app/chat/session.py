@@ -9,6 +9,15 @@ from app.schemas import ChatTurn, DetectionResult, SessionSnapshot
 from app.feedback.database import conversation_collection, feedback_collection
 
 
+def _chat_messages(messages) -> list[dict]:
+    return [
+        {"role": message.get("role"), "content": message.get("content")}
+        for message in messages
+        if message.get("role") in {"user", "assistant"}
+        and (message.get("content") or "").strip()
+    ]
+
+
 class MongoSessionStore:
     """Persistent conversation/session store backed by MongoDB.
 
@@ -18,7 +27,8 @@ class MongoSessionStore:
     ChatGPT's conversation sidebar.
     """
 
-    def __init__(self, max_turns: int = 12):
+    def __init__(self, max_turns: int = 6):
+        # Không cắt lịch sử lưu trong Mongo; chỉ giới hạn số message đưa vào LLM.
         self.max_turns = max_turns
 
     async def _ensure_session(self, session_id: str) -> None:
@@ -117,6 +127,20 @@ class MongoSessionStore:
             for message in doc.get("messages", [])
         )
 
+    async def recent_messages(
+        self,
+        session_id: str,
+        limit: int = 12,
+    ) -> list[dict]:
+        """Các message gần nhất dạng {"role", "content"}, cũ trước mới sau."""
+        doc = await conversation_collection.find_one(
+            {"session_id": session_id},
+            {"messages": {"$slice": -limit}},
+        )
+        if not doc:
+            return []
+        return _chat_messages(doc.get("messages", []))
+
     async def snapshot(self, session_id: str) -> SessionSnapshot:
         doc = await conversation_collection.find_one({"session_id": session_id})
         if not doc:
@@ -213,7 +237,7 @@ class InMemorySessionStore:
     The running API uses MongoSessionStore.
     """
 
-    def __init__(self, max_turns: int = 12):
+    def __init__(self, max_turns: int = 6):
         self._sessions: dict[str, _SessionData] = {}
         self._lock = asyncio.Lock()
         self.max_turns = max_turns
@@ -242,6 +266,12 @@ class InMemorySessionStore:
         data = await self._get_or_create(session_id)
         turns = data.turns[-limit:]
         return "\n".join(f"{turn.role.upper()}: {turn.content}" for turn in turns)
+
+    async def recent_messages(self, session_id: str, limit: int = 12) -> list[dict]:
+        data = await self._get_or_create(session_id)
+        return _chat_messages(
+            turn.model_dump(include={"role", "content"}) for turn in data.turns[-limit:]
+        )
 
     async def snapshot(self, session_id: str) -> SessionSnapshot:
         data = await self._get_or_create(session_id)

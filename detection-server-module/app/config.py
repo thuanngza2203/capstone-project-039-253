@@ -1,6 +1,8 @@
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -14,7 +16,8 @@ class Settings(BaseSettings):
     normalizer_model: str = "openai/gpt-oss-120b"
     answer_model: str = "openai/gpt-oss-120b"
 
-    max_history_turns: int = 12
+    # Số message gần nhất đưa vào normalizer/answer LLM. 6 = giống trước refactor.
+    max_history_turns: int = Field(default=6, ge=1)
 
     mongo_uri: str = "mongodb://localhost:27017"
     mongo_db_name: str = "plant_chatbot"
@@ -26,6 +29,24 @@ class Settings(BaseSettings):
     feedback_rerank_k: int = 2
     feedback_similarity_threshold: float = 0.55
     feedback_reranker_enabled: bool = True
+
+    # Sinh câu trả lời: groq = rag/ nội bộ + Groq như trước; rag = gọi RAG-module server.
+    answer_backend: Literal["groq", "rag"] = "groq"
+    rag_api_url: str = "http://127.0.0.1:8010"
+    rag_api_key: str = ""
+    # Giây; phải lớn hơn timeout LLM bên RAG (VLLM_TIMEOUT=120).
+    rag_api_timeout: float = 150.0
+
+    # Đăng nhập HTTP Basic cho /admin và /admin/*. Mật khẩu trống = không bảo vệ (cảnh báo trong log).
+    admin_username: str = "admin"
+    admin_password: str = ""
+
+    # Origin được gọi API từ trình duyệt, cách nhau bằng dấu phẩy. Trống = không bật CORS.
+    cors_origins: str = ""
+
+    @property
+    def cors_origin_list(self) -> list[str]:
+        return [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
 
     model_config = SettingsConfigDict(
         env_file=ENV_FILE,

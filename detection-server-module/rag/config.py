@@ -1,7 +1,11 @@
 from pathlib import Path
 import os
 
+from dotenv import load_dotenv
+
 BASE_DIR = Path(__file__).resolve().parent
+# `python -m rag.ingest` không đi qua package app, nên tự nạp .env của module.
+load_dotenv(BASE_DIR.parent / '.env')
 DATA_DIR = BASE_DIR / 'data'
 CHROMA_DIR = BASE_DIR / 'chroma_db'
 COLLECTION_NAME = 'plant_disease_vi'

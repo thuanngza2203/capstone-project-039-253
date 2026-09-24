@@ -2,127 +2,165 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>PlantGPT</title>
-  <link rel="stylesheet" href="/static/styles.css?v=public-ui-v6" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&family=Fraunces:opsz,wght@9..144,700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="/static/tokens.css?v=field-notebook-1" />
+  <link rel="stylesheet" href="/static/styles.css?v=field-notebook-1" />
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar">
+  <!-- One stroke voice for every icon: 24px grid, 1.75 stroke, round joins. -->
+  <svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M4.5 19.5C4.5 11 10 4.8 19.8 4.2 19.4 13.6 13.4 19.5 4.5 19.5Z"/><path d="M4.5 19.5 14.5 9.5"/><path d="M9.2 14.8h4.3M11.8 12.2V8.4"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-compose" viewBox="0 0 24 24"><path d="M12 4H6.5A2.5 2.5 0 0 0 4 6.5v11A2.5 2.5 0 0 0 6.5 20h11a2.5 2.5 0 0 0 2.5-2.5V12"/><path d="M17.6 3.6a2 2 0 0 1 2.8 2.8L13 13.8l-3.6.8.8-3.6Z"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M3.5 8.5A1.5 1.5 0 0 1 5 7h2.5l1.8-2.5h5.4L16.5 7H19a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 19 19H5a1.5 1.5 0 0 1-1.5-1.5Z"/><circle cx="12" cy="12.8" r="3.3"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="9.5" r="1.6"/><path d="m20.5 16-5-5-8.5 8.5"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.8v5M12 16.2v.01"/></symbol>
+    <symbol id="i-thumb-up" viewBox="0 0 24 24"><path d="M7.5 10.5v9h-3v-9Z"/><path d="M7.5 10.5 11 4c1.4 0 2.4 1.1 2.1 2.6L12.6 9.5h5.3a2 2 0 0 1 2 2.4l-1.1 5.6a2.5 2.5 0 0 1-2.5 2H7.5"/></symbol>
+    <symbol id="i-thumb-down" viewBox="0 0 24 24"><g transform="rotate(180 12 12)"><path d="M7.5 10.5v9h-3v-9Z"/><path d="M7.5 10.5 11 4c1.4 0 2.4 1.1 2.1 2.6L12.6 9.5h5.3a2 2 0 0 1 2 2.4l-1.1 5.6a2.5 2.5 0 0 1-2.5 2H7.5"/></g></symbol>
+  </svg>
+
+  <div id="appShell" class="app-shell">
+    <aside id="sidebar" class="sidebar" aria-label="Lịch sử và kết quả">
       <div class="brand">
-        <div class="brand-mark">🌿</div>
-        <div>
+        <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg></span>
+        <div class="brand-text">
           <strong>PlantGPT</strong>
           <span>Trợ lý chăm sóc cây trồng</span>
         </div>
       </div>
 
-      <button id="newChatBtn" class="new-chat-btn">
-        <span>＋</span>
-        Cuộc chat mới
+      <button id="newChatBtn" type="button" class="new-chat-btn">
+        <svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>
+        <span>Cuộc chat mới</span>
       </button>
 
-      <div class="side-section conversation-section">
-        <div class="side-label">CUỘC TRÒ CHUYỆN</div>
+      <section class="side-section conversation-section" aria-labelledby="conversationLabel">
+        <h2 id="conversationLabel" class="side-label">Cuộc trò chuyện</h2>
         <div id="conversationList" class="conversation-list">
           <div class="conversation-empty">Chưa có cuộc trò chuyện.</div>
         </div>
-      </div>
+      </section>
 
-      <div class="side-section">
-        <div class="side-label">KẾT QUẢ GẦN ĐÂY</div>
-        <div class="memory-card">
-          <div class="memory-row">
-            <span>Cây</span>
-            <strong id="memoryPlant">Chưa có</strong>
+      <section class="side-section specimen" aria-labelledby="specimenLabel">
+        <h2 id="specimenLabel" class="side-label">Kết quả gần đây</h2>
+        <dl id="memoryCard" class="specimen-card is-empty">
+          <div class="specimen-row">
+            <dt>Cây</dt>
+            <dd id="memoryPlant">Chưa có</dd>
           </div>
-          <div class="memory-row">
-            <span>Bệnh</span>
-            <strong id="memoryDisease">Chưa có</strong>
+          <div class="specimen-row">
+            <dt>Bệnh</dt>
+            <dd id="memoryDisease">Chưa có</dd>
           </div>
-          <div class="memory-row">
-            <span>Độ tin cậy</span>
-            <strong id="memoryConfidence">—</strong>
+          <div class="specimen-row specimen-confidence">
+            <dt>Độ tin cậy</dt>
+            <dd>
+              <span id="memoryConfidence" class="confidence-value">—</span>
+              <span class="confidence-meter" aria-hidden="true"><span id="memoryMeter"></span></span>
+            </dd>
           </div>
-        </div>
-      </div>
-
+        </dl>
+      </section>
     </aside>
 
-    <main class="main">
+    <button id="drawerBackdrop" type="button" class="drawer-backdrop" tabindex="-1" aria-label="Đóng menu"></button>
+
+    <main id="main" class="main">
       <header class="topbar">
-        <div>
-          <strong>Plant Disease Assistant</strong>
-          <span>Tư vấn bệnh và chăm sóc cây trồng</span>
-        </div>
+        <button id="menuBtn" type="button" class="icon-btn topbar-only-mobile" aria-label="Mở lịch sử trò chuyện" aria-controls="sidebar" aria-expanded="false">
+          <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+        </button>
+        <h1 id="topbarTitle" class="topbar-title">Cuộc trò chuyện mới</h1>
+        <button id="newChatMobileBtn" type="button" class="icon-btn topbar-only-mobile" aria-label="Cuộc chat mới">
+          <svg class="icon" aria-hidden="true"><use href="#i-compose"/></svg>
+        </button>
       </header>
 
-      <section id="chatArea" class="chat-area">
-        <div id="welcome" class="welcome">
-          <div class="welcome-icon">🌱</div>
-          <h1>Hỏi mình về bệnh cây</h1>
-          <div class="suggestions">
-            <button data-example="bệnh này là bệnh gì?">
-              <span>🔍</span>
-              <div>
-                <strong>Nhận diện bệnh trên lá cây</strong>
-                <small>Gửi ảnh lá cây để bắt đầu</small>
-              </div>
-            </button>
-            <button data-example="bệnh đốm lá trên cây cà chua chữa sao?">
-              <span>💬</span>
-              <div>
-                <strong>Cách chữa bệnh trên cà chua</strong>
-                <small>Hỏi hướng xử lý cụ thể</small>
-              </div>
-            </button>
-            <button data-example="cà chua nhà tui bị đóm nâu chữa s?">
-              <span>🍅</span>
-              <div>
-                <strong>Lá cây có đốm nâu</strong>
-                <small>Mô tả triệu chứng bạn nhìn thấy</small>
-              </div>
-            </button>
-            <button data-example="bệnh này chữa s?">
-              <span>🧠</span>
-              <div>
-                <strong>Cách phòng bệnh này</strong>
-                <small>Tiếp tục cuộc trò chuyện</small>
-              </div>
-            </button>
-          </div>
-        </div>
-      </section>
+      <section id="chatArea" class="chat-area" aria-label="Nội dung trò chuyện"></section>
 
       <footer class="composer-wrap">
         <div id="attachmentPreview" class="attachment-preview hidden">
-          <img id="previewImage" alt="preview" />
+          <img id="previewImage" alt="Ảnh lá sắp gửi" />
           <span id="previewName"></span>
-          <button id="removeImageBtn" title="Xóa ảnh">×</button>
+          <button id="removeImageBtn" type="button" class="icon-btn icon-btn-sm" aria-label="Bỏ ảnh">
+            <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+          </button>
         </div>
 
         <form id="chatForm" class="composer">
           <input id="imageInput" type="file" accept="image/*" hidden />
 
-          <button id="attachBtn" type="button" class="composer-icon" title="Upload ảnh">
-            ＋
+          <button id="attachBtn" type="button" class="attach-btn" aria-label="Gửi ảnh lá">
+            <svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg>
+            <span>Ảnh</span>
           </button>
 
+          <label for="messageInput" class="visually-hidden">Câu hỏi về bệnh cây</label>
           <textarea
             id="messageInput"
             rows="1"
-            placeholder="Nhắn về bệnh cây..."
+            placeholder="Nhắn về bệnh cây…"
           ></textarea>
 
-          <button id="sendBtn" type="submit" class="send-btn" title="Gửi">
-            ↑
+          <button id="sendBtn" type="submit" class="send-btn" aria-label="Gửi" disabled>
+            <svg class="icon" aria-hidden="true"><use href="#i-send"/></svg>
           </button>
         </form>
 
+        <p class="composer-note">Kết quả chỉ mang tính tham khảo.</p>
       </footer>
     </main>
   </div>
 
-  <script src="/static/app.js?v=public-ui-v6"></script>
+  <template id="welcomeTemplate">
+    <div id="welcome" class="welcome">
+      <span class="welcome-mark"><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg></span>
+      <h2 class="welcome-title">Hỏi mình về bệnh cây</h2>
+      <p class="welcome-lede">Gửi ảnh một chiếc lá bệnh, hoặc kể lại triệu chứng bạn nhìn thấy.</p>
+
+      <button type="button" class="photo-tile" data-pick-image data-example="bệnh này là bệnh gì?">
+        <span class="photo-tile-icon"><svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg></span>
+        <span class="photo-tile-text">
+          <strong>Nhận diện bệnh trên lá cây</strong>
+          <small>Gửi ảnh lá cây để bắt đầu</small>
+        </span>
+        <svg class="icon photo-tile-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+      </button>
+
+      <h3 class="prompt-label">Hoặc hỏi bằng lời</h3>
+      <ul class="prompt-list">
+        <li>
+          <button type="button" data-example="bệnh đốm lá trên cây cà chua chữa sao?">
+            <span><strong>Cách chữa bệnh trên cà chua</strong><small>Hỏi hướng xử lý cụ thể</small></span>
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </button>
+        </li>
+        <li>
+          <button type="button" data-example="cà chua nhà tui bị đóm nâu chữa s?">
+            <span><strong>Lá cây có đốm nâu</strong><small>Mô tả triệu chứng bạn nhìn thấy</small></span>
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </button>
+        </li>
+        <li>
+          <button type="button" data-example="bệnh này chữa s?">
+            <span><strong>Cách phòng bệnh này</strong><small>Tiếp tục cuộc trò chuyện</small></span>
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </button>
+        </li>
+      </ul>
+
+      <p class="crop-scope"><span>Nhận diện qua ảnh:</span> táo · anh đào · ngô · nho · đào · ớt · khoai tây · dâu tây · cà chua</p>
+    </div>
+  </template>
+
+  <script src="/static/app.js?v=field-notebook-2"></script>
 </body>
 </html>

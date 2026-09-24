@@ -4,19 +4,35 @@ Chatbot tư vấn bệnh cây trồng bằng tiếng Việt. Ứng dụng kết 
 
 ## Chạy nhanh
 
-Tạo `.env` với `GROQ_API_KEY` và `MONGO_URI` trước, theo [mẫu cấu hình](#cài-đặt-và-chạy) ở dưới. Sau đó chạy các lệnh PowerShell sau:
+Chép `.env.example` thành `.env`, điền `GROQ_API_KEY` và `MONGO_URI`. Sau đó chạy các lệnh PowerShell sau:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-pip install torch torchvision ultralytics timm pillow requests huggingface-hub
+Copy-Item .env.example .env   # rồi điền key
 python main.py
 ```
+
+Mặc định `ANSWER_BACKEND=groq`: trả lời bằng `rag/` nội bộ + Groq như trước. Lần đầu cần
+tạo chỉ mục: `python -m rag.ingest --reset`.
 
 Mở <http://127.0.0.1:8005> để dùng chatbot.
 
 > Kết quả nhận diện và nội dung tư vấn chỉ mang tính tham khảo. Với cây trồng có giá trị cao hoặc dấu hiệu bệnh nặng, hãy tham vấn cán bộ kỹ thuật nông nghiệp tại địa phương trước khi xử lý.
+
+### Linux (venv)
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env          # điền GROQ_API_KEY, MONGO_URI, ADMIN_PASSWORD
+python -m rag.ingest --reset  # lần đầu, tạo chỉ mục RAG nội bộ
+uvicorn app.api:app --host 0.0.0.0 --port 8005
+```
+
+`python main.py` cũng chạy được nhưng chỉ nghe `127.0.0.1` và bật `reload` (dành cho dev).
 
 ## Tính năng
 
@@ -38,16 +54,51 @@ Tin nhắn + ảnh lá (tùy chọn)
         +--> Nhận diện ảnh: cây -> tách lá YOLO -> bệnh
         +--> Ghép ngữ cảnh: câu hỏi + ảnh + lịch sử phiên
         +--> Định tuyến: trả lời / yêu cầu ảnh / hỏi làm rõ / ngoài phạm vi
-        +--> Domain RAG (ChromaDB) + Feedback RAG (MongoDB, tùy chọn)
-        +--> Sinh câu trả lời tiếng Việt (Groq)
+        +--> (chỉ ACCEPT_QUERY) dựng RagAnswerRequest -> AnswerBackend
+        |       ANSWER_BACKEND=rag : POST {RAG_API_URL}/v1/answer (RAG-module)
+        |       ANSWER_BACKEND=groq: rag/ nội bộ + Feedback RAG + Groq (như cũ)
         +--> Lưu hội thoại và bản ghi feedback (MongoDB)
 ```
+
+## Nguồn câu trả lời: `ANSWER_BACKEND`
+
+Pipeline chỉ dựng một payload đúng hợp đồng
+[`../2026-09-23-rag-api-openapi.json`](../2026-09-23-rag-api-openapi.json) rồi giao cho
+`AnswerBackend` (`app/answer/`). Đổi backend chỉ là đổi `.env`, không sửa code:
+
+| Biến | Ý nghĩa |
+| --- | --- |
+| `ANSWER_BACKEND` | `groq` (mặc định) = luồng cũ; `rag` = gọi RAG server theo file OpenAPI (server do bên RAG cung cấp). |
+| `RAG_API_URL` | Địa chỉ RAG server, mặc định `http://127.0.0.1:8010`. |
+| `RAG_API_KEY` | Khớp `RAG_API_KEY` bên RAG-module; gửi qua `Authorization: Bearer`. |
+| `RAG_API_TIMEOUT` | Giây, mặc định 150 (lớn hơn timeout LLM 120 bên RAG). |
+
+Payload gửi sang RAG:
+
+| Trường | Lấy từ |
+| --- | --- |
+| `query` | Câu gốc của người dùng (hoặc `"Ảnh này đang bị bệnh gì?"` khi chỉ gửi ảnh). |
+| `retrieval_query` | `RetrievalQueryBuilder`, nhãn detector đã đưa về key chuẩn (`apple_scab`). |
+| `plant_type`, `disease` | Nguyên giá trị đã resolve (ví dụ `Apple`, `Apple___Apple_scab`). |
+| `history` | Tối đa 12 message gần nhất `{role, content}`, mỗi content ≤ 8000 ký tự. |
+| `subject_context` | Kết quả nhận diện dạng chữ, khi có ảnh hoặc câu hỏi nối tiếp. |
+
+`sources`, `scope_status`, `grounded` được lưu vào `metadata` của bản ghi feedback và
+trả thêm trong `POST /api/chat` (trường `sources`). Khi RAG lỗi, route trả `503`
+(key sai, LLM lỗi, index chưa sẵn sàng, không kết nối được) hoặc `500` (payload sai
+hợp đồng) kèm thông báo tiếng Việt, và **không lưu** nửa lượt chat.
+
+Feedback RAG: với `ANSWER_BACKEND=rag`, feedback vẫn được thu thập và trang admin
+vẫn hoạt động, nhưng ví dụ admin duyệt **chưa** được gửi sang RAG (API RAG chưa nhận
+trường này; chờ chủ dự án quyết định).
 
 ## Phạm vi dữ liệu
 
 Kho kiến thức RAG hiện có 22 tài liệu về bệnh trên: táo, anh đào, ngô, nho, đào, ớt chuông, khoai tây, bí, dâu tây và cà chua.
 
-Nhận diện bằng ảnh hiện hỗ trợ 9 nhóm cây có checkpoint bệnh tương ứng: táo, anh đào, ngô, nho, đào, ớt, khoai tây, dâu tây và cà chua. Dữ liệu về bí hiện dùng được cho câu hỏi văn bản qua RAG, nhưng chưa có checkpoint IEViT để chẩn đoán từ ảnh.
+Ảnh không có lá cây (người, đồ vật, ảnh chụp màn hình…) bị từ chối ngay với thông báo "Ảnh không hợp lệ" (HTTP 400); ngưỡng chỉnh bằng `LEAF_MIN_CONFIDENCE`, `LEAF_MIN_AREA_RATIO`.
+
+Nhận diện bằng ảnh hiện hỗ trợ 9 nhóm cây có checkpoint bệnh tương ứng: táo, anh đào, ngô, nho, đào, ớt, khoai tây, dâu tây và cà chua. Dữ liệu về bí hiện dùng được cho câu hỏi văn bản qua RAG, nhưng chưa có checkpoint IEViT để chẩn đoán từ ảnh. Ảnh được phân loại là cây không có checkpoint bệnh (cam, bí) vẫn trả `200`: kết quả nhận diện chỉ có tên cây, `disease=null`.
 
 ## Công nghệ
 
@@ -83,34 +134,14 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-Pipeline thị giác sử dụng PyTorch, Ultralytics, timm, Pillow, Requests và Hugging Face Hub. Nếu môi trường của bạn chưa có các gói này, cài thêm:
+`requirements.txt` đã gồm cả pipeline thị giác (PyTorch, Ultralytics, timm, Pillow,
+Requests, Hugging Face Hub). Muốn chọn bản PyTorch CPU/CUDA cụ thể thì cài torch
+trước theo ghi chú ở đầu `requirements.txt`.
 
-```powershell
-# Chọn đúng lệnh PyTorch cho CPU/CUDA tại https://pytorch.org/get-started/locally/
-pip install torch torchvision
-pip install ultralytics timm pillow requests huggingface-hub
-```
-
-Tạo file `.env` tại thư mục gốc theo mẫu sau. Không commit file này.
-
-```dotenv
-GROQ_API_KEY=your_groq_api_key
-NORMALIZER_MODEL=openai/gpt-oss-120b
-ANSWER_MODEL=openai/gpt-oss-120b
-
-MONGO_URI=mongodb://localhost:27017
-MONGO_DB_NAME=plant_chatbot
-
-MAX_HISTORY_TURNS=12
-
-# Feedback RAG
-FEEDBACK_EMBEDDING_MODEL=intfloat/multilingual-e5-small
-FEEDBACK_RERANKER_MODEL=cross-encoder/mmarco-mMiniLMv2-L12-H384-v1
-FEEDBACK_RETRIEVE_K=8
-FEEDBACK_RERANK_K=2
-FEEDBACK_SIMILARITY_THRESHOLD=0.55
-FEEDBACK_RERANKER_ENABLED=true
-```
+Chép `.env.example` thành `.env` rồi điền `GROQ_API_KEY`, `MONGO_URI` và
+`ADMIN_PASSWORD` (đăng nhập trang `/admin`). Chỉ khi dùng `ANSWER_BACKEND=rag` mới cần
+`RAG_API_URL`, `RAG_API_KEY`. Không commit `.env`. Mọi biến trong `.env` đều có hiệu lực, kể cả các
+biến đọc bằng `os.getenv` (`YOLO_*`, `RAG_*`, `SAVE_SEGMENTATION_PREVIEW`...).
 
 Khởi động MongoDB, sau đó chạy ứng dụng:
 
@@ -121,15 +152,17 @@ python main.py
 Mở các địa chỉ sau:
 
 - Chat: <http://127.0.0.1:8005>
-- Duyệt feedback: <http://127.0.0.1:8005/admin>
+- Duyệt feedback: <http://127.0.0.1:8005/admin> (trình duyệt hỏi `ADMIN_USERNAME` / `ADMIN_PASSWORD`)
 - API docs: <http://127.0.0.1:8005/docs>
 - Health check: <http://127.0.0.1:8005/health>
 
-Lần khởi động đầu tiên sẽ kiểm tra và tải GenYOLO, một checkpoint ConvNeXt và các checkpoint IEViT theo từng loại cây vào `models/`. Thư mục này được `.gitignore` để tránh đẩy các file model lớn lên Git.
+Lần khởi động đầu tiên sẽ kiểm tra và tải GenYOLO, một checkpoint ConvNeXt và các checkpoint IEViT theo từng loại cây vào `models/` của module (tính theo thư mục module, chạy từ đâu cũng dùng chung). Thư mục này được `.gitignore` để tránh đẩy các file model lớn lên Git.
 
-## Xây dựng lại chỉ mục RAG
+## Xây dựng lại chỉ mục RAG nội bộ (chỉ `ANSWER_BACKEND=groq`)
 
-Sau khi thêm hoặc sửa file `.txt` trong `rag/data/`, tạo lại ChromaDB:
+Với `ANSWER_BACKEND=rag`, tài liệu và index nằm bên RAG server; `rag/` ở đây không được dùng.
+
+Với `ANSWER_BACKEND=groq`, sau khi thêm hoặc sửa file `.txt` trong `rag/data/`, tạo lại ChromaDB:
 
 ```powershell
 python -m rag.ingest --reset
@@ -137,27 +170,11 @@ python -m rag.ingest --reset
 
 `--reset` xóa chỉ mục cũ trong `rag/chroma_db/` trước khi lập chỉ mục lại, giúp tránh dữ liệu cũ bị giữ lại sau khi đổi tên hoặc xóa tài liệu. Bỏ `--reset` chỉ khi bạn thực sự muốn thêm tài liệu vào collection hiện có.
 
-Tùy chỉnh RAG sau phải được đặt trong environment của tiến trình chạy ứng dụng (ví dụ PowerShell), vì module RAG đọc trực tiếp từ environment:
+Tùy chỉnh `RAG_TOP_K`, `RAG_CHUNK_SIZE`, `RAG_CHUNK_OVERLAP`, `EMBEDDING_MODEL`,
+`EMBEDDING_DEVICE` đặt trong `.env` (hoặc environment của tiến trình, được ưu tiên hơn).
 
-```powershell
-$env:RAG_TOP_K = "5"
-$env:RAG_CHUNK_SIZE = "1000"
-$env:RAG_CHUNK_OVERLAP = "150"
-$env:EMBEDDING_MODEL = "AITeamVN/Vietnamese_Embedding"
-$env:EMBEDDING_DEVICE = "cpu"
-python -m rag.ingest --reset
-```
-
-Có thể tắt ảnh preview từ bước tách lá hoặc điều chỉnh số lá được giữ lại:
-
-```powershell
-$env:SAVE_SEGMENTATION_PREVIEW = "false"
-$env:YOLO_TOP_K = "2"
-$env:YOLO_MIN_MASK_AREA = "100"
-python main.py
-```
-
-Khi bật, preview được lưu ở `debug/segmentation/`; thư mục `debug/` cũng đã được bỏ qua bởi Git.
+Tương tự, `SAVE_SEGMENTATION_PREVIEW`, `YOLO_TOP_K`, `YOLO_MIN_MASK_AREA` điều khiển bước
+tách lá. Khi bật preview, ảnh được lưu ở `debug/segmentation/`; thư mục `debug/` đã được bỏ qua bởi Git.
 
 ## API chính
 
@@ -171,10 +188,14 @@ Khi bật, preview được lưu ở `debug/segmentation/`; thư mục `debug/` 
 | `GET` | `/api/session/{session_id}` | Lấy snapshot phiên và kết quả nhận diện gần nhất. |
 | `DELETE` | `/api/session/{session_id}` | Xóa dữ liệu phiên. |
 | `PUT` | `/feedback` | Gửi đánh giá `like` hoặc `unlike`. |
+| `GET` | `/admin/status` | Backend trả lời đang dùng, ví dụ Feedback RAG có được dùng không. |
 | `GET` | `/admin/reviews` | Lấy các QA đã được người dùng đánh giá. |
 | `POST` | `/admin/training` | Đưa các QA được chọn vào Feedback RAG. |
 | `GET` | `/admin/training` | Xem các QA đang có trong Feedback RAG. |
 | `DELETE` | `/admin/review/{feedback_id}` | Xóa feedback và vector Feedback RAG tương ứng. |
+
+Mọi route `/admin` và `/admin/*` cần đăng nhập HTTP Basic khi `ADMIN_PASSWORD` có giá trị.
+`MAX_HISTORY_TURNS` (mặc định 6) là số message gần nhất đưa vào normalizer và answer LLM.
 
 Ví dụ gửi câu hỏi kèm ảnh:
 
@@ -196,12 +217,21 @@ Trường `image` là tùy chọn. Khi chỉ hỏi về kiến thức đã biế
 5. Nhấn nút index để lưu embedding và metadata vào collection `feedback_training_vectors`.
 6. Ở các câu hỏi sau, hệ thống lọc theo cây/bệnh, tính cosine similarity, rerank rồi chỉ đưa các QA phù hợp vào LLM.
 
+## Chạy test
+
+Test chạy offline (không cần Groq, MongoDB, RAG server hay checkpoint):
+
+```powershell
+python -m pytest -q tests
+```
+
 ## Cấu trúc thư mục
 
 ```text
 main.py                       Điểm khởi động Uvicorn
 app/
   api.py                      FastAPI app, routes và dependency wiring
+  answer/                     AnswerBackend: GroqAnswerBackend, RagHttpBackend
   chat/                       Chuẩn hóa, routing, context, session, pipeline
   llm/                        Groq adapter và interface LLM
   feedback/                   MongoDB feedback, session và Feedback RAG
@@ -215,6 +245,7 @@ rag/
   retriever.py                Truy vấn ChromaDB
   service.py                  Adapter RAG cho pipeline chat
 models/                       Checkpoint tải tự động, không commit
+tests/                        Test offline
 ```
 
 ## Lưu ý khi đưa lên GitHub

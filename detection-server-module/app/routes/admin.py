@@ -1,13 +1,22 @@
 from datetime import datetime, timezone
 
 from bson import ObjectId
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 
+from app.config import get_settings
 from app.feedback.rag import get_feedback_rag_service
 from app.feedback.database import feedback_collection
+from app.schemas import (
+    AdminStatus,
+    DeleteReviewResponse,
+    ReviewItem,
+    TrainingExample,
+    TrainingResponse,
+)
+from app.security import require_admin
 
-router = APIRouter(prefix="/admin", tags=["Admin"])
+router = APIRouter(prefix="/admin", tags=["Admin"], dependencies=[Depends(require_admin)])
 
 
 class TrainingItem(BaseModel):
@@ -19,7 +28,18 @@ class TrainingRequest(BaseModel):
     items: list[TrainingItem] = Field(default_factory=list)
 
 
-@router.get("/reviews")
+@router.get("/status", response_model=AdminStatus)
+async def status():
+    """Cho trang admin biết ví dụ Feedback RAG có được dùng khi trả lời không."""
+    backend = get_settings().answer_backend
+    return {
+        "answer_backend": backend,
+        # ANSWER_BACKEND=rag: API RAG chưa nhận ví dụ admin (plan mục 3.7).
+        "feedback_examples_used": backend == "groq",
+    }
+
+
+@router.get("/reviews", response_model=list[ReviewItem])
 async def reviews():
     """Only show messages that the user actually liked/disliked."""
     items = []
@@ -34,7 +54,7 @@ async def reviews():
     return items
 
 
-@router.delete("/review/{feedback_id}")
+@router.delete("/review/{feedback_id}", response_model=DeleteReviewResponse)
 async def delete_review(feedback_id: str):
     """Delete raw QA feedback and its Feedback-RAG vector document."""
     if not ObjectId.is_valid(feedback_id):
@@ -49,7 +69,7 @@ async def delete_review(feedback_id: str):
     return {"success": True, "deleted_id": feedback_id}
 
 
-@router.post("/training")
+@router.post("/training", response_model=TrainingResponse)
 async def apply_training(data: TrainingRequest):
     """Index selected QA into Feedback RAG instead of appending all QA to prompt.
 
@@ -111,7 +131,8 @@ async def apply_training(data: TrainingRequest):
                 "question": question,
                 "preferred_answer": preferred_answer,
                 "correct_answer": correct_answer,
-                "planttype": metadata.get("planttype"),
+                # Pipeline lưu cây ở metadata.plant; planttype là tên cũ.
+                "planttype": metadata.get("planttype") or metadata.get("plant"),
                 "disease": metadata.get("disease"),
                 "rating": rating,
                 "reasons": reasons,
@@ -155,7 +176,7 @@ async def apply_training(data: TrainingRequest):
     }
 
 
-@router.get("/training")
+@router.get("/training", response_model=list[TrainingExample])
 async def training_dataset():
     """Inspect active Feedback-RAG index entries (embeddings omitted)."""
     return await get_feedback_rag_service().list_indexed()

@@ -1,438 +1,114 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plant Chatbot Admin</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, "Segoe UI", Arial, sans-serif;
-      background: #f5f7f6;
-      color: #172033;
-    }
-    .header {
-      height: 66px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 28px;
-      background: #fff;
-      border-top: 6px solid #303230;
-      border-bottom: 1px solid #e5e7eb;
-    }
-    .brand { display: flex; align-items: center; gap: 11px; }
-    .brand-icon {
-      width: 38px; height: 38px; display: grid; place-items: center;
-      border-radius: 10px; background: #e9f8f0; font-size: 19px;
-    }
-    .brand h1 { margin: 0; font-size: 18px; }
-    .brand p { margin: 2px 0 0; font-size: 12px; color: #7a8494; }
-    .refresh-btn, .train-btn, .delete-btn, .filter-btn {
-      border: 0; border-radius: 8px; cursor: pointer; font-weight: 650;
-    }
-    .refresh-btn { padding: 9px 14px; background: #fff; border: 1px solid #d9dee5; }
-    .container { max-width: 1500px; margin: 0 auto; padding: 24px; }
-    .title h2 { margin: 0; font-size: 23px; }
-    .title p { margin: 6px 0 18px; color: #7b8493; font-size: 13px; }
-    .stats {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px;
-    }
-    .stat {
-      background: #fff; border: 1px solid #e1e5ea; border-radius: 11px; padding: 14px 16px;
-    }
-    .stat-label { color: #7a8494; font-size: 12px; margin-bottom: 7px; }
-    .stat-value { font-size: 24px; font-weight: 750; }
-    .green { color: #0d8a61; } .red { color: #d92d20; }
-    .toolbar {
-      display: flex; justify-content: space-between; align-items: center; gap: 12px;
-      background: #fff; border: 1px solid #e1e5ea; border-radius: 11px;
-      padding: 10px 12px; margin-bottom: 12px;
-    }
-    .filters { display: flex; gap: 7px; flex-wrap: wrap; }
-    .filter-btn { padding: 8px 13px; background: #fff; border: 1px solid #e0e4e9; }
-    .filter-btn.active { background: #11875f; color: #fff; border-color: #11875f; }
-    .search {
-      width: 310px; max-width: 100%; padding: 9px 12px; border: 1px solid #d7dce2;
-      border-radius: 8px; outline: none;
-    }
-    .table-wrap {
-      background: #fff; border: 1px solid #e1e5ea; border-radius: 12px;
-      overflow: auto; margin-bottom: 86px;
-    }
-    table { width: 100%; min-width: 1250px; border-collapse: collapse; table-layout: fixed; }
-    th {
-      background: #f7f9f8; color: #536071; font-size: 11px; text-transform: uppercase;
-      letter-spacing: .25px; padding: 11px 10px; text-align: left; border-bottom: 1px solid #dfe4e7;
-    }
-    td {
-      padding: 11px 10px; vertical-align: top; border-bottom: 1px solid #edf0f2;
-      font-size: 13px; line-height: 1.45;
-    }
-    tbody tr:hover { background: #fbfcfb; }
-    .c-select { width: 55px; text-align: center; }
-    .c-feedback { width: 90px; }
-    .c-question { width: 210px; }
-    .c-answer { width: 310px; }
-    .c-reason { width: 170px; }
-    .c-correct { width: 290px; }
-    .c-created { width: 135px; }
-    .c-action { width: 90px; text-align: center; }
-    .qa-check { width: 17px; height: 17px; accent-color: #11875f; cursor: pointer; }
-    .badge {
-      display: inline-flex; align-items: center; padding: 5px 8px; border-radius: 20px;
-      font-size: 11px; font-weight: 700;
-    }
-    .badge-like { background: #e9f8f0; color: #0d8a61; }
-    .badge-unlike { background: #fff0ee; color: #d92d20; }
-    .training-badge {
-      display: block; margin-top: 6px; width: fit-content; padding: 3px 6px;
-      border-radius: 5px; background: #ede9fe; color: #6d28d9; font-size: 10px; font-weight: 700;
-    }
-    .question { font-weight: 650; word-break: break-word; }
-    .answer {
-      max-height: 125px; overflow: auto; white-space: pre-wrap; color: #384354; padding-right: 4px;
-    }
-    .reason-list { display: flex; gap: 5px; flex-wrap: wrap; }
-    .reason-chip {
-      padding: 4px 7px; border-radius: 6px; background: #fff0ee; color: #c43227;
-      border: 1px solid #ffd6d1; font-size: 11px;
-    }
-    .muted { color: #9aa3af; }
-    .correct-answer {
-      width: 100%; min-height: 86px; resize: vertical; border: 1px solid #d4dae1;
-      border-radius: 7px; padding: 8px; font: inherit; font-size: 12px; outline: none;
-    }
-    .correct-answer:focus { border-color: #12a06e; box-shadow: 0 0 0 2px rgba(18,160,110,.08); }
-    .delete-btn { padding: 7px 10px; background: #fff0ee; color: #c92a21; border: 1px solid #ffd8d3; }
-    .delete-btn:hover { background: #ffe4df; }
-    .bottom-bar {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
-      background: rgba(255,255,255,.96); backdrop-filter: blur(8px);
-      border-top: 1px solid #dfe4e7; padding: 12px 24px;
-    }
-    .bottom-inner {
-      max-width: 1500px; margin: auto; display: flex; align-items: center;
-      justify-content: space-between; gap: 16px;
-    }
-    .selected-info { color: #667085; font-size: 13px; }
-    .train-btn { padding: 11px 20px; background: #11875f; color: #fff; font-size: 13px; }
-    .train-btn:disabled { opacity: .55; cursor: not-allowed; }
-    .empty { padding: 45px; text-align: center; color: #7b8493; }
-    .toast {
-      position: fixed; right: 24px; bottom: 78px; z-index: 100; background: #172033; color: #fff;
-      padding: 11px 15px; border-radius: 9px; opacity: 0; transform: translateY(8px); transition: .18s;
-      pointer-events: none; font-size: 13px;
-    }
-    .toast.show { opacity: 1; transform: translateY(0); }
-    @media (max-width: 850px) {
-      .stats { grid-template-columns: repeat(2,1fr); }
-      .toolbar { align-items: stretch; flex-direction: column; }
-      .search { width: 100%; }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>PlantGPT · Duyệt phản hồi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&family=Fraunces:opsz,wght@9..144,700&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="/static/tokens.css?v=field-notebook-1" />
+  <link rel="stylesheet" href="/static/admin.css?v=field-notebook-1" />
 </head>
 <body>
-  <header class="header">
-    <div class="brand">
-      <div class="brand-icon">🌿</div>
-      <div><h1>Plant Chatbot Admin</h1><p>Feedback Review Dashboard</p></div>
+  <!-- Same stroke voice as index.html: 24px grid, 1.75 stroke, round joins. -->
+  <svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M4.5 19.5C4.5 11 10 4.8 19.8 4.2 19.4 13.6 13.4 19.5 4.5 19.5Z"/><path d="M4.5 19.5 14.5 9.5"/><path d="M9.2 14.8h4.3M11.8 12.2V8.4"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M19.5 4.5v3.7h-3.7"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4.5 5.5h15v10h-9l-4.5 4v-4H4.5Z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m15.5 15.5 4 4"/></symbol>
+    <symbol id="i-thumb-up" viewBox="0 0 24 24"><path d="M7.5 10.5v9h-3v-9Z"/><path d="M7.5 10.5 11 4c1.4 0 2.4 1.1 2.1 2.6L12.6 9.5h5.3a2 2 0 0 1 2 2.4l-1.1 5.6a2.5 2.5 0 0 1-2.5 2H7.5"/></symbol>
+    <symbol id="i-thumb-down" viewBox="0 0 24 24"><g transform="rotate(180 12 12)"><path d="M7.5 10.5v9h-3v-9Z"/><path d="M7.5 10.5 11 4c1.4 0 2.4 1.1 2.1 2.6L12.6 9.5h5.3a2 2 0 0 1 2 2.4l-1.1 5.6a2.5 2.5 0 0 1-2.5 2H7.5"/></g></symbol>
+    <symbol id="i-stack" viewBox="0 0 24 24"><path d="m12 4.5 8 4-8 4-8-4Z"/><path d="m4 12.5 8 4 8-4M4 16.5l8 4 8-4"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M10 7V5h4v2M7 7l.8 12h8.4L17 7"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3.8h6.5L18 8.3v11.9H7Z"/><path d="M13.5 3.8v4.5H18"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.8v5M12 16.2v.01"/></symbol>
+  </svg>
+
+  <header class="topbar">
+    <a class="brand" href="/admin">
+      <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#i-leaf"/></svg></span>
+      <span class="brand-text">
+        <strong>PlantGPT</strong>
+        <span>Duyệt phản hồi người dùng</span>
+      </span>
+    </a>
+    <div class="topbar-actions">
+      <a class="ghost-btn" href="/">
+        <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>
+        <span class="ghost-label">Trang chat</span>
+      </a>
+      <button id="refreshBtn" type="button" class="ghost-btn">
+        <svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg>
+        <span class="ghost-label">Tải lại</span>
+      </button>
     </div>
-    <button class="refresh-btn" onclick="loadReviews()">↻ Refresh</button>
   </header>
 
-  <main class="container">
-    <div class="title">
-      <h2>User Feedback</h2>
-      <p>Chọn QA tốt hoặc nhập câu trả lời sửa của admin, sau đó index vào Feedback RAG.</p>
+  <main class="page">
+    <div class="page-head">
+      <h1 class="page-title">Phản hồi của người dùng</h1>
+      <p class="page-lede">Chọn QA tốt, hoặc viết câu trả lời đúng cho câu bị chê, rồi đưa vào Feedback RAG.</p>
     </div>
 
-    <section class="stats">
-      <div class="stat"><div class="stat-label">Tổng feedback</div><div class="stat-value" id="totalCount">0</div></div>
-      <div class="stat"><div class="stat-label">👍 Like</div><div class="stat-value green" id="likeCount">0</div></div>
-      <div class="stat"><div class="stat-label">👎 Unlike</div><div class="stat-value red" id="unlikeCount">0</div></div>
-      <div class="stat"><div class="stat-label">Feedback RAG</div><div class="stat-value" id="trainingCount">0</div></div>
-    </section>
+    <dl class="stats">
+      <div class="stat"><dt>Tổng phản hồi</dt><dd id="totalCount">0</dd></div>
+      <div class="stat"><dt>Hữu ích</dt><dd id="likeCount" class="is-like">0</dd></div>
+      <div class="stat"><dt>Chưa tốt</dt><dd id="unlikeCount" class="is-unlike">0</dd></div>
+      <div class="stat"><dt>Trong Feedback RAG</dt><dd id="trainingCount">0</dd></div>
+    </dl>
 
-    <section class="toolbar">
-      <div class="filters">
-        <button class="filter-btn active" data-filter="all">Tất cả</button>
-        <button class="filter-btn" data-filter="like">👍 Like</button>
-        <button class="filter-btn" data-filter="unlike">👎 Unlike</button>
-        <button class="filter-btn" data-filter="training">RAG Indexed</button>
+    <p id="backendNote" class="notice" hidden>
+      <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
+      <span>Đang chạy chế độ RAG-module: ví dụ trong Feedback RAG vẫn được lưu, nhưng chưa được dùng khi trả lời.</span>
+    </p>
+
+    <div class="toolbar">
+      <div class="filters" role="group" aria-label="Lọc phản hồi">
+        <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">Tất cả</button>
+        <button type="button" class="filter-btn" data-filter="like" aria-pressed="false">Hữu ích</button>
+        <button type="button" class="filter-btn" data-filter="unlike" aria-pressed="false">Chưa tốt</button>
+        <button type="button" class="filter-btn" data-filter="training" aria-pressed="false">Trong RAG</button>
       </div>
-      <input id="searchInput" class="search" placeholder="🔍 Tìm câu hỏi / câu trả lời...">
-    </section>
+      <label class="search">
+        <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+        <span class="visually-hidden">Tìm câu hỏi hoặc câu trả lời</span>
+        <input id="searchInput" type="search" placeholder="Tìm câu hỏi, câu trả lời…" autocomplete="off" />
+      </label>
+    </div>
 
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th class="c-select"><input id="selectAll" class="qa-check" type="checkbox" title="Chọn tất cả đang hiển thị"></th>
-            <th class="c-feedback">Feedback</th>
-            <th class="c-question">User Question</th>
-            <th class="c-answer">Bot Answer</th>
-            <th class="c-reason">Reason</th>
-            <th class="c-correct">Correct Answer (Admin)</th>
-            <th class="c-created">Created</th>
-            <th class="c-action">Xóa</th>
+            <th class="c-select"><input id="selectAll" type="checkbox" aria-label="Chọn tất cả đang hiện" /></th>
+            <th class="c-feedback">Đánh giá</th>
+            <th class="c-question">Câu hỏi</th>
+            <th class="c-answer">Bot trả lời</th>
+            <th class="c-reason">Lý do</th>
+            <th class="c-correct">Câu trả lời đúng (admin)</th>
+            <th class="c-created">Thời gian</th>
+            <th class="c-action"><span class="visually-hidden">Xóa</span></th>
           </tr>
         </thead>
         <tbody id="reviewTableBody">
-          <tr><td colspan="8" class="empty">Đang tải feedback...</td></tr>
+          <tr><td colspan="8" class="empty">Đang tải phản hồi…</td></tr>
         </tbody>
       </table>
     </div>
   </main>
 
-  <div class="bottom-bar">
+  <footer class="bottom-bar">
     <div class="bottom-inner">
-      <div class="selected-info"><strong id="selectedCount">0</strong> QA đang được chọn</div>
-      <button id="trainBtn" class="train-btn" onclick="trainSelected()">🧠 Index QA vào Feedback RAG</button>
+      <p class="selected-info"><strong id="selectedCount">0</strong> <span class="wide-only">QA </span>đang chọn</p>
+      <p id="barStatus" class="bar-status" role="status"></p>
+      <button id="trainBtn" type="button" class="primary-btn" disabled>
+        <svg class="icon" aria-hidden="true"><use href="#i-stack"/></svg>
+        <span id="trainLabel">Đưa vào Feedback RAG</span>
+      </button>
     </div>
-  </div>
+  </footer>
 
-  <div id="toast" class="toast"></div>
-
-  <script>
-    let reviews = [];
-    let currentFilter = "all";
-    const selectedIds = new Set();
-
-    async function loadReviews() {
-      const tbody = document.getElementById("reviewTableBody");
-      tbody.innerHTML = '<tr><td colspan="8" class="empty">Đang tải feedback...</td></tr>';
-
-      try {
-        const response = await fetch("/admin/reviews", { cache: "no-store" });
-        if (!response.ok) throw new Error(await response.text());
-        reviews = await response.json();
-
-        // Keep selections only if the record still exists.
-        const existing = new Set(reviews.map(x => x._id));
-        for (const id of [...selectedIds]) if (!existing.has(id)) selectedIds.delete(id);
-
-        updateStats();
-        renderTable();
-        updateSelectedInfo();
-      } catch (error) {
-        console.error(error);
-        tbody.innerHTML = '<tr><td colspan="8" class="empty">❌ Không tải được /admin/reviews</td></tr>';
-      }
-    }
-
-    function updateStats() {
-      document.getElementById("totalCount").textContent = reviews.length;
-      document.getElementById("likeCount").textContent = reviews.filter(x => x.user_feedback?.rating === "like").length;
-      document.getElementById("unlikeCount").textContent = reviews.filter(x => x.user_feedback?.rating === "unlike").length;
-      document.getElementById("trainingCount").textContent = reviews.filter(x => x.training?.selected === true).length;
-    }
-
-    document.querySelectorAll(".filter-btn").forEach(button => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".filter-btn").forEach(x => x.classList.remove("active"));
-        button.classList.add("active");
-        currentFilter = button.dataset.filter;
-        renderTable();
-      });
-    });
-
-    document.getElementById("searchInput").addEventListener("input", renderTable);
-
-    document.getElementById("selectAll").addEventListener("change", (event) => {
-      for (const item of getFilteredReviews()) {
-        if (event.target.checked) selectedIds.add(item._id);
-        else selectedIds.delete(item._id);
-      }
-      renderTable();
-      updateSelectedInfo();
-    });
-
-    function getFilteredReviews() {
-      const search = document.getElementById("searchInput").value.trim().toLowerCase();
-
-      return reviews.filter(item => {
-        const rating = item.user_feedback?.rating;
-        if (currentFilter === "like" && rating !== "like") return false;
-        if (currentFilter === "unlike" && rating !== "unlike") return false;
-        if (currentFilter === "training" && item.training?.selected !== true) return false;
-
-        if (search) {
-          const text = `${item.question || ""} ${item.answer || ""} ${(item.user_feedback?.reasons || []).join(" ")}`.toLowerCase();
-          if (!text.includes(search)) return false;
-        }
-        return true;
-      });
-    }
-
-    function renderTable() {
-      const tbody = document.getElementById("reviewTableBody");
-      const data = getFilteredReviews();
-
-      if (!data.length) {
-        tbody.innerHTML = '<tr><td colspan="8" class="empty">Không có feedback phù hợp.</td></tr>';
-        document.getElementById("selectAll").checked = false;
-        return;
-      }
-
-      tbody.innerHTML = data.map(item => createRow(item)).join("");
-
-      const allVisibleSelected = data.every(item => selectedIds.has(item._id));
-      document.getElementById("selectAll").checked = allVisibleSelected;
-    }
-
-    function createRow(item) {
-      const rating = item.user_feedback?.rating || "";
-      const reasons = item.user_feedback?.reasons || [];
-      const admin = item.admin_feedback || {};
-      const isTraining = item.training?.selected === true;
-
-      const feedbackHtml = rating === "like"
-        ? '<span class="badge badge-like">👍 Like</span>'
-        : '<span class="badge badge-unlike">👎 Unlike</span>';
-
-      const reasonHtml = reasons.length
-        ? `<div class="reason-list">${reasons.map(r => `<span class="reason-chip">${escapeHtml(r)}</span>`).join("")}</div>`
-        : '<span class="muted">—</span>';
-
-      return `
-        <tr id="row-${item._id}">
-          <td class="c-select">
-            <input class="qa-check row-check" type="checkbox" data-id="${item._id}" ${selectedIds.has(item._id) ? "checked" : ""} onchange="toggleSelection('${item._id}', this.checked)">
-          </td>
-          <td>
-            ${feedbackHtml}
-            ${isTraining ? '<span class="training-badge">🧠 RAG INDEXED</span>' : ''}
-          </td>
-          <td><div class="question">${escapeHtml(item.question || "-")}</div></td>
-          <td><div class="answer">${escapeHtml(item.answer || "-")}</div></td>
-          <td>${reasonHtml}</td>
-          <td>
-            <textarea class="correct-answer" id="correct-${item._id}" placeholder="${rating === 'unlike' ? 'Bắt buộc nhập khi Unlike...' : 'Có thể để trống nếu Bot Answer đã tốt...'}">${escapeHtml(admin.correct_answer || "")}</textarea>
-          </td>
-          <td>${formatDate(item.created_at)}</td>
-          <td class="c-action"><button class="delete-btn" onclick="deleteQA('${item._id}')">🗑 Xóa</button></td>
-        </tr>
-      `;
-    }
-
-    function toggleSelection(id, checked) {
-      if (checked) selectedIds.add(id);
-      else selectedIds.delete(id);
-      updateSelectedInfo();
-
-      const visible = getFilteredReviews();
-      document.getElementById("selectAll").checked = visible.length > 0 && visible.every(item => selectedIds.has(item._id));
-    }
-
-    function updateSelectedInfo() {
-      document.getElementById("selectedCount").textContent = selectedIds.size;
-      document.getElementById("trainBtn").disabled = selectedIds.size === 0;
-    }
-
-    async function deleteQA(id) {
-      const item = reviews.find(x => x._id === id);
-      const shortQuestion = item?.question ? `\n\n${item.question.slice(0, 100)}` : "";
-      if (!confirm(`Xóa QA này khỏi feedback/training?${shortQuestion}`)) return;
-
-      try {
-        const response = await fetch(`/admin/review/${encodeURIComponent(id)}`, { method: "DELETE" });
-        if (!response.ok) throw new Error(await response.text());
-        selectedIds.delete(id);
-        reviews = reviews.filter(x => x._id !== id);
-        updateStats();
-        renderTable();
-        updateSelectedInfo();
-        showToast("✓ Đã xóa QA");
-      } catch (error) {
-        console.error(error);
-        showToast("❌ Xóa QA thất bại");
-      }
-    }
-
-    async function trainSelected() {
-      if (!selectedIds.size) return;
-
-      const items = [];
-
-      for (const id of selectedIds) {
-        const review = reviews.find(x => x._id === id);
-        if (!review) continue;
-
-        const textarea = document.getElementById(`correct-${id}`);
-        const correctAnswer = textarea ? textarea.value.trim() : (review.admin_feedback?.correct_answer || "").trim();
-
-        if (review.user_feedback?.rating === "unlike" && !correctAnswer) {
-          showToast("⚠️ QA Unlike phải nhập Correct Answer trước khi Training");
-          textarea?.focus();
-          return;
-        }
-
-        items.push({ id, correct_answer: correctAnswer });
-      }
-
-      if (!items.length) return;
-
-      const button = document.getElementById("trainBtn");
-      button.disabled = true;
-      button.textContent = "Đang embedding + rerank index...";
-
-      try {
-        const response = await fetch("/admin/training", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ items })
-        });
-
-        const raw = await response.text();
-        let data = {};
-        try { data = JSON.parse(raw); } catch {}
-
-        if (!response.ok) throw new Error(data.detail || raw || `HTTP ${response.status}`);
-
-        selectedIds.clear();
-        showToast(`✓ Đã index ${data.indexed_count || data.trained_count || items.length} QA vào Feedback RAG`);
-        await loadReviews();
-      } catch (error) {
-        console.error(error);
-        showToast(`❌ ${error.message}`);
-      } finally {
-        button.textContent = "🧠 Index QA vào Feedback RAG";
-        button.disabled = selectedIds.size === 0;
-      }
-    }
-
-    function formatDate(value) {
-      if (!value) return "—";
-      const date = new Date(value);
-      if (Number.isNaN(date.getTime())) return "—";
-      return date.toLocaleString("vi-VN", {
-        day: "2-digit", month: "2-digit", year: "numeric",
-        hour: "2-digit", minute: "2-digit"
-      });
-    }
-
-    function escapeHtml(value) {
-      return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    let toastTimer;
-    function showToast(message) {
-      const toast = document.getElementById("toast");
-      toast.textContent = message;
-      toast.classList.add("show");
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove("show"), 2400);
-    }
-
-    updateSelectedInfo();
-    loadReviews();
-  </script>
+  <script src="/static/admin.js?v=field-notebook-1"></script>
 </body>
 </html>

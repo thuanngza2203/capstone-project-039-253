@@ -1,0 +1,33 @@
+[
+  {
+    "date": "2026-09-23",
+    "scope": "app",
+    "macrostructure": "Workbench (app shell) + admin table",
+    "theme": "Garden",
+    "enrichment": "Tier B hand-built SVG leaf mark + icon sprite",
+    "nav": "N3 side-rail (chat) · brand top bar (admin)",
+    "footer": "chat: none (composer) · admin: sticky action bar",
+    "brief": "User reverted to the 17/09 Garden chat UI; admin rebuilt as a Garden-styled table. Supersedes the 'phòng khám cây' Split Studio entry below."
+  },
+  {
+    "date": "2026-09-23",
+    "scope": "app",
+    "macrostructure": "Split Studio (app diptych: chat thread | dossier, admin queue | detail)",
+    "theme": "custom",
+    "theme_axes": "light / grotesk-sans / warm (terracotta H40)",
+    "vibe": "warm field clinic, plant doctor's case sheet",
+    "enrichment": "none (hand-drawn SVG icon sprite + leaf mark)",
+    "nav": "N9 edge-aligned + history drawer",
+    "footer": "chat: none (composer) · admin: C4 sticky action bar",
+    "brief": "PlantGPT chat + feedback admin redesign, design.md locked"
+  },
+  {
+    "date": "2026-09-17",
+    "macrostructure": "Workbench (app shell)",
+    "theme": "Garden",
+    "enrichment": "Tier B hand-built SVG leaf mark + icon sprite",
+    "nav": "N3 side-rail (drawer below 52rem)",
+    "footer": "none — composer closes the page",
+    "brief": "PlantGPT chat redesign in plant_disease_chatbot-main (never ported to this module)"
+  }
+]
