@@ -319,10 +319,16 @@ def test_openapi_documents_auth_errors_and_fields(client: TestClient) -> None:
     assert "security" not in schema["paths"]["/health"]["get"]
 
 
-def test_cli_refuses_public_bind_without_key(monkeypatch: pytest.MonkeyPatch, capsys) -> None:
+def test_cli_warns_but_allows_public_bind_without_key(monkeypatch: pytest.MonkeyPatch, capsys) -> None:
+    """API public là lựa chọn đã chốt: không key vẫn chạy trên 0.0.0.0, chỉ cảnh báo."""
+    import uvicorn
+
+    started = {}
     monkeypatch.delenv("RAG_API_KEY", raising=False)
-    assert server_main.main(["--host", "0.0.0.0"]) == 1
-    assert "RAG_API_KEY" in capsys.readouterr().err
+    monkeypatch.setattr(uvicorn, "run", lambda app, **kwargs: started.update(kwargs))
+    assert server_main.main(["--host", "0.0.0.0"]) == 0
+    assert started["host"] == "0.0.0.0"
+    assert "RAG_API_KEY trống" in capsys.readouterr().err
 
 
 def test_cli_exports_openapi(tmp_path: Path) -> None:

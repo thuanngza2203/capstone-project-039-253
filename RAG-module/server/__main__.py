@@ -1,7 +1,7 @@
 """Chạy RAG API hoặc xuất OpenAPI schema.
 
     python -m server                             # theo RAG_API_HOST / RAG_API_PORT
-    python -m server --host 0.0.0.0 --port 8010  # cần RAG_API_KEY
+    python -m server --host 0.0.0.0 --port 8010  # public; không có RAG_API_KEY thì chỉ cảnh báo
     python -m server --export-openapi openapi.json
 """
 
@@ -41,15 +41,14 @@ def main(argv: list[str] | None = None) -> int:
         port = args.port or settings.port
         if not 1 <= port <= 65535:
             raise ValueError("Cổng phải nằm trong 1–65535.")
-        if not settings.api_key and host not in LOOPBACK_HOSTS:
-            # Không có key mà nghe ra ngoài thì ai tới được cổng cũng dùng được LLM.
-            raise ValueError(
-                f"Đặt RAG_API_KEY trước khi nghe trên {host}. "
-                "Không có key thì chỉ được dùng 127.0.0.1."
-            )
     except ValueError as exc:
         print(f"Lỗi: {exc}", file=sys.stderr)
         return 1
+
+    if not settings.api_key and host not in LOOPBACK_HOSTS:
+        # API public là lựa chọn đã chốt (plan kiến trúc 24/09); chỉ nhắc để không bật nhầm.
+        print(f"Cảnh báo: nghe trên {host} và RAG_API_KEY trống: ai tới được cổng này cũng gọi "
+              "được mọi API, kể cả /v1/answer (dùng GPU của LLM).", file=sys.stderr, flush=True)
 
     import uvicorn
 

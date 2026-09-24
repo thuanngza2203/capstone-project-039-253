@@ -150,6 +150,7 @@ class AnswerRequest(RetrieveRequest):
 
 class Chunk(BaseModel):
     rank: int = Field(description="Thứ hạng sau khi gộp các nhánh, bắt đầu từ 1.")
+    chunk_id: str = Field(description="ID ổn định của chunk; xem đầy đủ ở `GET /v1/admin/chunks/{chunk_id}`.")
     source: str = Field(description="Tài liệu gốc, cũng là nhãn trích dẫn trong câu trả lời.")
     heading_path: str | None = Field(None, description="Mục trong tài liệu (chỉ có với chunk structure).")
     content: str = Field(description="Nội dung chunk, gồm cả header định danh.")
@@ -267,6 +268,83 @@ class LLMInfo(BaseModel):
     reachable: bool | None = Field(None, description="null khi không probe.")
     served: list[ServedModel] | None = None
     detail: str | None = None
+
+
+# --- Kho tri thức (trang admin của web, chỉ đọc) ---------------------------------
+
+IndexState = Literal["current", "changed", "not_indexed", "deleted", "unknown"]
+
+
+class KbTaxonomyLink(BaseModel):
+    plant: str
+    disease: str
+
+
+class KbTokenStats(BaseModel):
+    mean: int
+    median: int
+    max: int
+
+
+class KbIndexOverview(IndexStatus):
+    documents: int | None = Field(None, description="Số tài liệu có chunk trong index.")
+    chunks: int | None = None
+    tokens: KbTokenStats | None = Field(None, description="Token mỗi chunk (tokenizer của embedding).")
+    chunks_per_crop: dict[str, int] = Field(default_factory=dict)
+
+
+class KbDataInfo(BaseModel):
+    documents: int = Field(description="Số file .txt trong data/.")
+    fingerprint: str = Field(description="12 ký tự đầu dấu vân tay của data/.")
+
+
+class KbOverview(BaseModel):
+    data: KbDataInfo
+    default_index: IndexName
+    indexes: list[KbIndexOverview]
+
+
+class KbDocument(BaseModel):
+    source: str = Field(description="Đường dẫn trong data/, ví dụ `apple/apple_scab.txt`.")
+    crop: str
+    title: str
+    chars: int | None = Field(None, description="null khi tài liệu đã xóa khỏi data/.")
+    chunks: int
+    tokens: int
+    index_state: IndexState = Field(description=(
+        "`current`: index khớp file; `changed`: file đã sửa sau lần index; `not_indexed`: file mới; "
+        "`deleted`: còn trong index nhưng đã xóa khỏi data/; `unknown`: index cũ không có manifest."
+    ))
+    taxonomy: list[KbTaxonomyLink] = Field(description="Bệnh trong taxonomy trỏ tới tài liệu này; rỗng = chưa gắn.")
+
+
+class KbChunkSummary(BaseModel):
+    chunk_id: str
+    source: str
+    position: int = Field(description="Thứ tự trong tài liệu, bắt đầu từ 0.")
+    heading_path: str | None = None
+    section: str | None = None
+    tokens: int
+    chars: int
+    start_line: int | None = None
+    end_line: int | None = None
+    preview: str = Field(description="Hai dòng đầu của thân chunk.")
+
+
+class KbDocumentDetail(KbDocument):
+    index: IndexName
+    chunk_list: list[KbChunkSummary]
+    text: str | None = Field(None, description="Văn bản gốc, khi `include_text=true`.")
+
+
+class KbChunk(KbChunkSummary):
+    index: IndexName
+    header: str = Field(description="Header định danh chèn vào đầu chunk khi index.")
+    body: str
+    metadata: dict
+    total_in_document: int
+    prev_id: str | None = None
+    next_id: str | None = None
 
 
 class TaxonomyDisease(BaseModel):

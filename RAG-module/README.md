@@ -172,6 +172,12 @@ python -m server --export-openapi openapi.json
 | `GET /v1/taxonomy` | Cây, bệnh, alias, bệnh nào có tài liệu | Không |
 | `POST /v1/retrieve` | Tìm chunk theo `plant_type`/`disease` | Không |
 | `POST /v1/answer` | Tìm + sinh câu trả lời có trích nguồn | Có |
+| `GET /v1/admin/overview` | Kho tri thức: số tài liệu, chunk, token từng index | Không |
+| `GET /v1/admin/documents[/{source}]` | Tài liệu, chunk theo thứ tự, văn bản gốc, "đã sửa sau lần index" | Không |
+| `GET /v1/admin/chunks?q=`, `/v1/admin/chunks/{chunk_id}` | Tìm chunk theo nội dung; xem một chunk | Không |
+
+Các API `/v1/admin/*` chỉ đọc, phục vụ trang quản trị của web (`application/web`). CORS mở theo
+`RAG_API_CORS_ORIGINS` (mặc định `*`); `RAG_API_KEY` trống thì nghe `0.0.0.0` được, chỉ in cảnh báo.
 
 Để so sánh, request chọn được `index` (`recursive`/`structure`) và `llm_provider`
 (`ollama`/`gemini`/`vllm`); bỏ trống thì dùng `.env`. Mọi response có `meta`: cấu hình

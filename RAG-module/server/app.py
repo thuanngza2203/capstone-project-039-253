@@ -10,6 +10,7 @@ from dataclasses import asdict
 from fastapi import APIRouter, Depends, FastAPI, HTTPException, Request, Security
 from fastapi import Query as QueryParam
 from fastapi.concurrency import run_in_threadpool
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
@@ -20,6 +21,7 @@ from config import (
     get_retrieval_settings,
 )
 from retrieval import SearchResult
+from server.knowledge import KnowledgeBase
 from server.runtime import AnswerOutcome, RAGRuntime, RunMeta, ServiceError
 from server.schemas import (
     SCOPE_STATUS_MEANING,
@@ -29,7 +31,13 @@ from server.schemas import (
     Citations,
     ErrorResponse,
     HealthResponse,
+    IndexName,
     IndexStatus,
+    KbChunk,
+    KbChunkSummary,
+    KbDocument,
+    KbDocumentDetail,
+    KbOverview,
     LLMInfo,
     ProviderName,
     ResponseMeta,
@@ -43,7 +51,7 @@ from taxonomy import ResolvedScope, taxonomy_table
 
 logger = logging.getLogger("rag.server")
 
-API_VERSION = "1.2.0"
+API_VERSION = "1.3.0"
 
 DESCRIPTION = """
 API tra cứu kiến thức bệnh cây: tìm tài liệu (hybrid semantic + BM25) và sinh câu
@@ -54,7 +62,8 @@ chuẩn hóa câu hỏi, nhận diện ảnh rồi gửi `query`, `plant_type`, 
 Server **không lưu lịch sử**: mỗi request tự mang `history` cần dùng.
 
 **Xác thực.** Header `Authorization: Bearer <RAG_API_KEY>`. Khi `RAG_API_KEY` trống,
-xác thực tắt và server chỉ được nghe `127.0.0.1`. Bấm **Authorize** để thử trên trang này.
+xác thực tắt: ai tới được cổng cũng gọi được mọi API. Bấm **Authorize** để thử trên trang này.
+CORS theo `RAG_API_CORS_ORIGINS` (mặc định `*`) để web gọi được từ origin khác.
 
 **Phạm vi tìm kiếm** (trường `scope.status` trong response):
 
@@ -80,6 +89,7 @@ TAGS = [
     {"name": "Hệ thống", "description": "Kiểm tra process, index và cấu hình đang chạy."},
     {"name": "Tra cứu", "description": "Tìm tài liệu và sinh câu trả lời."},
     {"name": "Danh mục", "description": "Cây, bệnh và độ phủ tài liệu mà API hiểu."},
+    {"name": "Kho tri thức", "description": "Chỉ đọc: tài liệu trong data/ và chunk trong từng index (trang admin của web)."},
 ]
 
 AUTH_RESPONSES = {401: {"model": ErrorResponse, "description": "Thiếu hoặc sai API key."}}
@@ -106,6 +116,7 @@ def _chunks(result: SearchResult | None) -> list[Chunk]:
     return [
         Chunk(
             rank=rank,
+            chunk_id=hit.chunk_id,
             source=str(hit.document.metadata.get("source", "không rõ nguồn")),
             heading_path=hit.document.metadata.get("heading_path"),
             content=hit.document.page_content,
@@ -136,10 +147,12 @@ def _answer_response(outcome: AnswerOutcome, debug: bool) -> AnswerResponse:
     )
 
 
-def create_app(runtime: RAGRuntime | None = None, *, api_key: str | None = None) -> FastAPI:
-    """`runtime`/`api_key` để test inject; bỏ trống thì đọc từ .env như khi chạy thật."""
+def create_app(runtime: RAGRuntime | None = None, *, api_key: str | None = None,
+               knowledge: KnowledgeBase | None = None) -> FastAPI:
+    """`runtime`/`api_key`/`knowledge` để test inject; bỏ trống thì đọc từ .env như khi chạy thật."""
 
-    expected_key = get_api_settings().api_key if api_key is None else api_key
+    settings = get_api_settings()
+    expected_key = settings.api_key if api_key is None else api_key
 
     @asynccontextmanager
     async def lifespan(app: FastAPI):
@@ -159,7 +172,12 @@ def create_app(runtime: RAGRuntime | None = None, *, api_key: str | None = None)
         lifespan=lifespan,
     )
     app.state.runtime = runtime or RAGRuntime()
+    app.state.knowledge = knowledge or KnowledgeBase(app.state.runtime)
     app.state.api_key = expected_key
+    if settings.cors_origins:
+        # Web gọi thẳng RAG từ origin khác (khi deploy). Không dùng cookie nên "*" là đủ.
+        app.add_middleware(CORSMiddleware, allow_origins=list(settings.cors_origins),
+                           allow_methods=["GET", "POST"], allow_headers=["*"])
 
     @app.exception_handler(ServiceError)
     async def service_error(_: Request, exc: ServiceError) -> JSONResponse:
@@ -274,6 +292,47 @@ def create_app(runtime: RAGRuntime | None = None, *, api_key: str | None = None)
             extra_queries=request.extra_queries,
         )
         return _answer_response(outcome, request.debug)
+
+    # --- Kho tri thức (chỉ đọc) -------------------------------------------------
+
+    index_param = QueryParam(None, description="`structure` hoặc `recursive`; bỏ trống = index mặc định.")
+
+    @router.get("/admin/overview", tags=["Kho tri thức"], response_model=KbOverview,
+                summary="Số tài liệu, số chunk, token và trạng thái từng index")
+    def kb_overview() -> KbOverview:
+        """Index chưa build hoặc lỗi vẫn có trong danh sách, kèm `detail`."""
+        return KbOverview.model_validate(app.state.knowledge.overview())
+
+    @router.get("/admin/documents", tags=["Kho tri thức"], response_model=list[KbDocument],
+                responses=INDEX_RESPONSES, summary="Tài liệu trong data/ và số chunk trong index")
+    def kb_documents(index: IndexName | None = index_param) -> list[KbDocument]:
+        return [KbDocument.model_validate(row) for row in app.state.knowledge.document_rows(index)]
+
+    @router.get("/admin/documents/{source:path}", tags=["Kho tri thức"], response_model=KbDocumentDetail,
+                responses={**INDEX_RESPONSES, 404: {"model": ErrorResponse}},
+                summary="Một tài liệu và danh sách chunk theo thứ tự")
+    def kb_document(source: str, index: IndexName | None = index_param,
+                    include_text: bool = QueryParam(False, description="Kèm văn bản gốc.")) -> KbDocumentDetail:
+        detail = app.state.knowledge.document_detail(source, index, include_text)
+        if detail is None:
+            raise HTTPException(404, f"Không có tài liệu {source}.")
+        return KbDocumentDetail.model_validate(detail)
+
+    @router.get("/admin/chunks", tags=["Kho tri thức"], response_model=list[KbChunkSummary],
+                responses=INDEX_RESPONSES, summary="Tìm chunk theo nội dung (không phân biệt dấu)")
+    def kb_search(q: str = QueryParam(..., min_length=1, max_length=200),
+                  index: IndexName | None = index_param,
+                  limit: int = QueryParam(50, ge=1, le=200)) -> list[KbChunkSummary]:
+        return [KbChunkSummary.model_validate(row) for row in app.state.knowledge.search(q, index, limit)]
+
+    @router.get("/admin/chunks/{chunk_id}", tags=["Kho tri thức"], response_model=KbChunk,
+                responses={**INDEX_RESPONSES, 404: {"model": ErrorResponse}},
+                summary="Nội dung đầy đủ một chunk, kèm chunk trước/sau")
+    def kb_chunk(chunk_id: str, index: IndexName | None = index_param) -> KbChunk:
+        detail = app.state.knowledge.chunk_detail(chunk_id, index)
+        if detail is None:
+            raise HTTPException(404, "Không có chunk này trong index (có thể index vừa được build lại).")
+        return KbChunk.model_validate(detail)
 
     app.include_router(router)
     return app

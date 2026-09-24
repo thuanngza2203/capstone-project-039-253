@@ -254,6 +254,10 @@ class RAGRuntime:
         return self.directory_for(self.default_index)
 
     @property
+    def collection_name(self) -> str:
+        return self._collection_name
+
+    @property
     def load_error(self) -> str | None:
         return self.load_errors.get(self.default_index)
 

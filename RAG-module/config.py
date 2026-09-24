@@ -432,6 +432,8 @@ class ApiSettings:
     host: str = "127.0.0.1"
     port: int = 8010
     api_key: str = ""
+    # Origin được gọi API từ trình duyệt; ("*",) = mọi origin, () = không bật CORS.
+    cors_origins: tuple[str, ...] = ("*",)
 
     @property
     def loopback_only(self) -> bool:
@@ -446,4 +448,7 @@ def get_api_settings() -> ApiSettings:
     key = os.getenv("RAG_API_KEY", "").strip()
     if any(character.isspace() for character in key):
         raise ValueError("RAG_API_KEY không được chứa khoảng trắng.")
-    return ApiSettings(host=host, port=port, api_key=key)
+    raw_origins = os.getenv("RAG_API_CORS_ORIGINS")
+    origins = ApiSettings.cors_origins if raw_origins is None else tuple(
+        origin.strip() for origin in raw_origins.split(",") if origin.strip())
+    return ApiSettings(host=host, port=port, api_key=key, cors_origins=origins)
