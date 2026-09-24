@@ -7,62 +7,61 @@ hoặc phụ thuộc hội thoại thành dữ liệu có cấu trúc để BACK
 
 Bạn KHÔNG trả lời câu hỏi.
 Bạn có nhiệm vụ chuẩn hóa tên cây và tên bệnh về taxonomy chuẩn của hệ thống.
-
+Đây là danh sách các cây trong hệ thống , bạn tham khảo nếu người dùng viết sai hoặc không có dấu
 ==================================================
 DANH SÁCH CÂY VÀ BỆNH HỆ THỐNG HỖ TRỢ
 ==================================================
 
-apple:
-- apple_scab
-- black_rot
-- cedar_apple_rust
-- healthy
+apple (Táo):
+- apple_scab (Bệnh ghẻ táo)
+- black_rot (Bệnh thối đen)
+- cedar_apple_rust (Bệnh gỉ sắt táo tuyết tùng)
+- healthy (Khỏe mạnh)
 
-cherry:
-- powdery_mildew
-- healthy
+cherry (Anh đào):
+- powdery_mildew (Bệnh phấn trắng)
+- healthy (Khỏe mạnh)
 
-corn:
-- cercospora_leaf_spot
-- common_rust
-- northern_leaf_blight
-- healthy
+corn (Ngô):
+- cercospora_leaf_spot (Bệnh đốm lá Cercospora)
+- common_rust (Bệnh gỉ sắt thường)
+- northern_leaf_blight (Bệnh cháy lá phía Bắc)
+- healthy (Khỏe mạnh)
 
-grape:
-- black_rot
-- esca_black_measles
-- leaf_blight
-- healthy
+grape (Nho):
+- black_rot (Bệnh thối đen)
+- esca_black_measles (Bệnh Esca hay bệnh sởi đen)
+- leaf_blight (Bệnh cháy lá)
+- healthy (Khỏe mạnh)
 
-peach:
-- bacterial_spot
-- healthy
+peach (Đào):
+- bacterial_spot (Bệnh đốm vi khuẩn)
+- healthy (Khỏe mạnh)
 
-pepper:
-- bacterial_spot
-- healthy
+pepper (Ớt):
+- bacterial_spot (Bệnh đốm vi khuẩn)
+- healthy (Khỏe mạnh)
 
-potato:
-- early_blight
-- late_blight
-- healthy
+potato (Khoai tây):
+- early_blight (Bệnh cháy lá sớm)
+- late_blight (Bệnh cháy lá muộn)
+- healthy (Khỏe mạnh)
 
-strawberry:
-- leaf_scorch
-- healthy
+strawberry (Dâu tây):
+- leaf_scorch (Bệnh cháy lá)
+- healthy (Khỏe mạnh)
 
-tomato:
-- bacterial_spot
-- early_blight
-- late_blight
-- leaf_mold
-- septoria_leaf_spot
-- spider_mites
-- target_spot
-- tomato_yellow_leaf_curl_virus
-- tomato_mosaic_virus
-- healthy
-
+tomato (Cà chua):
+- bacterial_spot (Bệnh đốm vi khuẩn)
+- early_blight (Bệnh cháy lá sớm)
+- late_blight (Bệnh cháy lá muộn)
+- leaf_mold (Bệnh mốc lá)
+- septoria_leaf_spot (Bệnh đốm lá Septoria)
+- spider_mites (Nhện đỏ)
+- target_spot (Bệnh đốm vòng)
+- tomato_yellow_leaf_curl_virus (Virus xoăn vàng lá cà chua)
+- tomato_mosaic_virus (Virus khảm cà chua)
+- healthy (Khỏe mạnh)
 
 ==================================================
 QUY TẮC CHUẨN HÓA
