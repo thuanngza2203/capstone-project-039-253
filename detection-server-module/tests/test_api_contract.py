@@ -116,3 +116,20 @@ def test_chat_route_returns_400_with_message_for_invalid_image(client):
         app.dependency_overrides.clear()
     assert response.status_code == 400
     assert response.json() == {"detail": NOT_A_LEAF}
+
+
+def test_reviews_filter_defaults_to_rated_and_can_include_all():
+    from datetime import datetime, timezone
+
+    from app.routes.admin import review_filter
+
+    assert review_filter() == {"user_feedback.rating": {"$in": ["like", "unlike"]}}
+    since = datetime(2026, 9, 1, tzinfo=timezone.utc)
+    assert review_filter(include_all=True, since=since) == {"created_at": {"$gte": since}}
+
+
+def test_reviews_accepts_all_from_to_params():
+    from app.api import app
+
+    params = {p["name"] for p in app.openapi()["paths"]["/admin/reviews"]["get"]["parameters"]}
+    assert {"all", "from", "to", "limit"} <= params

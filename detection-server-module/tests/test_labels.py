@@ -30,17 +30,20 @@ PROMPT = Path(__file__).resolve().parents[1] / "app" / "prompts" / "query_normal
 
 
 def normalizer_taxonomy() -> dict[str, set[str]]:
+    """Đọc khối taxonomy của prompt: `apple (Táo):` rồi `- apple_scab (Bệnh ghẻ táo)`; tên trong ngoặc tùy chọn."""
     text = PROMPT.read_text(encoding="utf-8")
     section = text.split("DANH SÁCH CÂY VÀ BỆNH HỆ THỐNG HỖ TRỢ", 1)[1].split("QUY TẮC CHUẨN HÓA", 1)[0]
     taxonomy: dict[str, set[str]] = {}
     plant = None
     for line in section.splitlines():
         line = line.strip()
-        if re.fullmatch(r"[a-z_]+:", line):
-            plant = line[:-1]
+        if match := re.fullmatch(r"([a-z_]+)(?: \(.*\))?:", line):
+            plant = match.group(1)
             taxonomy[plant] = set()
-        elif line.startswith("- ") and plant:
-            taxonomy[plant].add(line[2:])
+        elif match := re.fullmatch(r"- ([a-z_]+)(?: \(.*\))?", line):
+            if plant:
+                taxonomy[plant].add(match.group(1))
+    assert taxonomy, "Không đọc được taxonomy trong prompt normalizer"
     return taxonomy
 
 

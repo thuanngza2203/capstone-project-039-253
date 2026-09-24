@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Cài một lệnh: pip install -r requirements.txt
 # Đã chạy thử: Python 3.10.12, Linux, torch 2.14.0 CPU (xem CHANGELOG.md).
 #

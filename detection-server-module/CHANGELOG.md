@@ -21,7 +21,9 @@
   `debug.normalizer_failed=true`.
 - Prompt normalizer: quy tắc `normalized_query` nhắm vào việc tìm tài liệu (đủ dấu, bỏ teencode,
   giữ mọi chi tiết, không chèn tên bệnh đoán), thêm `disease_named` và ví dụ câu không dấu/teencode.
-- Test: 84 pass, 1 skip như cũ (thêm `tests/test_normalizer.py`; sửa test đang kiểm tra câu mẫu).
+- `GET /admin/reviews?all=true` (kèm `from`, `to`, `limit` tùy chọn) trả mọi câu trả lời của bot cho dashboard
+  của web mới; không có `all` thì như cũ (chỉ lượt đã thích/không thích).
+- Test: 86 pass, 1 skip như cũ (thêm `tests/test_normalizer.py`; sửa test đang kiểm tra câu mẫu).
 - Còn mở (xem báo cáo): Groq khôi phục dấu sai ở tên cây/bệnh ("phan trang" → "phân trang"), và router
   không cho 21/58 câu hợp lệ đi tiếp. Nên thêm tên tiếng Việt có dấu của cây/bệnh vào prompt và nới router.
 

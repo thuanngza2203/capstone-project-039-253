@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 
 from bson import ObjectId
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, Field
 
 from app.config import get_settings
@@ -39,13 +39,40 @@ async def status():
     }
 
 
+def review_filter(
+    include_all: bool = False,
+    since: datetime | None = None,
+    until: datetime | None = None,
+) -> dict:
+    """Điều kiện MongoDB cho /admin/reviews; tách riêng để test không cần MongoDB."""
+    query: dict = {}
+    if not include_all:
+        query["user_feedback.rating"] = {"$in": ["like", "unlike"]}
+    created: dict = {}
+    if since is not None:
+        created["$gte"] = since
+    if until is not None:
+        created["$lte"] = until
+    if created:
+        query["created_at"] = created
+    return query
+
+
 @router.get("/reviews", response_model=list[ReviewItem])
-async def reviews():
-    """Only show messages that the user actually liked/disliked."""
+async def reviews(
+    include_all: bool = Query(False, alias="all", description=(
+        "false (mặc định): chỉ lượt người dùng đã thích/không thích, như trang Feedback. "
+        "true: mọi câu trả lời của bot, dùng cho dashboard."
+    )),
+    since: datetime | None = Query(None, alias="from", description="Chỉ bản ghi tạo từ thời điểm này (ISO 8601)."),
+    until: datetime | None = Query(None, alias="to", description="Chỉ bản ghi tạo đến thời điểm này (ISO 8601)."),
+    limit: int = Query(5000, ge=1, le=20000, description="Số bản ghi tối đa, mới nhất trước."),
+):
+    """Bản ghi chat_feedback, mới nhất trước. Mỗi câu trả lời của bot có đúng một bản ghi."""
     items = []
     cursor = feedback_collection.find(
-        {"user_feedback.rating": {"$in": ["like", "unlike"]}}
-    ).sort("created_at", -1)
+        review_filter(include_all, since, until)
+    ).sort("created_at", -1).limit(limit)
 
     async for item in cursor:
         item["_id"] = str(item["_id"])
