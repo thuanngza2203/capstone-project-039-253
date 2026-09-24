@@ -29,15 +29,24 @@ def read_manifest(directory: Path, collection: str) -> dict | None:
     return manifest
 
 
+def _file_hashes(documents) -> list[dict]:
+    return [{"source": doc.metadata["source"],
+             "sha256": hashlib.sha256(doc.page_content.encode("utf-8")).hexdigest()}
+            for doc in documents]
+
+
+def corpus_fingerprint(documents) -> str:
+    """Cùng công thức với `corpus_sha256` trong manifest: so để biết index có cũ không."""
+    return hashlib.sha256(json.dumps(_file_hashes(documents), sort_keys=True).encode()).hexdigest()
+
+
 def describe_manifest(documents, settings: ChunkingSettings, *, collection: str,
                       embedding_model: str, chunk_size: int, chunk_overlap: int) -> dict:
-    files = [{"source": doc.metadata["source"],
-              "sha256": hashlib.sha256(doc.page_content.encode("utf-8")).hexdigest()}
-             for doc in documents]
+    files = _file_hashes(documents)
     return {
         "schema_version": 1, "status": "building", "collection": collection,
         "created_at": datetime.now(timezone.utc).isoformat(), "files": files,
-        "corpus_sha256": hashlib.sha256(json.dumps(files, sort_keys=True).encode()).hexdigest(),
+        "corpus_sha256": corpus_fingerprint(documents),
         "chunking": asdict(settings), "embedding_model": embedding_model,
         "chunking_version": "structure-v1" if settings.strategy == "structure" else "recursive-v1",
         "legacy_chunk_size": chunk_size, "legacy_chunk_overlap": chunk_overlap,

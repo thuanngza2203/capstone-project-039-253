@@ -1,0 +1,8 @@
+{"id": "s01", "question": "Lá táo có đốm màu xanh ô liu rồi chuyển đen là bệnh gì?", "topic": "triệu chứng"}
+{"id": "s02", "question": "Bệnh ghẻ táo xử lý như thế nào?", "plant_type": "apple", "disease": "apple_scab", "topic": "xử lý, kèm nhãn từ detection"}
+{"id": "s03", "question": "Vì sao cà chua bị mốc sương lan nhanh khi trời mưa nhiều?", "topic": "nguyên nhân"}
+{"id": "s04", "question": "Làm sao phòng bệnh gỉ sắt trên ngô?", "plant_type": "corn", "disease": "common_rust", "topic": "phòng ngừa"}
+{"id": "s05", "question": "cay khoai tay bi chay som thi phun thuoc gi", "topic": "câu gõ không dấu"}
+{"id": "s06", "question": "Lá dâu tây bị cháy mép, có cần nhổ bỏ cả cây không?", "topic": "câu kiểu nông dân hỏi"}
+{"id": "s07", "question": "Bệnh thối đen trên nho điều trị thế nào?", "topic": "ngoài kho tài liệu: xem model có biết từ chối"}
+{"id": "s08", "question": "Ớt chuông bị đốm vi khuẩn có lây sang cà chua trồng gần đó không?", "topic": "câu liên quan hai cây"}

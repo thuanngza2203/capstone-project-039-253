@@ -172,6 +172,55 @@ def test_remote_vast_urls_are_accepted(url: str, monkeypatch: pytest.MonkeyPatch
     assert config.create_chat_model()["base_url"] == url.rstrip("/")
 
 
+def _vllm_client(monkeypatch: pytest.MonkeyPatch, **env: str) -> dict:
+    monkeypatch.setenv("LLM_PROVIDER", "vllm")
+    monkeypatch.setenv("VLLM_THINK", "")
+    for name, value in env.items():
+        monkeypatch.setenv(name, value)
+    monkeypatch.setattr(langchain_openai, "ChatOpenAI", lambda **kwargs: kwargs)
+    return config.create_chat_model()
+
+
+@pytest.mark.parametrize(("env", "expected"), [
+    # Không điền gì: giữ nguyên mặc định cũ.
+    ({}, "http://127.0.0.1:8000/v1"),
+    # SSH tunnel: host là đầu tunnel trên máy mình.
+    ({"VLLM_HOST": "127.0.0.1", "VLLM_PORT": "8001"}, "http://127.0.0.1:8001/v1"),
+    # IP public Vast với cổng được map.
+    ({"VLLM_HOST": "203.0.113.10", "VLLM_PORT": "41234"}, "http://203.0.113.10:41234/v1"),
+    # HTTPS qua nginx, tên miền dùng cổng mặc định 443 thì không cần cổng.
+    ({"VLLM_SCHEME": "HTTPS", "VLLM_HOST": "llm.example.com"}, "https://llm.example.com/v1"),
+    # Cách cũ vẫn chạy: URL đầy đủ, không điền host/port.
+    ({"VLLM_BASE_URL": "https://vast.test:31443/v1/"}, "https://vast.test:31443/v1"),
+    # VLLM_SCHEME thường luôn có trong .env; không coi là xung đột với URL đầy đủ.
+    ({"VLLM_SCHEME": "http", "VLLM_BASE_URL": "http://10.0.0.5:8000/v1"}, "http://10.0.0.5:8000/v1"),
+])
+def test_vllm_address_from_host_port_or_full_url(
+    env: dict, expected: str, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    assert _vllm_client(monkeypatch, **env)["base_url"] == expected
+
+
+@pytest.mark.parametrize(("env", "message"), [
+    ({"VLLM_BASE_URL": "http://a:8000/v1", "VLLM_HOST": "b"}, "Chỉ dùng một cách"),
+    ({"VLLM_BASE_URL": "http://a:8000/v1", "VLLM_PORT": "8001"}, "Chỉ dùng một cách"),
+    ({"VLLM_PORT": "8001"}, "phải điền cả VLLM_HOST"),
+    ({"VLLM_HOST": "http://203.0.113.10"}, "không kèm http://"),
+    ({"VLLM_HOST": "203.0.113.10:8001"}, "không kèm cổng"),
+    ({"VLLM_HOST": "203.0.113.10/v1"}, "chỉ là IP hoặc tên miền"),
+    ({"VLLM_HOST": "user@203.0.113.10"}, "chỉ là IP hoặc tên miền"),
+    ({"VLLM_HOST": "203.0.113.10", "VLLM_PORT": "abc"}, "VLLM_PORT"),
+    ({"VLLM_HOST": "203.0.113.10", "VLLM_PORT": "0"}, "VLLM_PORT"),
+    ({"VLLM_HOST": "203.0.113.10", "VLLM_PORT": "70000"}, "VLLM_PORT"),
+    ({"VLLM_HOST": "203.0.113.10", "VLLM_SCHEME": "ftp"}, "VLLM_SCHEME"),
+])
+def test_invalid_vllm_address_fails_before_network(
+    env: dict, message: str, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    with pytest.raises(RuntimeError, match=message):
+        _vllm_client(monkeypatch, **env)
+
+
 def test_missing_vllm_dependency_reports_install_command(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("LLM_PROVIDER", "vllm")
     monkeypatch.setenv("VLLM_THINK", "")

@@ -36,6 +36,10 @@ def isolated_retrieval_settings(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("CHUNK_OVERLAP_TOKENS", "40")
     monkeypatch.setenv("CHUNK_TOKENIZER_MODEL", "")
     monkeypatch.delenv("CHROMA_DIR", raising=False)
+    # Địa chỉ vLLM trong .env cá nhân (host/port Vast) không được lọt vào test:
+    # nó sẽ xung đột với các test tự đặt VLLM_BASE_URL.
+    for name in ("VLLM_BASE_URL", "VLLM_SCHEME", "VLLM_HOST", "VLLM_PORT"):
+        monkeypatch.delenv(name, raising=False)
 
 
 class KeywordEmbeddings(Embeddings):

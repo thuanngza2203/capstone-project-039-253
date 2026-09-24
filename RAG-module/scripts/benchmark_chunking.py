@@ -34,6 +34,14 @@ class EvidenceSpan:
     positions: frozenset[int]  # Chỉ ký tự có nội dung; bỏ whitespace giữa hai chunk.
 
 
+# Tên file đã sửa chính tả sau 17/09. Nhãn dùng tên mới; snapshot baseline vẫn giữ tên cũ.
+OLD_SOURCE_NAMES = {
+    "potato/potato_early_blight.txt": "potato/potato_earrly_blight.txt",
+    "tomato/tomato_mosaic_virus.txt": "tomato/toamto_mosaic_virus.txt",
+    "tomato/tomato_yellow_leaf_curl_virus.txt": "tomato/tomato_yello_leaf_curl_virus.txt",
+}
+
+
 def resolve_evidence(rows, documents):
     """Map quote nguyên văn sang vị trí trong từng corpus (marker làm offset thay đổi)."""
     sources = {d.metadata["source"]: d.page_content for d in documents}
@@ -43,14 +51,17 @@ def resolve_evidence(rows, documents):
         for field in ("expected_evidence", "required_context"):
             spans = []
             for label in row[field]:
-                text = sources[label["source"]]
+                source = label["source"]
+                if source not in sources:
+                    source = OLD_SOURCE_NAMES.get(source, source)
+                text = sources[source]
                 if text.count(label["quote"]) != 1:
-                    raise ValueError(f"{row['id']}: quote phải khớp duy nhất trong {label['source']}")
+                    raise ValueError(f"{row['id']}: quote phải khớp duy nhất trong {source}")
                 start = text.index(label["quote"])
                 positions = frozenset(start + i for i, char in enumerate(label["quote"]) if not char.isspace())
                 if not positions:
                     raise ValueError(f"{row['id']}: evidence không có nội dung.")
-                spans.append(EvidenceSpan(label["source"], start, start + len(label["quote"]), positions))
+                spans.append(EvidenceSpan(source, start, start + len(label["quote"]), positions))
             resolved[row["id"]][field] = spans
     return resolved
 

@@ -29,8 +29,9 @@ from index_manifest import (
     describe_manifest, manifest_path, validate_query_manifest, write_manifest,
 )
 from conversation import ChatTurn, ConversationMemory, rewrite_question
-from retrieval import SearchResult, load_reranker, search_store
+from retrieval import MetadataScope, SearchResult, load_reranker, search_store
 from langchain_chroma import Chroma
+from langchain_core.callbacks import BaseCallbackHandler
 from langchain_core.documents import Document
 from langchain_core.embeddings import Embeddings
 from langchain_core.language_models.chat_models import BaseChatModel
@@ -65,12 +66,22 @@ RAG_PROMPT = ChatPromptTemplate.from_messages(
         (
             "human",
             (
-                "NGỮ CẢNH:\n{context}\n\nCÂU HỎI:\n{question}\n\n"
+                "{subject_block}NGỮ CẢNH:\n{context}\n\nCÂU HỎI:\n{question}\n\n"
                 "CÂU HỎI ĐÃ LÀM RÕ:\n{retrieval_query}\n\n"
                 "Hãy trả lời theo các quy tắc trên."
             ),
         ),
     ]
+)
+
+# Đối tượng đi trong lượt human chứ không phải SystemMessage thứ hai: nhiều chat
+# template (Gemma, một số bản Qwen) chỉ nhận system message ở đầu hội thoại.
+SUBJECT_HEADER = (
+    "ĐỐI TƯỢNG ĐANG HỎI (hệ thống cung cấp để biết người dùng hỏi về cây/bệnh nào; "
+    "không phải bằng chứng, không trích dẫn):"
+)
+NO_CONTEXT_ANSWER = (
+    "Kho tài liệu hiện tại chưa có đủ thông tin liên quan để trả lời câu hỏi này."
 )
 
 _ALIAS_SEPARATOR = " | "
@@ -496,8 +507,12 @@ def retrieve_with_debug(
     vector_store: Any | None = None,
     mode: str | None = None,
     rerank: bool | None = None,
+    scope: MetadataScope | None = None,
 ) -> SearchResult:
-    """Tìm chunk và giữ trace thứ hạng; không suy metadata filter từ query."""
+    """Tìm chunk và giữ trace thứ hạng; không suy metadata filter từ query.
+
+    `scope` chỉ đến từ nhãn có cấu trúc (xem taxonomy.py), không từ câu hỏi.
+    """
 
     question = question.strip()
     if not question:
@@ -514,7 +529,7 @@ def retrieve_with_debug(
             collection_name,
             load_embeddings=settings.mode != "bm25",
         )
-    return search_store(question, store, k=k, settings=settings)
+    return search_store(question, store, k=k, settings=settings, scope=scope)
 
 
 def retrieve(
@@ -527,6 +542,7 @@ def retrieve(
     vector_store: Any | None = None,
     mode: str | None = None,
     rerank: bool | None = None,
+    scope: MetadataScope | None = None,
 ) -> list[Document]:
     """API gọn cho caller chỉ cần các chunk; debug nằm ở retrieve_with_debug."""
     result = retrieve_with_debug(
@@ -537,6 +553,7 @@ def retrieve(
         vector_store=vector_store,
         mode=mode,
         rerank=rerank,
+        scope=scope,
     )
     return result.documents
 
@@ -624,20 +641,24 @@ def _answer_from_documents(
     llm: BaseChatModel | None = None,
     history: list[BaseMessage] | None = None,
     retrieval_query: str | None = None,
+    subject: str | None = None,
+    callbacks: list[BaseCallbackHandler] | None = None,
 ) -> tuple[str, list[str]]:
     """Dùng chung bước generation cho lệnh ask một lần và phiên hỏi liên tục."""
     if not documents:
-        return (
-            "Kho tài liệu hiện tại chưa có đủ thông tin liên quan để trả lời câu hỏi này.",
-            [],
-        )
+        return NO_CONTEXT_ANSWER, []
 
     context = format_context(documents)
     chain = RAG_PROMPT | (llm or create_chat_model()) | StrOutputParser()
     answer = chain.invoke({
         "context": context, "question": question, "history": history or [],
         "retrieval_query": retrieval_query or question,
-    }).strip()
+        # Rỗng thì prompt giống hệt trước khi có tham số này (CLI không đổi).
+        "subject_block": (
+            f"{SUBJECT_HEADER}\n{subject.strip()}\n\n"
+            if subject and subject.strip() else ""
+        ),
+    }, config={"callbacks": callbacks} if callbacks else None).strip()
     if not answer:
         raise RuntimeError("LLM trả về nội dung rỗng.")
     # Cảnh báo thay vì raise: câu trả lời vẫn tới người dùng, nhưng nhãn trỏ ra
@@ -650,6 +671,26 @@ def _answer_from_documents(
             stacklevel=2,
         )
     return answer, _unique_sources(documents)
+
+
+def generate_answer(
+    question: str,
+    documents: list[Document],
+    *,
+    llm: BaseChatModel | None = None,
+    history: list[BaseMessage] | None = None,
+    retrieval_query: str | None = None,
+    subject: str | None = None,
+    callbacks: list[BaseCallbackHandler] | None = None,
+) -> tuple[str, list[str]]:
+    """Bước sinh câu trả lời dùng chung cho CLI, RAGSession và API server.
+
+    `callbacks` để API đọc model/token/finish_reason mà LLM báo về.
+    """
+    return _answer_from_documents(
+        question, documents, llm=llm, history=history,
+        retrieval_query=retrieval_query, subject=subject, callbacks=callbacks,
+    )
 
 
 @dataclass

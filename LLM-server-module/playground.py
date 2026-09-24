@@ -45,7 +45,7 @@ def resolve_defaults(env: dict[str, str]) -> tuple[str, str, str]:
     """Ưu tiên biến phía client (VLLM_*) rồi mới tới biến phía server (LLM_*)."""
     base_url = client_base_url(env)
     model = env.get("VLLM_MODEL") or env.get("LLM_SERVED_MODEL_NAME", DEFAULT_SERVED_MODEL_NAME)
-    api_key = env.get("VLLM_API_KEY") or env.get("LLM_API_KEY", "")
+    api_key = env.get("VLLM_API_KEY") or env.get("LLM_API_KEY", "thuanlocalmodel")
     return base_url.strip().rstrip("/"), model.strip(), api_key.strip()
 
 

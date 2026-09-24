@@ -1,0 +1,1490 @@
+{
+  "generated_at": "2026-09-23T19:22:00+00:00",
+  "git": "0fdcebd+thay đổi chưa commit",
+  "queries_total": 60,
+  "queries_scored": 58,
+  "queries_sha256": "893ce4502b747d132ae32f6cc2c3c48a8c6c37b286346d627184deb4ba52a9fc",
+  "splits": {
+    "dev": 40,
+    "heldout": 18
+  },
+  "evidence_spans": 59,
+  "embedding": {
+    "model": "AITeamVN/Vietnamese_Embedding",
+    "device": "cuda"
+  },
+  "chunking": {
+    "recursive": {
+      "chunk_size_chars": 1000,
+      "overlap_chars": 150
+    },
+    "structure": {
+      "strategy": "structure",
+      "max_tokens": 400,
+      "overlap_tokens": 40,
+      "tokenizer_model": "AITeamVN/Vietnamese_Embedding"
+    }
+  },
+  "retrieval": {
+    "mode": "hybrid",
+    "candidate_k": 20,
+    "rrf_k": 60,
+    "reranker_enabled": false,
+    "reranker_model": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "reranker_device": "cpu"
+  },
+  "versions": {
+    "python": "3.11.0",
+    "langchain-core": "1.6.3",
+    "chromadb": "1.5.9",
+    "sentence-transformers": "5.6.1"
+  },
+  "configs": {
+    "A": {
+      "label": "Dữ liệu cũ + recursive",
+      "data_dir": "artifacts/chunking/baseline/data",
+      "strategy": "recursive",
+      "fingerprint": "20c4cd3eb68b4544fed9ff8c3fb1cebab23d659c6a2637c0ceaae3817272c5e7",
+      "index_dir": "D:\\HCMUT\\Capstone_Project\\RAG-module\\artifacts\\chunking\\compare-2026-09-24\\old-recursive",
+      "evidence_contained": 0.9661016949152542,
+      "evidence_chunks_overlapping": 1.2203389830508475,
+      "index": {
+        "config": "A",
+        "label": "Dữ liệu cũ + recursive",
+        "strategy": "recursive",
+        "documents": 22,
+        "corpus_chars": 293172,
+        "corpus_tokens": 83357,
+        "chunks": 362,
+        "chunks_per_document": 16.454545454545453,
+        "tokens_mean": 345.6353591160221,
+        "tokens_median": 360.0,
+        "tokens_std": 51.0173263657742,
+        "tokens_p05": 230.1,
+        "tokens_p95": 397.0,
+        "tokens_max": 429,
+        "body_tokens_median": 271.5,
+        "header_overhead": 0.2516304347826087,
+        "over_512_tokens": 0.0,
+        "redundancy": 1.1233129791139316,
+        "corpus_coverage": 1.0,
+        "content_coverage": 1.0,
+        "clean_start": 1.0,
+        "clean_end": 1.0,
+        "clean_both": 1.0,
+        "single_section": null,
+        "single_unit": null,
+        "sections_per_chunk": null,
+        "body_matches": 1.0,
+        "build_seconds": 12.682650899980217,
+        "index_size_mb": 7.591817855834961
+      }
+    },
+    "B": {
+      "label": "Dữ liệu mới + recursive",
+      "data_dir": "data",
+      "strategy": "recursive",
+      "fingerprint": "7139bf71038b742bd765b170cff032fb6ea7e44786fe40b2eb1b13b3f084e027",
+      "index_dir": "D:\\HCMUT\\Capstone_Project\\RAG-module\\artifacts\\chunking\\compare-2026-09-24\\new-recursive",
+      "evidence_contained": 0.9491525423728814,
+      "evidence_chunks_overlapping": 1.271186440677966,
+      "index": {
+        "config": "B",
+        "label": "Dữ liệu mới + recursive",
+        "strategy": "recursive",
+        "documents": 25,
+        "corpus_chars": 335439,
+        "corpus_tokens": 96027,
+        "chunks": 420,
+        "chunks_per_document": 16.8,
+        "tokens_mean": 334.70952380952383,
+        "tokens_median": 346.0,
+        "tokens_std": 59.992351931303986,
+        "tokens_p05": 184.95,
+        "tokens_p95": 403.0,
+        "tokens_max": 431,
+        "body_tokens_median": 270.0,
+        "header_overhead": 0.24274779837527916,
+        "over_512_tokens": 0.0,
+        "redundancy": 1.1085736303331355,
+        "corpus_coverage": 1.0,
+        "content_coverage": 1.0,
+        "clean_start": 1.0,
+        "clean_end": 1.0,
+        "clean_both": 1.0,
+        "single_section": 0.4166666666666667,
+        "single_unit": 0.17142857142857143,
+        "sections_per_chunk": 1.8142857142857143,
+        "body_matches": 1.0,
+        "build_seconds": 14.089296200021636,
+        "index_size_mb": 8.775832176208496
+      }
+    },
+    "C": {
+      "label": "Dữ liệu mới + structure",
+      "data_dir": "data",
+      "strategy": "structure",
+      "fingerprint": "7139bf71038b742bd765b170cff032fb6ea7e44786fe40b2eb1b13b3f084e027",
+      "index_dir": "D:\\HCMUT\\Capstone_Project\\RAG-module\\artifacts\\chunking\\compare-2026-09-24\\new-structure",
+      "evidence_contained": 1.0,
+      "evidence_chunks_overlapping": 1.0,
+      "index": {
+        "config": "C",
+        "label": "Dữ liệu mới + structure",
+        "strategy": "structure",
+        "documents": 25,
+        "corpus_chars": 335439,
+        "corpus_tokens": 96027,
+        "chunks": 743,
+        "chunks_per_document": 29.72,
+        "tokens_mean": 167.835800807537,
+        "tokens_median": 150,
+        "tokens_std": 66.56930498118247,
+        "tokens_p05": 94.0,
+        "tokens_p95": 317.79999999999995,
+        "tokens_max": 399,
+        "body_tokens_median": 97,
+        "header_overhead": 0.30817468845728213,
+        "over_512_tokens": 0.0,
+        "redundancy": 0.8984139877326168,
+        "corpus_coverage": 0.9176610978520287,
+        "content_coverage": 1.0,
+        "clean_start": 0.9744279946164199,
+        "clean_end": 1.0,
+        "clean_both": 0.9744279946164199,
+        "single_section": 1.0,
+        "single_unit": 1.0,
+        "sections_per_chunk": 1.0,
+        "body_matches": 1.0,
+        "build_seconds": 15.127897300000768,
+        "index_size_mb": 11.135233879089355
+      }
+    }
+  },
+  "retrieval_results": {
+    "A/hybrid": {
+      "config": "A",
+      "mode": "hybrid",
+      "queries": 58,
+      "hit_at_1": 0.5862068965517241,
+      "hit_at_1_ci": [
+        0.46551724137931033,
+        0.7068965517241379
+      ],
+      "recall_at_4": 0.8448275862068966,
+      "recall_at_4_ci": [
+        0.7413793103448276,
+        0.9310344827586207
+      ],
+      "coverage_at_4": 0.8634941744144992,
+      "coverage_at_4_ci": [
+        0.7772413793103448,
+        0.9403907261386372
+      ],
+      "rr_at_10": 0.7168308702791463,
+      "rr_at_10_ci": [
+        0.6212643678160921,
+        0.8057922824302133
+      ],
+      "ndcg_at_4": 0.7565843170677021,
+      "ndcg_at_4_ci": [
+        0.6654090505907914,
+        0.8398291652728646
+      ],
+      "ndcg_at_10": 0.8023406352904343,
+      "ndcg_at_10_ci": [
+        0.733810646861302,
+        0.8672757505057211
+      ],
+      "precision_at_4": 0.2672413793103448,
+      "precision_at_4_ci": [
+        0.23275862068965517,
+        0.3017241379310345
+      ],
+      "evidence_density_at_4": 0.049147118213763746,
+      "evidence_density_at_4_ci": [
+        0.041234723538953306,
+        0.057367171729571294
+      ],
+      "doc_hit_at_1": 0.9827586206896551,
+      "doc_hit_at_1_ci": [
+        0.9482758620689655,
+        1.0
+      ],
+      "doc_recall_at_4": 1.0,
+      "doc_recall_at_4_ci": [
+        1.0,
+        1.0
+      ],
+      "doc_precision_at_4": 0.875,
+      "doc_precision_at_4_ci": [
+        0.8232758620689655,
+        0.9224137931034483
+      ],
+      "recall_budget_1024": 0.7672413793103449,
+      "recall_budget_1024_ci": [
+        0.6551724137931034,
+        0.8706896551724138
+      ],
+      "recall_budget_1536": 0.8275862068965517,
+      "recall_budget_1536_ci": [
+        0.7241379310344828,
+        0.9137931034482759
+      ],
+      "context_tokens_at_4": 1414.448275862069,
+      "context_tokens_at_4_ci": [
+        1389.9306034482759,
+        1436.4310344827586
+      ],
+      "wrong_section_at_4": 2.4310344827586206,
+      "wrong_section_at_4_ci": [
+        2.2241379310344827,
+        2.6379310344827585
+      ],
+      "context_tokens_at_4_median": 1417.0,
+      "context_tokens_at_4_p95": 1531.75,
+      "latency_ms_median": 26.252200012095273,
+      "latency_ms_p95": 33.339394952054136,
+      "required_context_recall_at_4": 1.0,
+      "required_context_queries": 4
+    },
+    "A/semantic": {
+      "config": "A",
+      "mode": "semantic",
+      "queries": 58,
+      "hit_at_1": 0.4827586206896552,
+      "hit_at_1_ci": [
+        0.3620689655172414,
+        0.603448275862069
+      ],
+      "recall_at_4": 0.7844827586206896,
+      "recall_at_4_ci": [
+        0.6724137931034483,
+        0.8793103448275862
+      ],
+      "coverage_at_4": 0.8143040899695422,
+      "coverage_at_4_ci": [
+        0.7166573375985937,
+        0.9055297111606532
+      ],
+      "rr_at_10": 0.6354406130268199,
+      "rr_at_10_ci": [
+        0.5344803639846742,
+        0.7315205938697317
+      ],
+      "ndcg_at_4": 0.6772938342890938,
+      "ndcg_at_4_ci": [
+        0.5825676191956648,
+        0.7677183482010376
+      ],
+      "ndcg_at_10": 0.7374120787943093,
+      "ndcg_at_10_ci": [
+        0.6646075213031724,
+        0.8092548214120359
+      ],
+      "precision_at_4": 0.23706896551724138,
+      "precision_at_4_ci": [
+        0.20689655172413793,
+        0.2672413793103448
+      ],
+      "evidence_density_at_4": 0.04583418742499389,
+      "evidence_density_at_4_ci": [
+        0.03811952462249328,
+        0.05388795476778661
+      ],
+      "doc_hit_at_1": 0.9137931034482759,
+      "doc_hit_at_1_ci": [
+        0.8448275862068966,
+        0.9827586206896551
+      ],
+      "doc_recall_at_4": 0.9655172413793104,
+      "doc_recall_at_4_ci": [
+        0.9137931034482759,
+        1.0
+      ],
+      "doc_precision_at_4": 0.7844827586206896,
+      "doc_precision_at_4_ci": [
+        0.7112068965517241,
+        0.8491379310344828
+      ],
+      "recall_budget_1024": 0.6896551724137931,
+      "recall_budget_1024_ci": [
+        0.5689655172413793,
+        0.8103448275862069
+      ],
+      "recall_budget_1536": 0.7844827586206896,
+      "recall_budget_1536_ci": [
+        0.6724137931034483,
+        0.8793103448275862
+      ],
+      "context_tokens_at_4": 1427.9827586206898,
+      "context_tokens_at_4_ci": [
+        1404.3275862068965,
+        1450.5702586206896
+      ],
+      "wrong_section_at_4": 2.189655172413793,
+      "wrong_section_at_4_ci": [
+        1.896551724137931,
+        2.4482758620689653
+      ],
+      "context_tokens_at_4_median": 1421.0,
+      "context_tokens_at_4_p95": 1548.35,
+      "latency_ms_median": 18.351150007219985,
+      "latency_ms_p95": 22.647279957891442,
+      "required_context_recall_at_4": 1.0,
+      "required_context_queries": 4
+    },
+    "A/bm25": {
+      "config": "A",
+      "mode": "bm25",
+      "queries": 58,
+      "hit_at_1": 0.5344827586206896,
+      "hit_at_1_ci": [
+        0.41379310344827586,
+        0.6551724137931034
+      ],
+      "recall_at_4": 0.7758620689655172,
+      "recall_at_4_ci": [
+        0.6724137931034483,
+        0.8793103448275862
+      ],
+      "coverage_at_4": 0.7945286571731198,
+      "coverage_at_4_ci": [
+        0.6896551724137931,
+        0.8900458985524303
+      ],
+      "rr_at_10": 0.6562465790914066,
+      "rr_at_10_ci": [
+        0.554255097153804,
+        0.7542302955665026
+      ],
+      "ndcg_at_4": 0.6821577793729378,
+      "ndcg_at_4_ci": [
+        0.5791744743239328,
+        0.779497765643311
+      ],
+      "ndcg_at_10": 0.7468360215730233,
+      "ndcg_at_10_ci": [
+        0.6709533291520191,
+        0.8217897465690907
+      ],
+      "precision_at_4": 0.23706896551724138,
+      "precision_at_4_ci": [
+        0.19827586206896552,
+        0.27155172413793105
+      ],
+      "evidence_density_at_4": 0.04475914466113605,
+      "evidence_density_at_4_ci": [
+        0.03670410837445134,
+        0.05294518993995337
+      ],
+      "doc_hit_at_1": 0.9310344827586207,
+      "doc_hit_at_1_ci": [
+        0.8620689655172413,
+        0.9827586206896551
+      ],
+      "doc_recall_at_4": 0.9827586206896551,
+      "doc_recall_at_4_ci": [
+        0.9482758620689655,
+        1.0
+      ],
+      "doc_precision_at_4": 0.8663793103448276,
+      "doc_precision_at_4_ci": [
+        0.8103448275862069,
+        0.9181034482758621
+      ],
+      "recall_budget_1024": 0.6551724137931034,
+      "recall_budget_1024_ci": [
+        0.5344827586206896,
+        0.7758620689655172
+      ],
+      "recall_budget_1536": 0.7758620689655172,
+      "recall_budget_1536_ci": [
+        0.6551724137931034,
+        0.8793103448275862
+      ],
+      "context_tokens_at_4": 1396.6896551724137,
+      "context_tokens_at_4_ci": [
+        1369.4987068965518,
+        1422.5866379310344
+      ],
+      "wrong_section_at_4": 2.5172413793103448,
+      "wrong_section_at_4_ci": [
+        2.2758620689655173,
+        2.7586206896551726
+      ],
+      "context_tokens_at_4_median": 1400.5,
+      "context_tokens_at_4_p95": 1531.3,
+      "latency_ms_median": 8.369299990590662,
+      "latency_ms_p95": 13.369095040252432,
+      "required_context_recall_at_4": 1.0,
+      "required_context_queries": 4
+    },
+    "B/hybrid": {
+      "config": "B",
+      "mode": "hybrid",
+      "queries": 58,
+      "hit_at_1": 0.5689655172413793,
+      "hit_at_1_ci": [
+        0.4482758620689655,
+        0.6896551724137931
+      ],
+      "recall_at_4": 0.9310344827586207,
+      "recall_at_4_ci": [
+        0.8620689655172413,
+        0.9827586206896551
+      ],
+      "coverage_at_4": 0.9528001265339808,
+      "coverage_at_4_ci": [
+        0.8965440312766814,
+        0.9951680210849989
+      ],
+      "rr_at_10": 0.7201354679802955,
+      "rr_at_10_ci": [
+        0.6307471264367815,
+        0.8060344827586207
+      ],
+      "ndcg_at_4": 0.8108247742870761,
+      "ndcg_at_4_ci": [
+        0.7411765011243587,
+        0.8734367489651923
+      ],
+      "ndcg_at_10": 0.8356741748236083,
+      "ndcg_at_10_ci": [
+        0.7825151820771037,
+        0.8881340097287537
+      ],
+      "precision_at_4": 0.28879310344827586,
+      "precision_at_4_ci": [
+        0.2629310344827586,
+        0.31896551724137934
+      ],
+      "evidence_density_at_4": 0.053813390343350156,
+      "evidence_density_at_4_ci": [
+        0.04697287667252166,
+        0.06117929030824585
+      ],
+      "doc_hit_at_1": 1.0,
+      "doc_hit_at_1_ci": [
+        1.0,
+        1.0
+      ],
+      "doc_recall_at_4": 1.0,
+      "doc_recall_at_4_ci": [
+        1.0,
+        1.0
+      ],
+      "doc_precision_at_4": 0.8879310344827587,
+      "doc_precision_at_4_ci": [
+        0.8448275862068966,
+        0.9267241379310345
+      ],
+      "recall_budget_1024": 0.8189655172413793,
+      "recall_budget_1024_ci": [
+        0.7155172413793104,
+        0.9051724137931034
+      ],
+      "recall_budget_1536": 0.9310344827586207,
+      "recall_budget_1536_ci": [
+        0.8620689655172413,
+        0.9827586206896551
+      ],
+      "context_tokens_at_4": 1374.396551724138,
+      "context_tokens_at_4_ci": [
+        1344.8099137931035,
+        1404.0862068965516
+      ],
+      "wrong_section_at_4": 2.396551724137931,
+      "wrong_section_at_4_ci": [
+        2.206896551724138,
+        2.586206896551724
+      ],
+      "context_tokens_at_4_median": 1382.0,
+      "context_tokens_at_4_p95": 1529.15,
+      "latency_ms_median": 29.374599980656058,
+      "latency_ms_p95": 32.40678499278147,
+      "required_context_recall_at_4": 1.0,
+      "required_context_queries": 4
+    },
+    "B/semantic": {
+      "config": "B",
+      "mode": "semantic",
+      "queries": 58,
+      "hit_at_1": 0.5689655172413793,
+      "hit_at_1_ci": [
+        0.4482758620689655,
+        0.6896551724137931
+      ],
+      "recall_at_4": 0.853448275862069,
+      "recall_at_4_ci": [
+        0.7586206896551724,
+        0.9310344827586207
+      ],
+      "coverage_at_4": 0.8984078244455884,
+      "coverage_at_4_ci": [
+        0.8265778152652022,
+        0.960510158512296
+      ],
+      "rr_at_10": 0.6966201423097975,
+      "rr_at_10_ci": [
+        0.6026813081554462,
+        0.7902339901477832
+      ],
+      "ndcg_at_4": 0.7641301081386638,
+      "ndcg_at_4_ci": [
+        0.6803573583112454,
+        0.8401540047168883
+      ],
+      "ndcg_at_10": 0.7967314321563753,
+      "ndcg_at_10_ci": [
+        0.7285173718514931,
+        0.8608283958901017
+      ],
+      "precision_at_4": 0.27155172413793105,
+      "precision_at_4_ci": [
+        0.24568965517241378,
+        0.2974137931034483
+      ],
+      "evidence_density_at_4": 0.05021885508830904,
+      "evidence_density_at_4_ci": [
+        0.04358591652565089,
+        0.05744261677986506
+      ],
+      "doc_hit_at_1": 0.9655172413793104,
+      "doc_hit_at_1_ci": [
+        0.9137931034482759,
+        1.0
+      ],
+      "doc_recall_at_4": 0.9655172413793104,
+      "doc_recall_at_4_ci": [
+        0.9137931034482759,
+        1.0
+      ],
+      "doc_precision_at_4": 0.8146551724137931,
+      "doc_precision_at_4_ci": [
+        0.75,
+        0.875
+      ],
+      "recall_budget_1024": 0.7155172413793104,
+      "recall_budget_1024_ci": [
+        0.5948275862068966,
+        0.8275862068965517
+      ],
+      "recall_budget_1536": 0.853448275862069,
+      "recall_budget_1536_ci": [
+        0.7586206896551724,
+        0.9310344827586207
+      ],
+      "context_tokens_at_4": 1381.7758620689656,
+      "context_tokens_at_4_ci": [
+        1352.7228448275862,
+        1411.0866379310344
+      ],
+      "wrong_section_at_4": 2.1724137931034484,
+      "wrong_section_at_4_ci": [
+        1.9310344827586208,
+        2.413793103448276
+      ],
+      "context_tokens_at_4_median": 1386.5,
+      "context_tokens_at_4_p95": 1524.6,
+      "latency_ms_median": 18.01159998285584,
+      "latency_ms_p95": 20.599955035140738,
+      "required_context_recall_at_4": 1.0,
+      "required_context_queries": 4
+    },
+    "B/bm25": {
+      "config": "B",
+      "mode": "bm25",
+      "queries": 58,
+      "hit_at_1": 0.5517241379310345,
+      "hit_at_1_ci": [
+        0.43103448275862066,
+        0.6724137931034483
+      ],
+      "recall_at_4": 0.8189655172413793,
+      "recall_at_4_ci": [
+        0.7155172413793104,
+        0.9137931034482759
+      ],
+      "coverage_at_4": 0.847137193669203,
+      "coverage_at_4_ci": [
+        0.7551831706806973,
+        0.9310344827586207
+      ],
+      "rr_at_10": 0.6686781609195402,
+      "rr_at_10_ci": [
+        0.5673850574712643,
+        0.7643714080459769
+      ],
+      "ndcg_at_4": 0.7243217265737665,
+      "ndcg_at_4_ci": [
+        0.6339658002794123,
+        0.8108218753337716
+      ],
+      "ndcg_at_10": 0.7778691812637336,
+      "ndcg_at_10_ci": [
+        0.7057374807206327,
+        0.8437691535475043
+      ],
+      "precision_at_4": 0.25862068965517243,
+      "precision_at_4_ci": [
+        0.22413793103448276,
+        0.29310344827586204
+      ],
+      "evidence_density_at_4": 0.049146681973137034,
+      "evidence_density_at_4_ci": [
+        0.041310405836424854,
+        0.05725631806760777
+      ],
+      "doc_hit_at_1": 0.9655172413793104,
+      "doc_hit_at_1_ci": [
+        0.9137931034482759,
+        1.0
+      ],
+      "doc_recall_at_4": 1.0,
+      "doc_recall_at_4_ci": [
+        1.0,
+        1.0
+      ],
+      "doc_precision_at_4": 0.8405172413793104,
+      "doc_precision_at_4_ci": [
+        0.7801724137931034,
+        0.896551724137931
+      ],
+      "recall_budget_1024": 0.6896551724137931,
+      "recall_budget_1024_ci": [
+        0.5689655172413793,
+        0.8103448275862069
+      ],
+      "recall_budget_1536": 0.8189655172413793,
+      "recall_budget_1536_ci": [
+        0.7155172413793104,
+        0.9051724137931034
+      ],
+      "context_tokens_at_4": 1359.0172413793102,
+      "context_tokens_at_4_ci": [
+        1329.8271551724138,
+        1388.344827586207
+      ],
+      "wrong_section_at_4": 2.3275862068965516,
+      "wrong_section_at_4_ci": [
+        2.0517241379310347,
+        2.603448275862069
+      ],
+      "context_tokens_at_4_median": 1354.0,
+      "context_tokens_at_4_p95": 1529.15,
+      "latency_ms_median": 8.477449999190867,
+      "latency_ms_p95": 10.02752501226496,
+      "required_context_recall_at_4": 1.0,
+      "required_context_queries": 4
+    },
+    "C/hybrid": {
+      "config": "C",
+      "mode": "hybrid",
+      "queries": 58,
+      "hit_at_1": 0.6724137931034483,
+      "hit_at_1_ci": [
+        0.5517241379310345,
+        0.7931034482758621
+      ],
+      "recall_at_4": 0.8706896551724138,
+      "recall_at_4_ci": [
+        0.7844827586206896,
+        0.9482758620689655
+      ],
+      "coverage_at_4": 0.8706896551724138,
+      "coverage_at_4_ci": [
+        0.7758620689655172,
+        0.9482758620689655
+      ],
+      "rr_at_10": 0.7632183908045976,
+      "rr_at_10_ci": [
+        0.6723994252873563,
+        0.8511494252873562
+      ],
+      "ndcg_at_4": 0.7796286843953761,
+      "ndcg_at_4_ci": [
+        0.6878067113916271,
+        0.8629268461167727
+      ],
+      "ndcg_at_10": 0.8057798155817839,
+      "ndcg_at_10_ci": [
+        0.7266307355550865,
+        0.8806793299772167
+      ],
+      "precision_at_4": 0.21982758620689655,
+      "precision_at_4_ci": [
+        0.19827586206896552,
+        0.23706896551724138
+      ],
+      "evidence_density_at_4": 0.09247662523176474,
+      "evidence_density_at_4_ci": [
+        0.07740964033243958,
+        0.10843394725553102
+      ],
+      "doc_hit_at_1": 0.9655172413793104,
+      "doc_hit_at_1_ci": [
+        0.9137931034482759,
+        1.0
+      ],
+      "doc_recall_at_4": 1.0,
+      "doc_recall_at_4_ci": [
+        1.0,
+        1.0
+      ],
+      "doc_precision_at_4": 0.8232758620689655,
+      "doc_precision_at_4_ci": [
+        0.7672413793103449,
+        0.875
+      ],
+      "recall_budget_1024": 0.8879310344827587,
+      "recall_budget_1024_ci": [
+        0.8017241379310345,
+        0.9655172413793104
+      ],
+      "recall_budget_1536": 0.9396551724137931,
+      "recall_budget_1536_ci": [
+        0.8706896551724138,
+        0.9913793103448276
+      ],
+      "context_tokens_at_4": 806.6724137931035,
+      "context_tokens_at_4_ci": [
+        756.9306034482759,
+        857.5862068965517
+      ],
+      "wrong_section_at_4": 2.413793103448276,
+      "wrong_section_at_4_ci": [
+        2.1724137931034484,
+        2.6551724137931036
+      ],
+      "context_tokens_at_4_median": 789.5,
+      "context_tokens_at_4_p95": 1116.2,
+      "latency_ms_median": 34.12644998752512,
+      "latency_ms_p95": 39.939569961279624,
+      "required_context_recall_at_4": 1.0,
+      "required_context_queries": 4
+    },
+    "C/semantic": {
+      "config": "C",
+      "mode": "semantic",
+      "queries": 58,
+      "hit_at_1": 0.5862068965517241,
+      "hit_at_1_ci": [
+        0.46551724137931033,
+        0.7068965517241379
+      ],
+      "recall_at_4": 0.7758620689655172,
+      "recall_at_4_ci": [
+        0.6724137931034483,
+        0.8793103448275862
+      ],
+      "coverage_at_4": 0.7758620689655172,
+      "coverage_at_4_ci": [
+        0.6724137931034483,
+        0.8793103448275862
+      ],
+      "rr_at_10": 0.6792624521072798,
+      "rr_at_10_ci": [
+        0.5744216954022989,
+        0.7772569444444444
+      ],
+      "ndcg_at_4": 0.6864784256638967,
+      "ndcg_at_4_ci": [
+        0.576254594819562,
+        0.7871621210695554
+      ],
+      "ndcg_at_10": 0.7358735048589296,
+      "ndcg_at_10_ci": [
+        0.64566083628761,
+        0.8198129710979778
+      ],
+      "precision_at_4": 0.1939655172413793,
+      "precision_at_4_ci": [
+        0.16379310344827586,
+        0.21982758620689655
+      ],
+      "evidence_density_at_4": 0.07312853960290684,
+      "evidence_density_at_4_ci": [
+        0.05856039910221186,
+        0.0884158433321958
+      ],
+      "doc_hit_at_1": 0.9655172413793104,
+      "doc_hit_at_1_ci": [
+        0.9137931034482759,
+        1.0
+      ],
+      "doc_recall_at_4": 0.9655172413793104,
+      "doc_recall_at_4_ci": [
+        0.9137931034482759,
+        1.0
+      ],
+      "doc_precision_at_4": 0.7801724137931034,
+      "doc_precision_at_4_ci": [
+        0.7068965517241379,
+        0.8491379310344828
+      ],
+      "recall_budget_1024": 0.8017241379310345,
+      "recall_budget_1024_ci": [
+        0.6982758620689655,
+        0.896551724137931
+      ],
+      "recall_budget_1536": 0.8793103448275862,
+      "recall_budget_1536_ci": [
+        0.7931034482758621,
+        0.9655172413793104
+      ],
+      "context_tokens_at_4": 854.2241379310345,
+      "context_tokens_at_4_ci": [
+        801.9120689655173,
+        905.0172413793103
+      ],
+      "wrong_section_at_4": 2.3448275862068964,
+      "wrong_section_at_4_ci": [
+        2.0172413793103448,
+        2.6551724137931036
+      ],
+      "context_tokens_at_4_median": 914.5,
+      "context_tokens_at_4_p95": 1145.85,
+      "latency_ms_median": 18.135799997253343,
+      "latency_ms_p95": 21.967589974519797,
+      "required_context_recall_at_4": 1.0,
+      "required_context_queries": 4
+    },
+    "C/bm25": {
+      "config": "C",
+      "mode": "bm25",
+      "queries": 58,
+      "hit_at_1": 0.5689655172413793,
+      "hit_at_1_ci": [
+        0.4482758620689655,
+        0.6896551724137931
+      ],
+      "recall_at_4": 0.8275862068965517,
+      "recall_at_4_ci": [
+        0.7241379310344828,
+        0.9137931034482759
+      ],
+      "coverage_at_4": 0.8275862068965517,
+      "coverage_at_4_ci": [
+        0.7241379310344828,
+        0.9137931034482759
+      ],
+      "rr_at_10": 0.6813423645320197,
+      "rr_at_10_ci": [
+        0.5810319170771757,
+        0.7783482142857142
+      ],
+      "ndcg_at_4": 0.7046489287908467,
+      "ndcg_at_4_ci": [
+        0.605578847032538,
+        0.803062210269809
+      ],
+      "ndcg_at_10": 0.7429327207099681,
+      "ndcg_at_10_ci": [
+        0.6590105563698987,
+        0.8235527261332226
+      ],
+      "precision_at_4": 0.20689655172413793,
+      "precision_at_4_ci": [
+        0.1810344827586207,
+        0.22844827586206898
+      ],
+      "evidence_density_at_4": 0.0938557309400691,
+      "evidence_density_at_4_ci": [
+        0.07658817718069877,
+        0.11156944999556774
+      ],
+      "doc_hit_at_1": 0.9310344827586207,
+      "doc_hit_at_1_ci": [
+        0.8620689655172413,
+        0.9827586206896551
+      ],
+      "doc_recall_at_4": 0.9827586206896551,
+      "doc_recall_at_4_ci": [
+        0.9482758620689655,
+        1.0
+      ],
+      "doc_precision_at_4": 0.7068965517241379,
+      "doc_precision_at_4_ci": [
+        0.6379310344827587,
+        0.7758620689655172
+      ],
+      "recall_budget_1024": 0.8620689655172413,
+      "recall_budget_1024_ci": [
+        0.7758620689655172,
+        0.9482758620689655
+      ],
+      "recall_budget_1536": 0.896551724137931,
+      "recall_budget_1536_ci": [
+        0.8103448275862069,
+        0.9655172413793104
+      ],
+      "context_tokens_at_4": 766.3275862068965,
+      "context_tokens_at_4_ci": [
+        718.6202586206897,
+        816.7422413793104
+      ],
+      "wrong_section_at_4": 2.0,
+      "wrong_section_at_4_ci": [
+        1.706896551724138,
+        2.293103448275862
+      ],
+      "context_tokens_at_4_median": 727.5,
+      "context_tokens_at_4_p95": 1175.45,
+      "latency_ms_median": 10.131600021850318,
+      "latency_ms_p95": 12.130924977827817,
+      "required_context_recall_at_4": 1.0,
+      "required_context_queries": 4
+    }
+  },
+  "significance": [
+    {
+      "metric": "hit_at_1",
+      "contrast": "A→B",
+      "meaning": "Viết lại dữ liệu (cùng recursive)",
+      "left_mean": 0.5862068965517241,
+      "right_mean": 0.5689655172413793,
+      "diff": -0.017241379310344827,
+      "diff_ci_low": -0.13793103448275862,
+      "diff_ci_high": 0.10344827586206896,
+      "better": 6,
+      "worse": 7,
+      "same": 45,
+      "test_name": "McNemar chính xác",
+      "p_value": 1.0,
+      "only_left": 7,
+      "only_right": 6,
+      "p_holm": 1.0
+    },
+    {
+      "metric": "hit_at_1",
+      "contrast": "B→C",
+      "meaning": "Đổi cách chunk (cùng dữ liệu mới)",
+      "left_mean": 0.5689655172413793,
+      "right_mean": 0.6724137931034483,
+      "diff": 0.10344827586206896,
+      "diff_ci_low": -0.034482758620689655,
+      "diff_ci_high": 0.22413793103448276,
+      "better": 11,
+      "worse": 5,
+      "same": 42,
+      "test_name": "McNemar chính xác",
+      "p_value": 0.210113525390625,
+      "only_left": 5,
+      "only_right": 11,
+      "p_holm": 0.630340576171875
+    },
+    {
+      "metric": "hit_at_1",
+      "contrast": "A→C",
+      "meaning": "Tổng hợp cả hai",
+      "left_mean": 0.5862068965517241,
+      "right_mean": 0.6724137931034483,
+      "diff": 0.08620689655172414,
+      "diff_ci_low": -0.034482758620689655,
+      "diff_ci_high": 0.20689655172413793,
+      "better": 9,
+      "worse": 4,
+      "same": 45,
+      "test_name": "McNemar chính xác",
+      "p_value": 0.266845703125,
+      "only_left": 4,
+      "only_right": 9,
+      "p_holm": 0.630340576171875
+    },
+    {
+      "metric": "doc_hit_at_1",
+      "contrast": "A→B",
+      "meaning": "Viết lại dữ liệu (cùng recursive)",
+      "left_mean": 0.9827586206896551,
+      "right_mean": 1.0,
+      "diff": 0.017241379310344827,
+      "diff_ci_low": 0.0,
+      "diff_ci_high": 0.05172413793103448,
+      "better": 1,
+      "worse": 0,
+      "same": 57,
+      "test_name": "McNemar chính xác",
+      "p_value": 1.0,
+      "only_left": 0,
+      "only_right": 1,
+      "p_holm": 1.0
+    },
+    {
+      "metric": "doc_hit_at_1",
+      "contrast": "B→C",
+      "meaning": "Đổi cách chunk (cùng dữ liệu mới)",
+      "left_mean": 1.0,
+      "right_mean": 0.9655172413793104,
+      "diff": -0.034482758620689655,
+      "diff_ci_low": -0.08620689655172414,
+      "diff_ci_high": 0.0,
+      "better": 0,
+      "worse": 2,
+      "same": 56,
+      "test_name": "McNemar chính xác",
+      "p_value": 0.5,
+      "only_left": 2,
+      "only_right": 0,
+      "p_holm": 1.0
+    },
+    {
+      "metric": "doc_hit_at_1",
+      "contrast": "A→C",
+      "meaning": "Tổng hợp cả hai",
+      "left_mean": 0.9827586206896551,
+      "right_mean": 0.9655172413793104,
+      "diff": -0.017241379310344827,
+      "diff_ci_low": -0.06896551724137931,
+      "diff_ci_high": 0.034482758620689655,
+      "better": 1,
+      "worse": 2,
+      "same": 55,
+      "test_name": "McNemar chính xác",
+      "p_value": 1.0,
+      "only_left": 2,
+      "only_right": 1,
+      "p_holm": 1.0
+    },
+    {
+      "metric": "recall_at_4",
+      "contrast": "A→B",
+      "meaning": "Viết lại dữ liệu (cùng recursive)",
+      "left_mean": 0.8448275862068966,
+      "right_mean": 0.9310344827586207,
+      "diff": 0.08620689655172414,
+      "diff_ci_low": 0.0,
+      "diff_ci_high": 0.1724137931034483,
+      "better": 6,
+      "worse": 1,
+      "same": 51,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.05878172135535886,
+      "p_holm": 0.1763451640660766
+    },
+    {
+      "metric": "recall_at_4",
+      "contrast": "B→C",
+      "meaning": "Đổi cách chunk (cùng dữ liệu mới)",
+      "left_mean": 0.9310344827586207,
+      "right_mean": 0.8706896551724138,
+      "diff": -0.0603448275862069,
+      "diff_ci_low": -0.16379310344827586,
+      "diff_ci_high": 0.04310344827586207,
+      "better": 3,
+      "worse": 7,
+      "same": 48,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.2919147959664441,
+      "p_holm": 0.5838295919328882
+    },
+    {
+      "metric": "recall_at_4",
+      "contrast": "A→C",
+      "meaning": "Tổng hợp cả hai",
+      "left_mean": 0.8448275862068966,
+      "right_mean": 0.8706896551724138,
+      "diff": 0.02586206896551724,
+      "diff_ci_low": -0.07780172413793084,
+      "diff_ci_high": 0.13793103448275862,
+      "better": 6,
+      "worse": 5,
+      "same": 47,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.5598155925079977,
+      "p_holm": 0.5838295919328882
+    },
+    {
+      "metric": "rr_at_10",
+      "contrast": "A→B",
+      "meaning": "Viết lại dữ liệu (cùng recursive)",
+      "left_mean": 0.7168308702791463,
+      "right_mean": 0.7201354679802955,
+      "diff": 0.003304597701149424,
+      "diff_ci_low": -0.08105706075533663,
+      "diff_ci_high": 0.08489378078817733,
+      "better": 15,
+      "worse": 11,
+      "same": 32,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.72984494612638,
+      "p_holm": 0.9485625473369226
+    },
+    {
+      "metric": "rr_at_10",
+      "contrast": "B→C",
+      "meaning": "Đổi cách chunk (cùng dữ liệu mới)",
+      "left_mean": 0.7201354679802955,
+      "right_mean": 0.7632183908045976,
+      "diff": 0.043082922824302136,
+      "diff_ci_low": -0.05835385878489328,
+      "diff_ci_high": 0.14552955665024622,
+      "better": 12,
+      "worse": 13,
+      "same": 33,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.4742812736684613,
+      "p_holm": 0.9485625473369226
+    },
+    {
+      "metric": "rr_at_10",
+      "contrast": "A→C",
+      "meaning": "Tổng hợp cả hai",
+      "left_mean": 0.7168308702791463,
+      "right_mean": 0.7632183908045976,
+      "diff": 0.046387520525451545,
+      "diff_ci_low": -0.03953201970443349,
+      "diff_ci_high": 0.13419540229885057,
+      "better": 17,
+      "worse": 9,
+      "same": 32,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.24180799026040223,
+      "p_holm": 0.7254239707812067
+    },
+    {
+      "metric": "ndcg_at_10",
+      "contrast": "A→B",
+      "meaning": "Viết lại dữ liệu (cùng recursive)",
+      "left_mean": 0.8023406352904343,
+      "right_mean": 0.8356741748236083,
+      "diff": 0.03333353953317391,
+      "diff_ci_low": -0.01846020097911676,
+      "diff_ci_high": 0.08545843788680481,
+      "better": 18,
+      "worse": 12,
+      "same": 28,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.17778120045602963,
+      "p_holm": 0.5333436013680889
+    },
+    {
+      "metric": "ndcg_at_10",
+      "contrast": "B→C",
+      "meaning": "Đổi cách chunk (cùng dữ liệu mới)",
+      "left_mean": 0.8356741748236083,
+      "right_mean": 0.8057798155817839,
+      "diff": -0.02989435924182444,
+      "diff_ci_low": -0.09894374853369357,
+      "diff_ci_high": 0.03659368544247331,
+      "better": 13,
+      "worse": 14,
+      "same": 31,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.5242698863157131,
+      "p_holm": 1.0
+    },
+    {
+      "metric": "ndcg_at_10",
+      "contrast": "A→C",
+      "meaning": "Tổng hợp cả hai",
+      "left_mean": 0.8023406352904343,
+      "right_mean": 0.8057798155817839,
+      "diff": 0.0034391802913494697,
+      "diff_ci_low": -0.06355432915716965,
+      "diff_ci_high": 0.06704030135353603,
+      "better": 18,
+      "worse": 11,
+      "same": 29,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.6263448944094845,
+      "p_holm": 1.0
+    },
+    {
+      "metric": "coverage_at_4",
+      "contrast": "A→B",
+      "meaning": "Viết lại dữ liệu (cùng recursive)",
+      "left_mean": 0.8634941744144992,
+      "right_mean": 0.9528001265339808,
+      "diff": 0.08930595211948165,
+      "diff_ci_low": 0.02343949044585987,
+      "diff_ci_high": 0.17103448275862068,
+      "better": 6,
+      "worse": 1,
+      "same": 51,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.02258688816417967,
+      "p_holm": 0.06776066449253901
+    },
+    {
+      "metric": "coverage_at_4",
+      "contrast": "B→C",
+      "meaning": "Đổi cách chunk (cùng dữ liệu mới)",
+      "left_mean": 0.9528001265339808,
+      "right_mean": 0.8706896551724138,
+      "diff": -0.0821104713615671,
+      "diff_ci_low": -0.1762025038436196,
+      "diff_ci_high": 0.0051396933649868175,
+      "better": 3,
+      "worse": 7,
+      "same": 48,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.06396891699082884,
+      "p_holm": 0.12793783398165767
+    },
+    {
+      "metric": "coverage_at_4",
+      "contrast": "A→C",
+      "meaning": "Tổng hợp cả hai",
+      "left_mean": 0.8634941744144992,
+      "right_mean": 0.8706896551724138,
+      "diff": 0.00719548075791456,
+      "diff_ci_low": -0.0969424502765682,
+      "diff_ci_high": 0.11206896551724138,
+      "better": 6,
+      "worse": 6,
+      "same": 46,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.869197911071798,
+      "p_holm": 0.869197911071798
+    },
+    {
+      "metric": "precision_at_4",
+      "contrast": "A→B",
+      "meaning": "Viết lại dữ liệu (cùng recursive)",
+      "left_mean": 0.2672413793103448,
+      "right_mean": 0.28879310344827586,
+      "diff": 0.021551724137931036,
+      "diff_ci_low": -0.017241379310344827,
+      "diff_ci_high": 0.0603448275862069,
+      "better": 11,
+      "worse": 7,
+      "same": 40,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.27523352407483437,
+      "p_holm": 0.27523352407483437
+    },
+    {
+      "metric": "precision_at_4",
+      "contrast": "B→C",
+      "meaning": "Đổi cách chunk (cùng dữ liệu mới)",
+      "left_mean": 0.28879310344827586,
+      "right_mean": 0.21982758620689655,
+      "diff": -0.06896551724137931,
+      "diff_ci_low": -0.09913793103448276,
+      "diff_ci_high": -0.03879310344827586,
+      "better": 1,
+      "worse": 17,
+      "same": 40,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.00016244084518680075,
+      "p_holm": 0.0004873225355604022
+    },
+    {
+      "metric": "precision_at_4",
+      "contrast": "A→C",
+      "meaning": "Tổng hợp cả hai",
+      "left_mean": 0.2672413793103448,
+      "right_mean": 0.21982758620689655,
+      "diff": -0.04741379310344827,
+      "diff_ci_low": -0.08620689655172414,
+      "diff_ci_high": -0.01293103448275862,
+      "better": 5,
+      "worse": 16,
+      "same": 37,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.016377308341494895,
+      "p_holm": 0.03275461668298979
+    },
+    {
+      "metric": "evidence_density_at_4",
+      "contrast": "A→B",
+      "meaning": "Viết lại dữ liệu (cùng recursive)",
+      "left_mean": 0.049147118213763746,
+      "right_mean": 0.053813390343350156,
+      "diff": 0.004666272129586419,
+      "diff_ci_low": 0.0010407682905310082,
+      "diff_ci_high": 0.009209200763268316,
+      "better": 29,
+      "worse": 27,
+      "same": 2,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.365234253927773,
+      "p_holm": 0.365234253927773
+    },
+    {
+      "metric": "evidence_density_at_4",
+      "contrast": "B→C",
+      "meaning": "Đổi cách chunk (cùng dữ liệu mới)",
+      "left_mean": 0.053813390343350156,
+      "right_mean": 0.09247662523176474,
+      "diff": 0.03866323488841456,
+      "diff_ci_low": 0.026755876573102157,
+      "diff_ci_high": 0.051781768186078235,
+      "better": 49,
+      "worse": 8,
+      "same": 1,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 1.6775878644016727e-07,
+      "p_holm": 3.3551757288033453e-07
+    },
+    {
+      "metric": "evidence_density_at_4",
+      "contrast": "A→C",
+      "meaning": "Tổng hợp cả hai",
+      "left_mean": 0.049147118213763746,
+      "right_mean": 0.09247662523176474,
+      "diff": 0.04332950701800097,
+      "diff_ci_low": 0.030543459160763953,
+      "diff_ci_high": 0.05696960156199935,
+      "better": 50,
+      "worse": 6,
+      "same": 2,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 4.215899281304314e-08,
+      "p_holm": 1.264769784391294e-07
+    },
+    {
+      "metric": "recall_budget_1024",
+      "contrast": "A→B",
+      "meaning": "Viết lại dữ liệu (cùng recursive)",
+      "left_mean": 0.7672413793103449,
+      "right_mean": 0.8189655172413793,
+      "diff": 0.05172413793103448,
+      "diff_ci_low": -0.05172413793103448,
+      "diff_ci_high": 0.15517241379310345,
+      "better": 6,
+      "worse": 3,
+      "same": 49,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.31731050786291415,
+      "p_holm": 0.4118064214641368
+    },
+    {
+      "metric": "recall_budget_1024",
+      "contrast": "B→C",
+      "meaning": "Đổi cách chunk (cùng dữ liệu mới)",
+      "left_mean": 0.8189655172413793,
+      "right_mean": 0.8879310344827587,
+      "diff": 0.06896551724137931,
+      "diff_ci_low": -0.034482758620689655,
+      "diff_ci_high": 0.1724137931034483,
+      "better": 7,
+      "worse": 3,
+      "same": 48,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.2059032107320684,
+      "p_holm": 0.4118064214641368
+    },
+    {
+      "metric": "recall_budget_1024",
+      "contrast": "A→C",
+      "meaning": "Tổng hợp cả hai",
+      "left_mean": 0.7672413793103449,
+      "right_mean": 0.8879310344827587,
+      "diff": 0.1206896551724138,
+      "diff_ci_low": 0.0,
+      "diff_ci_high": 0.2413793103448276,
+      "better": 10,
+      "worse": 3,
+      "same": 45,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.05220363534131467,
+      "p_holm": 0.156610906023944
+    },
+    {
+      "metric": "recall_budget_1536",
+      "contrast": "A→B",
+      "meaning": "Viết lại dữ liệu (cùng recursive)",
+      "left_mean": 0.8275862068965517,
+      "right_mean": 0.9310344827586207,
+      "diff": 0.10344827586206896,
+      "diff_ci_low": 0.017241379310344827,
+      "diff_ci_high": 0.1896551724137931,
+      "better": 7,
+      "worse": 1,
+      "same": 50,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.033894853524689246,
+      "p_holm": 0.06884912823328798
+    },
+    {
+      "metric": "recall_budget_1536",
+      "contrast": "B→C",
+      "meaning": "Đổi cách chunk (cùng dữ liệu mới)",
+      "left_mean": 0.9310344827586207,
+      "right_mean": 0.9396551724137931,
+      "diff": 0.008620689655172414,
+      "diff_ci_low": -0.06896551724137931,
+      "diff_ci_high": 0.08620689655172414,
+      "better": 3,
+      "worse": 3,
+      "same": 52,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.7388826803635273,
+      "p_holm": 0.7388826803635273
+    },
+    {
+      "metric": "recall_budget_1536",
+      "contrast": "A→C",
+      "meaning": "Tổng hợp cả hai",
+      "left_mean": 0.8275862068965517,
+      "right_mean": 0.9396551724137931,
+      "diff": 0.11206896551724138,
+      "diff_ci_low": 0.017241379310344827,
+      "diff_ci_high": 0.21551724137931033,
+      "better": 8,
+      "worse": 2,
+      "same": 48,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.022949709411095993,
+      "p_holm": 0.06884912823328798
+    },
+    {
+      "metric": "context_tokens_at_4",
+      "contrast": "A→B",
+      "meaning": "Viết lại dữ liệu (cùng recursive)",
+      "left_mean": 1414.448275862069,
+      "right_mean": 1374.396551724138,
+      "diff": -40.05172413793103,
+      "diff_ci_low": -61.86206896551724,
+      "diff_ci_high": -18.395258620689674,
+      "better": 17,
+      "worse": 41,
+      "same": 0,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 0.0007677951341893697,
+      "p_holm": 0.0007677951341893697
+    },
+    {
+      "metric": "context_tokens_at_4",
+      "contrast": "B→C",
+      "meaning": "Đổi cách chunk (cùng dữ liệu mới)",
+      "left_mean": 1374.396551724138,
+      "right_mean": 806.6724137931035,
+      "diff": -567.7241379310345,
+      "diff_ci_low": -628.4836206896551,
+      "diff_ci_high": -508.9646551724138,
+      "better": 0,
+      "worse": 58,
+      "same": 0,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 3.504284870854178e-11,
+      "p_holm": 1.0511088951111694e-10
+    },
+    {
+      "metric": "context_tokens_at_4",
+      "contrast": "A→C",
+      "meaning": "Tổng hợp cả hai",
+      "left_mean": 1414.448275862069,
+      "right_mean": 806.6724137931035,
+      "diff": -607.7758620689655,
+      "diff_ci_low": -660.6383620689655,
+      "diff_ci_high": -553.9288793103449,
+      "better": 0,
+      "worse": 58,
+      "same": 0,
+      "test_name": "Wilcoxon signed-rank",
+      "p_value": 3.503696317037232e-11,
+      "p_holm": 1.0511088951111694e-10
+    }
+  ],
+  "figures": [
+    "figures/recall_at_k.png",
+    "figures/recall_at_budget.png",
+    "figures/chunk_tokens.png",
+    "figures/main_metrics.png",
+    "figures/cost_density.png",
+    "figures/recall_by_category.png"
+  ]
+}

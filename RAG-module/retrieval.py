@@ -12,7 +12,7 @@ import re
 import unicodedata
 from dataclasses import dataclass, field, replace
 from functools import lru_cache
-from typing import Any
+from typing import Any, Callable
 from weakref import WeakKeyDictionary
 
 from langchain_core.documents import Document
@@ -31,6 +31,39 @@ class SearchHit:
     rerank_score: float | None = None
 
 
+@dataclass(frozen=True)
+class MetadataScope:
+    """Giới hạn tìm kiếm theo metadata đã lưu trong index; rỗng = toàn corpus.
+
+    Chỉ nhận giá trị có cấu trúc (đường dẫn tài liệu, thư mục cây), không suy từ
+    câu hỏi. Bảng ánh xạ nhãn → phạm vi nằm ở taxonomy.py.
+    """
+
+    sources: tuple[str, ...] = ()
+    crop: str | None = None
+
+    @property
+    def active(self) -> bool:
+        return bool(self.sources or self.crop)
+
+    def matches(self, document: Document) -> bool:
+        metadata = document.metadata
+        if self.sources and metadata.get("source") not in self.sources:
+            return False
+        return not self.crop or metadata.get("crop") == self.crop
+
+    def chroma_filter(self) -> dict | None:
+        conditions = []
+        if self.sources:
+            conditions.append({"source": self.sources[0]} if len(self.sources) == 1
+                              else {"source": {"$in": list(self.sources)}})
+        if self.crop:
+            conditions.append({"crop": self.crop})
+        if not conditions:
+            return None
+        return conditions[0] if len(conditions) == 1 else {"$and": conditions}
+
+
 @dataclass
 class SearchResult:
     mode: str
@@ -40,6 +73,7 @@ class SearchResult:
     bm25_count: int
     merged_count: int
     reranked: bool
+    scope: MetadataScope | None = None
 
     @property
     def documents(self) -> list[Document]:
@@ -54,6 +88,9 @@ class SearchResult:
             "bm25_candidates": self.bm25_count,
             "merged_candidates": self.merged_count,
             "reranked": self.reranked,
+            "scope": None if self.scope is None else {
+                "sources": list(self.scope.sources), "crop": self.scope.crop,
+            },
             "candidates": [
                 {
                     "rank": rank,
@@ -205,8 +242,15 @@ def corpus_index(store: Any) -> CorpusIndex:
     return index
 
 
-def bm25_search_index(question: str, index: CorpusIndex, limit: int) -> list[SearchHit]:
-    """Chấm điểm một query trên corpus đã dựng sẵn."""
+def bm25_search_index(
+    question: str, index: CorpusIndex, limit: int,
+    keep: Callable[[Document], bool] | None = None,
+) -> list[SearchHit]:
+    """Chấm điểm một query trên corpus đã dựng sẵn.
+
+    `keep` lọc theo phạm vi **trước** khi cắt top, để phạm vi hẹp không trả rỗng
+    chỉ vì top của toàn corpus nằm ngoài phạm vi. IDF vẫn tính trên toàn corpus.
+    """
     query_tokens = tokenize(question)
     if not query_tokens or index.bm25 is None:
         return []
@@ -216,7 +260,7 @@ def bm25_search_index(question: str, index: CorpusIndex, limit: int) -> list[Sea
     hits = [
         SearchHit(document=doc, chunk_id=chunk_key(doc), bm25_score=float(score))
         for doc, tokens, score in zip(index.documents, index.tokens, scores)
-        if query_terms.intersection(tokens)
+        if query_terms.intersection(tokens) and (keep is None or keep(doc))
     ]
     # Không lấy chunk không có từ nào khớp chỉ để lấp đầy top-k.
     # Điểm BM25 là điểm xếp hạng, không phải xác suất liên quan.
@@ -231,9 +275,15 @@ def bm25_search(question: str, documents: list[Document], limit: int) -> list[Se
     return bm25_search_index(question, build_corpus_index(documents), limit)
 
 
-def semantic_search(question: str, store: Any, limit: int) -> list[SearchHit]:
-    """Gửi nguyên query vào embedding search; không tạo metadata filter."""
-    documents = unique_documents(list(store.similarity_search(question, k=limit)))
+def semantic_search(
+    question: str, store: Any, limit: int, scope: MetadataScope | None = None,
+) -> list[SearchHit]:
+    """Gửi nguyên query vào embedding search; filter chỉ đến từ phạm vi có cấu trúc."""
+    if scope is not None and scope.active:
+        found = store.similarity_search(question, k=limit, filter=scope.chroma_filter())
+    else:
+        found = store.similarity_search(question, k=limit)
+    documents = unique_documents(list(found))
     return [
         SearchHit(document=doc, chunk_id=chunk_key(doc), semantic_rank=rank)
         for rank, doc in enumerate(documents[:limit], start=1)
@@ -297,17 +347,21 @@ def rerank_hits(
 
 
 def search_store(
-    question: str, store: Any, *, k: int, settings: RetrievalSettings
+    question: str, store: Any, *, k: int, settings: RetrievalSettings,
+    scope: MetadataScope | None = None,
 ) -> SearchResult:
     """Luồng chính: lấy ứng viên → gộp → rerank tùy chọn → chọn top-k."""
     limit = max(k, settings.candidate_k)
     semantic_hits = []
     bm25_hits = []
+    active = scope if scope is not None and scope.active else None
 
     if settings.mode in {"semantic", "hybrid"}:
-        semantic_hits = semantic_search(question, store, limit)
+        semantic_hits = semantic_search(question, store, limit, active)
     if settings.mode in {"bm25", "hybrid"}:
-        bm25_hits = bm25_search_index(question, corpus_index(store), limit)
+        bm25_hits = bm25_search_index(
+            question, corpus_index(store), limit, active.matches if active else None,
+        )
 
     if settings.mode == "hybrid":
         candidates = reciprocal_rank_fusion(semantic_hits, bm25_hits, settings.rrf_k)
@@ -329,4 +383,5 @@ def search_store(
         bm25_count=len(bm25_hits),
         merged_count=merged_count,
         reranked=settings.reranker_enabled and bool(candidates),
+        scope=active,
     )

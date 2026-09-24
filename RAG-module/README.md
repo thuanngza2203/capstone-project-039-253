@@ -153,6 +153,41 @@ Retrieval mặc định kết hợp semantic search và BM25 bằng RRF. Query l
 toàn collection; alias không còn tạo bộ lọc cứng theo bệnh. Có thể bật reranker
 để xếp hạng lại ứng viên. Chi tiết và hướng dẫn debug: [docs/RETRIEVAL.md](docs/RETRIEVAL.md).
 
+## API server (FastAPI + Swagger)
+
+Cho detection-server-module (và client khác) gọi RAG qua HTTP. Server không lưu
+lịch sử: mỗi request tự mang `history`.
+
+```powershell
+python main.py index            # cần index trước, như CLI
+python -m server                # http://127.0.0.1:8010/docs
+python -m server --export-openapi openapi.json
+```
+
+| Endpoint | Việc | Gọi LLM |
+| --- | --- | --- |
+| `GET /health` | Process còn sống, không cần key | Không |
+| `GET /v1/status` | Index, số chunk, provider/model đang dùng; từng index có khớp `data/` không | Không |
+| `GET /v1/llm?probe=true` | Model thật đang chạy (vLLM: `root` sau alias `rag-llm`) | Không |
+| `GET /v1/taxonomy` | Cây, bệnh, alias, bệnh nào có tài liệu | Không |
+| `POST /v1/retrieve` | Tìm chunk theo `plant_type`/`disease` | Không |
+| `POST /v1/answer` | Tìm + sinh câu trả lời có trích nguồn | Có |
+
+Để so sánh, request chọn được `index` (`recursive`/`structure`) và `llm_provider`
+(`ollama`/`gemini`/`vllm`); bỏ trống thì dùng `.env`. Mọi response có `meta`: cấu hình
+thật đã dùng, model LLM báo về, token, `finish_reason` và thời gian từng bước. Quy trình
+chạy bộ câu hỏi và dựng Google Form: [experiments/README.md](experiments/README.md).
+
+`plant_type` và `disease` nhận nhãn của normalizer (`apple`, `apple_scab`) lẫn của
+detector (`Apple`, `Apple___Black_rot`, `Scab`); bảng alias ở `taxonomy.py`. Có nhãn
+thì chỉ tìm trong đúng tài liệu của bệnh đó. Bệnh chưa có tài liệu hoặc nhãn lạ thì
+**không tìm và không gọi LLM**, `scope.status` cho biết lý do. Không gửi nhãn thì
+tìm như CLI.
+
+Xác thực bằng `Authorization: Bearer <RAG_API_KEY>`. Để trống `RAG_API_KEY` thì tắt
+xác thực và server từ chối nghe ngoài `127.0.0.1`. Thiết kế và các bước tích hợp:
+[agents/2026-09-23-rag-api-server-integration-plan.md](agents/2026-09-23-rag-api-server-integration-plan.md).
+
 ## Chọn chunking cũ hoặc theo cấu trúc
 
 Trong `.env`:
@@ -418,7 +453,7 @@ Thiết lập model/endpoint/API key của từng provider một lần, sau đó
 | --- | --- | --- |
 | `ollama` | Ollama | `OLLAMA_MODEL`, `OLLAMA_BASE_URL` |
 | `gemini` | Gemini API | `GEMINI_MODEL`, `GEMINI_API_KEY` |
-| `vllm` | API vLLM trong Docker | `VLLM_MODEL`, `VLLM_BASE_URL`, `VLLM_API_KEY` nếu có |
+| `vllm` | API vLLM local hoặc remote trên Vast | `VLLM_MODEL`, `VLLM_BASE_URL`, `VLLM_API_KEY` nếu có |
 
 Chạy lại `python main.py ask "..."` sau khi sửa `.env`. Với process Python chạy
 liên tục hoặc notebook, khởi động lại process/kernel để đọc cấu hình mới.
@@ -439,6 +474,36 @@ GEMINI_MODEL=gemini-2.5-flash
 
 `index` và `search` vẫn hoàn toàn local. Khi dùng Gemini, chỉ câu hỏi và các
 chunk đã retrieve được gửi tới API; toàn bộ corpus không được gửi đi.
+
+## Gọi cùng vLLM remote đang dùng trong playground
+
+Nếu `LLM-server-module/playground.py` đã gọi thành công, dùng đúng ba giá trị
+**Base URL**, **Model**, **API key** đang nhập ở sidebar để sửa `RAG-module/.env`.
+Các giá trị nhập trên giao diện playground không tự lưu vào `.env` của RAG.
+
+| Playground | `RAG-module/.env` |
+| --- | --- |
+| Base URL | `VLLM_BASE_URL` (giữ `/v1` ở cuối) |
+| Model | `VLLM_MODEL` (alias API, không tự đổi thành tên checkpoint) |
+| API key | `VLLM_API_KEY` |
+| enable_thinking = tắt | `VLLM_THINK=false` |
+
+Đặt thêm `LLM_PROVIDER=vllm`; để `VLLM_HOST=` và `VLLM_PORT=` trống khi đã dùng
+`VLLM_BASE_URL`. Giữ `VLLM_MAX_TOKENS=800`, `VLLM_TIMEOUT=120` để bắt đầu.
+Nếu URL là localhost qua SSH tunnel, giữ tunnel đang chạy trong lúc dùng RAG.
+
+Từ thư mục `RAG-module`, sau khi activate venv:
+
+```powershell
+python ..\LLM-server-module\check_api.py --env-file .env
+python main.py ask "Bệnh ghẻ táo có triệu chứng gì?"
+python main.py chat
+```
+
+Lệnh đầu chỉ kiểm tra kết nối và một câu trả lời từ LLM; hai lệnh sau chạy
+retrieval và gửi ngữ cảnh sang model. Không cần index lại khi chỉ đổi LLM.
+Nếu RAG API đang chạy (`python -m server`), khởi động lại process để đọc `.env`
+mới. Embedding và Chroma vẫn chạy ở host; RAG không nạp weights Qwen 27B.
 
 ## Dùng vLLM trong Docker
 
@@ -462,7 +527,10 @@ curl.exe http://127.0.0.1:8000/v1/models
 
 ```dotenv
 LLM_PROVIDER=vllm
-VLLM_BASE_URL=http://127.0.0.1:8000/v1
+VLLM_SCHEME=http
+VLLM_HOST=127.0.0.1
+VLLM_PORT=8000
+VLLM_BASE_URL=
 VLLM_MODEL=Qwen/Qwen3-0.6B
 VLLM_API_KEY=
 VLLM_MAX_TOKENS=800
@@ -473,7 +541,12 @@ EMBEDDING_MODEL=AITeamVN/Vietnamese_Embedding
 EMBEDDING_DEVICE=cpu
 ```
 
-- `VLLM_BASE_URL` là địa chỉ gốc API, có `/v1`; không thêm `/chat/completions`.
+- Địa chỉ server: điền `VLLM_HOST` (chỉ IP hoặc tên miền, không kèm `http://`
+  hay `:cổng`) và `VLLM_PORT`; RAG tự ghép thành `VLLM_SCHEME://HOST:PORT/v1`.
+  Dùng HTTPS qua nginx thì `VLLM_SCHEME=https`, cổng 443 thì để trống `VLLM_PORT`.
+- Hoặc điền `VLLM_BASE_URL` đầy đủ (có `/v1`, không thêm `/chat/completions`) và
+  để trống `VLLM_HOST`/`VLLM_PORT`. Điền cả hai cách sẽ báo lỗi, để một dòng cũ
+  còn sót không lặng lẽ ghi đè dòng bạn vừa sửa.
 - `VLLM_MODEL` là tên phục vụ qua API (kể cả alias `--served-model-name`),
   không phải tên model trong Ollama.
 - `VLLM_API_KEY`: để trống nếu server không bật xác thực. Nếu container dùng

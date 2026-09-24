@@ -70,6 +70,19 @@ def get_chunking_settings(*, strategy: str | None = None) -> ChunkingSettings:
     )
 
 
+INDEX_STRATEGIES = ("recursive", "structure")
+
+
+def strategy_index_directory(strategy: str) -> Path:
+    """Thư mục mặc định của từng strategy, không xét CHROMA_DIR.
+
+    Hai index nằm cạnh nhau để API chọn được theo request khi so sánh chunking.
+    """
+    if strategy not in INDEX_STRATEGIES:
+        raise ValueError(f"Index không hợp lệ: {strategy!r}. Chỉ có {', '.join(INDEX_STRATEGIES)}.")
+    return CHROMA_DIR if strategy == "recursive" else PROJECT_ROOT / "chroma_db_structure"
+
+
 def get_index_directory(
     directory: Path | str | None = None, *, strategy: str | None = None,
 ) -> Path:
@@ -81,8 +94,7 @@ def get_index_directory(
     if configured:
         path = Path(configured)
         return (path if path.is_absolute() else PROJECT_ROOT / path).resolve()
-    selected = get_chunking_settings(strategy=strategy).strategy
-    return CHROMA_DIR if selected == "recursive" else PROJECT_ROOT / "chroma_db_structure"
+    return strategy_index_directory(get_chunking_settings(strategy=strategy).strategy)
 
 
 @dataclass(frozen=True)
@@ -165,8 +177,13 @@ class LLMSettings:
     ollama_keep_alive: str = "10m"
     ollama_think: bool = False
     gemini_model: str = "gemini-2.5-flash"
-    vllm_model: str = "Qwen/Qwen3-0.6B"
-    vllm_base_url: str = "http://127.0.0.1:8000/v1"
+    # Khớp alias mặc định của LLM-server-module; .env ghi đè theo /v1/models.
+    vllm_model: str = "rag-llm"
+    # URL đầy đủ; để trống thì ghép từ scheme/host/port bên dưới.
+    vllm_base_url: str = ""
+    vllm_scheme: str = "http"
+    vllm_host: str = ""
+    vllm_port: str = ""
 
 
 def get_llm_settings(*, provider: str | None = None) -> LLMSettings:
@@ -199,10 +216,74 @@ def get_llm_settings(*, provider: str | None = None) -> LLMSettings:
         },
         gemini_model=os.getenv("GEMINI_MODEL", "").strip() or LLMSettings.gemini_model,
         vllm_model=os.getenv("VLLM_MODEL", "").strip() or LLMSettings.vllm_model,
-        vllm_base_url=(
-            os.getenv("VLLM_BASE_URL", "").strip() or LLMSettings.vllm_base_url
-        ).rstrip("/"),
+        vllm_base_url=os.getenv("VLLM_BASE_URL", "").strip().rstrip("/"),
+        vllm_scheme=(
+            os.getenv("VLLM_SCHEME", "").strip().casefold() or LLMSettings.vllm_scheme
+        ),
+        vllm_host=os.getenv("VLLM_HOST", "").strip(),
+        vllm_port=os.getenv("VLLM_PORT", "").strip(),
     )
+
+
+LLM_PROVIDERS = ("ollama", "gemini", "vllm")
+
+
+def configured_model(settings: LLMSettings) -> str | None:
+    """Tên model trong .env của provider đang chọn. Với vLLM đây là served-model-name,
+    có thể là alias (LLM-server giữ `rag-llm` khi đổi model); model thật xem qua probe."""
+    return {
+        "ollama": settings.ollama_model,
+        "gemini": settings.gemini_model,
+        "vllm": settings.vllm_model,
+    }.get(settings.provider)
+
+
+DEFAULT_VLLM_BASE_URL = "http://127.0.0.1:8000/v1"
+
+
+def resolve_vllm_base_url(settings: LLMSettings) -> str:
+    """Địa chỉ API vLLM: VLLM_BASE_URL đầy đủ, hoặc ghép từ VLLM_SCHEME/HOST/PORT.
+
+    Hai cách loại trừ nhau, để một dòng cũ còn sót trong .env không lặng lẽ thắng
+    dòng vừa điền. Không điền gì thì giữ mặc định cũ.
+    """
+    host, port, scheme = settings.vllm_host, settings.vllm_port, settings.vllm_scheme
+    if settings.vllm_base_url:
+        if host or port:
+            raise RuntimeError(
+                "Chỉ dùng một cách: điền VLLM_HOST/VLLM_PORT, hoặc điền VLLM_BASE_URL "
+                "đầy đủ. Để trống cách còn lại trong .env."
+            )
+        return settings.vllm_base_url
+    if not host:
+        if port:
+            raise RuntimeError("Đã điền VLLM_PORT thì phải điền cả VLLM_HOST.")
+        return DEFAULT_VLLM_BASE_URL
+
+    if scheme not in {"http", "https"}:
+        raise RuntimeError("VLLM_SCHEME phải là http hoặc https.")
+    # Ba lỗi dễ gặp nhất khi chép địa chỉ từ trang Vast, báo riêng từng lỗi.
+    if "://" in host:
+        raise RuntimeError(
+            "VLLM_HOST chỉ là IP hoặc tên miền, không kèm http://. "
+            "Giao thức đặt ở VLLM_SCHEME."
+        )
+    if ":" in host:
+        # Cũng chặn IPv6; cần IPv6 thì dùng VLLM_BASE_URL với [địa chỉ].
+        raise RuntimeError("VLLM_HOST không kèm cổng. Cổng đặt ở VLLM_PORT.")
+    if any(character.isspace() or character in "/@?#" for character in host):
+        raise RuntimeError(
+            "VLLM_HOST chỉ là IP hoặc tên miền, ví dụ 203.0.113.10 hoặc llm.example.com."
+        )
+    if not port:
+        return f"{scheme}://{host}/v1"
+    try:
+        number = int(port)
+    except ValueError as exc:
+        raise RuntimeError("VLLM_PORT phải là số nguyên trong 1–65535.") from exc
+    if not 1 <= number <= 65535:
+        raise RuntimeError("VLLM_PORT phải là số nguyên trong 1–65535.")
+    return f"{scheme}://{host}:{number}/v1"
 
 
 @lru_cache(maxsize=1)
@@ -253,7 +334,8 @@ def create_chat_model(*, provider: str | None = None) -> BaseChatModel:
         # Chỉ kiểm tra cấu hình vLLM khi provider này được chọn.
         # Cùng ràng buộc với check_api.py của LLM-server-module: URL sai phải báo
         # ngay, thay vì để server remote trả 404/401 khó đoán sau một vòng mạng.
-        address = urlsplit(settings.vllm_base_url)
+        base_url = resolve_vllm_base_url(settings)
+        address = urlsplit(base_url)
         if address.scheme not in {"http", "https"} or not address.hostname:
             raise RuntimeError(
                 "VLLM_BASE_URL phải dạng http(s)://host[:port]/v1. Ví dụ "
@@ -305,7 +387,7 @@ def create_chat_model(*, provider: str | None = None) -> BaseChatModel:
 
         return ChatOpenAI(
             model=settings.vllm_model,
-            base_url=settings.vllm_base_url,
+            base_url=base_url,
             api_key=os.getenv("VLLM_API_KEY", "").strip() or "EMPTY",
             temperature=0,
             max_tokens=max_tokens,
@@ -338,3 +420,30 @@ def create_chat_model(*, provider: str | None = None) -> BaseChatModel:
         max_tokens=800,
         max_retries=2,
     )
+
+
+LOOPBACK_HOSTS = frozenset({"127.0.0.1", "localhost", "::1"})
+
+
+@dataclass(frozen=True)
+class ApiSettings:
+    """Cấu hình RAG API server (python -m server)."""
+
+    host: str = "127.0.0.1"
+    port: int = 8010
+    api_key: str = ""
+
+    @property
+    def loopback_only(self) -> bool:
+        return self.host in LOOPBACK_HOSTS
+
+
+def get_api_settings() -> ApiSettings:
+    host = os.getenv("RAG_API_HOST", "").strip() or ApiSettings.host
+    port = _int_setting("RAG_API_PORT", ApiSettings.port)
+    if port > 65535:
+        raise ValueError("RAG_API_PORT phải nằm trong 1–65535.")
+    key = os.getenv("RAG_API_KEY", "").strip()
+    if any(character.isspace() for character in key):
+        raise ValueError("RAG_API_KEY không được chứa khoảng trắng.")
+    return ApiSettings(host=host, port=port, api_key=key)

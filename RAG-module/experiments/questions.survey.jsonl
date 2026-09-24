@@ -1,0 +1,24 @@
+{"id": "s01", "question": "Quả táo nhà tôi bị thối nâu rồi teo khô lại, vẫn dính trên cành. Có phải bệnh thối đen không, xử lý thế nào?", "topic": "triệu chứng + xử lý", "doc": "apple/apple_black_rot.txt"}
+{"id": "s02", "question": "Làm sao phòng bệnh ghẻ táo khi bắt đầu mùa mưa?", "topic": "phòng ngừa", "doc": "apple/apple_scab.txt"}
+{"id": "s03", "question": "Cây anh đào bị phấn trắng thì nên xử lý như thế nào?", "topic": "xử lý", "doc": "cherry/cherry_powdery_mildew.txt"}
+{"id": "s04", "question": "Lá ngô nổi nhiều mụn màu nâu đỏ như gỉ sắt là bệnh gì, có đáng lo không?", "topic": "triệu chứng + mức độ gây hại", "doc": "corn/corn_common_rust.txt"}
+{"id": "s05", "question": "Làm sao phân biệt bệnh cháy lá ngô phương Bắc với bệnh đốm xám lá trên cây ngô?", "topic": "phân biệt", "doc": "corn/corn_northern_leaf_blight.txt, corn/corn_gray_leaf_spot.txt", "note": "Bản đầu hỏi 'cháy lá lớn' (tên dân gian, tài liệu không có) nên RAG không lấy được tài liệu; đã sửa trước khi khảo sát."}
+{"id": "s06", "question": "Cây nho bị bệnh esca có chữa khỏi được không?", "topic": "xử lý", "doc": "grape/grape_esca.txt"}
+{"id": "s07", "question": "Quả nho bị teo đen lại như nho khô ngay trên chùm là bệnh gì, phòng thế nào?", "topic": "triệu chứng + phòng ngừa", "doc": "grape/grape_black_rot.txt"}
+{"id": "s08", "question": "Bệnh cháy lá trên cây nho có những triệu chứng gì?", "topic": "triệu chứng", "doc": "grape/grape_leaf_blight.txt"}
+{"id": "s09", "question": "Lá đào bị thủng lỗ chỗ như bị đạn bắn là do nguyên nhân gì?", "topic": "nguyên nhân", "doc": "peach/peach_bacterial_spot.txt"}
+{"id": "s10", "question": "Trồng ớt chuông vào mùa mưa hay bị đốm vi khuẩn, nên phòng bệnh thế nào?", "topic": "phòng ngừa", "doc": "pepper_bell/pepper_bell_bacterial_spot.txt"}
+{"id": "s11", "question": "Bệnh cháy sớm và bệnh mốc sương trên khoai tây khác nhau thế nào?", "topic": "phân biệt", "doc": "potato/potato_early_blight.txt, potato/potato_late_blight.txt"}
+{"id": "s12", "question": "Khoai tây bị mốc sương thì củ có bị hư không, thu hoạch và bảo quản cần lưu ý gì?", "topic": "xử lý", "doc": "potato/potato_late_blight.txt"}
+{"id": "s13", "question": "Bí bị phấn trắng phủ kín lá có làm giảm năng suất không?", "topic": "mức độ gây hại", "doc": "squash/squash_powdery_mildew.txt"}
+{"id": "s14", "question": "Làm gì để hạn chế bệnh cháy lá trên dâu tây?", "topic": "phòng ngừa", "doc": "strawberry/strawberry_leaf_scorch.txt"}
+{"id": "s15", "question": "Bệnh đốm vi khuẩn trên cà chua lây lan qua những con đường nào?", "topic": "nguyên nhân", "doc": "tomato/tomato_bacterial_spot.txt"}
+{"id": "s16", "question": "Mới phát hiện cà chua bị bệnh cháy sớm thì nên làm gì?", "topic": "xử lý", "doc": "tomato/tomato_early_blight.txt"}
+{"id": "s17", "question": "Vì sao bệnh mốc sương cà chua lây rất nhanh khi trời mưa lạnh?", "topic": "điều kiện phát sinh", "doc": "tomato/tomato_late_blight.txt"}
+{"id": "s18", "question": "Trồng cà chua trong nhà màng bị bệnh mốc lá thì phòng trị thế nào?", "topic": "xử lý", "doc": "tomato/tomato_leaf_mold.txt"}
+{"id": "s19", "question": "Cây cà chua bị virus khảm có cần nhổ bỏ không?", "topic": "xử lý", "doc": "tomato/tomato_mosaic_virus.txt"}
+{"id": "s20", "question": "la ca chua co nhieu dom tron nho tam xam vien nau la benh gi", "topic": "triệu chứng, gõ không dấu", "doc": "tomato/tomato_septoria_leaf_spot.txt"}
+{"id": "s21", "question": "Nhện đỏ hại cà chua mạnh vào thời tiết nào và phòng trừ ra sao?", "topic": "điều kiện + phòng trừ", "doc": "tomato/tomato_spider_mites.txt"}
+{"id": "s22", "question": "Bệnh đốm vòng (target spot) trên cà chua gây hại những bộ phận nào của cây?", "topic": "triệu chứng", "doc": "tomato/tomato_target_spot.txt"}
+{"id": "s23", "question": "Làm sao ngăn bọ phấn truyền bệnh xoăn vàng lá cho cà chua?", "topic": "phòng ngừa", "doc": "tomato/tomato_yellow_leaf_curl_virus.txt"}
+{"id": "s24", "question": "Cây cam bị vàng lá, gân lá vẫn xanh thì xử lý thế nào?", "topic": "ngoài kho tài liệu: xem model có biết từ chối", "doc": ""}
