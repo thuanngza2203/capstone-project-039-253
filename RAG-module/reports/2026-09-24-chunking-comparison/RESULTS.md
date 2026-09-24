@@ -1,6 +1,6 @@
 # Kết quả so sánh chunking (tự sinh)
 
-Sinh bởi `scripts/compare_chunking.py` lúc 2026-09-23T19:22:00+00:00. Đừng sửa tay: chạy lại script sẽ ghi đè.
+Sinh bởi `scripts/compare_chunking.py` lúc 2026-09-24T11:18:15+00:00. Đừng sửa tay: chạy lại script sẽ ghi đè.
 Phần nhận xét nằm ở `README.md`.
 
 ## 1. Thiết lập
@@ -15,7 +15,7 @@ Phần nhận xét nằm ở `README.md`.
 - Embedding `AITeamVN/Vietnamese_Embedding` (cuda); token đếm bằng tokenizer của embedding.
 - Retrieval chính: hybrid (semantic + BM25, RRF k=60, 20 ứng viên mỗi nhánh), không reranker; hệ thống dùng k = 4.
 - Khoảng tin cậy 95%: bootstrap 10.000 lần theo câu hỏi (seed 20260924).
-- Git `0fdcebd+thay đổi chưa commit`; Python 3.11.0, langchain-core 1.6.3, chromadb 1.5.9.
+- Git `7689b4f+thay đổi chưa commit`; Python 3.11.0, langchain-core 1.6.3, chromadb 1.5.9.
 
 ## 2. Đặc trưng index
 
@@ -58,21 +58,21 @@ Thời gian build gồm tách chunk, embedding và ghi Chroma; model đã nạp 
 | nDCG@4 | 0,757 [0,665–0,840] | 0,811 [0,741–0,873] | 0,780 [0,688–0,863] |
 | nDCG@10 | 0,802 [0,734–0,867] | 0,836 [0,783–0,888] | 0,806 [0,727–0,881] |
 | Context precision@4 | 0,267 [0,233–0,302] | 0,289 [0,263–0,319] | 0,220 [0,198–0,237] |
-| Mật độ bằng chứng@4 | 0,049 [0,041–0,057] | 0,054 [0,047–0,061] | 0,092 [0,077–0,108] |
+| Mật độ bằng chứng@4 | 0,049 [0,041–0,057] | 0,054 [0,047–0,061] | 0,093 [0,078–0,109] |
 | Doc Hit@1 | 0,983 [0,948–1,000] | 1,000 [1,000–1,000] | 0,966 [0,914–1,000] |
 | Doc Recall@4 | 1,000 [1,000–1,000] | 1,000 [1,000–1,000] | 1,000 [1,000–1,000] |
-| Doc precision@4 | 0,875 [0,823–0,922] | 0,888 [0,845–0,927] | 0,823 [0,767–0,875] |
+| Doc precision@4 | 0,875 [0,823–0,922] | 0,888 [0,845–0,927] | 0,828 [0,776–0,879] |
 | Recall@1024 token | 0,767 [0,655–0,871] | 0,819 [0,716–0,905] | 0,888 [0,802–0,966] |
 | Recall@1536 token | 0,828 [0,724–0,914] | 0,931 [0,862–0,983] | 0,940 [0,871–0,991] |
 
 | Chi phí | A. Dữ liệu cũ + recursive | B. Dữ liệu mới + recursive | C. Dữ liệu mới + structure |
 | --- | ---: | ---: | ---: |
-| Token ngữ cảnh top-4: trung bình | 1 414 | 1 374 | 807 |
-| Token ngữ cảnh top-4: trung vị | 1 417 | 1 382 | 790 |
+| Token ngữ cảnh top-4: trung bình | 1 414 | 1 374 | 805 |
+| Token ngữ cảnh top-4: trung vị | 1 417 | 1 382 | 779 |
 | Token ngữ cảnh top-4: P95 | 1 532 | 1 529 | 1 116 |
-| Chunk đúng tài liệu nhưng sai mục (TB / 4) | 2,43 | 2,40 | 2,41 |
-| Độ trễ retrieval: trung vị (ms) | 26,3 | 29,4 | 34,1 |
-| Độ trễ retrieval: P95 (ms) | 33,3 | 32,4 | 39,9 |
+| Chunk đúng tài liệu nhưng sai mục (TB / 4) | 2,43 | 2,40 | 2,43 |
+| Độ trễ retrieval: trung vị (ms) | 23,1 | 27,7 | 34,0 |
+| Độ trễ retrieval: P95 (ms) | 28,1 | 31,1 | 40,8 |
 | Required context recall@4 (4 câu) | 100,0% | 100,0% | 100,0% |
 
 Số trong ngoặc vuông là khoảng tin cậy 95%.
@@ -132,8 +132,8 @@ Nhị phân: McNemar chính xác; liên tục: Wilcoxon signed-rank. p Holm hi�
 | Context precision@4 | B→C (Đổi cách chunk (cùng dữ liệu mới)) | 0,289 | 0,220 | -0,069 [-0,099; -0,039] | 1/17/40 | 0,000 | 0,000 |
 | Context precision@4 | A→C (Tổng hợp cả hai) | 0,267 | 0,220 | -0,047 [-0,086; -0,013] | 5/16/37 | 0,016 | 0,033 |
 | Mật độ bằng chứng@4 | A→B (Viết lại dữ liệu (cùng recursive)) | 0,049 | 0,054 | 0,005 [0,001; 0,009] | 29/27/2 | 0,365 | 0,365 |
-| Mật độ bằng chứng@4 | B→C (Đổi cách chunk (cùng dữ liệu mới)) | 0,054 | 0,092 | 0,039 [0,027; 0,052] | 49/8/1 | 0,000 | 0,000 |
-| Mật độ bằng chứng@4 | A→C (Tổng hợp cả hai) | 0,049 | 0,092 | 0,043 [0,031; 0,057] | 50/6/2 | 0,000 | 0,000 |
+| Mật độ bằng chứng@4 | B→C (Đổi cách chunk (cùng dữ liệu mới)) | 0,054 | 0,093 | 0,039 [0,027; 0,052] | 49/8/1 | 0,000 | 0,000 |
+| Mật độ bằng chứng@4 | A→C (Tổng hợp cả hai) | 0,049 | 0,093 | 0,043 [0,031; 0,057] | 50/6/2 | 0,000 | 0,000 |
 | Recall@1024 token | A→B (Viết lại dữ liệu (cùng recursive)) | 0,767 | 0,819 | 0,052 [-0,052; 0,155] | 6/3/49 | 0,317 | 0,412 |
 | Recall@1024 token | B→C (Đổi cách chunk (cùng dữ liệu mới)) | 0,819 | 0,888 | 0,069 [-0,034; 0,172] | 7/3/48 | 0,206 | 0,412 |
 | Recall@1024 token | A→C (Tổng hợp cả hai) | 0,767 | 0,888 | 0,121 [0,000; 0,241] | 10/3/45 | 0,052 | 0,157 |
@@ -141,8 +141,8 @@ Nhị phân: McNemar chính xác; liên tục: Wilcoxon signed-rank. p Holm hi�
 | Recall@1536 token | B→C (Đổi cách chunk (cùng dữ liệu mới)) | 0,931 | 0,940 | 0,009 [-0,069; 0,086] | 3/3/52 | 0,739 | 0,739 |
 | Recall@1536 token | A→C (Tổng hợp cả hai) | 0,828 | 0,940 | 0,112 [0,017; 0,216] | 8/2/48 | 0,023 | 0,069 |
 | Token ngữ cảnh top-4 | A→B (Viết lại dữ liệu (cùng recursive)) | 1 414 | 1 374 | -40 [-62; -18] | 17/41/0 | 0,001 | 0,001 |
-| Token ngữ cảnh top-4 | B→C (Đổi cách chunk (cùng dữ liệu mới)) | 1 374 | 807 | -568 [-628; -509] | 0/58/0 | 0,000 | 0,000 |
-| Token ngữ cảnh top-4 | A→C (Tổng hợp cả hai) | 1 414 | 807 | -608 [-661; -554] | 0/58/0 | 0,000 | 0,000 |
+| Token ngữ cảnh top-4 | B→C (Đổi cách chunk (cùng dữ liệu mới)) | 1 374 | 805 | -569 [-630; -510] | 0/58/0 | 0,000 | 0,000 |
+| Token ngữ cảnh top-4 | A→C (Tổng hợp cả hai) | 1 414 | 805 | -609 [-662; -555] | 0/58/0 | 0,000 | 0,000 |
 
 Với Token ngữ cảnh, "tốt hơn" nghĩa là nhiều token hơn (tức tốn hơn).
 

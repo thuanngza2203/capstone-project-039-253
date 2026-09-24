@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-23T19:22:00+00:00",
-  "git": "0fdcebd+thay đổi chưa commit",
+  "generated_at": "2026-09-24T11:18:15+00:00",
+  "git": "7689b4f+thay đổi chưa commit",
   "queries_total": 60,
   "queries_scored": 58,
   "queries_sha256": "893ce4502b747d132ae32f6cc2c3c48a8c6c37b286346d627184deb4ba52a9fc",
@@ -243,8 +243,8 @@
       ],
       "context_tokens_at_4_median": 1417.0,
       "context_tokens_at_4_p95": 1531.75,
-      "latency_ms_median": 26.252200012095273,
-      "latency_ms_p95": 33.339394952054136,
+      "latency_ms_median": 23.12984998570755,
+      "latency_ms_p95": 28.125739959068596,
       "required_context_recall_at_4": 1.0,
       "required_context_queries": 4
     },
@@ -329,8 +329,8 @@
       ],
       "context_tokens_at_4_median": 1421.0,
       "context_tokens_at_4_p95": 1548.35,
-      "latency_ms_median": 18.351150007219985,
-      "latency_ms_p95": 22.647279957891442,
+      "latency_ms_median": 15.00130002386868,
+      "latency_ms_p95": 17.01839502202347,
       "required_context_recall_at_4": 1.0,
       "required_context_queries": 4
     },
@@ -415,8 +415,8 @@
       ],
       "context_tokens_at_4_median": 1400.5,
       "context_tokens_at_4_p95": 1531.3,
-      "latency_ms_median": 8.369299990590662,
-      "latency_ms_p95": 13.369095040252432,
+      "latency_ms_median": 7.220149971544743,
+      "latency_ms_p95": 8.692679926753044,
       "required_context_recall_at_4": 1.0,
       "required_context_queries": 4
     },
@@ -501,8 +501,8 @@
       ],
       "context_tokens_at_4_median": 1382.0,
       "context_tokens_at_4_p95": 1529.15,
-      "latency_ms_median": 29.374599980656058,
-      "latency_ms_p95": 32.40678499278147,
+      "latency_ms_median": 27.733300055842847,
+      "latency_ms_p95": 31.146389996865764,
       "required_context_recall_at_4": 1.0,
       "required_context_queries": 4
     },
@@ -587,8 +587,8 @@
       ],
       "context_tokens_at_4_median": 1386.5,
       "context_tokens_at_4_p95": 1524.6,
-      "latency_ms_median": 18.01159998285584,
-      "latency_ms_p95": 20.599955035140738,
+      "latency_ms_median": 16.216050018556416,
+      "latency_ms_p95": 18.4924450062681,
       "required_context_recall_at_4": 1.0,
       "required_context_queries": 4
     },
@@ -673,8 +673,8 @@
       ],
       "context_tokens_at_4_median": 1354.0,
       "context_tokens_at_4_p95": 1529.15,
-      "latency_ms_median": 8.477449999190867,
-      "latency_ms_p95": 10.02752501226496,
+      "latency_ms_median": 8.930150070227683,
+      "latency_ms_p95": 10.220765002304688,
       "required_context_recall_at_4": 1.0,
       "required_context_queries": 4
     },
@@ -717,10 +717,10 @@
         0.19827586206896552,
         0.23706896551724138
       ],
-      "evidence_density_at_4": 0.09247662523176474,
+      "evidence_density_at_4": 0.09261727712547957,
       "evidence_density_at_4_ci": [
-        0.07740964033243958,
-        0.10843394725553102
+        0.07754198271074823,
+        0.1085566501584803
       ],
       "doc_hit_at_1": 0.9655172413793104,
       "doc_hit_at_1_ci": [
@@ -732,10 +732,10 @@
         1.0,
         1.0
       ],
-      "doc_precision_at_4": 0.8232758620689655,
+      "doc_precision_at_4": 0.8275862068965517,
       "doc_precision_at_4_ci": [
-        0.7672413793103449,
-        0.875
+        0.7758620689655172,
+        0.8793103448275862
       ],
       "recall_budget_1024": 0.8879310344827587,
       "recall_budget_1024_ci": [
@@ -747,20 +747,20 @@
         0.8706896551724138,
         0.9913793103448276
       ],
-      "context_tokens_at_4": 806.6724137931035,
+      "context_tokens_at_4": 805.4137931034483,
       "context_tokens_at_4_ci": [
-        756.9306034482759,
-        857.5862068965517
+        755.5512931034483,
+        856.3275862068965
       ],
-      "wrong_section_at_4": 2.413793103448276,
+      "wrong_section_at_4": 2.4310344827586206,
       "wrong_section_at_4_ci": [
-        2.1724137931034484,
+        2.189655172413793,
         2.6551724137931036
       ],
-      "context_tokens_at_4_median": 789.5,
+      "context_tokens_at_4_median": 779.0,
       "context_tokens_at_4_p95": 1116.2,
-      "latency_ms_median": 34.12644998752512,
-      "latency_ms_p95": 39.939569961279624,
+      "latency_ms_median": 34.02589994948357,
+      "latency_ms_p95": 40.79575500800274,
       "required_context_recall_at_4": 1.0,
       "required_context_queries": 4
     },
@@ -845,8 +845,8 @@
       ],
       "context_tokens_at_4_median": 914.5,
       "context_tokens_at_4_p95": 1145.85,
-      "latency_ms_median": 18.135799997253343,
-      "latency_ms_p95": 21.967589974519797,
+      "latency_ms_median": 17.583350010681897,
+      "latency_ms_p95": 21.184309921227396,
       "required_context_recall_at_4": 1.0,
       "required_context_queries": 4
     },
@@ -931,8 +931,8 @@
       ],
       "context_tokens_at_4_median": 727.5,
       "context_tokens_at_4_p95": 1175.45,
-      "latency_ms_median": 10.131600021850318,
-      "latency_ms_p95": 12.130924977827817,
+      "latency_ms_median": 10.681499959900975,
+      "latency_ms_p95": 13.153195037739351,
       "required_context_recall_at_4": 1.0,
       "required_context_queries": 4
     }
@@ -1307,32 +1307,32 @@
       "contrast": "B→C",
       "meaning": "Đổi cách chunk (cùng dữ liệu mới)",
       "left_mean": 0.053813390343350156,
-      "right_mean": 0.09247662523176474,
-      "diff": 0.03866323488841456,
-      "diff_ci_low": 0.026755876573102157,
-      "diff_ci_high": 0.051781768186078235,
+      "right_mean": 0.09261727712547957,
+      "diff": 0.03880388678212942,
+      "diff_ci_low": 0.026858458111831504,
+      "diff_ci_high": 0.051906818989562176,
       "better": 49,
       "worse": 8,
       "same": 1,
       "test_name": "Wilcoxon signed-rank",
-      "p_value": 1.6775878644016727e-07,
-      "p_holm": 3.3551757288033453e-07
+      "p_value": 1.5391796242620912e-07,
+      "p_holm": 3.0783592485241824e-07
     },
     {
       "metric": "evidence_density_at_4",
       "contrast": "A→C",
       "meaning": "Tổng hợp cả hai",
       "left_mean": 0.049147118213763746,
-      "right_mean": 0.09247662523176474,
-      "diff": 0.04332950701800097,
-      "diff_ci_low": 0.030543459160763953,
-      "diff_ci_high": 0.05696960156199935,
+      "right_mean": 0.09261727712547957,
+      "diff": 0.04347015891171582,
+      "diff_ci_low": 0.030716710917443227,
+      "diff_ci_high": 0.05706853415112497,
       "better": 50,
       "worse": 6,
       "same": 2,
       "test_name": "Wilcoxon signed-rank",
-      "p_value": 4.215899281304314e-08,
-      "p_holm": 1.264769784391294e-07
+      "p_value": 3.6701185887215424e-08,
+      "p_holm": 1.1010355766164627e-07
     },
     {
       "metric": "recall_budget_1024",
@@ -1451,32 +1451,32 @@
       "contrast": "B→C",
       "meaning": "Đổi cách chunk (cùng dữ liệu mới)",
       "left_mean": 1374.396551724138,
-      "right_mean": 806.6724137931035,
-      "diff": -567.7241379310345,
-      "diff_ci_low": -628.4836206896551,
-      "diff_ci_high": -508.9646551724138,
+      "right_mean": 805.4137931034483,
+      "diff": -568.9827586206897,
+      "diff_ci_low": -629.7422413793104,
+      "diff_ci_high": -510.1375,
       "better": 0,
       "worse": 58,
       "same": 0,
       "test_name": "Wilcoxon signed-rank",
       "p_value": 3.504284870854178e-11,
-      "p_holm": 1.0511088951111694e-10
+      "p_holm": 1.0512854612562535e-10
     },
     {
       "metric": "context_tokens_at_4",
       "contrast": "A→C",
       "meaning": "Tổng hợp cả hai",
       "left_mean": 1414.448275862069,
-      "right_mean": 806.6724137931035,
-      "diff": -607.7758620689655,
-      "diff_ci_low": -660.6383620689655,
-      "diff_ci_high": -553.9288793103449,
+      "right_mean": 805.4137931034483,
+      "diff": -609.0344827586207,
+      "diff_ci_low": -661.6737068965517,
+      "diff_ci_high": -555.2581896551724,
       "better": 0,
       "worse": 58,
       "same": 0,
       "test_name": "Wilcoxon signed-rank",
-      "p_value": 3.503696317037232e-11,
-      "p_holm": 1.0511088951111694e-10
+      "p_value": 3.504284870854178e-11,
+      "p_holm": 1.0512854612562535e-10
     }
   ],
   "figures": [

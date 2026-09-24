@@ -125,7 +125,9 @@ Câu gõ không dấu là điểm yếu rõ nhất của chunk nhỏ: ít chữ 
 - **Hit@1 nghiêm ngặt**: phải chứa trọn đoạn bằng chứng. Một chunk chứa 90% bằng chứng vẫn tính là trượt
   (Coverage@k cho điểm từng phần).
 - **Độ trễ** đo trên một máy có GPU, mỗi câu chạy một lần; chênh lệch vài ms không đáng kể so với thời
-  gian LLM sinh câu trả lời.
+  gian LLM sinh câu trả lời. Độ trễ tuyệt đối thay đổi giữa các lần chạy, xem báo cáo semantic/hybrid.
+- **Chroma tìm gần đúng (HNSW)**: so với tìm chính xác, index structure bỏ sót chunk hạng 3 ở 1/58 câu
+  (q054); index recursive khớp hoàn toàn. Đo lại sau khi index ổn định cho kết quả giống hệt bản này.
 
 ## 6. Khuyến nghị
 
