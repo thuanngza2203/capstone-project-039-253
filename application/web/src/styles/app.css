@@ -96,10 +96,16 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .sidebar-brand span { flex: 1; color: var(--color-ink); }
 .sidebar-footer { margin-top: auto; border-top: 1px solid var(--color-rule); padding-top: var(--space-sm); }
-.sidebar-footer a {
+.sidebar-footer a, .sidebar-logout {
   display: flex; align-items: center; gap: var(--space-xs); min-height: var(--size-control);
   color: var(--color-ink-2); text-decoration: none; font-weight: 600;
 }
+.sidebar-logout { width: 100%; padding: 0; border: 0; background: none; font: inherit; font-weight: 600; cursor: pointer; text-align: left; }
+.sidebar-logout:hover { color: var(--color-error); }
+
+.login-page { min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; padding: var(--space-md); }
+.login-card { width: 100%; max-width: 24rem; display: flex; flex-direction: column; gap: var(--space-md); }
+.login-card h1 { font-size: clamp(1.5rem, 1.5vw + 1.1rem, 2rem); }
 
 /* --- Chat ------------------------------------------------------------------ */
 
@@ -111,7 +117,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
   padding: calc(var(--space-xs) + env(safe-area-inset-top)) var(--space-sm) var(--space-xs);
   border-bottom: 1px solid var(--color-rule); background: var(--color-sheet);
 }
-.chat-title { flex: 1; min-width: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chat-title { flex: 1; min-width: 0; color: var(--color-ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Điện thoại: nhường chỗ cho nút chọn model; tiêu đề vẫn có trong danh sách lịch sử. */
+@media (max-width: 639px) { .chat-title { visibility: hidden; } }
 .memory-pill {
   display: none; align-items: center; gap: var(--space-2xs); max-width: 16rem; min-width: 0; flex: 0 1 auto;
   padding: var(--space-2xs) var(--space-sm); border-radius: var(--radius-pill);
@@ -215,6 +223,55 @@ button, input, select, textarea { font: inherit; color: inherit; }
   display: inline-grid; place-items: center; min-width: 1.4rem; height: 1.4rem; border-radius: var(--radius-pill);
   background: var(--color-paper-2); font-size: var(--text-xs); font-weight: 600; color: var(--color-ink);
 }
+.source-doc { display: flex; align-items: flex-start; gap: var(--space-xs); font-size: var(--text-sm); color: var(--color-ink); }
+.source-doc > .icon { flex: none; margin-top: 0.15rem; color: var(--color-accent); }
+.source-file { font-family: var(--font-outlier); font-size: var(--text-xs); color: var(--color-muted); overflow-wrap: anywhere; }
+.sources .source-links { margin: var(--space-3xs) 0 0 calc(16px + var(--space-xs)); gap: var(--space-3xs); }
+.source-links a { align-items: flex-start; overflow-wrap: anywhere; }
+.source-links a .icon { flex: none; margin-top: 0.2rem; }
+.answered-by { display: flex; align-items: center; gap: var(--space-3xs); font-size: var(--text-xs); color: var(--color-muted); }
+.web-caution { margin: var(--space-2xs) 0 0; font-size: var(--text-xs); color: var(--color-warn); }
+
+/* Chọn model ở đầu trang chat (kiểu ChatGPT / Gemini) */
+.model-menu { position: relative; flex: none; min-width: 0; }
+.model-button {
+  display: inline-flex; align-items: center; gap: var(--space-2xs); min-height: var(--size-control); max-width: 15rem;
+  padding: 0 var(--space-sm); border: 0; border-radius: var(--radius-md); background: none;
+  font: inherit; font-family: var(--font-display); font-size: var(--text-md); color: var(--color-ink); cursor: pointer;
+}
+.model-button span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.model-button:hover:not(:disabled), .model-button[aria-expanded="true"] { background: var(--color-paper-2); }
+.model-button:disabled { opacity: 0.6; cursor: default; }
+.model-button.is-static { cursor: default; }
+.model-button .icon:last-child { flex: none; color: var(--color-muted); }
+.model-popover {
+  position: absolute; top: calc(100% + var(--space-2xs)); left: 0; z-index: 30;
+  width: min(20rem, calc(100vw - 2 * var(--space-md))); padding: var(--space-2xs);
+  background: var(--color-sheet); border: 1px solid var(--color-rule); border-radius: var(--radius-lg); box-shadow: var(--shadow-lift);
+}
+.model-popover-title { padding: var(--space-xs) var(--space-sm) var(--space-2xs); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-muted); }
+.model-popover-note { margin: 0 var(--space-sm) var(--space-xs); font-size: var(--text-xs); color: var(--color-warn); }
+.model-option {
+  display: flex; align-items: center; gap: var(--space-sm); width: 100%; padding: var(--space-xs) var(--space-sm);
+  border: 0; border-radius: var(--radius-md); background: none; font: inherit; text-align: left; cursor: pointer;
+}
+.model-option:hover, .model-option:focus-visible { background: var(--color-paper-2); outline: none; }
+.model-option[aria-checked="true"] { background: var(--color-accent-soft); }
+.model-option-text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.model-option-name { font-weight: 600; color: var(--color-ink); }
+.model-option-description { font-size: var(--text-xs); color: var(--color-muted); }
+.model-option-check { flex: none; color: var(--color-accent); }
+
+/* Nút "Tìm web" trong ô nhập */
+.web-search-toggle {
+  flex: none; display: inline-flex; align-items: center; gap: var(--space-3xs); min-height: var(--size-control);
+  padding: 0 var(--space-sm); border: 1px solid var(--color-rule); border-radius: var(--radius-pill);
+  background: none; font: inherit; font-size: var(--text-sm); color: var(--color-ink-2); cursor: pointer;
+}
+.web-search-toggle:hover { border-color: var(--color-accent); }
+.web-search-toggle.is-on { background: var(--color-accent-soft); border-color: var(--color-accent); color: var(--color-accent); font-weight: 600; }
+.web-search-label { display: none; }
+@media (min-width: 480px) { .web-search-label { display: inline; } }
 
 .feedback { border-top: 1px dashed var(--color-rule); padding-top: var(--space-xs); }
 .feedback-row { display: flex; align-items: center; gap: var(--space-2xs); flex-wrap: wrap; font-size: var(--text-sm); }

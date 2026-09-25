@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ACTION_LABEL, INTENT_LABEL, SCOPE_LABEL, diseaseName, plantName, subjectLabel } from "../lib/labels.js";
+import { ACTION_LABEL, INTENT_LABEL, SCOPE_LABEL, diseaseName, plantName, providerName, subjectLabel } from "../lib/labels.js";
 import { formatPercent } from "../lib/format.js";
 import { KeyValue } from "./ui.jsx";
 
@@ -27,23 +27,62 @@ function Step({ number, title, children }) {
 }
 
 // Dấu vết pipeline của một lượt trả lời (trường `debug` của /api/chat), theo các bước ②–⑧ trong plan.
-export default function DebugPanel({ debug }) {
-  if (!debug) return <p className="muted">Lượt này không có dữ liệu debug.</p>;
-  const request = debug.rag_request || {};
-  const detection = debug.detection;
+function DetectionStep({ detection }) {
+  return (
+    <Step number="②" title="Nhận diện ảnh">
+      {detection ? (
+        <KeyValue rows={[
+          ["Cây", `${plantName(detection.plant)} (${detection.plant})`],
+          ["Bệnh", detection.disease ? `${diseaseName(detection.disease)} (${detection.disease})` : "không có model bệnh cho cây này"],
+          ["Độ tin cậy", formatPercent(detection.confidence, 1)],
+        ]} />
+      ) : (
+        <p className="muted">Lượt này không có ảnh.</p>
+      )}
+    </Step>
+  );
+}
+
+function RawJson({ debug }) {
+  return (
+    <details className="raw-json">
+      <summary>JSON đầy đủ</summary>
+      <pre>{JSON.stringify(debug, null, 2)}</pre>
+    </details>
+  );
+}
+
+// "Tìm trên web": sau nhận diện ảnh, Groq tìm web và trả lời; không qua bước ③–⑦.
+function WebSearchTrace({ debug }) {
   return (
     <div className="trace">
-      <Step number="②" title="Nhận diện ảnh">
-        {detection ? (
-          <KeyValue rows={[
-            ["Cây", `${plantName(detection.plant)} (${detection.plant})`],
-            ["Bệnh", detection.disease ? `${diseaseName(detection.disease)} (${detection.disease})` : "không có model bệnh cho cây này"],
-            ["Độ tin cậy", formatPercent(detection.confidence, 1)],
-          ]} />
-        ) : (
-          <p className="muted">Lượt này không có ảnh.</p>
-        )}
+      <DetectionStep detection={debug.detection} />
+      <Step number="🌐" title="Tìm trên web (bỏ qua chuẩn hóa, điều hướng và RAG)">
+        <KeyValue rows={[
+          ["Model", `${providerName(debug.llm_provider) || "—"}${debug.llm_model ? ` · ${debug.llm_model}` : ""}`],
+          ["Cây / bệnh gửi kèm", subjectLabel(debug.resolved_plant, debug.resolved_disease) || null],
+          ["Lấy từ", contextSource(debug.context_source)],
+          ["Trang đã đọc", debug.web_sources?.length ? (
+            <span className="inline-list">
+              {debug.web_sources.map((link) => (
+                <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer">{link.label || link.url}</a>
+              ))}
+            </span>
+          ) : "không có"],
+        ]} />
       </Step>
+      <RawJson debug={debug} />
+    </div>
+  );
+}
+
+export default function DebugPanel({ debug }) {
+  if (!debug) return <p className="muted">Lượt này không có dữ liệu debug.</p>;
+  if (debug.web_search) return <WebSearchTrace debug={debug} />;
+  const request = debug.rag_request || {};
+  return (
+    <div className="trace">
+      <DetectionStep detection={debug.detection} />
       <Step number="③" title="Chuẩn hóa câu hỏi (Groq)">
         {debug.normalizer_failed ? (
           <p className="text-warn">Groq lỗi: câu gốc được gửi thẳng sang RAG (rewrite_query=true).</p>
@@ -82,12 +121,26 @@ export default function DebugPanel({ debug }) {
           ["plant_type / disease", request.plant_type || request.disease
             ? `${request.plant_type || "—"} / ${request.disease || "—"}` : request.query ? "không gửi" : null],
           ["rewrite_query", request.rewrite_query ? "true" : undefined],
+          ["Model đã chọn", request.llm_provider ? `${providerName(request.llm_provider)} (${request.llm_provider})` : undefined],
+          ["Câu trả lời mẫu (Feedback RAG)", debug.feedback_rag_examples?.length ? (
+            <ul className="list-plain">
+              {debug.feedback_rag_examples.map((example) => (
+                <li key={example.feedback_id || example.question}>
+                  {example.question}
+                  {example.similarity !== undefined ? <span className="muted"> · giống {formatPercent(example.similarity)}</span> : null}
+                </li>
+              ))}
+            </ul>
+          ) : undefined],
           ["Lịch sử gửi kèm", request.history ? `${request.history.length} tin nhắn` : null],
         ]} />
       </Step>
       <Step number="⑦–⑧" title="Tìm tài liệu và sinh câu trả lời">
         <KeyValue rows={[
           ["Backend", debug.answer_backend],
+          ["Model trả lời", debug.llm_provider
+            ? `${providerName(debug.llm_provider)}${debug.llm_model ? ` · ${debug.llm_model}` : ""}`
+            : debug.rag_grounded === false ? "không gọi LLM (câu từ chối dựng sẵn)" : undefined],
           ["Phạm vi tìm", debug.rag_scope_status
             ? `${SCOPE_LABEL[debug.rag_scope_status] || debug.rag_scope_status} (${debug.rag_scope_status})` : null],
           ["Có tài liệu", debug.rag_grounded === null || debug.rag_grounded === undefined ? null : debug.rag_grounded ? "có" : "không"],
@@ -100,10 +153,7 @@ export default function DebugPanel({ debug }) {
           ) : null],
         ]} />
       </Step>
-      <details className="raw-json">
-        <summary>JSON đầy đủ</summary>
-        <pre>{JSON.stringify(debug, null, 2)}</pre>
-      </details>
+      <RawJson debug={debug} />
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import { adminSession, clearSession } from "./lib/auth.js";
+
 // Mọi lời gọi backend đi qua file này.
 // Local: để trống biến môi trường → đi qua proxy của Vite (/detection, /rag).
 // Deploy: đặt VITE_DETECTION_URL, VITE_RAG_URL trong .env.production rồi `npm run build`.
@@ -23,9 +25,12 @@ function errorMessage(status, data, service) {
   return `Lỗi ${status}`;
 }
 
-async function request(service, path, { method = "GET", body, form, signal } = {}) {
+// `admin`: API /admin/* của detection, cần token đăng nhập; 401 là phiên hết hạn → về trang đăng nhập.
+async function request(service, path, { method = "GET", body, form, signal, admin = false } = {}) {
   const base = service === "rag" ? RAG_URL : DETECTION_URL;
   const init = { method, signal, headers: {}, cache: "no-store" };
+  const session = admin ? adminSession() : null;
+  if (session) init.headers.Authorization = `Bearer ${session.token}`;
   if (form) {
     init.body = form;
   } else if (body !== undefined) {
@@ -46,6 +51,7 @@ async function request(service, path, { method = "GET", body, form, signal } = {
   } catch {
     data = null;
   }
+  if (admin && response.status === 401) clearSession("expired");
   if (!response.ok) throw new ApiError(response.status, errorMessage(response.status, data, service), service);
   return data;
 }
@@ -66,10 +72,13 @@ const sourcePath = (source) => source.split("/").map(encodeURIComponent).join("/
 
 export const detection = {
   health: () => request("detection", "/health"),
-  chat: ({ sessionId, message, image, imageName, signal }) => {
+  models: () => request("detection", "/api/models"),
+  chat: ({ sessionId, message, image, imageName, llmProvider, webSearch, signal }) => {
     const form = new FormData();
     form.append("session_id", sessionId);
     form.append("message", message || "");
+    if (webSearch) form.append("web_search", "true");
+    else if (llmProvider) form.append("llm_provider", llmProvider);
     if (image) form.append("image", image, imageName || "leaf.jpg");
     return request("detection", "/api/chat", { method: "POST", form, signal });
   },
@@ -78,10 +87,12 @@ export const detection = {
   deleteConversation: (id) => request("detection", `/api/conversations/${encodeURIComponent(id)}`, { method: "DELETE" }),
   feedback: (feedbackId, rating, reasons = []) =>
     request("detection", "/feedback", { method: "PUT", body: { feedback_id: feedbackId, rating, reasons } }),
-  adminStatus: () => request("detection", "/admin/status"),
-  reviews: ({ all = false, from, to } = {}) => request("detection", `/admin/reviews${query({ all: all || undefined, from, to })}`),
-  deleteReview: (id) => request("detection", `/admin/review/${encodeURIComponent(id)}`, { method: "DELETE" }),
-  train: (items) => request("detection", "/admin/training", { method: "POST", body: { items } }),
+  login: (username, password) => request("detection", "/admin/login", { method: "POST", body: { username, password } }),
+  adminStatus: () => request("detection", "/admin/status", { admin: true }),
+  reviews: ({ all = false, from, to } = {}) =>
+    request("detection", `/admin/reviews${query({ all: all || undefined, from, to })}`, { admin: true }),
+  deleteReview: (id) => request("detection", `/admin/review/${encodeURIComponent(id)}`, { method: "DELETE", admin: true }),
+  train: (items) => request("detection", "/admin/training", { method: "POST", body: { items }, admin: true }),
 };
 
 // --- RAG server ------------------------------------------------------------------

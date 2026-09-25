@@ -208,7 +208,9 @@ export default function Feedback() {
                       <summary className="clamp-2">{item.answer || "—"}</summary>
                       <div style={{ whiteSpace: "pre-wrap" }}>{item.answer}</div>
                     </details>
+                    {item.action === "WEB_SEARCH" ? <Badge tone="warn">tìm trên web</Badge> : null}
                     {meta.sources?.length ? <div className="small muted">Nguồn: {meta.sources.join(", ")}</div> : null}
+                    {meta.web_sources?.length ? <div className="small muted">Nguồn web: {meta.web_sources.join(", ")}</div> : null}
                     {!meta.sources?.length && meta.grounded === false ? <div className="small text-warn">Kho chưa có tài liệu cho câu này</div> : null}
                   </td>
                   <td data-label="Trả lời đúng">

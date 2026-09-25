@@ -5,7 +5,8 @@ import { shrinkImage } from "../../lib/image.js";
 const coarsePointer = () => window.matchMedia?.("(pointer: coarse)").matches;
 
 // Ô nhập: chữ, ảnh hoặc cả hai. Ảnh được thu nhỏ ngay khi chọn để xem trước và gửi nhanh.
-const Composer = forwardRef(function Composer({ disabled, onSend }, ref) {
+// `webSearch`/`onToggleWebSearch`: nút "Tìm web"; không truyền `onToggleWebSearch` thì không hiện nút.
+const Composer = forwardRef(function Composer({ disabled, onSend, webSearch = false, onToggleWebSearch }, ref) {
   const [text, setText] = useState("");
   const [image, setImage] = useState(null);
   const [preparing, setPreparing] = useState(false);
@@ -95,6 +96,21 @@ const Composer = forwardRef(function Composer({ disabled, onSend }, ref) {
           <Icon name="camera" />
         </button>
         <input ref={fileInput} type="file" accept="image/*" hidden onChange={choose} />
+        {onToggleWebSearch ? (
+          <button
+            type="button"
+            className={`web-search-toggle ${webSearch ? "is-on" : ""}`}
+            onClick={onToggleWebSearch}
+            aria-pressed={webSearch}
+            aria-label="Tìm trên web"
+            title={webSearch
+              ? "Đang bật: Groq tìm trên web và trả lời, không dùng kho tài liệu. Bấm để tắt."
+              : "Tìm trên web: Groq tìm web và trả lời, không dùng kho tài liệu."}
+          >
+            <Icon name="globe" size={18} />
+            <span className="web-search-label">Tìm web</span>
+          </button>
+        ) : null}
         <label className="visually-hidden" htmlFor="chat-input">Câu hỏi</label>
         <textarea
           id="chat-input"
@@ -103,7 +119,8 @@ const Composer = forwardRef(function Composer({ disabled, onSend }, ref) {
           value={text}
           onChange={(event) => setText(event.target.value)}
           onKeyDown={onKeyDown}
-          placeholder={image ? "Hỏi thêm về ảnh (không bắt buộc)…" : "Nhập câu hỏi hoặc gửi ảnh lá…"}
+          // Ngắn để vừa một dòng trên điện thoại 360 px (bên cạnh nút ảnh, Tìm web, Gửi).
+          placeholder={webSearch ? "Hỏi và tìm trên web…" : image ? "Hỏi thêm về ảnh…" : "Hỏi hoặc gửi ảnh lá…"}
           maxLength={2000}
         />
         <button type="submit" className="send-btn" disabled={!canSend} aria-label="Gửi">

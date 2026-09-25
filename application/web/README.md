@@ -5,7 +5,8 @@ React 18 + Vite 5, JavaScript. Thiết kế theo `RAG-module/agents/2026-09-24-s
 
 | Đường dẫn | Trang |
 | --- | --- |
-| `/` | Chat: gửi chữ, ảnh (tự thu nhỏ còn cạnh dài 1.600 px), hoặc cả hai. Mỗi câu trả lời có nguồn, nút thích/không thích, và mục "Cách hệ thống xử lý câu này" hiện từng bước pipeline (nhận diện ảnh, Groq chuẩn hóa, cây/bệnh, điều hướng, câu gửi RAG, phạm vi tìm). `/?session=<id>` mở một cuộc trò chuyện có sẵn. |
+| `/` | Chat: gửi chữ, ảnh (tự thu nhỏ còn cạnh dài 1.600 px), hoặc cả hai. Nút chọn model ở đầu trang (kiểu ChatGPT / Gemini) khi detection cho phép nhiều model (`CHAT_LLM_PROVIDERS`). Nút "Tìm web" trong ô nhập: Groq tìm web và trả lời, không dùng kho tài liệu; câu trả lời kèm các trang web đã đọc và cảnh báo thông tin chưa được kiểm chứng. Mỗi câu trả lời liệt kê tài liệu trong kho và link nguồn tham khảo, nút thích/không thích, và mục "Cách hệ thống xử lý câu này" hiện từng bước pipeline (nhận diện ảnh, Groq chuẩn hóa, cây/bệnh, điều hướng, câu gửi RAG, phạm vi tìm). `/?session=<id>` mở một cuộc trò chuyện có sẵn. Trang chat không có đường dẫn sang trang quản trị. |
+| `/admin/login` | Đăng nhập quản trị bằng `ADMIN_USERNAME` / `ADMIN_PASSWORD` trong `.env` của detection (phải đặt `ADMIN_PASSWORD`). Mọi trang `/admin/*` chuyển về đây khi chưa đăng nhập hoặc phiên đã hết hạn. |
 | `/admin` | Tổng quan: số câu trả lời, cuộc trò chuyện, tỉ lệ có tài liệu, tỉ lệ được thích; biểu đồ theo ngày, theo hành động, bệnh hỏi nhiều, phạm vi tìm, đánh giá. |
 | `/admin/conversations` | Mọi cuộc trò chuyện; từng lượt kèm dấu vết pipeline, mở tiếp trong trang chat. |
 | `/admin/feedback` | Như trang admin cũ: lọc, tìm, sửa câu trả lời đúng, đưa vào Feedback RAG, xóa. |

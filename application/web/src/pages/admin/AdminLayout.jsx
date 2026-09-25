@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import { Link, Navigate, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import Icon from "../../components/Icon.jsx";
+import { LOGOUT_EVENT, adminSession, clearSession } from "../../lib/auth.js";
 
 const NAV = [
   { to: "/admin", label: "Tổng quan", icon: "chart", end: true },
@@ -14,8 +15,22 @@ const NAV = [
 export default function AdminLayout() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.pathname + location.search;
 
   useEffect(() => setOpen(false), [location.pathname]);
+
+  // Đăng xuất, hoặc detection trả 401 (phiên hết hạn / đổi mật khẩu): về trang đăng nhập rồi quay lại đúng trang này.
+  useEffect(() => {
+    const onLogout = (event) => navigate("/admin/login", {
+      replace: true, state: { from, expired: event.detail === "expired" },
+    });
+    window.addEventListener(LOGOUT_EVENT, onLogout);
+    return () => window.removeEventListener(LOGOUT_EVENT, onLogout);
+  }, [navigate, from]);
+
+  const session = adminSession();
+  if (!session) return <Navigate to="/admin/login" replace state={{ from }} />;
 
   const current = NAV.slice().reverse().find((item) => (
     item.end ? location.pathname === item.to : location.pathname.startsWith(item.to)
@@ -41,6 +56,9 @@ export default function AdminLayout() {
         </nav>
         <nav className="sidebar-footer">
           <Link to="/"><Icon name="chat" size={18} /> Về trang chat</Link>
+          <button type="button" className="sidebar-logout" onClick={() => clearSession("logout")}>
+            <Icon name="close" size={18} /> Đăng xuất ({session.username})
+          </button>
         </nav>
       </aside>
       <div className="admin-main">

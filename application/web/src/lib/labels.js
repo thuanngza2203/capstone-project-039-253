@@ -75,6 +75,8 @@ export const ACTION_LABEL = {
   REQUEST_IMAGE: "Yêu cầu gửi ảnh",
   ASK_CLARIFICATION: "Hỏi lại cho rõ",
   OUT_OF_SCOPE: "Ngoài phạm vi",
+  WEB_SEARCH: "Tìm trên web",
+  HEALTHY_PLANT: "Lá khỏe (trả lời luôn)",
 };
 
 export const SCOPE_LABEL = {
@@ -87,6 +89,24 @@ export const SCOPE_LABEL = {
   unsupported_disease: "Kho chưa có tài liệu",
   unknown_disease: "Không nhận ra bệnh",
   internal: "Backend groq (không dùng RAG server)",
+  web_search: "Tìm trên web (không dùng kho)",
+};
+
+// Model sinh câu trả lời (`llm_provider` của RAG; `groq` là backend cũ của detection).
+export const PROVIDER_LABEL = {
+  vllm: "LLM riêng (Vast)",
+  gemini: "Gemini (Google)",
+  ollama: "Ollama (máy local)",
+  groq: "Groq",
+};
+
+export const providerName = (value) => (value ? PROVIDER_LABEL[value] || value : null);
+
+// Dòng mô tả dưới tên model trong menu chọn model.
+export const PROVIDER_DESCRIPTION = {
+  vllm: "Model tự host trên Vast.ai. Trả lời từ kho tài liệu.",
+  gemini: "Google Gemini qua API. Trả lời từ kho tài liệu.",
+  ollama: "Model chạy trên máy local. Trả lời từ kho tài liệu.",
 };
 
 export const INTENT_LABEL = {

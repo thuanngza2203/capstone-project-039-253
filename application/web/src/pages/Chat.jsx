@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Icon from "../components/Icon.jsx";
 import Composer from "../components/chat/Composer.jsx";
 import Message from "../components/chat/Message.jsx";
+import ModelMenu from "../components/chat/ModelMenu.jsx";
 import { detection } from "../api.js";
-import { history, newId } from "../lib/storage.js";
+import { history, newId, readJSON, writeJSON } from "../lib/storage.js";
 import { formatRelative } from "../lib/format.js";
 import { diseaseName, plantName } from "../lib/labels.js";
+
+const MODEL_KEY = "plant.web.model";
 
 const SUGGESTIONS = [
   "Lá cà chua bị mốc sương thì xịt thuốc gì?",
@@ -14,6 +17,12 @@ const SUGGESTIONS = [
   "khoai tay bi chay som phong sao",
   "Gỉ sắt trên lá ngô lây lan thế nào?",
 ];
+
+// Lượt lưu trước khi có tên tài liệu + link chỉ còn đường dẫn file.
+function documentsOf(documents, sources) {
+  if (documents?.length) return documents;
+  return (sources || []).map((source) => ({ source, title: null, links: [] }));
+}
 
 // Key gồm cả session: đổi cuộc trò chuyện thì React tạo component mới, không giữ trạng thái
 // (đã thích, đang mở dấu vết) của tin nhắn cùng vị trí ở cuộc trò chuyện trước.
@@ -30,7 +39,10 @@ function fromStored(sessionId, message, index) {
     reasons: message.feedback_reasons || [],
     action: message.action,
     debug,
-    sources: debug?.rag_sources || [],
+    documents: documentsOf(debug?.source_documents, debug?.rag_sources),
+    webSources: debug?.web_sources || [],
+    webSearch: Boolean(debug?.web_search),
+    llmProvider: debug?.llm_provider || null,
     detection: debug?.detection || null,
   };
 }
@@ -42,7 +54,10 @@ function fromResponse(key, response) {
     content: response.answer,
     action: response.action,
     feedbackId: response.feedback_id,
-    sources: response.sources || [],
+    documents: documentsOf(response.source_documents, response.sources),
+    webSources: response.web_sources || [],
+    webSearch: Boolean(response.debug?.web_search),
+    llmProvider: response.debug?.llm_provider || null,
     detection: response.debug?.detection || null,
     debug: response.debug,
     rating: null,
@@ -91,6 +106,10 @@ export default function Chat() {
   const [loadError, setLoadError] = useState(null);
   const [sending, setSending] = useState(false);
   const [drawer, setDrawer] = useState(false);
+  const [models, setModels] = useState({ answer_backend: null, providers: [], default: null, web_search: false });
+  const [chosenModel, setChosenModel] = useState(() => readJSON(MODEL_KEY, null));
+  // Bật cho tới khi người dùng tắt (như nút Search của ChatGPT); không nhớ qua lần tải lại trang.
+  const [webSearch, setWebSearch] = useState(false);
   const composer = useRef(null);
   const scroller = useRef(null);
   // Cuộc trò chuyện đang mở; câu trả lời về muộn của cuộc khác không được đổi màn hình hiện tại.
@@ -101,6 +120,20 @@ export default function Chat() {
     if (params.get("session")) setParams({}, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    // Không lấy được danh sách: không gửi llm_provider, detection dùng model mặc định.
+    detection.models().then(setModels).catch(() => {});
+  }, []);
+
+  // Model đã chọn trước đó nhưng không còn trong danh sách (đổi cấu hình) thì về mặc định.
+  const model = models.providers.includes(chosenModel) ? chosenModel : models.default;
+  const searching = webSearch && models.web_search;
+
+  function chooseModel(value) {
+    setChosenModel(value);
+    writeJSON(MODEL_KEY, value);
+  }
 
   // Mở lại hội thoại đã có trên backend; hội thoại mới thì để trống.
   useEffect(() => {
@@ -141,28 +174,31 @@ export default function Chat() {
     scroller.current?.scrollTo({ top: scroller.current.scrollHeight, behavior: "smooth" });
   }, [messages]);
 
-  const send = useCallback(async ({ text, image }) => {
+  // `web`: gửi lại một lượt lỗi thì giữ đúng chế độ (tìm web hay không) của lần gửi đầu.
+  const send = useCallback(async ({ text, image, web = searching }) => {
     const pendingKey = newId();
     setMessages((current) => [
       ...current,
       { key: newId(), role: "user", content: text, imageUrl: image?.previewUrl, imageName: image?.name },
-      { key: pendingKey, role: "assistant", pending: true, startedAt: Date.now() },
+      { key: pendingKey, role: "assistant", pending: true, webSearch: web, startedAt: Date.now() },
     ]);
     setSending(true);
     try {
-      const response = await detection.chat({ sessionId, message: text, image: image?.blob, imageName: image?.name });
+      const response = await detection.chat({
+        sessionId, message: text, image: image?.blob, imageName: image?.name, llmProvider: model, webSearch: web,
+      });
       setConversations(history.upsert({ id: sessionId, title: titleFrom(text, image), updatedAt: new Date().toISOString() }));
       if (activeSession.current !== sessionId) return; // người dùng đã chuyển sang cuộc khác
       setMessages((current) => current.map((item) => (item.key === pendingKey ? fromResponse(pendingKey, response) : item)));
       setMemory(response.memory || null);
     } catch (error) {
       setMessages((current) => current.map((item) => (
-        item.key === pendingKey ? { key: pendingKey, role: "assistant", error, retry: { text, image } } : item
+        item.key === pendingKey ? { key: pendingKey, role: "assistant", error, retry: { text, image, web } } : item
       )));
     } finally {
       setSending(false);
     }
-  }, [sessionId]);
+  }, [sessionId, model, searching]);
 
   // Backend không lưu lượt bị lỗi, nên gửi lại là an toàn: bỏ tin nhắn lỗi và câu hỏi của nó rồi gửi lại.
   function retry(failed) {
@@ -229,9 +265,6 @@ export default function Chat() {
             ))}
           </ul>
         </div>
-        <nav className="sidebar-footer">
-          <Link to="/admin"><Icon name="chart" size={18} /> Trang quản trị</Link>
-        </nav>
       </aside>
 
       <main className="chat-main">
@@ -239,6 +272,14 @@ export default function Chat() {
           <button type="button" className="icon-btn only-mobile" onClick={() => setDrawer(true)} aria-label="Mở lịch sử">
             <Icon name="menu" />
           </button>
+          <ModelMenu
+            providers={models.providers}
+            value={model}
+            onChange={chooseModel}
+            answerBackend={models.answer_backend}
+            webSearch={searching}
+            disabled={sending}
+          />
           <div className="chat-title">{title}</div>
           {memory ? (
             <div className="memory-pill" title="Kết quả nhận diện gần nhất trong cuộc trò chuyện; câu hỏi tiếp theo như 'bệnh này chữa sao?' sẽ dùng kết quả này.">
@@ -276,7 +317,13 @@ export default function Chat() {
 
         <div className="chat-bottom">
           <div className="chat-column">
-            <Composer ref={composer} disabled={sending} onSend={send} />
+            <Composer
+              ref={composer}
+              disabled={sending}
+              onSend={send}
+              webSearch={searching}
+              onToggleWebSearch={models.web_search ? () => setWebSearch((value) => !value) : undefined}
+            />
             <p className="disclaimer">Thông tin chỉ để tham khảo. Hỏi cán bộ kỹ thuật nông nghiệp trước khi dùng thuốc.</p>
           </div>
         </div>

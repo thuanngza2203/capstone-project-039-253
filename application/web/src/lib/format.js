@@ -44,6 +44,22 @@ export function formatMs(value) {
   return value >= 1000 ? `${(value / 1000).toFixed(1).replace(".", ",")} s` : `${Math.round(value)} ms`;
 }
 
+// Bỏ nhãn [Nguồn n] trong câu trả lời; tài liệu và link được liệt kê riêng dưới câu trả lời.
+// Detection đã bỏ ở câu trả lời mới (strip_citations trong rag_http.py); ở đây cho các lượt lưu trước đó.
+const CITATIONS = /[ \t]*\[\s*Nguồn\s+\d[^\]]*\](?:[ \t]*(?:,|;|và|and)?[ \t]*\[\s*Nguồn\s+\d[^\]]*\])*/giu;
+const LEFTOVER = new Set(["", "nguồn", "nguồn tham khảo", "tài liệu tham khảo"]);
+
+export function stripCitations(text) {
+  if (!text) return text;
+  const lines = [];
+  for (const line of text.normalize("NFC").split("\n")) {
+    const cleaned = line.replace(CITATIONS, "");
+    if (cleaned !== line && LEFTOVER.has(cleaned.replace(/^[\s\-*•_:.,;]+|[\s\-*•_:.,;]+$/g, "").toLowerCase())) continue;
+    lines.push(cleaned.trimEnd());
+  }
+  return lines.join("\n").replace(/\n{3,}/g, "\n\n").trim() || text.trim();
+}
+
 // Ngày theo giờ máy người xem, dạng YYYY-MM-DD, để gom lượt dùng theo ngày.
 export function dayKey(value) {
   const date = toDate(value);

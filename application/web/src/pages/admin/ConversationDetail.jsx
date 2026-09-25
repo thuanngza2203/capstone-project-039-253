@@ -15,7 +15,11 @@ function BotTurn({ message }) {
     <div className="card conversation-turn">
       <div className="toolbar">
         <Badge tone="neutral">Bot</Badge>
-        {message.action ? <Badge tone={message.action === "ACCEPT_QUERY" ? "ok" : "warn"}>{ACTION_LABEL[message.action] || message.action}</Badge> : null}
+        {message.action ? (
+          <Badge tone={["ACCEPT_QUERY", "HEALTHY_PLANT"].includes(message.action) ? "ok" : "warn"}>
+            {ACTION_LABEL[message.action] || message.action}
+          </Badge>
+        ) : null}
         {debug?.rag_scope_status ? <Badge tone="neutral">{SCOPE_LABEL[debug.rag_scope_status] || debug.rag_scope_status}</Badge> : null}
         {message.feedback_rating === "like" ? <Badge tone="ok">Được thích</Badge> : null}
         {message.feedback_rating === "unlike" ? <Badge tone="error">Không thích: {(message.feedback_reasons || []).join(", ")}</Badge> : null}

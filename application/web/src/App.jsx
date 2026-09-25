@@ -4,6 +4,7 @@ import Chat from "./pages/Chat.jsx";
 import { Spinner } from "./components/ui.jsx";
 
 // Trang admin tải riêng (có thư viện biểu đồ): người dùng chat trên điện thoại không phải tải phần này.
+const Login = lazy(() => import("./pages/admin/Login.jsx"));
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout.jsx"));
 const Dashboard = lazy(() => import("./pages/admin/Dashboard.jsx"));
 const Conversations = lazy(() => import("./pages/admin/Conversations.jsx"));
@@ -30,6 +31,8 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Chat />} />
+      <Route path="/admin/login" element={page(<Login />)} />
+      {/* AdminLayout chặn mọi trang con khi chưa đăng nhập. */}
       <Route path="/admin" element={page(<AdminLayout />)}>
         <Route index element={page(<Dashboard />)} />
         <Route path="conversations" element={page(<Conversations />)} />
