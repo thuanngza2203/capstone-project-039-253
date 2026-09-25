@@ -68,7 +68,7 @@ export default function Dashboard() {
   const [range, setRange] = useState("7");
   const { data, loading, reload } = useLoad(() => loadAll(range), [range]);
 
-  const records = data?.reviews.status === "fulfilled" ? data.reviews.value : [];
+  const records = useMemo(() => (data?.reviews.status === "fulfilled" ? data.reviews.value : []), [data]);
   const stats = useMemo(() => {
     const sessions = new Set(records.map((item) => item.session_id)).size;
     const withGrounding = records.filter((item) => item.metadata?.grounded !== null && item.metadata?.grounded !== undefined);

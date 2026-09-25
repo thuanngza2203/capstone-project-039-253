@@ -15,10 +15,12 @@ const SUGGESTIONS = [
   "Gỉ sắt trên lá ngô lây lan thế nào?",
 ];
 
-function fromStored(message, index) {
+// Key gồm cả session: đổi cuộc trò chuyện thì React tạo component mới, không giữ trạng thái
+// (đã thích, đang mở dấu vết) của tin nhắn cùng vị trí ở cuộc trò chuyện trước.
+function fromStored(sessionId, message, index) {
   const debug = message.debug || null;
   return {
-    key: `stored-${index}`,
+    key: `${sessionId}:${index}`,
     role: message.role,
     content: message.content,
     imageUploaded: message.image_uploaded,
@@ -91,6 +93,9 @@ export default function Chat() {
   const [drawer, setDrawer] = useState(false);
   const composer = useRef(null);
   const scroller = useRef(null);
+  // Cuộc trò chuyện đang mở; câu trả lời về muộn của cuộc khác không được đổi màn hình hiện tại.
+  const activeSession = useRef(sessionId);
+  activeSession.current = sessionId;
 
   useEffect(() => {
     if (params.get("session")) setParams({}, { replace: true });
@@ -113,7 +118,7 @@ export default function Chat() {
       .conversation(sessionId)
       .then((conversation) => {
         if (!alive) return;
-        setMessages((conversation.messages || []).map(fromStored));
+        setMessages((conversation.messages || []).map((message, index) => fromStored(sessionId, message, index)));
         setMemory(conversation.last_detection || null);
         if (fromLink && conversation.messages?.length) {
           setConversations(history.upsert({ id: sessionId, title: conversation.title, updatedAt: new Date().toISOString() }));
@@ -146,9 +151,10 @@ export default function Chat() {
     setSending(true);
     try {
       const response = await detection.chat({ sessionId, message: text, image: image?.blob, imageName: image?.name });
+      setConversations(history.upsert({ id: sessionId, title: titleFrom(text, image), updatedAt: new Date().toISOString() }));
+      if (activeSession.current !== sessionId) return; // người dùng đã chuyển sang cuộc khác
       setMessages((current) => current.map((item) => (item.key === pendingKey ? fromResponse(pendingKey, response) : item)));
       setMemory(response.memory || null);
-      setConversations(history.upsert({ id: sessionId, title: titleFrom(text, image), updatedAt: new Date().toISOString() }));
     } catch (error) {
       setMessages((current) => current.map((item) => (
         item.key === pendingKey ? { key: pendingKey, role: "assistant", error, retry: { text, image } } : item
@@ -162,7 +168,8 @@ export default function Chat() {
   function retry(failed) {
     setMessages((current) => {
       const index = current.findIndex((item) => item.key === failed.key);
-      return index > 0 ? current.slice(0, index - 1) : current;
+      // Chỉ bỏ cặp câu hỏi + lỗi này, giữ các tin nhắn gửi sau đó.
+      return index > 0 ? [...current.slice(0, index - 1), ...current.slice(index + 1)] : current;
     });
     send(failed.retry);
   }

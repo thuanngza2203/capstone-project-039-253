@@ -29,7 +29,7 @@ export default function Feedback() {
   const [message, setMessage] = useState(null);
   const [busy, setBusy] = useState(false);
 
-  const reviews = data?.reviews || [];
+  const reviews = useMemo(() => data?.reviews || [], [data]);
   const visible = useMemo(() => {
     const needle = search.trim().toLowerCase();
     return reviews.filter((item) => {
