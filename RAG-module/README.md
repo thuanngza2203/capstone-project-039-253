@@ -197,7 +197,7 @@ RRF; `meta.search_queries` ghi các câu đã thật sự dùng. Detection khôn
 ([reports/2026-09-24-query-normalization](reports/2026-09-24-query-normalization)).
 
 Xác thực bằng `Authorization: Bearer <RAG_API_KEY>`. Để trống `RAG_API_KEY` thì tắt
-xác thực và server từ chối nghe ngoài `127.0.0.1`. Thiết kế và các bước tích hợp:
+xác thực (API public); nghe `0.0.0.0` khi không có key vẫn chạy, chỉ in cảnh báo. Thiết kế và các bước tích hợp:
 [agents/2026-09-23-rag-api-server-integration-plan.md](agents/2026-09-23-rag-api-server-integration-plan.md).
 
 ## Chọn chunking cũ hoặc theo cấu trúc

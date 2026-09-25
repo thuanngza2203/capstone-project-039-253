@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 import re
-from pathlib import Path
 
 import pytest
 from langchain_core.documents import Document
@@ -11,7 +10,7 @@ import chunk_preview
 import config
 import main
 import rag
-from chunking import canonical_text, parse_document, structure_records
+from chunking import parse_document, structure_records
 from config import ChunkingSettings, get_chunking_settings, get_index_directory
 from index_manifest import manifest_path, read_manifest
 

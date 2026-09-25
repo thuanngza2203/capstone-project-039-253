@@ -116,7 +116,7 @@ def test_meta_records_what_the_llm_reported(monkeypatch: pytest.MonkeyPatch) -> 
 
 def test_refusal_meta_has_no_llm_and_no_retrieval(two_indexes: RAGRuntime) -> None:
     body = make_client(two_indexes).post("/v1/answer", headers=AUTH, json={
-        "query": "Cháy muộn khoai tây xử lý sao?", "plant_type": "potato", "disease": "late_blight",
+        "query": "Khoai tây bị bệnh lạ xử lý sao?", "plant_type": "potato", "disease": "made_up_label",
         "index": "structure",
     }).json()
     assert body["grounded"] is False

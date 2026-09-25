@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import pytest
-import config
 import rag
 from langchain_core.documents import Document
 from langchain_core.messages import AIMessage

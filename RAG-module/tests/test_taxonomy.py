@@ -56,12 +56,27 @@ def test_every_normalizer_label_is_understood(plant: str, disease: str) -> None:
     assert resolve_scope(plant, disease).status in {"document", "healthy", "unsupported_disease"}
 
 
-def test_coverage_gaps_are_exactly_the_ones_in_the_plan() -> None:
+def test_every_normalizer_disease_has_a_document() -> None:
+    """24/09 còn thiếu 3 bệnh (P0-4 plan rà soát); từ 25/09 mọi bệnh đều có tài liệu."""
     gaps = sorted(
         (plant, disease) for plant, diseases in NORMALIZER_TAXONOMY.items() for disease in diseases
         if resolve_scope(plant, disease).status == "unsupported_disease"
     )
-    assert gaps == [("grape", "black_rot"), ("grape", "leaf_blight"), ("potato", "late_blight")]
+    assert gaps == []
+
+
+def test_disease_without_document_is_not_searchable(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Nhánh `unsupported_disease` vẫn phải chặn tìm theo cây, dù hiện không bệnh thật nào rơi vào."""
+    monkeypatch.setattr(taxonomy, "DISEASES", taxonomy.DISEASES + (taxonomy.Disease("potato", "wart", None),))
+    for plant in ("potato", None):
+        scope = resolve_scope(plant, "wart")
+        assert scope.status == "unsupported_disease"
+        assert not scope.searchable
+
+
+def test_same_disease_name_on_two_crops_searches_both_documents() -> None:
+    assert set(resolve_scope(None, "black_rot").sources) == {"apple/apple_black_rot.txt", "grape/grape_black_rot.txt"}
+    assert resolve_scope("grape", "Black_rot").sources == ("grape/grape_black_rot.txt",)
 
 
 @pytest.mark.parametrize(("plant", "disease", "source"), [
@@ -94,12 +109,12 @@ def test_detector_label_variants_map_to_one_document(plant: str, disease: str, s
     ("Soybean", None, "unknown_plant", True),
     ("pepper", None, "crop", True),
     ("Tomato", "healthy", "healthy", True),
-    ("potato", "late_blight", "unsupported_disease", False),
+    ("potato", "late_blight", "document", True),
     ("apple", "made_up_label", "unknown_disease", False),
     (None, "made_up_label", "unknown_disease", False),
     (None, "leaf_mold", "document", True),
     (None, "bacterial_spot", "disease_multi_crop", True),
-    (None, "isariopsis_leaf_spot", "unsupported_disease", False),
+    (None, "isariopsis_leaf_spot", "document", True),
 ])
 def test_scope_status(plant, disease, status: str, searchable: bool) -> None:
     scope = resolve_scope(plant, disease)
@@ -162,7 +177,7 @@ def test_detector_gaps_match_normalizer_gaps() -> None:
         (plant, disease) for plant, classes in DETECTOR_CLASSES.items() for disease in classes
         if resolve_scope(plant, disease).status == "unsupported_disease"
     )
-    assert gaps == [("Grape", "Black_rot"), ("Grape", "Leaf_blight"), ("Potato", "Late_blight")]
+    assert gaps == []
 
 
 @pytest.mark.parametrize("plant", ["Orange", "Squash"])

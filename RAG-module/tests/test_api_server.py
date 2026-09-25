@@ -12,6 +12,7 @@ from langchain_core.messages import AIMessage
 from langchain_core.runnables import RunnableLambda
 
 import rag
+import taxonomy
 from server import __main__ as server_main
 from server.app import create_app
 from server.runtime import RAGRuntime
@@ -189,12 +190,15 @@ def test_answer_prompt_has_subject_scoped_context_and_history(client: TestClient
 
 
 @pytest.mark.parametrize(("plant", "disease", "status", "phrase"), [
-    ("potato", "late_blight", "unsupported_disease", "late_blight"),
+    ("potato", "wart", "unsupported_disease", "wart"),
     ("apple", "Apple___Weird_Class", "unknown_disease", "chưa có đủ thông tin"),
 ])
 def test_unsearchable_scope_answers_without_retrieval_or_llm(
-    client: TestClient, llm: RecordingLLM, plant: str, disease: str, status: str, phrase: str,
+    client: TestClient, llm: RecordingLLM, monkeypatch: pytest.MonkeyPatch,
+    plant: str, disease: str, status: str, phrase: str,
 ) -> None:
+    # Mọi bệnh thật đều đã có tài liệu: thêm một bệnh giả chưa có tài liệu để thử nhánh này.
+    monkeypatch.setattr(taxonomy, "DISEASES", taxonomy.DISEASES + (taxonomy.Disease("potato", "wart", None),))
     response = client.post("/v1/answer", headers=AUTH,
                            json={"query": "Phòng bệnh thế nào?", "plant_type": plant, "disease": disease})
     data = response.json()
@@ -305,7 +309,7 @@ def test_taxonomy_lists_coverage(client: TestClient) -> None:
     plants = {p["plant"]: p for p in client.get("/v1/taxonomy", headers=AUTH).json()["plants"]}
     assert plants["pepper"]["crop"] == "pepper_bell"
     potato = {d["disease"]: d for d in plants["potato"]["diseases"]}
-    assert potato["late_blight"]["has_document"] is False
+    assert potato["late_blight"]["source"] == "potato/potato_late_blight.txt"
     assert potato["early_blight"]["source"] == "potato/potato_early_blight.txt"
 
 
