@@ -18,6 +18,7 @@ from typing import Any, Callable
 from config import DATA_DIR, EMBEDDING_MODEL, INDEX_STRATEGIES
 from index_manifest import _file_hashes, corpus_fingerprint, read_manifest
 from rag import load_documents
+from references import document_title
 from retrieval import chunk_key
 from taxonomy import DISEASES
 
@@ -96,10 +97,7 @@ class KnowledgeBase:
 
     @staticmethod
     def title_of(text: str, source: str) -> str:
-        for line in text.splitlines():
-            if line.strip():
-                return line.strip().lstrip("#").strip() or source
-        return source
+        return document_title(text, source)
 
     @staticmethod
     def taxonomy_of(source: str) -> list[dict[str, str]]:

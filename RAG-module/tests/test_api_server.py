@@ -215,7 +215,46 @@ def test_no_matching_documents_refuses_without_llm(client: TestClient, llm: Reco
     response = client.post("/v1/answer", headers=AUTH, json={"query": "xử lý", "plant_type": "cherry"})
     assert response.json()["grounded"] is False
     assert response.json()["answer"] == rag.NO_CONTEXT_ANSWER
+    assert response.json()["documents"] == []
     assert llm.prompts == []
+
+
+def test_admin_approved_examples_go_into_the_prompt(client: TestClient, llm: RecordingLLM) -> None:
+    body = {"query": "Xử lý ghẻ táo?", "plant_type": "apple", "disease": "apple_scab"}
+    plain = client.post("/v1/answer", headers=AUTH, json=body).json()
+    assert plain["meta"]["feedback_examples"] == 0
+    assert rag.EXAMPLES_HEADER not in llm.prompts[-1]
+
+    example = {"question": "Ghẻ táo có cần nhổ cây không?", "answer": "Không cần nhổ; tỉa cành bệnh và gom lá rụng."}
+    data = client.post("/v1/answer", headers=AUTH, json={**body, "feedback_examples": [example]}).json()
+    prompt = llm.prompts[-1]
+    assert data["meta"]["feedback_examples"] == 1
+    assert rag.EXAMPLES_HEADER in prompt
+    assert "Hỏi: Ghẻ táo có cần nhổ cây không?\nĐáp: Không cần nhổ; tỉa cành bệnh và gom lá rụng." in prompt
+    # Mẫu đứng trước NGỮ CẢNH, sau đối tượng đang hỏi.
+    assert prompt.index(rag.SUBJECT_HEADER) < prompt.index(rag.EXAMPLES_HEADER) < prompt.index("NGỮ CẢNH:")
+
+
+def test_at_most_three_examples(client: TestClient) -> None:
+    example = {"question": "q", "answer": "a"}
+    response = client.post("/v1/answer", headers=AUTH, json={"query": "x", "feedback_examples": [example] * 4})
+    assert response.status_code == 422
+
+
+def test_answer_lists_document_titles_and_reference_links(llm: RecordingLLM, tmp_path: Path) -> None:
+    (tmp_path / "apple").mkdir()
+    (tmp_path / "apple" / "apple_scab.txt").write_text(
+        "# Bệnh ghẻ táo\n\n## NGUỒN THAM KHẢO\nUniversity of Minnesota Extension\n"
+        "https://extension.umn.edu/plant-diseases/apple-scab\n", encoding="utf-8")
+    runtime = RAGRuntime(vector_store=FilterStore(DOCS), llm=llm.runnable, data_dir=tmp_path)
+    client = TestClient(create_app(runtime, api_key=KEY))
+    data = client.post("/v1/answer", headers=AUTH, json={
+        "query": "Xử lý ghẻ táo?", "plant_type": "apple", "disease": "apple_scab"}).json()
+    assert data["documents"] == [{
+        "source": "apple/apple_scab.txt", "title": "Bệnh ghẻ táo",
+        "links": [{"label": "University of Minnesota Extension",
+                   "url": "https://extension.umn.edu/plant-diseases/apple-scab"}],
+    }]
 
 
 def test_invalid_citation_is_reported(llm: RecordingLLM) -> None:

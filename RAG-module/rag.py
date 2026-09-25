@@ -66,7 +66,7 @@ RAG_PROMPT = ChatPromptTemplate.from_messages(
         (
             "human",
             (
-                "{subject_block}NGỮ CẢNH:\n{context}\n\nCÂU HỎI:\n{question}\n\n"
+                "{subject_block}{examples_block}NGỮ CẢNH:\n{context}\n\nCÂU HỎI:\n{question}\n\n"
                 "CÂU HỎI ĐÃ LÀM RÕ:\n{retrieval_query}\n\n"
                 "Hãy trả lời theo các quy tắc trên."
             ),
@@ -83,6 +83,24 @@ SUBJECT_HEADER = (
 NO_CONTEXT_ANSWER = (
     "Kho tài liệu hiện tại chưa có đủ thông tin liên quan để trả lời câu hỏi này."
 )
+# Câu trả lời admin đã duyệt/sửa (Feedback RAG của detection). Quy tắc nằm ngay trong khối
+# này, không thêm vào SYSTEM_PROMPT: không có ví dụ thì prompt giữ nguyên như trước.
+EXAMPLES_HEADER = (
+    "CÂU TRẢ LỜI MẪU ĐÃ ĐƯỢC QUẢN TRỊ VIÊN DUYỆT (cho các câu hỏi tương tự trước đây). "
+    "Nếu câu hỏi hiện tại cùng ý với một mẫu, ưu tiên nội dung của mẫu đó: quản trị viên đã "
+    "kiểm tra hoặc sửa lại, được dùng cả khi NGỮ CẢNH không có và thay NGỮ CẢNH khi hai bên "
+    "mâu thuẫn. Không gắn nhãn [Nguồn n] cho phần lấy từ mẫu. Mẫu không cùng ý thì bỏ qua:"
+)
+
+
+def examples_block(examples: Sequence[dict[str, str]] | None) -> str:
+    if not examples:
+        return ""
+    items = [
+        f"Mẫu {number}\nHỏi: {example['question'].strip()}\nĐáp: {example['answer'].strip()}"
+        for number, example in enumerate(examples, start=1)
+    ]
+    return f"{EXAMPLES_HEADER}\n\n" + "\n\n".join(items) + "\n\n"
 
 _ALIAS_SEPARATOR = " | "
 _DISEASE_LABELS = {
@@ -642,6 +660,7 @@ def _answer_from_documents(
     history: list[BaseMessage] | None = None,
     retrieval_query: str | None = None,
     subject: str | None = None,
+    examples: Sequence[dict[str, str]] | None = None,
     callbacks: list[BaseCallbackHandler] | None = None,
 ) -> tuple[str, list[str]]:
     """Dùng chung bước generation cho lệnh ask một lần và phiên hỏi liên tục."""
@@ -658,6 +677,7 @@ def _answer_from_documents(
             f"{SUBJECT_HEADER}\n{subject.strip()}\n\n"
             if subject and subject.strip() else ""
         ),
+        "examples_block": examples_block(examples),
     }, config={"callbacks": callbacks} if callbacks else None).strip()
     if not answer:
         raise RuntimeError("LLM trả về nội dung rỗng.")
@@ -681,15 +701,17 @@ def generate_answer(
     history: list[BaseMessage] | None = None,
     retrieval_query: str | None = None,
     subject: str | None = None,
+    examples: Sequence[dict[str, str]] | None = None,
     callbacks: list[BaseCallbackHandler] | None = None,
 ) -> tuple[str, list[str]]:
     """Bước sinh câu trả lời dùng chung cho CLI, RAGSession và API server.
 
+    `examples`: câu trả lời mẫu admin đã duyệt ({question, answer}), chỉ API gửi.
     `callbacks` để API đọc model/token/finish_reason mà LLM báo về.
     """
     return _answer_from_documents(
         question, documents, llm=llm, history=history,
-        retrieval_query=retrieval_query, subject=subject, callbacks=callbacks,
+        retrieval_query=retrieval_query, subject=subject, examples=examples, callbacks=callbacks,
     )
 
 

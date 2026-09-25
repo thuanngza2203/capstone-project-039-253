@@ -176,7 +176,7 @@ class LLMSettings:
     ollama_num_predict: int = 800
     ollama_keep_alive: str = "10m"
     ollama_think: bool = False
-    gemini_model: str = "gemini-2.5-flash"
+    gemini_model: str = "gemini-3.5-flash"
     # Khớp alias mặc định của LLM-server-module; .env ghi đè theo /v1/models.
     vllm_model: str = "rag-llm"
     # URL đầy đủ; để trống thì ghép từ scheme/host/port bên dưới.

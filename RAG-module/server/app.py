@@ -51,7 +51,7 @@ from taxonomy import ResolvedScope, taxonomy_table
 
 logger = logging.getLogger("rag.server")
 
-API_VERSION = "1.3.0"
+API_VERSION = "1.5.0"
 
 DESCRIPTION = """
 API tra cứu kiến thức bệnh cây: tìm tài liệu (hybrid semantic + BM25) và sinh câu
@@ -137,6 +137,7 @@ def _answer_response(outcome: AnswerOutcome, debug: bool) -> AnswerResponse:
     return AnswerResponse(
         answer=outcome.answer,
         sources=outcome.sources,
+        documents=outcome.documents,
         grounded=outcome.grounded,
         retrieval_query=outcome.retrieval_query,
         scope=_scope(outcome.scope),
@@ -290,6 +291,7 @@ def create_app(runtime: RAGRuntime | None = None, *, api_key: str | None = None,
             top_k=request.top_k, mode=request.mode, rerank=request.rerank,
             index=request.index, llm_provider=request.llm_provider,
             extra_queries=request.extra_queries,
+            feedback_examples=[example.model_dump() for example in request.feedback_examples],
         )
         return _answer_response(outcome, request.debug)
 

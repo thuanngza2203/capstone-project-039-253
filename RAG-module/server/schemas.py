@@ -102,6 +102,16 @@ class ChatMessage(BaseModel):
     content: MessageText = Field(description="Nội dung lượt đó.")
 
 
+class FeedbackExample(BaseModel):
+    """Một cặp hỏi–đáp quản trị viên đã duyệt hoặc sửa (Feedback RAG của detection)."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    question: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=1000)]
+    answer: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=3000)] = Field(
+        description="Câu trả lời đã duyệt.")
+
+
 class AnswerRequest(RetrieveRequest):
     model_config = ConfigDict(
         populate_by_name=True,
@@ -139,6 +149,11 @@ class AnswerRequest(RetrieveRequest):
     rewrite_query: bool = Field(False, description=(
         "Viết lại câu hỏi nối tiếp thành câu độc lập bằng LLM trước khi tìm. Để false khi "
         "gọi từ detection-server vì normalizer ở đó đã làm việc này."
+    ))
+    feedback_examples: list[FeedbackExample] = Field(default_factory=list, max_length=3, description=(
+        "Câu trả lời mẫu quản trị viên đã duyệt cho câu hỏi tương tự (detection lấy từ Feedback RAG). "
+        "LLM ưu tiên mẫu cùng ý, kể cả khi tài liệu không có. Chỉ dùng khi đã tìm được tài liệu: "
+        "không có tài liệu thì vẫn là câu từ chối dựng sẵn."
     ))
 
     @model_validator(mode="after")
@@ -191,6 +206,7 @@ class ResponseMeta(BaseModel):
         "Các câu thật sự dùng để tìm, câu chính trước, đã bỏ câu trùng. Rỗng khi scope không cho tìm."
     ))
     llm: LLMMeta | None = Field(description="null khi không gọi LLM (câu từ chối dựng sẵn).")
+    feedback_examples: int = Field(0, description="Số câu trả lời mẫu đã đưa vào prompt.")
     timing_ms: TimingMeta
 
 
@@ -206,9 +222,24 @@ class Citations(BaseModel):
     invalid: list[int] = Field(description="Số nguồn nằm ngoài NGỮ CẢNH lượt này: dấu hiệu trích dẫn bịa.")
 
 
+class SourceLink(BaseModel):
+    label: str | None = Field(None, description="Tên nguồn ghi ngay trên link trong tài liệu.")
+    url: str
+
+
+class SourceDocument(BaseModel):
+    source: str = Field(description="Tài liệu trong data/, trùng một phần tử của `sources`.")
+    title: str = Field(description="Tiêu đề tài liệu (dòng H1); tên file khi server không có data/.")
+    links: list[SourceLink] = Field(default_factory=list, description=(
+        "Link nguồn tham khảo ghi trong tài liệu; rỗng khi tài liệu không ghi link."))
+
+
 class AnswerResponse(BaseModel):
     answer: str = Field(description="Câu trả lời cho người dùng cuối.")
     sources: list[str] = Field(description="Tài liệu đã đưa vào ngữ cảnh, không trùng lặp.")
+    documents: list[SourceDocument] = Field(default_factory=list, description=(
+        "Như `sources`, kèm tiêu đề và link nguồn tham khảo để hiển thị cho người dùng. "
+        "Rỗng khi `grounded=false`."))
     grounded: bool = Field(description="True nếu có tài liệu và LLM đã được gọi; false là câu từ chối dựng sẵn.")
     retrieval_query: str = Field(description="Câu thật sự dùng để tìm (khác `query` khi bật rewrite_query).")
     scope: Scope

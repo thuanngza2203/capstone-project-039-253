@@ -171,7 +171,7 @@ python -m server --export-openapi openapi.json
 | `GET /v1/llm?probe=true` | Model thật đang chạy (vLLM: `root` sau alias `rag-llm`) | Không |
 | `GET /v1/taxonomy` | Cây, bệnh, alias, bệnh nào có tài liệu | Không |
 | `POST /v1/retrieve` | Tìm chunk theo `plant_type`/`disease` | Không |
-| `POST /v1/answer` | Tìm + sinh câu trả lời có trích nguồn | Có |
+| `POST /v1/answer` | Tìm + sinh câu trả lời có trích nguồn; `documents` kèm tiêu đề và link nguồn tham khảo của từng tài liệu; `feedback_examples` (tối đa 3) là câu trả lời admin đã duyệt, được đưa vào prompt | Có |
 | `GET /v1/admin/overview` | Kho tri thức: số tài liệu, chunk, token từng index | Không |
 | `GET /v1/admin/documents[/{source}]` | Tài liệu, chunk theo thứ tự, văn bản gốc, "đã sửa sau lần index" | Không |
 | `GET /v1/admin/chunks?q=`, `/v1/admin/chunks/{chunk_id}` | Tìm chunk theo nội dung; xem một chunk | Không |
@@ -481,7 +481,7 @@ khi gặp lỗi. Không cần sửa `rag.py` hay tạo lại Chroma index.
 ```dotenv
 LLM_PROVIDER=gemini
 GEMINI_API_KEY=your_gemini_api_key
-GEMINI_MODEL=gemini-2.5-flash
+GEMINI_MODEL=gemini-3.5-flash
 ```
 
 `index` và `search` vẫn hoàn toàn local. Khi dùng Gemini, chỉ câu hỏi và các

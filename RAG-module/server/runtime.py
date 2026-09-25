@@ -26,6 +26,7 @@ from langchain_core.outputs import LLMResult
 
 from config import (
     COLLECTION_NAME,
+    DATA_DIR,
     INDEX_STRATEGIES,
     TOP_K,
     configured_model,
@@ -48,6 +49,7 @@ from rag import (
     invalid_citations,
     load_documents,
 )
+from references import describe_sources
 from retrieval import SearchResult, search_store
 from taxonomy import ResolvedScope, resolve_scope
 
@@ -101,6 +103,7 @@ class RunMeta:
     reranker_enabled: bool | None = None
     search_queries: list[str] = field(default_factory=list)  # Câu chính trước; rỗng: không tìm.
     llm: dict[str, Any] | None = None  # None: không gọi LLM.
+    feedback_examples: int = 0  # Số câu trả lời mẫu thật sự đưa vào prompt.
     timing_ms: dict[str, int | None] = field(default_factory=lambda: {
         "rewrite": None, "retrieve": None, "generate": None, "total": None,
     })
@@ -124,6 +127,8 @@ class AnswerOutcome:
     meta: RunMeta
     cited: list[int] = field(default_factory=list)
     invalid: list[int] = field(default_factory=list)
+    # Như `sources`, kèm tiêu đề và link nguồn tham khảo để hiển thị cho người dùng.
+    documents: list[dict[str, Any]] = field(default_factory=list)
 
 
 def _elapsed_ms(started: float) -> int:
@@ -220,9 +225,11 @@ class RAGRuntime:
         llms: Mapping[str, BaseChatModel] | None = None,
         index_directories: Mapping[str, Path | str] | None = None,
         http_client: httpx.Client | None = None,
+        data_dir: Path | str = DATA_DIR,
     ) -> None:
         """`vector_store`/`llm` là index và LLM mặc định; `stores`/`llms` gắn theo tên
         (test inject). Thiếu thì mở từ đĩa / tạo client lúc cần."""
+        self._data_dir = Path(data_dir)
         self._embeddings = embeddings
         self._persist_directory = persist_directory
         self._collection_name = collection_name
@@ -510,7 +517,7 @@ class RAGRuntime:
         rewrite_query: bool = False, retrieval_query: str | None = None,
         top_k: int | None = None, mode: str | None = None, rerank: bool | None = None,
         index: str | None = None, llm_provider: str | None = None,
-        extra_queries: Sequence[str] = (),
+        extra_queries: Sequence[str] = (), feedback_examples: Sequence[dict[str, str]] = (),
     ) -> AnswerOutcome:
         started = time.perf_counter()
         meta = self._new_meta(index, top_k)
@@ -518,9 +525,9 @@ class RAGRuntime:
         messages = history_messages(history or [])
 
         def finish(answer: str, sources: list[str], grounded: bool, search_query: str,
-                   result: SearchResult | None, **citations: list[int]) -> AnswerOutcome:
+                   result: SearchResult | None, **extra: Any) -> AnswerOutcome:
             meta.timing_ms["total"] = _elapsed_ms(started)
-            return AnswerOutcome(answer, sources, grounded, search_query, scope, result, meta, **citations)
+            return AnswerOutcome(answer, sources, grounded, search_query, scope, result, meta, **extra)
 
         if not scope.searchable:
             return finish(refusal_for(scope), [], False, query, None)
@@ -552,14 +559,16 @@ class RAGRuntime:
             answer, sources = generate_answer(
                 query, documents, llm=llm, history=messages,
                 retrieval_query=retrieval_query, subject=subject_text(scope, subject_context),
-                callbacks=[recorder],
+                examples=feedback_examples, callbacks=[recorder],
             )
         except Exception as exc:  # noqa: BLE001 - kết nối, 401 từ vLLM, timeout, output rỗng.
             raise LLMFailed(f"LLM lỗi hoặc không phản hồi: {type(exc).__name__}: {exc}") from exc
         meta.timing_ms["generate"] = _elapsed_ms(generate_started)
         meta.llm = recorder.describe(self.provider_name(llm_provider))
+        meta.feedback_examples = len(feedback_examples)
         return finish(
             answer, sources, True, retrieval_query, result,
             cited=cited_source_numbers(answer),
             invalid=invalid_citations(answer, len(documents)),
+            documents=describe_sources(sources, self._data_dir),
         )
