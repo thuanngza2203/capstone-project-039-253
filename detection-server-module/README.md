@@ -94,9 +94,14 @@ trả thêm trong `POST /api/chat` (trường `sources`). Khi RAG lỗi, route t
 (key sai, LLM lỗi, index chưa sẵn sàng, không kết nối được) hoặc `500` (payload sai
 hợp đồng) kèm thông báo tiếng Việt, và **không lưu** nửa lượt chat.
 
-Feedback RAG: với `ANSWER_BACKEND=rag`, feedback vẫn được thu thập và trang admin
-vẫn hoạt động, nhưng ví dụ admin duyệt **chưa** được gửi sang RAG (API RAG chưa nhận
-trường này; chờ chủ dự án quyết định).
+Feedback RAG: với `ANSWER_BACKEND=rag`, tối đa 3 câu trả lời admin đã duyệt (lọc theo cây/bệnh,
+cosine rồi rerank như backend groq) được gửi kèm trong `feedback_examples`; RAG đưa vào prompt và
+LLM ưu tiên mẫu cùng ý. Feedback RAG lỗi (Mongo, tải model) thì vẫn trả lời, chỉ không có mẫu.
+
+**Tìm trên web** (`web_search=true`): sau bước nhận diện ảnh, Groq (`WEB_SEARCH_MODEL`, tool
+`browser_search`) tự tìm web và trả lời; không qua normalizer, router hay RAG. Lịch sử gần nhất và
+kết quả nhận diện (ảnh lượt này hoặc ảnh gần nhất) đi kèm câu hỏi. Trang web model đã đọc nằm ở
+`web_sources`; `action=WEB_SEARCH`. Groq lỗi thì trả 503 và không lưu nửa lượt chat.
 
 ## Phạm vi dữ liệu
 
@@ -187,7 +192,9 @@ tách lá. Khi bật preview, ảnh được lưu ở `debug/segmentation/`; th�
 | Method | Endpoint | Mô tả |
 | --- | --- | --- |
 | `GET` | `/health` | Kiểm tra API hoạt động. |
-| `POST` | `/api/chat` | Gửi câu hỏi và ảnh tùy chọn dưới dạng `multipart/form-data`. |
+| `GET` | `/api/models` | Model trả lời người dùng chọn được (`CHAT_LLM_PROVIDERS`, rỗng khi `ANSWER_BACKEND=groq`) và có nút Tìm trên web không (`web_search`). |
+| `POST` | `/api/chat` | Gửi câu hỏi, ảnh tùy chọn, `llm_provider` hoặc `web_search=true` dưới dạng `multipart/form-data`. |
+| `POST` | `/admin/login` | Đăng nhập trang admin của web, trả token dùng trong `Authorization: Bearer`. |
 | `GET` | `/api/conversations` | Liệt kê tối đa 100 cuộc trò chuyện gần nhất. |
 | `GET` | `/api/conversations/{session_id}` | Lấy chi tiết hội thoại và trạng thái feedback. |
 | `DELETE` | `/api/conversations/{session_id}` | Xóa một hội thoại. |
@@ -200,7 +207,11 @@ tách lá. Khi bật preview, ảnh được lưu ở `debug/segmentation/`; th�
 | `GET` | `/admin/training` | Xem các QA đang có trong Feedback RAG. |
 | `DELETE` | `/admin/review/{feedback_id}` | Xóa feedback và vector Feedback RAG tương ứng. |
 
-Mọi route `/admin` và `/admin/*` cần đăng nhập HTTP Basic khi `ADMIN_PASSWORD` có giá trị.
+Mọi route `/admin` và `/admin/*` (trừ `/admin/login`) cần đăng nhập khi `ADMIN_PASSWORD` có giá trị:
+HTTP Basic (trang admin cũ) hoặc token của `/admin/login` (web). Web bắt buộc có `ADMIN_PASSWORD` mới đăng nhập được.
+
+Câu trả lời gửi về người dùng đã bỏ nhãn `[Nguồn n]` (RAG vẫn yêu cầu LLM ghi để đo trích dẫn);
+tài liệu đã dùng nằm ở `source_documents`: tên tài liệu, file trong kho và link nguồn tham khảo.
 `MAX_HISTORY_TURNS` (mặc định 6) là số message gần nhất đưa vào normalizer và answer LLM.
 
 Ví dụ gửi câu hỏi kèm ảnh:

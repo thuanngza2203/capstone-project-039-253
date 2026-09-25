@@ -1,8 +1,9 @@
 """Đưa nhãn thô của detector về key trong prompt normalizer: `Apple___Apple_scab` -> `apple_scab`.
 
 Từ 24/09 câu tìm tài liệu không còn ghép key này (xem `query.py`); `plant_type`/`disease`
-gửi sang RAG vẫn giữ nguyên nhãn gốc. Bảng được giữ để `tests/test_labels.py` kiểm tra
-taxonomy trong prompt normalizer khớp class của IEViT.
+gửi sang RAG vẫn giữ nguyên nhãn gốc. Router dùng để nhận ra nhãn "khỏe" (`Tomato___healthy`,
+`healthy`) và gọi tên cây bằng tiếng Việt; `tests/test_labels.py` kiểm tra taxonomy trong
+prompt normalizer khớp class của IEViT.
 """
 
 import re
@@ -47,6 +48,16 @@ _DISEASE_KEYS = {
     "mosaic_virus": "tomato_mosaic_virus",
     "spider_mites_two_spotted_spider_mite": "spider_mites",
 }
+
+
+# Tên cây trong câu trả lời dựng sẵn (key sau canonical_plant).
+PLANT_VI = {
+    "apple": "táo", "cherry": "anh đào", "corn": "ngô", "grape": "nho", "peach": "đào",
+    "pepper": "ớt chuông", "potato": "khoai tây", "strawberry": "dâu tây", "tomato": "cà chua",
+    "squash": "bí", "orange": "cam",
+}
+
+HEALTHY = "healthy"
 
 
 def _slug(value: str) -> str:

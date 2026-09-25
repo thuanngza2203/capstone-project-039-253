@@ -1,5 +1,42 @@
 # Changelog
 
+## 2026-09-26 — Lá khỏe trả lời luôn, ảnh lá không bị coi là ngoài phạm vi
+
+- **Lá khỏe:** ảnh (lượt này, hoặc lượt trước khi câu hỏi nhắc lại) được IEViT nhận là `healthy` và
+  người dùng hỏi bệnh/cách chữa (hoặc chỉ gửi ảnh) → `action=HEALTHY_PLANT`, trả lời dựng sẵn
+  "lá … khỏe mạnh (độ tin cậy …)", không gọi RAG. Độ tin cậy < 0.8 thì nói rõ chưa chắc và nhắc chụp
+  lại. Hỏi phòng bệnh/chăm sóc, hoặc tự nêu tên một bệnh, thì vẫn tra RAG như cũ. Trước đây RAG tìm
+  trong tài liệu bệnh và trả lời "chưa đủ thông tin".
+- **Sửa lỗi:** chỉ gửi ảnh thì Groq thấy câu mặc định "Ảnh này đang bị bệnh gì?" và có lúc báo
+  `is_plant_related=false` → trả "Mình đang hỗ trợ các câu hỏi về cây trồng…". Có ảnh lá thì không
+  còn OUT_OF_SCOPE.
+- Đo 26/09 trên 158 ảnh lá khỏe PlantDoc (chụp ngoài đồng, tối đa 20 ảnh/cây): IEViT nhận đúng
+  "healthy" 64%; cà chua 3/20 (phần lớn nhầm thành Late_blight), dâu tây 9/20, đào 8/20, anh đào 9/20;
+  ConvNeXt nhầm cây ở anh đào 12/20, đào 9/20. Luật trên chỉ chạy khi model trả `healthy`.
+
+## 2026-09-26 — Tìm trên web, Feedback RAG cho backend rag
+
+- **Tìm trên web:** `/api/chat` nhận `web_search=true`: Groq `openai/gpt-oss-120b` (`WEB_SEARCH_MODEL`)
+  với tool `browser_search` trả lời thẳng, không qua normalizer/router/RAG. Nguồn là các trang model
+  đã mở đọc (`web_sources`); bỏ dấu trích dẫn nội bộ `【n†Lx-Ly】`. Groq đôi khi trả 400
+  `tool_use_failed` khi model không gọi tool dù `tool_choice=required`: thử lại một lần với `auto`.
+  `GET /api/models` có thêm `web_search`.
+- **Feedback RAG khi `ANSWER_BACKEND=rag`:** `RagHttpBackend` lấy câu trả lời mẫu admin đã duyệt và gửi
+  sang RAG (`feedback_examples`, RAG API 1.5.0). `/admin/status` luôn báo `feedback_examples_used=true`.
+- Pipeline gom bước lưu lượt chat vào `_save_turn`, dùng chung cho luồng thường và tìm web.
+
+## 2026-09-25 — Chọn model trả lời, đăng nhập admin cho web, nguồn tài liệu
+
+- **Chọn model:** `GET /api/models` trả các model trong `CHAT_LLM_PROVIDERS` (mặc định `vllm,gemini`,
+  chỉ khi `ANSWER_BACKEND=rag`); `/api/chat` nhận `llm_provider` và gửi sang RAG. Model không có trong
+  danh sách → 400. Model đã trả lời lưu ở `debug.llm_provider`/`llm_model` và metadata của feedback.
+  RAG báo LLM lỗi/chưa cấu hình → thông báo gợi ý chọn model khác.
+- **Đăng nhập admin cho web:** `POST /admin/login` trả token (HMAC, hết hạn sau `ADMIN_SESSION_HOURS`,
+  đổi mật khẩu là hết hiệu lực). `/admin/*` nhận token hoặc HTTP Basic như cũ; token sai trả 401 kèm
+  `WWW-Authenticate: Bearer` để trình duyệt không bật hộp đăng nhập riêng.
+- **Nguồn tài liệu:** bỏ nhãn `[Nguồn n]` khỏi câu trả lời cho người dùng; `source_documents` (RAG API
+  1.4.0 `documents`) cho biết tài liệu trong kho và link nguồn tham khảo ghi trong tài liệu đó.
+
 ## 2026-09-24 — Câu tìm tài liệu dùng câu Groq đã chuẩn hóa
 
 - **Sửa lỗi làm mọi lượt chat trả 500:** normalizer gửi `reasoning_effort="none"`, nhưng

@@ -2,12 +2,18 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Literal
 
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+from app.schemas import LLM_PROVIDERS
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 ENV_FILE = BASE_DIR / ".env"
+
+
+def _split(value: str) -> list[str]:
+    return [item.strip().lower() for item in value.split(",") if item.strip()]
 
 
 class Settings(BaseSettings):
@@ -42,10 +48,19 @@ class Settings(BaseSettings):
     # Gửi kèm câu gốc làm câu tìm phụ (extra_queries) bên cạnh câu Groq đã chuẩn hóa.
     # Tắt: đo 24/09 không thấy lợi (RAG-module/reports/2026-09-24-query-normalization).
     rag_search_original_query: bool = False
+    # Model trả lời người dùng chọn được trên web (chỉ ANSWER_BACKEND=rag), theo thứ tự hiển thị;
+    # model đầu là mặc định. Mỗi model phải cấu hình được bên RAG-module/.env. Trống = không cho chọn.
+    chat_llm_providers: str = "vllm,gemini"
+    # Nút "Tìm trên web": Groq tìm web (tool browser_search) và trả lời thẳng, không qua RAG.
+    # Groq chỉ có browser_search ở openai/gpt-oss-120b, openai/gpt-oss-20b. Trống = tắt nút.
+    web_search_model: str = "openai/gpt-oss-120b"
 
-    # Đăng nhập HTTP Basic cho /admin và /admin/*. Mật khẩu trống = không bảo vệ (cảnh báo trong log).
+    # Đăng nhập cho /admin và /admin/*: HTTP Basic (trang admin cũ) hoặc token của
+    # POST /admin/login (web). Mật khẩu trống = không bảo vệ, và web không đăng nhập được.
     admin_username: str = "admin"
     admin_password: str = ""
+    # Phiên đăng nhập của web hết hạn sau số giờ này.
+    admin_session_hours: float = Field(default=12, gt=0)
 
     # Origin được gọi API từ trình duyệt, cách nhau bằng dấu phẩy. Trống = không bật CORS.
     cors_origins: str = ""
@@ -53,6 +68,25 @@ class Settings(BaseSettings):
     @property
     def cors_origin_list(self) -> list[str]:
         return [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
+
+    @field_validator("chat_llm_providers")
+    @classmethod
+    def _known_providers(cls, value: str) -> str:
+        unknown = [name for name in _split(value) if name not in LLM_PROVIDERS]
+        if unknown:
+            raise ValueError(f"CHAT_LLM_PROVIDERS chỉ nhận {', '.join(LLM_PROVIDERS)}; sai: {', '.join(unknown)}.")
+        return value
+
+    @property
+    def web_search_enabled(self) -> bool:
+        return bool(self.web_search_model.strip())
+
+    @property
+    def chat_llm_provider_list(self) -> list[str]:
+        """Model người dùng chọn được; rỗng khi ANSWER_BACKEND=groq (Groq trả lời)."""
+        if self.answer_backend != "rag":
+            return []
+        return list(dict.fromkeys(_split(self.chat_llm_providers)))
 
     model_config = SettingsConfigDict(
         env_file=ENV_FILE,

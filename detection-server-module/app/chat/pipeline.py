@@ -5,6 +5,7 @@ from app.schemas import (
     Action,
     ChatResponse,
     ChatTurn,
+    DetectionResult,
     Intent,
     PipelineDebug,
     QueryAnalysis,
@@ -21,6 +22,7 @@ from app.schemas import (
 )
 
 from app.answer.base import AnswerBackend, AnswerContext
+from app.answer.web_search import GroqWebSearch
 from app.chat.context import ContextResolver
 from app.chat.detector import DiseaseDetector
 from app.chat.query import RetrievalQueryBuilder
@@ -48,9 +50,12 @@ class ChatService:
         router: QueryRouter,
         query_builder: RetrievalQueryBuilder,
         feedback_recorder: FeedbackRecorder = save_feedback_record,
+        web_search: GroqWebSearch | None = None,
     ):
         self.normalizer = normalizer
         self.answer_backend = answer_backend
+        # None: WEB_SEARCH_MODEL trống, nút "Tìm trên web" bị tắt.
+        self.web_search = web_search
         self.detector = detector
         self.sessions = sessions
         self.resolver = resolver
@@ -66,6 +71,8 @@ class ChatService:
         raw_query: str,
         image_bytes: bytes | None = None,
         image_filename: str | None = None,
+        llm_provider: str | None = None,
+        web_search: bool = False,
     ) -> ChatResponse:
 
         raw_query = raw_query.strip()
@@ -108,7 +115,18 @@ class ChatService:
                 filename=image_filename,
             )
             # Chưa lưu last_detection ở đây: nếu Groq/RAG lỗi phía sau thì Mongo
-            # không được còn lại hội thoại rỗng. Lưu ở bước 9 khi đã có câu trả lời.
+            # không được còn lại hội thoại rỗng. Lưu ở bước 10 khi đã có câu trả lời.
+
+        # Người dùng bật "Tìm trên web": Groq tìm web và trả lời, bỏ qua bước 3–8.
+        if web_search:
+            return await self._web_search_turn(
+                session_id=session_id,
+                question=effective_query,
+                image_bytes=image_bytes,
+                image_filename=image_filename,
+                current_detection=current_detection,
+                previous_detection=previous_detection,
+            )
 
         # ==================================================
         # 3. QUERY NORMALIZATION
@@ -151,14 +169,26 @@ class ChatService:
             session_detection=active_detection,
         )
 
+        # Kết quả nhận diện mà lượt này dựa vào: ảnh vừa gửi, hoặc ảnh trước khi câu hỏi nhắc lại.
+        subject_detection = current_detection or (
+            active_detection if analysis.refers_to_previous_context else None
+        )
+
         # ==================================================
         # 5. ROUTER
+        # Ảnh cho thấy lá khỏe + hỏi cây có bệnh không: trả lời luôn, kể cả khi Groq lỗi.
         # ==================================================
 
-        if normalizer_failed:
+        decision = self.router.healthy(
+            analysis=analysis,
+            resolved=resolved,
+            detection=subject_detection,
+            image_only=not raw_query,
+        )
+        if decision is None and normalizer_failed:
             # Không có intent/cây/bệnh để route: để RAG tự tìm bằng câu gốc.
             decision = RouteDecision(action=Action.ACCEPT_QUERY)
-        else:
+        elif decision is None:
             decision = self.router.decide(
                 analysis=analysis,
                 resolved=resolved,
@@ -195,14 +225,7 @@ class ChatService:
             "disease": resolved.disease,
         }
 
-        detector_context = self._detector_text(
-            current_detection
-            or (
-                active_detection
-                if analysis.refers_to_previous_context
-                else None
-            )
-        )
+        detector_context = self._detector_text(subject_detection)
 
         # ==================================================
         # 7–8. RETRIEVAL + ANSWER (AnswerBackend)
@@ -226,6 +249,7 @@ class ChatService:
                 resolved=resolved,
                 history=history,
                 subject_context=detector_context,
+                llm_provider=llm_provider,
             )
             result = await self.answer_backend.answer(
                 rag_request,
@@ -241,45 +265,7 @@ class ChatService:
             answer = decision.message or "Bạn có thể cung cấp thêm thông tin không?"
 
         # ==================================================
-        # 9. SAVE DETECTION + USER MESSAGE
-        # ==================================================
-
-        if current_detection is not None:
-            await self.sessions.set_last_detection(session_id, current_detection)
-
-        await self.sessions.add_turn(
-            session_id,
-            ChatTurn(
-                role="user",
-                content=effective_query,
-                image_uploaded=image_bytes is not None,
-                image_filename=image_filename,
-            ),
-        )
-
-        # ==================================================
-        # 10. FEEDBACK RECORD
-        # ==================================================
-
-        feedback_id = await self.feedback_recorder(
-            session_id=session_id,
-            question=effective_query,
-            answer=answer,
-            metadata={
-                "model": self.answer_backend.name,
-                "action": decision.action.value,
-                "normalized_query": analysis.normalized_query,
-                "plant": resolved.plant,
-                "disease": resolved.disease,
-                # Để admin biết câu trả lời dựa trên tài liệu nào.
-                "sources": result.sources if result else [],
-                "scope_status": result.scope_status if result else None,
-                "grounded": result.grounded if result else None,
-            },
-        )
-
-        # ==================================================
-        # 11. DEBUG OBJECT
+        # 9. DEBUG OBJECT
         # ==================================================
 
         debug = PipelineDebug(
@@ -308,11 +294,147 @@ class ChatService:
             rag_sources=result.sources if result else [],
             rag_grounded=result.grounded if result else None,
             rag_scope_status=result.scope_status if result else None,
+            source_documents=result.documents if result else [],
+            llm_provider=result.llm_provider if result else None,
+            llm_model=result.llm_model if result else None,
         )
 
         # ==================================================
-        # 12. SAVE ASSISTANT MESSAGE
+        # 10. SAVE TURN + FEEDBACK RECORD
         # ==================================================
+
+        return await self._save_turn(
+            session_id=session_id,
+            question=effective_query,
+            image_bytes=image_bytes,
+            image_filename=image_filename,
+            current_detection=current_detection,
+            answer=answer,
+            action=decision.action,
+            result=result,
+            debug=debug,
+            metadata={
+                "model": self.answer_backend.name,
+                "normalized_query": analysis.normalized_query,
+                "plant": resolved.plant,
+                "disease": resolved.disease,
+                # Để admin biết câu trả lời dựa trên tài liệu nào.
+                "sources": result.sources if result else [],
+                "scope_status": result.scope_status if result else None,
+                "grounded": result.grounded if result else None,
+            },
+        )
+
+    async def _web_search_turn(
+        self,
+        *,
+        session_id: str,
+        question: str,
+        image_bytes: bytes | None,
+        image_filename: str | None,
+        current_detection: DetectionResult | None,
+        previous_detection: DetectionResult | None,
+    ) -> ChatResponse:
+        """Groq tìm web rồi trả lời; không chuẩn hóa, không điều hướng, không gọi RAG.
+
+        Kết quả nhận diện (ảnh lượt này, hoặc ảnh gần nhất trong cuộc trò chuyện) đi kèm câu hỏi
+        để model hiểu "bệnh này"; model tự quyết có dùng hay không.
+        """
+        if self.web_search is None:
+            raise ValueError("Tìm trên web chưa được bật trên máy chủ (WEB_SEARCH_MODEL).")
+
+        detection = current_detection or previous_detection
+        detector_context = ""
+        if detection is not None:
+            when = "ảnh lượt này" if current_detection is not None else "ảnh gần nhất trong cuộc trò chuyện"
+            detector_context = f"Kết quả nhận diện {when}: {self._detector_text(detection)}"
+
+        history = await self.sessions.recent_messages(session_id, limit=self.sessions.max_turns)
+        history = [
+            {"role": message["role"], "content": message["content"][:RAG_HISTORY_CONTENT_MAX_CHARS]}
+            for message in history
+        ]
+        result = await self.web_search.answer(
+            question=question, history=history, detector_context=detector_context,
+        )
+
+        debug = PipelineDebug(
+            raw_query=question,
+            normalized_query=question,
+            detection=current_detection,
+            resolved_plant=detection.plant if detection else None,
+            resolved_disease=detection.disease if detection else None,
+            context_source="current_image" if current_detection else "session_memory" if detection else "query_only",
+            action=Action.WEB_SEARCH,
+            answer_backend=self.web_search.name,
+            rag_grounded=result.grounded,
+            rag_scope_status=result.scope_status,
+            llm_provider=result.llm_provider,
+            llm_model=result.llm_model,
+            web_search=True,
+            web_sources=result.web_sources,
+        )
+        return await self._save_turn(
+            session_id=session_id,
+            question=question,
+            image_bytes=image_bytes,
+            image_filename=image_filename,
+            current_detection=current_detection,
+            answer=result.answer,
+            action=Action.WEB_SEARCH,
+            result=result,
+            debug=debug,
+            metadata={
+                "model": self.web_search.name,
+                "plant": detection.plant if detection else None,
+                "disease": detection.disease if detection else None,
+                "sources": [],
+                "web_sources": [link.url for link in result.web_sources],
+                "scope_status": result.scope_status,
+                # None: không tính vào tỉ lệ "có tài liệu" của RAG trên dashboard.
+                "grounded": None,
+            },
+        )
+
+    async def _save_turn(
+        self,
+        *,
+        session_id: str,
+        question: str,
+        image_bytes: bytes | None,
+        image_filename: str | None,
+        current_detection: DetectionResult | None,
+        answer: str,
+        action: Action,
+        result: RagAnswer | None,
+        debug: PipelineDebug,
+        metadata: dict,
+    ) -> ChatResponse:
+        """Chỉ gọi khi đã có câu trả lời: lỗi ở bước trước thì Mongo không còn nửa lượt chat."""
+        if current_detection is not None:
+            await self.sessions.set_last_detection(session_id, current_detection)
+
+        await self.sessions.add_turn(
+            session_id,
+            ChatTurn(
+                role="user",
+                content=question,
+                image_uploaded=image_bytes is not None,
+                image_filename=image_filename,
+            ),
+        )
+
+        feedback_id = await self.feedback_recorder(
+            session_id=session_id,
+            question=question,
+            answer=answer,
+            metadata={
+                **metadata,
+                "action": action.value,
+                "llm_provider": result.llm_provider if result else None,
+                "llm_model": result.llm_model if result else None,
+            },
+        )
 
         await self.sessions.add_turn(
             session_id,
@@ -320,7 +442,7 @@ class ChatService:
                 role="assistant",
                 content=answer,
                 feedback_id=feedback_id,
-                action=decision.action,
+                action=action,
                 debug=debug.model_dump(mode="json"),
             ),
         )
@@ -330,11 +452,13 @@ class ChatService:
         return ChatResponse(
             session_id=session_id,
             answer=answer,
-            action=decision.action,
+            action=action,
             memory=memory,
             debug=debug,
             feedback_id=feedback_id,
             sources=result.sources if result else [],
+            source_documents=result.documents if result else [],
+            web_sources=result.web_sources if result else [],
         )
 
     # ==================================================
@@ -351,6 +475,7 @@ class ChatService:
         subject_context: str,
         extra_queries: list[str] | None = None,
         rewrite_query: bool = False,
+        llm_provider: str | None = None,
     ) -> RagAnswerRequest:
         """Payload đúng `AnswerRequest` của RAG; cắt theo giới hạn của hợp đồng.
 
@@ -375,6 +500,7 @@ class ChatService:
             disease=resolved.disease[:100] if resolved.disease else None,
             history=messages,
             subject_context=subject_context[:RAG_SUBJECT_CONTEXT_MAX_CHARS] or None,
+            llm_provider=llm_provider,
         )
 
     @staticmethod

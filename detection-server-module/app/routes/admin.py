@@ -31,11 +31,11 @@ class TrainingRequest(BaseModel):
 @router.get("/status", response_model=AdminStatus)
 async def status():
     """Cho trang admin biết ví dụ Feedback RAG có được dùng khi trả lời không."""
-    backend = get_settings().answer_backend
     return {
-        "answer_backend": backend,
-        # ANSWER_BACKEND=rag: API RAG chưa nhận ví dụ admin (plan mục 3.7).
-        "feedback_examples_used": backend == "groq",
+        "answer_backend": get_settings().answer_backend,
+        # groq: đưa vào prompt Groq; rag: gửi sang RAG trong `feedback_examples` (RAG API 1.5.0).
+        # "Tìm trên web" không dùng ví dụ này.
+        "feedback_examples_used": True,
     }
 
 

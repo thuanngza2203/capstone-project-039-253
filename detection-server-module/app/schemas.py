@@ -19,6 +19,10 @@ class Action(str, Enum):
     REQUEST_IMAGE = "REQUEST_IMAGE"
     ASK_CLARIFICATION = "ASK_CLARIFICATION"
     OUT_OF_SCOPE = "OUT_OF_SCOPE"
+    # Người dùng bật "Tìm trên web": Groq tìm web và trả lời, không qua normalizer/router/RAG.
+    WEB_SEARCH = "WEB_SEARCH"
+    # Ảnh được nhận diện là lá khỏe và người dùng hỏi cây có bệnh không: trả lời luôn, không gọi RAG.
+    HEALTHY_PLANT = "HEALTHY_PLANT"
 
 
 class QueryAnalysis(BaseModel):
@@ -143,7 +147,23 @@ RAG_HISTORY_MAX_MESSAGES = 12
 RAG_HISTORY_CONTENT_MAX_CHARS = 8000
 RAG_SUBJECT_CONTEXT_MAX_CHARS = 1000
 
+# LLM sinh câu trả lời bên RAG (`llm_provider` của RAG API).
+LLM_PROVIDERS = ("vllm", "gemini", "ollama")
+LlmProvider = Literal["vllm", "gemini", "ollama"]
+
 RagQueryText = Annotated[str, Field(min_length=1, max_length=RAG_QUERY_MAX_CHARS)]
+
+# Câu trả lời mẫu admin đã duyệt gửi kèm sang RAG (giới hạn theo AnswerRequest của RAG).
+RAG_FEEDBACK_EXAMPLES_MAX = 3
+RAG_FEEDBACK_QUESTION_MAX_CHARS = 1000
+RAG_FEEDBACK_ANSWER_MAX_CHARS = 3000
+
+
+class RagFeedbackExample(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    question: str = Field(min_length=1, max_length=RAG_FEEDBACK_QUESTION_MAX_CHARS)
+    answer: str = Field(min_length=1, max_length=RAG_FEEDBACK_ANSWER_MAX_CHARS)
 
 
 class RagChatMessage(BaseModel):
@@ -178,13 +198,38 @@ class RagAnswerRequest(BaseModel):
     subject_context: Optional[str] = Field(
         default=None, max_length=RAG_SUBJECT_CONTEXT_MAX_CHARS
     )
+    # Model người dùng chọn trên web; None = LLM_PROVIDER mặc định bên RAG.
+    llm_provider: Optional[LlmProvider] = None
+    # RagHttpBackend điền từ Feedback RAG; None thay cho [] để payload không đổi khi không có.
+    feedback_examples: Optional[list[RagFeedbackExample]] = Field(
+        default=None, max_length=RAG_FEEDBACK_EXAMPLES_MAX
+    )
+
+
+class SourceLink(BaseModel):
+    label: Optional[str] = None
+    url: str
+
+
+class SourceDocument(BaseModel):
+    """Tài liệu đã dùng để trả lời: file trong kho và link nguồn tham khảo ghi trong file."""
+
+    source: str
+    title: str
+    links: list[SourceLink] = Field(default_factory=list)
 
 
 class RagAnswer(BaseModel):
     answer: str
     sources: list[str] = Field(default_factory=list)
+    documents: list[SourceDocument] = Field(default_factory=list)
+    # Trang web đã đọc khi trả lời bằng "Tìm trên web".
+    web_sources: list[SourceLink] = Field(default_factory=list)
     grounded: bool
     scope_status: str
+    # Model đã sinh câu trả lời; None khi không gọi LLM (câu từ chối dựng sẵn).
+    llm_provider: Optional[str] = None
+    llm_model: Optional[str] = None
     # Chỉ GroqAnswerBackend điền: để debug như trước refactor.
     rag_documents: list[RagDocument] = Field(default_factory=list)
     feedback_examples: list[dict] = Field(default_factory=list)
@@ -212,7 +257,8 @@ class SessionSnapshot(BaseModel):
 class PipelineDebug(BaseModel):
     raw_query: str
     normalized_query: str
-    intent: Intent
+    # None khi tìm trên web (không chạy normalizer).
+    intent: Optional[Intent] = None
 
     explicit_plant: Optional[str] = None
     explicit_disease: Optional[str] = None
@@ -259,6 +305,14 @@ class PipelineDebug(BaseModel):
     rag_grounded: Optional[bool] = None
     rag_scope_status: Optional[str] = None
 
+    # Tên tài liệu + link nguồn; lưu cùng lượt để mở lại hội thoại vẫn hiện được.
+    source_documents: list[SourceDocument] = Field(default_factory=list)
+    llm_provider: Optional[str] = None
+    llm_model: Optional[str] = None
+
+    web_search: bool = False
+    web_sources: list[SourceLink] = Field(default_factory=list)
+
 
 class ChatResponse(BaseModel):
     session_id: str
@@ -267,8 +321,24 @@ class ChatResponse(BaseModel):
     memory: Optional[DetectionResult] = None
     debug: PipelineDebug
     feedback_id: str | None = None
-    # Trường mới; frontend hiện chỉ đọc 5 trường ở trên và bỏ qua trường này.
     sources: list[str] = Field(default_factory=list)
+    source_documents: list[SourceDocument] = Field(default_factory=list)
+    web_sources: list[SourceLink] = Field(default_factory=list)
+
+
+class ModelOptions(BaseModel):
+    """Model trả lời người dùng chọn được ở trang chat."""
+
+    answer_backend: str = Field(description="`rag` hoặc `groq`; với `groq` không có lựa chọn nào.")
+    providers: list[LlmProvider] = Field(description="Theo thứ tự hiển thị; rỗng = không cho chọn.")
+    default: Optional[LlmProvider] = Field(None, description="Model chọn sẵn (phần tử đầu).")
+    web_search: bool = Field(False, description="Có nút \"Tìm trên web\" (WEB_SEARCH_MODEL khác rỗng).")
+
+
+class AdminSession(BaseModel):
+    token: str = Field(description="Gửi lại trong header `Authorization: Bearer <token>`.")
+    username: str
+    expires_at: datetime
 
 
 # ======================================================

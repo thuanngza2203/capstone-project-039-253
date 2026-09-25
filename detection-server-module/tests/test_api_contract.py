@@ -42,7 +42,10 @@ def test_every_api_route_has_response_model_and_tag():
     assert missing == []
 
 
-def test_admin_requires_login_when_password_is_set(client, admin_password):
+def test_admin_requires_login_when_password_is_set(client, admin_password, monkeypatch):
+    # Không phụ thuộc ANSWER_BACKEND trong .env của máy chạy test.
+    monkeypatch.setenv("ANSWER_BACKEND", "groq")
+    get_settings.cache_clear()
     assert client.get("/admin/status").status_code == 401
     assert client.get("/admin/status", headers=basic("admin", "sai")).status_code == 401
     assert client.get("/admin").status_code == 401
@@ -53,6 +56,122 @@ def test_admin_requires_login_when_password_is_set(client, admin_password):
     # Trang chat và health không bị khóa.
     assert client.get("/health").status_code == 200
     assert client.get("/").status_code == 200
+
+
+def test_web_login_returns_token_for_admin_api(client, admin_password):
+    wrong = client.post("/admin/login", json={"username": "admin", "password": "sai"})
+    assert wrong.status_code == 401
+    assert "www-authenticate" not in wrong.headers  # không bật hộp đăng nhập của trình duyệt
+
+    session = client.post("/admin/login", json={"username": "admin", "password": admin_password}).json()
+    bearer = {"Authorization": f"Bearer {session['token']}"}
+    assert client.get("/admin/status", headers=bearer).status_code == 200
+
+    forged = client.get("/admin/status", headers={"Authorization": f"Bearer {session['token']}x"})
+    assert forged.status_code == 401
+    assert forged.headers["www-authenticate"] == "Bearer"
+    # Trang admin cũ vẫn dùng HTTP Basic.
+    assert client.get("/admin/status", headers=basic("admin", admin_password)).status_code == 200
+
+
+def test_token_expires_and_dies_when_password_changes(admin_password, monkeypatch):
+    from app.security import issue_admin_token, verify_admin_token
+
+    settings = get_settings()
+    token, expires = issue_admin_token(settings, now=1_000)
+    assert expires == 1_000 + 12 * 3600
+    assert verify_admin_token(token, settings, now=1_001)
+    assert not verify_admin_token(token, settings, now=expires)
+    monkeypatch.setenv("ADMIN_PASSWORD", "mat-khau-moi")
+    get_settings.cache_clear()
+    assert not verify_admin_token(token, get_settings(), now=1_001)
+
+
+def test_web_login_needs_admin_password(client, monkeypatch):
+    monkeypatch.setenv("ADMIN_PASSWORD", "")
+    get_settings.cache_clear()
+    try:
+        response = client.post("/admin/login", json={"username": "admin", "password": ""})
+    finally:
+        get_settings.cache_clear()
+    assert response.status_code == 503
+    assert "ADMIN_PASSWORD" in response.json()["detail"]
+
+
+@pytest.fixture
+def rag_backend(monkeypatch):
+    monkeypatch.setenv("ANSWER_BACKEND", "rag")
+    monkeypatch.setenv("CHAT_LLM_PROVIDERS", "gemini, vllm")
+    get_settings.cache_clear()
+    yield
+    get_settings.cache_clear()
+
+
+def test_models_lists_choices_only_for_rag_backend(client, rag_backend, monkeypatch):
+    monkeypatch.setenv("WEB_SEARCH_MODEL", "openai/gpt-oss-120b")
+    get_settings.cache_clear()
+    assert client.get("/api/models").json() == {
+        "answer_backend": "rag", "providers": ["gemini", "vllm"], "default": "gemini", "web_search": True}
+    monkeypatch.setenv("ANSWER_BACKEND", "groq")
+    monkeypatch.setenv("WEB_SEARCH_MODEL", "")
+    get_settings.cache_clear()
+    assert client.get("/api/models").json() == {
+        "answer_backend": "groq", "providers": [], "default": None, "web_search": False}
+
+
+@pytest.mark.parametrize("model", ["openai/gpt-oss-120b", ""])
+def test_chat_web_search_skips_model_choice(client, rag_backend, monkeypatch, model):
+    from app.api import app, get_chat_service
+
+    monkeypatch.setenv("WEB_SEARCH_MODEL", model)
+    get_settings.cache_clear()
+    seen = {}
+
+    class Service:
+        async def chat(self, **kwargs):
+            seen.update(kwargs)  # chỉ kiểm tra tham số route truyền vào
+            raise RuntimeError("dừng ở đây")
+
+    app.dependency_overrides[get_chat_service] = lambda: Service()
+    try:
+        response = client.post("/api/chat", data={
+            "session_id": "s1", "message": "x", "web_search": "true", "llm_provider": "ollama"})
+    finally:
+        app.dependency_overrides.clear()
+    if model:
+        # Model đã chọn (kể cả không hợp lệ) bị bỏ qua: tìm web luôn trả lời bằng Groq.
+        assert seen["web_search"] is True and seen["llm_provider"] is None
+    else:
+        assert response.status_code == 400 and "Tìm trên web" in response.json()["detail"]
+        assert seen == {}
+
+
+def test_unknown_provider_in_config_fails_at_startup():
+    from app.config import Settings
+
+    with pytest.raises(ValueError, match="CHAT_LLM_PROVIDERS"):
+        Settings(groq_api_key="x", chat_llm_providers="vllm,gpt", _env_file=None)
+
+
+@pytest.mark.parametrize(("sent", "status", "used"), [
+    ("vllm", 200, "vllm"), ("", 200, "gemini"), ("ollama", 400, None),
+])
+def test_chat_passes_the_chosen_model(client, rag_backend, sent, status, used):
+    from app.api import app, get_chat_service
+    from test_pipeline import Harness, analysis
+
+    harness = Harness()
+    harness.normalizer.next = analysis(plant="apple", disease="apple_scab")
+    app.dependency_overrides[get_chat_service] = lambda: harness.service
+    try:
+        response = client.post("/api/chat", data={"session_id": "s1", "message": "ghẻ táo?", "llm_provider": sent})
+    finally:
+        app.dependency_overrides.clear()
+    assert response.status_code == status
+    if used:
+        assert harness.payload()["llm_provider"] == used
+    else:
+        assert harness.backend.requests == []
 
 
 def test_admin_is_open_without_password(client, monkeypatch):

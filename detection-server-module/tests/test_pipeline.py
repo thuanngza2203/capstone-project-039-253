@@ -13,7 +13,16 @@ from app.chat.query import RetrievalQueryBuilder
 from app.chat.routing import QueryRouter
 from app.chat.session import InMemorySessionStore
 from app.llm.base import QueryNormalizerLLM
-from app.schemas import Action, ChatTurn, DetectionResult, Intent, QueryAnalysis, RagAnswer
+from app.schemas import (
+    Action,
+    ChatTurn,
+    DetectionResult,
+    Intent,
+    QueryAnalysis,
+    RagAnswer,
+    SourceDocument,
+    SourceLink,
+)
 
 OPENAPI_FILE = Path(__file__).resolve().parents[2] / "2026-09-23-rag-api-openapi.json"
 
@@ -114,6 +123,29 @@ def test_text_only_payload_searches_with_normalized_query():
     assert response.sources == ["apple/apple_scab.txt"]
     assert h.feedback[0]["metadata"]["sources"] == ["apple/apple_scab.txt"]
     assert h.feedback[0]["metadata"]["scope_status"] == "document"
+
+
+def test_chosen_model_and_source_documents_are_kept_with_the_turn():
+    h = Harness()
+    documents = [SourceDocument(source="apple/apple_scab.txt", title="Bệnh ghẻ táo",
+                                links=[SourceLink(label="UMN", url="https://extension.umn.edu/x")])]
+
+    async def answer(request, context=None):
+        h.backend.requests.append(request)
+        return RagAnswer(answer="Trả lời.", sources=["apple/apple_scab.txt"], documents=documents,
+                         grounded=True, scope_status="document",
+                         llm_provider="gemini", llm_model="gemini-2.5-flash")
+
+    h.backend.answer = answer
+    h.normalizer.next = analysis(plant="apple", disease="apple_scab")
+    response = asyncio.run(h.service.chat(session_id="s1", raw_query="ghẻ táo?", llm_provider="gemini"))
+    assert h.payload()["llm_provider"] == "gemini"
+    assert response.source_documents == documents
+    assert response.debug.llm_model == "gemini-2.5-flash"
+    assert h.feedback[0]["metadata"]["llm_provider"] == "gemini"
+    # Mở lại hội thoại: lượt đã lưu vẫn có tài liệu + link để web hiển thị.
+    stored = asyncio.run(h.sessions.snapshot("s1")).turns[-1].debug
+    assert stored["source_documents"][0]["links"][0]["url"] == "https://extension.umn.edu/x"
 
 
 def test_raw_query_is_not_an_extra_search_query_by_default():
@@ -247,6 +279,68 @@ def test_plant_without_disease_model_still_completes_the_turn():
     assert response.memory.plant == "Orange"
     assert response.memory.disease is None
     assert len(asyncio.run(h.sessions.snapshot("s1")).turns) == 2
+
+
+TOMATO_HEALTHY = DetectionResult(plant="Tomato", disease="healthy", confidence=0.97)
+
+
+@pytest.mark.parametrize("message", ["Lá cây này có đang bị gì không?", ""])
+def test_healthy_leaf_is_answered_without_rag(message):
+    """Ảnh lá khỏe + hỏi có bệnh không (hoặc chỉ gửi ảnh): RAG chỉ có tài liệu bệnh nên không gọi."""
+    h = Harness(detection=TOMATO_HEALTHY)
+    response = h.chat(message, analysis(intent=Intent.DIAGNOSIS), image=b"img")
+    assert h.backend.requests == []
+    assert response.action == Action.HEALTHY_PLANT
+    assert "lá cà chua khỏe mạnh" in response.answer and "97%" in response.answer
+    assert h.feedback[0]["metadata"]["action"] == "HEALTHY_PLANT"
+    assert response.memory == TOMATO_HEALTHY
+
+
+def test_unsure_healthy_result_asks_for_a_better_photo():
+    h = Harness(detection=DetectionResult(plant="Apple", disease="Apple___healthy", confidence=0.62))
+    response = h.chat("", analysis(intent=Intent.DIAGNOSIS), image=b"img")
+    assert response.action == Action.HEALTHY_PLANT
+    assert "chưa chắc chắn" in response.answer and "lá táo" in response.answer
+
+
+def test_healthy_leaf_prevention_question_still_uses_rag():
+    h = Harness(detection=TOMATO_HEALTHY)
+    response = h.chat("Cây này phòng bệnh thế nào?", analysis(intent=Intent.PREVENTION), image=b"img")
+    assert response.action == Action.ACCEPT_QUERY
+    assert h.payload()["disease"] == "healthy"
+
+
+def test_disease_named_by_user_beats_healthy_image():
+    h = Harness(detection=TOMATO_HEALTHY)
+    response = h.chat("Lá này có bị mốc sương không?",
+                      analysis(plant="tomato", disease="late_blight", intent=Intent.DIAGNOSIS), image=b"img")
+    assert response.action == Action.ACCEPT_QUERY
+    assert h.payload()["disease"] == "late_blight"
+
+
+def test_follow_up_about_healthy_leaf_is_answered_without_rag():
+    h = Harness(detection=TOMATO_HEALTHY)
+    h.chat("", analysis(intent=Intent.DIAGNOSIS), image=b"img")
+    response = h.chat("Vậy cây đó có bị bệnh gì không?",
+                      analysis(intent=Intent.DIAGNOSIS, refers_to_previous_context=True))
+    assert response.action == Action.HEALTHY_PLANT and h.backend.requests == []
+
+
+def test_healthy_image_only_is_answered_even_when_groq_fails():
+    h = Harness(detection=TOMATO_HEALTHY)
+    h.normalizer.analyze = broken_normalizer
+    response = asyncio.run(h.service.chat(session_id="s1", raw_query="", image_bytes=b"img"))
+    assert response.action == Action.HEALTHY_PLANT and h.backend.requests == []
+
+
+def test_leaf_image_is_never_out_of_scope():
+    """Đo 26/09: chỉ gửi ảnh, Groq thấy "Ảnh này đang bị bệnh gì?" và báo is_plant_related=false."""
+    h = Harness()
+    response = h.chat("", analysis(intent=Intent.DIAGNOSIS, is_plant_related=False), image=b"img")
+    assert response.action == Action.ACCEPT_QUERY
+    assert h.payload()["disease"] == "Apple___Apple_scab"
+    # Không có ảnh thì vẫn từ chối câu ngoài phạm vi như cũ.
+    assert h.chat("Giá vàng hôm nay?", analysis(is_plant_related=False)).action == Action.OUT_OF_SCOPE
 
 
 def test_long_history_is_clipped_to_contract_limits():

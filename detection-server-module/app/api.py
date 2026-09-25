@@ -19,6 +19,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.routes.admin import router as admin_router
+from app.routes.auth import router as auth_router
 from app.routes.feedback import router as feedback_router
 
 from app.config import Settings, get_settings
@@ -28,12 +29,14 @@ from app.schemas import (
     ConversationDetail,
     ConversationSummary,
     HealthResponse,
+    ModelOptions,
     OkResponse,
     SessionSnapshot,
 )
 
 from app.answer.base import AnswerBackend, AnswerBackendError
 from app.answer.rag_http import RagHttpBackend
+from app.answer.web_search import GroqWebSearch
 from app.chat.pipeline import ChatService
 from app.chat.context import ContextResolver
 from app.chat.detector import PlantAIDetector
@@ -138,6 +141,8 @@ if _cors_origins:
 
 app.include_router(feedback_router)
 
+app.include_router(auth_router)
+
 app.include_router(admin_router)
 
 app.mount(
@@ -182,10 +187,14 @@ def build_answer_backend(settings: Settings) -> AnswerBackend:
     """ANSWER_BACKEND=groq: như trước refactor; rag: gọi RAG-module server."""
 
     if settings.answer_backend == "rag":
+        from app.feedback.rag import get_feedback_rag_service
+
         return RagHttpBackend(
             base_url=settings.rag_api_url,
             api_key=settings.rag_api_key,
             timeout=settings.rag_api_timeout,
+            # Câu trả lời mẫu admin đã duyệt được gửi kèm sang RAG.
+            feedback_rag=get_feedback_rag_service(),
         )
 
     # Import muộn: chế độ rag không cần nạp Chroma/embedding của rag/ nội bộ.
@@ -226,6 +235,11 @@ def get_chat_service() -> ChatService:
         query_builder=RetrievalQueryBuilder(
             search_original_query=settings.rag_search_original_query,
         ),
+        # Nút "Tìm trên web": Groq tìm web và trả lời thẳng.
+        web_search=GroqWebSearch(
+            api_key=settings.groq_api_key,
+            model=settings.web_search_model.strip(),
+        ) if settings.web_search_enabled else None,
     )
 
 
@@ -254,15 +268,50 @@ async def health():
 # =====================================================
 
 
+@app.get("/api/models", response_model=ModelOptions, tags=["Chat"])
+async def models():
+    """Model trả lời người dùng chọn được (CHAT_LLM_PROVIDERS; rỗng khi ANSWER_BACKEND=groq)
+    và có nút "Tìm trên web" hay không (WEB_SEARCH_MODEL)."""
+    settings = get_settings()
+    providers = settings.chat_llm_provider_list
+    return ModelOptions(
+        answer_backend=settings.answer_backend,
+        providers=providers,
+        default=providers[0] if providers else None,
+        web_search=settings.web_search_enabled,
+    )
+
+
+def resolve_llm_provider(settings: Settings, requested: str) -> str | None:
+    """Model gửi sang RAG; bỏ trống = model đầu của CHAT_LLM_PROVIDERS (hoặc mặc định của RAG)."""
+    allowed = settings.chat_llm_provider_list
+    if settings.answer_backend != "rag":
+        return None  # Groq trả lời: không có model nào để chọn.
+    requested = requested.strip().lower()
+    if not requested:
+        return allowed[0] if allowed else None
+    if requested not in allowed:
+        raise HTTPException(status_code=400, detail=f"Model '{requested}' không được phép dùng.")
+    return requested
+
+
 @app.post("/api/chat", response_model=ChatResponse, tags=["Chat"])
 async def chat(
     session_id: Annotated[str, Form(min_length=1)],
     message: Annotated[str, Form()] = "",
     image: Annotated[UploadFile | None, File()] = None,
+    llm_provider: Annotated[str, Form(description="Một giá trị của GET /api/models; bỏ trống = mặc định.")] = "",
+    web_search: Annotated[bool, Form(description="true: Groq tìm web và trả lời, không qua RAG.")] = False,
     service: ChatService = Depends(get_chat_service),
 ):
 
     try:
+
+        settings = get_settings()
+        if web_search and not settings.web_search_enabled:
+            raise HTTPException(status_code=400, detail="Tìm trên web chưa được bật trên máy chủ.")
+        # Tìm trên web luôn trả lời bằng Groq: model đã chọn không dùng tới.
+        provider = None if web_search else resolve_llm_provider(settings, llm_provider)
 
         image_bytes = None
         image_filename = None
@@ -279,6 +328,8 @@ async def chat(
             raw_query=message,
             image_bytes=image_bytes,
             image_filename=image_filename,
+            llm_provider=provider,
+            web_search=web_search,
         )
 
     except HTTPException:

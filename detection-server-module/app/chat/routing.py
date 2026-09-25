@@ -1,7 +1,55 @@
-from app.schemas import Action, Intent, QueryAnalysis, ResolvedQuery, RouteDecision
+from app.chat.labels import HEALTHY, PLANT_VI, canonical_disease, canonical_plant
+from app.schemas import Action, DetectionResult, Intent, QueryAnalysis, ResolvedQuery, RouteDecision
+
+
+# Dưới ngưỡng này câu trả lời "cây khỏe" nói rõ là chưa chắc và nhắc chụp lại.
+HEALTHY_CONFIDENT = 0.8
+# Hỏi cây có bệnh gì / chữa thế nào mà ảnh cho thấy lá khỏe: trả lời luôn. Hỏi phòng bệnh,
+# chăm sóc... vẫn tra tài liệu (RAG có tài liệu phòng bệnh của cây).
+HEALTHY_ANSWER_INTENTS = frozenset({Intent.DIAGNOSIS, Intent.TREATMENT})
+
+
+def healthy_message(detection: DetectionResult) -> str:
+    plant = PLANT_VI.get(canonical_plant(detection.plant) or "", detection.plant)
+    percent = f"{detection.confidence * 100:.0f}%"
+    if detection.confidence >= HEALTHY_CONFIDENT:
+        return (
+            f"Hệ thống nhận diện đây là **lá {plant} khỏe mạnh** (độ tin cậy {percent}), "
+            "không thấy dấu hiệu bệnh.\n\n"
+            "Bạn chỉ cần tiếp tục chăm sóc và theo dõi cây. Nếu sau này lá có đốm, vàng, xoăn hay "
+            "héo, hãy chụp lại phần lá bất thường để hệ thống kiểm tra."
+        )
+    return (
+        f"Hệ thống nghiêng về **lá {plant} khỏe mạnh** nhưng chưa chắc chắn (độ tin cậy {percent}).\n\n"
+        "Nếu bạn thấy lá có đốm, vàng, xoăn hay héo, hãy chụp lại gần hơn, đủ sáng, vào đúng phần "
+        "lá bất thường để kiểm tra lại."
+    )
 
 
 class QueryRouter:
+    def healthy(
+        self,
+        *,
+        analysis: QueryAnalysis,
+        resolved: ResolvedQuery,
+        detection: DetectionResult | None,
+        image_only: bool,
+    ) -> RouteDecision | None:
+        """Ảnh (lượt này, hoặc lượt trước khi câu hỏi nhắc lại) là lá khỏe và người dùng hỏi
+        cây có bệnh không: trả lời luôn, không gọi RAG.
+
+        Kho chỉ có tài liệu về bệnh; tìm "lá này có bị gì không" trong đó chỉ ra câu "chưa đủ
+        thông tin". Người dùng tự nêu một bệnh (resolved.disease khác nhãn ảnh) thì vẫn tra
+        tài liệu bệnh đó. `image_only`: chỉ gửi ảnh, câu hỏi mặc định là hỏi bệnh.
+        """
+        if detection is None or canonical_disease(detection.disease) != HEALTHY:
+            return None
+        if resolved.disease != detection.disease:
+            return None
+        if not image_only and analysis.intent not in HEALTHY_ANSWER_INTENTS:
+            return None
+        return RouteDecision(action=Action.HEALTHY_PLANT, message=healthy_message(detection))
+
     def decide(
         self,
         *,
@@ -9,7 +57,9 @@ class QueryRouter:
         resolved: ResolvedQuery,
         has_current_image: bool,
     ) -> RouteDecision:
-        if not analysis.is_plant_related:
+        # Ảnh đã qua bước kiểm tra "có lá cây" nên lượt này chắc chắn về cây trồng; Groq không
+        # thấy ảnh, câu mặc định "Ảnh này đang bị bệnh gì?" hay bị đánh giá là ngoài phạm vi.
+        if not analysis.is_plant_related and not has_current_image:
             return RouteDecision(
                 action=Action.OUT_OF_SCOPE,
                 message="Mình đang hỗ trợ các câu hỏi về cây trồng và bệnh cây.",

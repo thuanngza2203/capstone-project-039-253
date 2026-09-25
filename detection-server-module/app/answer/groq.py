@@ -3,7 +3,7 @@ import logging
 from app.answer.base import AnswerBackend, AnswerContext
 from app.feedback.rag import FeedbackRAGService
 from app.llm.base import AnswerLLM
-from app.schemas import RagAnswer, RagAnswerRequest
+from app.schemas import RagAnswer, RagAnswerRequest, SourceDocument
 from rag.service import RAGService
 
 
@@ -68,11 +68,16 @@ class GroqAnswerBackend(AnswerBackend):
             feedback_examples=feedback_examples,
         )
 
+        sources = list(dict.fromkeys(doc.source for doc in rag_documents))
         return RagAnswer(
             answer=answer,
-            sources=list(dict.fromkeys(doc.source for doc in rag_documents)),
+            sources=sources,
+            # rag/ nội bộ không đọc link nguồn: chỉ có tên file.
+            documents=[SourceDocument(source=source, title=source) for source in sources],
             grounded=bool(rag_documents),
             scope_status="internal",
+            llm_provider="groq",
+            llm_model=getattr(self.answer_llm, "model", None),
             rag_documents=rag_documents,
             feedback_examples=feedback_examples,
         )

@@ -29,6 +29,8 @@ downloads/
 eggs/
 .eggs/
 lib/
+# Code JS của web (không phải thư mục build của Python): phải có trong git.
+!application/web/src/lib/
 lib64/
 parts/
 sdist/
@@ -37,7 +39,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-
+!application/web/src/lib/
 # Virtual environments (global & nested)
 .venv/
 venv/
@@ -100,6 +102,8 @@ dist-ssr/
 # Model directories & runs
 models/
 */models/
+# Code Python định nghĩa kiến trúc model (không phải trọng số): phải có trong git.
+!detection-server-module/app/plant_ai/models/
 AI-models/
 */AI-models/
 runs/
@@ -183,3 +187,4 @@ Desktop.ini
 # Câu trả lời thí nghiệm, khóa giải mã khảo sát, phản hồi Google Form (có thể có email).
 /RAG-module/experiments/runs/
 /RAG-module/experiments/surveys/
+!application/web/src/lib/

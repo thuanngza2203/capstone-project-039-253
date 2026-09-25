@@ -6,3 +6,4 @@ __pycache__/
 rag/chroma_db/
 debug/
 /models/
+app/plant_ai/models
