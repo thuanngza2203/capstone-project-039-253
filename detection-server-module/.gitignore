@@ -6,4 +6,5 @@ __pycache__/
 rag/chroma_db/
 debug/
 /models/
-app/plant_ai/models
+# app/plant_ai/models/ chứa code Python, phải commit cùng source.
+# Trọng số nằm trong /models/ và bị chặn theo phần mở rộng ở .gitignore gốc.

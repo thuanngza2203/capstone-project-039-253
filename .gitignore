@@ -39,7 +39,6 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-!application/web/src/lib/
 # Virtual environments (global & nested)
 .venv/
 venv/
@@ -92,6 +91,8 @@ dist-ssr/
 *.tflite
 *.pb
 *.safetensors
+*.gguf
+*.ggml
 *.bin
 *.pkl
 *.pickle
@@ -176,16 +177,15 @@ Desktop.ini
 !.vscode/settings.json
 !.vscode/extensions.json
 !.vscode/launch.json
-/RAG-module/scripts/
 /detection-module
 /RAG-module/agents
-/RAG-module/docs
+# Giữ scripts/ và docs/ trong Git; chỉ bỏ qua kết quả sinh ra bên dưới.
 /RAG-module/reports/
 /RAG-module/artifacts/
 /RAG-module/chroma_db_structure/
-/RAG-module/reports/
 # Câu trả lời thí nghiệm, khóa giải mã khảo sát, phản hồi Google Form (có thể có email).
 /RAG-module/experiments/runs/
 /RAG-module/experiments/surveys/
-!application/web/src/lib/
 /bao-cao
+/RAG-module/docs
+/RAG-module/scripts
