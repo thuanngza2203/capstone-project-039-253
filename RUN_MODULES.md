@@ -43,6 +43,8 @@ Web ở `http://localhost:5173` (điện thoại cùng Wi-Fi: `http://<IP máy>:
 | Kiểm tra tunnel tới Vast | `docker compose logs vast-tunnel` |
 | Index lại sau khi đổi dữ liệu/chunking/embedding | `docker compose stop rag`, rồi `docker compose run --rm rag python main.py index`, rồi `docker compose start rag` |
 | Sửa `.env` của một module | `docker compose restart rag` (hoặc `detection`) |
+| Sửa code của một module | `docker compose up -d --build web` (hoặc `detection`, `rag`): chỉ build lại phần code, thư viện không cài lại |
+| Sửa giao diện liên tục, xem ngay khi lưu file | `docker compose stop web`, rồi `cd application\web; npm run dev`; xong thì `docker compose up -d --build web` |
 
 Lần bật đầu, container RAG tự tạo index (khoảng một phút) trong volume Docker; các lần sau dùng lại. Model nhận diện nằm ở `detection-server-module/models`, model HuggingFace ở `HF_CACHE_DIR` (hoặc volume `hf-cache`): tải một lần, các lần sau dùng lại.
 
