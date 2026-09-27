@@ -2,6 +2,52 @@
 
 Luồng ứng dụng: **Web → Detection → RAG → vLLM trên Vast.ai**.
 
+## Cách nhanh: chạy bằng Docker
+
+Một lệnh bật Web, Detection, RAG và SSH tunnel tới Vast (4 container, file [docker-compose.yml](docker-compose.yml)). vLLM vẫn chạy trên Vast (mục 1 bên dưới); MongoDB vẫn là service đang chạy trên Windows, dữ liệu cũ giữ nguyên.
+
+**Cần có:** Docker Desktop (backend WSL2), MongoDB chạy trên Windows; instance Vast đang chạy vLLM nếu dùng Qwen 27B. Máy không có GPU NVIDIA: bỏ `#` ở dòng `COMPOSE_FILE` trong `.env` gốc.
+
+**Lần đầu:** chép `.env.example` ở thư mục gốc thành `.env` (hoặc để `run.cmd` tự chép), điền `VAST_SSH_KEY_FILE` nếu dùng Vast; `HF_CACHE_DIR` để dùng lại model HuggingFace đã tải trên máy (tùy chọn). `.env` của từng module vẫn dùng như cũ; Docker chỉ đổi các địa chỉ nội bộ (RAG gọi `vast-tunnel:8000`, Detection gọi `rag:8010` và MongoDB qua `host.docker.internal`).
+
+**Bật:** nhấp đúp `run.cmd`. Script hỏi lệnh SSH của Vast:
+
+```text
+Vast dang luu: root@92.180.27.84, cong SSH 59921
+Dan lenh SSH cua Vast (nut Connect), Enter de giu nguyen: ssh -p 41234 root@173.44.12.9 -L 8080:localhost:8080
+```
+
+Mỗi lần thuê GPU mới, Vast cấp IP và cổng SSH mới: bấm **Connect** trên Vast, chép dòng `ssh -p ... root@...` rồi dán vào (dán nguyên dòng, script tự tách IP và cổng, lưu vào `.env` gốc). Vẫn instance cũ thì chỉ cần Enter. Đổi IP khi hệ thống đang chạy cũng chỉ cần chạy lại `run.cmd`: Docker chỉ tạo lại container `vast-tunnel`.
+
+**Tắt:** nhấp đúp `stop.cmd`, hoặc `docker compose down`.
+
+**Tự build và chạy bằng lệnh** (thấy được tiến độ tải; lần đầu mất khá lâu vì phải tải vài GB thư viện, các lần sau dùng lại):
+
+```powershell
+cd D:\HCMUT\Capstone_Project
+docker compose build detection   # từng image, hoặc "docker compose build" cho cả 4
+docker compose build web
+docker compose up -d             # bật cả hệ thống
+docker compose ps                # cột STATUS: running / healthy
+```
+
+Build bị ngắt giữa chừng (mất mạng, tắt máy) thì chạy lại đúng lệnh đó: các gói đã tải được giữ trong cache của Docker, không tải lại từ đầu.
+
+Web ở `http://localhost:5173` (điện thoại cùng Wi-Fi: `http://<IP máy>:5173`), Swagger ở `http://127.0.0.1:8005/docs` và `http://127.0.0.1:8010/docs`.
+
+| Việc | Lệnh |
+|---|---|
+| Xem log | `docker compose logs -f rag` (hoặc `detection`, `web`, `vast-tunnel`) |
+| Trạng thái | `docker compose ps` |
+| Đổi instance Vast | chạy lại `run.cmd`, dán lệnh SSH mới (hoặc sửa `VAST_SSH_HOST`, `VAST_SSH_PORT` trong `.env` gốc rồi `docker compose up -d`) |
+| Kiểm tra tunnel tới Vast | `docker compose logs vast-tunnel` |
+| Index lại sau khi đổi dữ liệu/chunking/embedding | `docker compose stop rag`, rồi `docker compose run --rm rag python main.py index`, rồi `docker compose start rag` |
+| Sửa `.env` của một module | `docker compose restart rag` (hoặc `detection`) |
+
+Lần bật đầu, container RAG tự tạo index (khoảng một phút) trong volume Docker; các lần sau dùng lại. Model nhận diện nằm ở `detection-server-module/models`, model HuggingFace ở `HF_CACHE_DIR` (hoặc volume `hf-cache`): tải một lần, các lần sau dùng lại.
+
+## Cách chạy tay từng module
+
 Mỗi server chạy trong một terminal riêng và giữ terminal đó mở. Các lệnh dưới dành cho máy đã cài dependencies, tạo `.venv` riêng cho từng module Python và cấu hình `.env`. MongoDB phải đang chạy, `MONGO_URI` trỏ đúng địa chỉ/cổng.
 
 ## 1. LLM-server-module — chạy trên Vast.ai (Linux)
@@ -24,10 +70,10 @@ python check_api.py
 
 ## 2. SSH tunnel — terminal riêng trên Windows
 
-Chuyển cổng `8001` trên Windows tới vLLM cổng `8000` trên Vast. Lệnh dưới dùng instance hiện tại (`92.180.27.84`, SSH port `59921`) và key `vast_ed25519`; cập nhật IP/port theo Connect của Vast khi đổi instance.
+Chuyển cổng `8001` trên Windows tới vLLM cổng `8000` trên Vast. Mỗi lần thuê GPU, Vast cấp IP và cổng SSH mới: thay `<IP>`, `<PORT>` theo lệnh ở nút Connect của Vast.
 
 ```powershell
-ssh -i "$env:USERPROFILE\.ssh\vast_ed25519" -N -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -p 59921 -L 127.0.0.1:8001:127.0.0.1:8000 root@92.180.27.84
+ssh -i "$env:USERPROFILE\.ssh\vast_ed25519" -N -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -p <PORT> -L 127.0.0.1:8001:127.0.0.1:8000 root@<IP>
 ```
 
 Với tunnel này, sửa các dòng tương ứng trong `RAG-module/.env`:

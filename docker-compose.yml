@@ -1,0 +1,101 @@
+# Chạy cả hệ thống trên máy: nhấp đúp run.cmd (hỏi IP/cổng Vast mới rồi chạy docker compose up -d --build)
+# Web: http://localhost:5173 · Detection: http://127.0.0.1:8005/docs · RAG: http://127.0.0.1:8010/docs
+#
+# LLM (vLLM) vẫn chạy trên Vast.ai; container vast-tunnel thay cho lệnh ssh -L trên Windows.
+# MongoDB dùng service đang chạy trên Windows (giữ nguyên dữ liệu cũ).
+# Mỗi module vẫn đọc .env của chính nó; mục environment bên dưới chỉ đổi các địa chỉ cho đúng mạng Docker.
+# Biến ${...} lấy từ file .env ở thư mục gốc (xem .env.example).
+name: plant-disease
+
+services:
+  vast-tunnel:
+    build: ./docker/vast-tunnel
+    # Để trống VAST_SSH_HOST (chỉ dùng Gemini/Ollama) thì container chỉ chờ, không kết nối.
+    environment:
+      VAST_SSH_HOST: ${VAST_SSH_HOST:-}
+      VAST_SSH_PORT: ${VAST_SSH_PORT:-}
+      VAST_SSH_USER: ${VAST_SSH_USER:-root}
+      VAST_LLM_PORT: ${VAST_LLM_PORT:-8000}
+    volumes:
+      - ${VAST_SSH_KEY_FILE:-./docker/vast-tunnel/no-key.txt}:/ssh/key:ro
+    init: true
+    restart: unless-stopped
+
+  rag:
+    build: ./RAG-module
+    environment:
+      RAG_API_HOST: 0.0.0.0
+      RAG_API_PORT: "8010"
+      # vLLM qua tunnel; để trống VLLM_BASE_URL vì RAG chỉ nhận một trong hai cách khai báo địa chỉ.
+      VLLM_SCHEME: http
+      VLLM_HOST: vast-tunnel
+      VLLM_PORT: "8000"
+      VLLM_BASE_URL: ""
+      # Ollama (nếu chọn LLM_PROVIDER=ollama) chạy trên Windows.
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      ANONYMIZED_TELEMETRY: "False"
+    volumes:
+      - ./RAG-module/.env:/app/.env:ro
+      - ./RAG-module/data:/app/data:ro
+      # Index tạo lần đầu (docker/entrypoint.sh), giữ lại giữa các lần bật.
+      - rag-index-structure:/app/chroma_db_structure
+      - rag-index-recursive:/app/chroma_db
+      # Model HuggingFace (Vietnamese_Embedding...): thư mục cache trên máy nếu có HF_CACHE_DIR,
+      # không thì volume hf-cache (tải một lần, giữ lại giữa các lần bật).
+      - ${HF_CACHE_DIR:-hf-cache}:/root/.cache/huggingface
+    ports:
+      - "127.0.0.1:${RAG_PORT:-8010}:8010"
+    # Máy không có GPU NVIDIA: bật docker-compose.cpu.yml (dòng COMPOSE_FILE trong .env gốc).
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    depends_on:
+      - vast-tunnel
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8010/health', timeout=5)"]
+      interval: 15s
+      timeout: 10s
+      start_period: 300s
+      retries: 3
+    restart: unless-stopped
+
+  detection:
+    build: ./detection-server-module
+    environment:
+      RAG_API_URL: http://rag:8010
+      MONGO_URI: ${DOCKER_MONGO_URI:-mongodb://host.docker.internal:27017}
+    volumes:
+      - ./detection-server-module/.env:/app/.env:ro
+      # Checkpoint nhận diện đã tải (737 MB); thiếu file nào thì server tự tải vào đây.
+      - ./detection-server-module/models:/app/models
+      - ${HF_CACHE_DIR:-hf-cache}:/root/.cache/huggingface
+    ports:
+      - "127.0.0.1:${DETECTION_PORT:-8005}:8005"
+    depends_on:
+      - rag
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8005/health', timeout=5)"]
+      interval: 15s
+      timeout: 10s
+      start_period: 60s
+      retries: 3
+    restart: unless-stopped
+
+  web:
+    build: ./application/web
+    ports:
+      # Mở cho cả mạng LAN như npm run dev: điện thoại cùng Wi-Fi vào http://<IP máy>:5173.
+      - "${WEB_PORT:-5173}:80"
+    depends_on:
+      - detection
+      - rag
+    restart: unless-stopped
+
+volumes:
+  rag-index-structure:
+  rag-index-recursive:
+  hf-cache:

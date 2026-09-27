@@ -1,0 +1,20 @@
+# .env được mount lúc chạy (docker-compose.yml), không đóng vào image.
+.env
+.env.*
+!.env.example
+.venv
+**/__pycache__
+.pytest_cache
+# Index nằm trong volume riêng, tạo lần đầu bằng docker/entrypoint.sh.
+chroma_db
+chroma_db_structure
+# Chỉ dùng khi thí nghiệm/đánh giá, API không cần.
+artifacts
+reports
+experiments
+eval
+tests
+scripts
+local-llm
+agents
+docs

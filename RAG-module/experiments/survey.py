@@ -1,7 +1,8 @@
 """Khảo sát ẩn danh so sánh hai variant bằng Google Form.
 
-build   : ghép câu trả lời của hai variant thành từng cặp, đảo vị trí 1/2 có cân bằng,
-          sinh Apps Script tạo form (`form.gs`), file khóa (`key.json`) và bản xem trước.
+build   : ghép câu trả lời của hai variant thành từng cặp, đảo vị trí 1/2 có cân bằng
+          (hoặc giữ cố định A ở vị trí 1 với --fixed-order), sinh Apps Script tạo form
+          (`form.gs`), file khóa (`key.json`) và bản xem trước.
 export  : bảng so sánh có tên model (side_by_side.csv/.md) để người làm khảo sát đọc.
 analyze : đọc CSV phản hồi (Google Form → Phản hồi → Tải xuống CSV), giải mã bằng
           `key.json`, tính tỉ lệ thắng, khoảng tin cậy và kiểm định dấu.
@@ -108,17 +109,23 @@ def build_pairs(
     return pairs, excluded
 
 
-def assign(pairs: list[dict[str, str]], *, seed: int, per_form: int) -> list[list[dict[str, Any]]]:
-    """Trộn thứ tự câu; mỗi variant đứng ở vị trí 1 đúng một nửa số cặp (lệch tối đa 1)."""
+def assign(
+    pairs: list[dict[str, str]], *, seed: int, per_form: int, fixed_order: bool = False,
+) -> list[list[dict[str, Any]]]:
+    """Trộn thứ tự câu. Mặc định mỗi variant đứng ở vị trí 1 đúng một nửa số cặp (lệch tối đa 1);
+    `fixed_order` giữ A ở vị trí 1 và B ở vị trí 2 cho mọi cặp. Thứ tự câu chỉ phụ thuộc seed."""
     if per_form < 1:
         raise SurveyError("--per-form phải lớn hơn 0.")
     rng = random.Random(seed)
     order = pairs[:]
     rng.shuffle(order)
-    firsts = ["a"] * (len(order) // 2) + ["b"] * (len(order) // 2)
-    if len(order) % 2:
-        firsts.append(rng.choice("ab"))
-    rng.shuffle(firsts)
+    if fixed_order:
+        firsts = ["a"] * len(order)
+    else:
+        firsts = ["a"] * (len(order) // 2) + ["b"] * (len(order) // 2)
+        if len(order) % 2:
+            firsts.append(rng.choice("ab"))
+        rng.shuffle(firsts)
     items = []
     for number, (pair, first) in enumerate(zip(order, firsts), start=1):
         second = "b" if first == "a" else "a"
@@ -201,7 +208,7 @@ def preview(forms: list[list[dict[str, Any]]], title: str) -> str:
 
 def build(
     path_a: Path, path_b: Path, out_dir: Path, *, title: str, seed: int, per_form: int,
-    keep_citations: bool = False, include_truncated: bool = False,
+    keep_citations: bool = False, include_truncated: bool = False, fixed_order: bool = False,
 ) -> dict[str, Any]:
     rows_a, rows_b = load_rows(path_a), load_rows(path_b)
     if not rows_a or not rows_b:
@@ -214,10 +221,10 @@ def build(
                                   include_truncated=include_truncated)
     if not pairs:
         raise SurveyError("Không còn cặp nào để khảo sát sau khi lọc.")
-    forms = assign(pairs, seed=seed, per_form=per_form)
+    forms = assign(pairs, seed=seed, per_form=per_form, fixed_order=fixed_order)
     created = datetime.now(timezone.utc).isoformat(timespec="seconds")
     key = {
-        "created_at": created, "title": title, "seed": seed,
+        "created_at": created, "title": title, "seed": seed, "fixed_order": fixed_order,
         "variants": {"a": variant_a, "b": variant_b},
         "files": {"a": str(path_a), "b": str(path_b)},
         "keep_citations": keep_citations, "include_truncated": include_truncated,
@@ -435,6 +442,8 @@ def main(argv: list[str] | None = None) -> int:
     build_parser.add_argument("--per-form", type=int, default=12, help="Số cặp tối đa mỗi form.")
     build_parser.add_argument("--keep-citations", action="store_true", help="Giữ [Nguồn n] trong câu trả lời.")
     build_parser.add_argument("--include-truncated", action="store_true", help="Giữ cả cặp có câu bị cắt.")
+    build_parser.add_argument("--fixed-order", action="store_true",
+                              help="Câu trả lời 1 luôn là --a, câu trả lời 2 luôn là --b (không đảo vị trí).")
     export_parser = commands.add_parser("export", help="Bảng so sánh có tên model (CSV + markdown).")
     export_parser.add_argument("--a", required=True, type=Path)
     export_parser.add_argument("--b", required=True, type=Path)
@@ -448,10 +457,13 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.command == "build":
             key = build(args.a, args.b, args.out, title=args.title, seed=args.seed, per_form=args.per_form,
-                        keep_citations=args.keep_citations, include_truncated=args.include_truncated)
+                        keep_citations=args.keep_citations, include_truncated=args.include_truncated,
+                        fixed_order=args.fixed_order)
             forms = max(item["form"] for item in key["items"])
             print(f"{len(key['items'])} cặp trong {forms} form → {args.out}/form.gs "
                   f"(A = {key['variants']['a']}, B = {key['variants']['b']}).")
+            if key["fixed_order"]:
+                print("Vị trí cố định: câu trả lời 1 luôn là A, câu trả lời 2 luôn là B.")
             for item in key["excluded"]:
                 print(f"  bỏ {item['question_id']}: {item['reason']}")
             print("Đọc preview.md trước, rồi chạy form.gs trên script.google.com. "

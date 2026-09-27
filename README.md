@@ -1,104 +1,93 @@
-# PlantGPT — nhận diện và tư vấn bệnh cây
+# PlantGPT — Chatbot nhận diện và tư vấn bệnh cây trồng
 
-Luồng ứng dụng: **Web → Detection → RAG → LLM**. LLM có thể dùng Ollama,
-Gemini hoặc vLLM trên server Linux/Vast.ai.
+Người dùng hỏi bằng tiếng Việt hoặc gửi ảnh lá cây. Hệ thống nhận diện cây và bệnh từ ảnh, tìm thông tin trong kho 25 tài liệu bệnh cây (10 loại cây), rồi sinh câu trả lời có dẫn nguồn.
 
-## Sau khi clone lần đầu
+## Kiến trúc
 
-Repo có source, tài liệu `.txt` để index, `.env.example`, requirements và
-`package-lock.json`. Cần cài **Python 3.11**, **Node.js 22** và có **MongoDB**
-đang chạy. Mỗi module Python dùng một `.venv` riêng.
-
-Không đưa lên Git: `.env`, trọng số model, `.venv`, `node_modules`, Chroma index
-và dữ liệu hội thoại MongoDB. Vì vậy clone xong cần cài dependencies, điền cấu
-hình, tải model và tạo index trước khi chat được.
-
-Các lệnh PowerShell dưới đây bắt đầu từ **thư mục gốc repo**.
-
-### 1. RAG
-
-```powershell
-cd RAG-module
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install --upgrade pip
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-if (-not (Test-Path .env)) { Copy-Item .env.example .env }
+```text
+Trình duyệt ─► Web ─────────► Detection server ─────► RAG module ─────► LLM server
+               (React)        nhận diện ảnh lá,        tìm tài liệu,      vLLM trên GPU Vast.ai
+               :5173          chuẩn hóa câu hỏi        sinh câu trả lời   (hoặc Gemini / Ollama)
+                              (Groq), MongoDB          :8010
+                              :8005
 ```
 
-Sửa `.env`: chọn `LLM_PROVIDER`, cấu hình provider đó; đặt `EMBEDDING_DEVICE=cpu`
-nếu máy không có CUDA. Nếu dùng Ollama, cần chạy Ollama và tải `OLLAMA_MODEL`
-trước khi hỏi. Nếu dùng vLLM, cần server đang chạy, URL truy cập được, API key
-và tên model khớp server. Hướng dẫn: [RAG](RAG-module/README.md),
-[vLLM/Vast.ai](LLM-server-module/README.md).
+| Thư mục | Vai trò | Hướng dẫn |
+|---|---|---|
+| [`application/web`](application/web) | Giao diện chat và trang quản trị | [README](application/web/README.md) |
+| [`detection-server-module`](detection-server-module) | API chat: nhận diện ảnh, chuẩn hóa câu hỏi, lưu hội thoại | [README](detection-server-module/README.md) |
+| [`RAG-module`](RAG-module) | API tìm tài liệu và sinh câu trả lời | [README](RAG-module/README.md) |
+| [`LLM-server-module`](LLM-server-module) | Chạy mô hình ngôn ngữ (Qwen 27B) bằng vLLM trên GPU thuê | [README](LLM-server-module/README.md) |
 
-Tạo index theo `CHUNKING_STRATEGY` trong `.env`, rồi bật API:
+## Cần chuẩn bị
 
-```powershell
-.\.venv\Scripts\python.exe main.py index
-.\.venv\Scripts\python.exe -m server
+- Windows 10/11 (đã chạy thử), Git.
+- **MongoDB Community Server** chạy ở `localhost:27017`.
+- **Groq API key** ([console.groq.com](https://console.groq.com), gói miễn phí đủ dùng thử).
+- Một LLM để sinh câu trả lời, chọn một:
+  - vLLM trên GPU thuê ở Vast.ai (cấu hình chính), xem [LLM-server-module](LLM-server-module/README.md);
+  - Gemini API key;
+  - Ollama chạy trên máy (`ollama pull qwen3.5:4b`).
+- Chạy bằng Docker: **Docker Desktop**. Chạy thủ công: **Python 3.11** và **Node.js 18+**.
+
+GPU NVIDIA không bắt buộc; không có GPU thì RAG tính embedding bằng CPU (chậm hơn).
+
+## Chạy nhanh bằng Docker
+
+1. Tạo file cấu hình từ file mẫu (PowerShell, tại thư mục gốc repo):
+
+   ```powershell
+   Copy-Item .env.example .env
+   Copy-Item RAG-module\.env.example RAG-module\.env
+   Copy-Item detection-server-module\.env.example detection-server-module\.env
+   ```
+
+2. Điền các giá trị bắt buộc:
+
+   | File | Biến |
+   |---|---|
+   | `detection-server-module/.env` | `GROQ_API_KEY`, `ADMIN_PASSWORD` (mật khẩu trang quản trị) |
+   | `RAG-module/.env` | `LLM_PROVIDER` và cấu hình LLM đã chọn: `vllm` → `VLLM_API_KEY`; `gemini` → `GEMINI_API_KEY`; `ollama` → không cần thêm |
+   | `.env` (gốc) | Chỉ khi dùng Vast: `VAST_SSH_KEY_FILE`. Máy không có GPU NVIDIA: bỏ `#` ở dòng `COMPOSE_FILE` |
+
+3. Nếu dùng Vast: bật vLLM theo [LLM-server-module](LLM-server-module/README.md).
+4. Nhấp đúp **`run.cmd`**. Khi được hỏi, dán lệnh SSH của Vast (nút **Connect**, dạng `ssh -p 41234 root@173.44.12.9 ...`); không dùng Vast thì bấm Enter.
+5. Mở <http://localhost:5173>. Tắt bằng **`stop.cmd`**.
+
+Lần đầu mất khoảng 10–30 phút: Docker tải thư viện (vài GB), RAG tải model embedding và tạo index, detection tải model nhận diện (khoảng 740 MB). Các lần sau chỉ mất khoảng một phút. Mỗi lần thuê GPU mới, Vast đổi IP và cổng: chạy lại `run.cmd` và dán lệnh SSH mới. Xem log, index lại, đổi cấu hình: [RUN_MODULES.md](RUN_MODULES.md).
+
+## Chạy thủ công từng module
+
+Mỗi module chạy trong một terminal riêng, theo thứ tự:
+
+1. LLM: [vLLM trên Vast](LLM-server-module/README.md) và SSH tunnel, hoặc Gemini/Ollama.
+2. [RAG module](RAG-module/README.md): `python -m server` (cổng 8010).
+3. [Detection server](detection-server-module/README.md): `uvicorn app.api:app --port 8005`.
+4. [Web](application/web/README.md): `npm run dev`, mở <http://localhost:5173>.
+
+Mỗi README có phần cài đặt lần đầu. Lệnh bật hằng ngày gom trong [RUN_MODULES.md](RUN_MODULES.md).
+
+## Cấu trúc thư mục
+
+```text
+application/web/           Web React + Vite
+detection-server-module/   FastAPI: nhận diện ảnh, chat, quản trị
+RAG-module/                FastAPI + CLI: tài liệu (data/), index, tìm kiếm, sinh câu trả lời
+LLM-server-module/         Script cài và chạy vLLM trên Linux (Vast.ai)
+docker/, docker-compose.yml, run.cmd, stop.cmd   Chạy cả hệ thống bằng Docker
 ```
 
-Lần index đầu cần Internet để tải embedding/tokenizer. Đổi provider LLM không
-cần index lại. API: `http://127.0.0.1:8010/docs`.
+## Kiểm thử
 
-### 2. Detection — terminal khác tại thư mục gốc repo
+| Module | Lệnh (trong thư mục module, đã kích hoạt `.venv`) |
+|---|---|
+| RAG | `python -m pytest -q` |
+| Detection | `python -m pytest -q tests` |
+| LLM server | `python -m unittest discover -s tests -v` |
 
-```powershell
-cd detection-server-module
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install --upgrade pip
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
-if (-not (Test-Path .env)) { Copy-Item .env.example .env }
-```
+Các test chạy offline: không cần GPU, Groq, MongoDB hay LLM thật.
 
-Điền `GROQ_API_KEY`, `MONGO_URI`, `ADMIN_PASSWORD`; cấu hình để nối với RAG:
+## Lưu ý
 
-```dotenv
-ANSWER_BACKEND=rag
-RAG_API_URL=http://127.0.0.1:8010
-# Để trống: dùng LLM_PROVIDER bên RAG. Chỉ liệt kê provider đã cấu hình và chạy được.
-CHAT_LLM_PROVIDERS=
-```
-
-Nếu đặt `RAG_API_KEY`, hai module phải dùng cùng key. Khởi động MongoDB trước,
-sau đó chạy:
-
-```powershell
-.\.venv\Scripts\python.exe -m uvicorn app.api:app --host 127.0.0.1 --port 8005
-```
-
-Detection tải checkpoint còn thiếu vào `detection-server-module/models/`.
-`app/plant_ai/models/` chứa **code kiến trúc**, phải được commit cùng source.
-Với `ANSWER_BACKEND=rag`, không cần index thư mục `rag/` nội bộ của Detection.
-Hướng dẫn khác, gồm backend Groq độc lập: [Detection README](detection-server-module/README.md).
-
-### 3. Web — terminal khác tại thư mục gốc repo
-
-```powershell
-cd application/web
-npm.cmd ci
-npm.cmd run dev
-```
-
-Mở `http://localhost:5173`. Cấu hình mặc định đã proxy tới Detection `8005` và
-RAG `8010`; chỉ cần `.env.local` nếu đổi địa chỉ backend. Xem
-[Web README](application/web/README.md) khi build hoặc deploy.
-
-## Những lần chạy sau
-
-Xem [RUN_MODULES.md](RUN_MODULES.md) để bật từng server. Không cần cài lại
-dependencies hoặc index lại khi source, dữ liệu và cấu hình index không đổi.
-
-## File cần giữ trong Git
-
-- Source của các module, gồm `detection-server-module/app/plant_ai/models/`
-  và `application/web/src/lib/`.
-- `RAG-module/data/`, `detection-server-module/rag/data/`, static assets.
-- `.env.example`, requirements, `package.json`, `package-lock.json`, script
-  cài/chạy, scripts đánh giá và tài liệu hướng dẫn.
-- `agents/`, báo cáo sinh tự động, cache và kết quả thí nghiệm không bắt buộc
-  để chạy ứng dụng. OpenAPI hiện tại có tại `http://127.0.0.1:8010/openapi.json`.
-
-`.gitignore` chỉ quyết định file chưa track nào sẽ bị bỏ qua; sửa rule không
-tự thêm file vào commit hoặc xóa file đã commit. Trước khi push, kiểm tra
-`git status --short` và thêm cả các file source mới hiện ra.
+- Không có trong Git: các file `.env` (chứa key), trọng số model, index Chroma, `.venv`, `node_modules`. Chúng được tạo hoặc tải ở lần chạy đầu.
+- Kết quả nhận diện và tư vấn chỉ mang tính tham khảo. Với bệnh nặng hoặc cây có giá trị cao, hãy hỏi thêm cán bộ kỹ thuật nông nghiệp.

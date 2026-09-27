@@ -184,6 +184,18 @@ def test_build_pairs_filters_and_balances_positions() -> None:
     assert survey.assign(pairs, seed=7, per_form=4) == forms  # cùng seed, cùng kết quả
 
 
+def test_fixed_order_keeps_a_first_and_the_same_question_order() -> None:
+    rows_a = {f"q{i}": row(f"q{i}", "A", f"A trả lời {i}") for i in range(5)}
+    rows_b = {f"q{i}": row(f"q{i}", "B", f"B trả lời {i}") for i in range(5)}
+    pairs, _ = survey.build_pairs(rows_a, rows_b)
+    fixed = [item for form in survey.assign(pairs, seed=7, per_form=12, fixed_order=True) for item in form]
+    mixed = [item for form in survey.assign(pairs, seed=7, per_form=12) for item in form]
+    for item in fixed:
+        assert item["first"] == "a"
+        assert item["answer1"].startswith("A") and item["answer2"].startswith("B")
+    assert [item["question_id"] for item in fixed] == [item["question_id"] for item in mixed]
+
+
 def write_run(path: Path, variant: str, answers: dict[str, str]) -> None:
     path.write_text("".join(json.dumps(row(qid, variant, text), ensure_ascii=False) + "\n"
                             for qid, text in answers.items()), encoding="utf-8")

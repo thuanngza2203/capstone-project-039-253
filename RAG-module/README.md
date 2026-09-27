@@ -1,699 +1,124 @@
-# RAG bệnh cây với LangChain
+# RAG module
 
-Module này đọc tài liệu `.txt`, tạo embedding tiếng Việt trên máy, lưu vector
-trong Chroma và dùng LLM để sinh câu trả lời có trích nguồn. LLM mặc định là
-`qwen3.5:4b` chạy local qua Ollama; có thể chuyển sang Gemini hoặc API vLLM
-local/remote bằng `LLM_PROVIDER` trong `.env`.
+Tìm đoạn tài liệu liên quan tới câu hỏi và sinh câu trả lời có dẫn nguồn. Dùng qua **API** (detection server và web gọi) hoặc **CLI** (thử nhanh trong terminal).
 
-**Chỉ chạy LLM trên Vast.ai, giữ RAG ở host:** xem
-[LLM-server-module](../LLM-server-module/README.md). Module riêng này khởi động
-vLLM trên Linux; RAG gọi API qua `VLLM_BASE_URL` và `VLLM_API_KEY`. Dùng
-`LLM_PROVIDER=vllm`, giữ embedding, retrieval, Chroma và lịch sử chat ở host.
-Đổi endpoint LLM không cần index lại.
+- Kho tài liệu: `data/` gồm 25 file `.txt`, mỗi file một bệnh, chia mục theo tiêu đề.
+- Chia chunk theo tiêu đề (tối đa 400 token), embedding `AITeamVN/Vietnamese_Embedding`, lưu trong ChromaDB.
+- Tìm lai: tìm theo ngữ nghĩa + BM25, gộp bằng RRF; gửi 6 chunk tốt nhất cho LLM.
+- LLM chọn bằng `LLM_PROVIDER`: `vllm` (Qwen 27B trên Vast.ai), `gemini` hoặc `ollama`.
 
-## Chạy thử nhanh với Ollama Qwen3.5 4B
+## Cài đặt lần đầu
 
-Dành cho máy đã có `.venv` và dependencies. Nếu cài lần đầu, làm các mục
-**1–4** bên dưới trước. Thực hiện các bước sau trong cùng terminal PowerShell.
-
-### Bước 1 — Vào module và activate venv
+Cần Python 3.11. Lần chạy đầu cần Internet để tải model embedding (khoảng 2,3 GB).
 
 ```powershell
-Set-Location D:\HCMUT\Capstone_Project\RAG-module
+cd RAG-module
+py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+Copy-Item .env.example .env
 ```
 
-Sau khi activate, dùng `python` như các lệnh bên dưới. Không cần tạo lại venv
-hoặc cài lại dependencies mỗi lần chạy.
+Có GPU NVIDIA: trên Windows, lệnh trên cài PyTorch bản CPU. Muốn chạy embedding trên GPU thì cài PyTorch bản CUDA theo [pytorch.org](https://pytorch.org/get-started/locally/) trước khi cài `requirements.txt`, rồi đặt `EMBEDDING_DEVICE=cuda`. Không có GPU thì để `EMBEDDING_DEVICE=cpu`.
 
-### Bước 2 — Chọn cấu hình trong `.env`
+PowerShell chặn `Activate.ps1`: chạy `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` rồi activate lại.
 
-Để thử chunking mới với Ollama, sửa các giá trị này trong file `.env` hiện có:
+## Cấu hình `.env`
 
-```dotenv
-LLM_PROVIDER=ollama
-OLLAMA_MODEL=qwen3.5:4b
-OLLAMA_BASE_URL=http://127.0.0.1:11434
-OLLAMA_THINK=false
+Chọn một LLM và điền phần tương ứng:
 
-CHUNKING_STRATEGY=structure
-CHUNK_MAX_TOKENS=400
-CHUNK_OVERLAP_TOKENS=40
-CHROMA_DIR=
+| `LLM_PROVIDER` | Cần điền | Ghi chú |
+|---|---|---|
+| `vllm` | `VLLM_API_KEY` (trùng `LLM_API_KEY` trên server), `VLLM_MODEL=rag-llm` | Server và SSH tunnel theo [LLM-server-module](../LLM-server-module/README.md); chép các dòng trong `rag-client.env.example` của module đó |
+| `gemini` | `GEMINI_API_KEY`, `GEMINI_MODEL` | Chỉ câu hỏi và các chunk được gửi đi |
+| `ollama` | `OLLAMA_MODEL` (mặc định `qwen3.5:4b`) | Cài [Ollama](https://ollama.com/download) rồi `ollama pull qwen3.5:4b` |
 
-RETRIEVAL_MODE=hybrid
-RERANKER_ENABLED=false
-CHAT_HISTORY_TURNS=4
+Các biến khác đã có giá trị mặc định hợp lý trong `.env.example`:
 
-RAG_CHUNK_SIZE=1000
-RAG_CHUNK_OVERLAP=150
-RAG_TOP_K=4
-```
+| Biến | Mặc định | Ý nghĩa |
+|---|---|---|
+| `EMBEDDING_DEVICE` | `cuda` | `cpu` nếu không có GPU NVIDIA |
+| `RAG_TOP_K` | `6` | Số chunk gửi cho LLM |
+| `RETRIEVAL_MODE` | `hybrid` | `semantic`, `bm25` hoặc `hybrid` |
+| `CHUNKING_STRATEGY` | `structure` | `structure` (theo tiêu đề) hoặc `recursive` (theo số ký tự) |
+| `RAG_API_KEY` | trống | Đặt key thì client phải gửi `Authorization: Bearer <key>`; detection dùng cùng key |
 
-`CHROMA_DIR` để trống để tự chọn index: `structure` → `chroma_db_structure/`,
-`recursive` → `chroma_db/`. Các biến số như `RAG_TOP_K` phải có giá trị nếu được
-khai báo; không để dạng `RAG_TOP_K=`. Giữ cấu hình embedding đã dùng để tạo index.
+Biến môi trường của terminal được ưu tiên hơn `.env`. Sửa `.env` xong phải khởi động lại chương trình.
 
-Sau khi sửa `.env`, thoát và mở lại `chat`. Nếu terminal đã đặt biến `$env:...`
-cùng tên, giá trị đó có ưu tiên hơn `.env`; mở terminal mới nếu muốn đọc lại
-cấu hình từ file mà không giữ các override trước đó.
+## Tạo index
 
-### Bước 3 — Kiểm tra Ollama
-
-```powershell
-ollama list
-```
-
-Nếu chưa có model `qwen3.5:4b`, tải một lần:
-
-```powershell
-ollama pull qwen3.5:4b
-```
-
-Nếu không kết nối được Ollama, mở ứng dụng Ollama hoặc chạy `ollama serve`
-trong terminal khác. `index`, `preview-chunks` và `search` không cần Ollama;
-`ask`/`chat` có sinh câu trả lời thì cần.
-
-### Bước 4 — Xem chunk và tạo index khi cần
-
-```powershell
-python main.py preview-chunks --source apple/apple_black_rot.txt
-```
-
-Lệnh này dùng strategy trong `.env`, in header/body, vị trí nguồn và thống kê
-token; không tạo embedding hoặc ghi Chroma.
-
-**Chỉ chạy lệnh sau nếu index chưa có, hoặc đã sửa data, cách chia/header,
-token budget hay embedding model:**
+Chạy một lần, và chạy lại khi sửa tài liệu trong `data/`, đổi cách chia chunk hoặc model embedding:
 
 ```powershell
 python main.py index
 ```
 
-`index` tự đọc tài liệu, chia chunk, tạo embedding và lưu Chroma; không cần
-chạy bước chunking riêng trước nó. Index đã có và cấu hình tương ứng không đổi
-thì bỏ qua. Các thay đổi cache BM25, config provider và kiểm tra citation của
-plan 18/09 không yêu cầu index lại nếu text/header/embedding vẫn giữ nguyên.
+Kết quả: 25 tài liệu thành 743 chunk trong `chroma_db_structure/`. Đổi LLM, số chunk hay cách tìm thì **không** cần index lại.
 
-### Bước 5 — Kiểm tra retrieval, rồi hỏi chatbot
+## Chạy API
 
 ```powershell
-# Chỉ xem chunk được lấy ra, không gọi LLM:
-python main.py search "Bệnh ghẻ táo có triệu chứng gì?" --debug
-
-# Hỏi một câu, có gọi Ollama:
-python main.py ask "Cách quản lý bệnh thối đen trên táo?"
-
-# Hỏi liên tục, dùng lại tài nguyên và giữ lịch sử:
-python main.py chat --debug
+python -m server
 ```
 
-Trong chat, thử lần lượt:
-
-1. `Bệnh ghẻ táo có triệu chứng gì?`
-2. `Vậy tác nhân gây bệnh đó là gì?`
-3. `Cháy lá sớm trên khoai tây do tác nhân nào?`
-
-Xem `retrieval_query` để kiểm tra câu nối tiếp có được làm rõ đúng bệnh không.
-Gõ `/reset` để xóa lịch sử, `/exit` để thoát. Lịch sử chỉ tồn tại trong phiên.
-
-Nếu chỉ muốn kiểm tra retrieval nhiều lần và quan sát cache BM25, dùng:
-
-```powershell
-python main.py chat --search-only --mode bm25 --no-rerank --debug
-```
-
-Lệnh này không cần Ollama/embedding. BM25 dựng cache ở query đầu và dùng lại
-trong cùng phiên; chạy từng lệnh `search` riêng tạo process mới nên không đo
-được lợi ích cache giữa các query. Thay `--mode bm25` bằng `--mode hybrid` để
-thử kết hợp embedding và BM25.
-
-## Luồng xử lý
-
-```mermaid
-flowchart LR
-    A[TXT trong data] --> B[Chia chunk]
-    B --> C[Gắn danh tính bệnh]
-    C --> D[Embedding local]
-    D --> E[Chroma]
-    E --> F[Semantic + BM25, RRF, reranker tùy chọn]
-    F --> G{LLM_PROVIDER}
-    G -->|ollama| H[Qwen local]
-    G -->|gemini| I[Gemini API]
-    G -->|vllm| J[vLLM API trong Docker]
-```
-
-- `index`: đọc `data/**/*.txt`, chia chunk và build lại index theo strategy.
-- `preview-chunks`: xem chunk, heading, token và vị trí nguồn trước khi index.
-- `search`: kiểm tra các chunk được truy xuất, không gọi LLM.
-- `ask`: retrieve context rồi gọi provider được chọn trong `.env`.
-- `chat`: nhận nhiều câu hỏi trong cùng process, giữ model và Chroma để dùng lại.
-
-Retrieval mặc định kết hợp semantic search và BM25 bằng RRF. Query luôn tìm trên
-toàn collection; alias không còn tạo bộ lọc cứng theo bệnh. Có thể bật reranker
-để xếp hạng lại ứng viên. Chi tiết và hướng dẫn debug: [docs/RETRIEVAL.md](docs/RETRIEVAL.md).
-
-## API server (FastAPI + Swagger)
-
-Cho detection-server-module (và client khác) gọi RAG qua HTTP. Server không lưu
-lịch sử: mỗi request tự mang `history`.
-
-```powershell
-python main.py index            # cần index trước, như CLI
-python -m server                # http://127.0.0.1:8010/docs
-python -m server --export-openapi openapi.json
-```
+Swagger: <http://127.0.0.1:8010/docs>. Các endpoint chính:
 
 | Endpoint | Việc | Gọi LLM |
-| --- | --- | --- |
-| `GET /health` | Process còn sống, không cần key | Không |
-| `GET /v1/status` | Index, số chunk, provider/model đang dùng; từng index có khớp `data/` không | Không |
-| `GET /v1/llm?probe=true` | Model thật đang chạy (vLLM: `root` sau alias `rag-llm`) | Không |
-| `GET /v1/taxonomy` | Cây, bệnh, alias, bệnh nào có tài liệu | Không |
-| `POST /v1/retrieve` | Tìm chunk theo `plant_type`/`disease` | Không |
-| `POST /v1/answer` | Tìm + sinh câu trả lời có trích nguồn; `documents` kèm tiêu đề và link nguồn tham khảo của từng tài liệu; `feedback_examples` (tối đa 3) là câu trả lời admin đã duyệt, được đưa vào prompt | Có |
-| `GET /v1/admin/overview` | Kho tri thức: số tài liệu, chunk, token từng index | Không |
-| `GET /v1/admin/documents[/{source}]` | Tài liệu, chunk theo thứ tự, văn bản gốc, "đã sửa sau lần index" | Không |
-| `GET /v1/admin/chunks?q=`, `/v1/admin/chunks/{chunk_id}` | Tìm chunk theo nội dung; xem một chunk | Không |
+|---|---|---|
+| `GET /health` | Server còn sống | Không |
+| `GET /v1/status` | Index, số chunk, LLM đang dùng | Không |
+| `GET /v1/llm?probe=true` | Hỏi server LLM model nào đang thật sự chạy (kiểm tra kết nối) | Không |
+| `POST /v1/retrieve` | Tìm chunk theo câu hỏi, có thể khoanh theo `plant_type`, `disease` | Không |
+| `POST /v1/answer` | Tìm chunk và sinh câu trả lời có dẫn nguồn | Có |
+| `GET /v1/taxonomy` | Danh sách cây, bệnh và tên gọi khác | Không |
+| `GET /v1/admin/...` | Xem tài liệu, chunk cho trang quản trị | Không |
 
-Các API `/v1/admin/*` chỉ đọc, phục vụ trang quản trị của web (`application/web`). CORS mở theo
-`RAG_API_CORS_ORIGINS` (mặc định `*`); `RAG_API_KEY` trống thì nghe `0.0.0.0` được, chỉ in cảnh báo.
-
-Để so sánh, request chọn được `index` (`recursive`/`structure`) và `llm_provider`
-(`ollama`/`gemini`/`vllm`); bỏ trống thì dùng `.env`. Mọi response có `meta`: cấu hình
-thật đã dùng, model LLM báo về, token, `finish_reason` và thời gian từng bước. Quy trình
-chạy bộ câu hỏi và dựng Google Form: [experiments/README.md](experiments/README.md).
-
-`plant_type` và `disease` nhận nhãn của normalizer (`apple`, `apple_scab`) lẫn của
-detector (`Apple`, `Apple___Black_rot`, `Scab`); bảng alias ở `taxonomy.py`. Có nhãn
-thì chỉ tìm trong đúng tài liệu của bệnh đó. Bệnh chưa có tài liệu hoặc nhãn lạ thì
-**không tìm và không gọi LLM**, `scope.status` cho biết lý do. Không gửi nhãn thì
-tìm như CLI.
-
-Câu dùng để tìm: `retrieval_query` (detection gửi câu Groq đã chuẩn hóa), không có thì
-`query`. `extra_queries` (tối đa 3) được tìm y như câu đó, mọi bảng xếp hạng gộp bằng
-RRF; `meta.search_queries` ghi các câu đã thật sự dùng. Detection không gửi câu gốc ở
-đây trừ khi bật `RAG_SEARCH_ORIGINAL_QUERY`: đo trên câu có nhiễu không thấy lợi
-([reports/2026-09-24-query-normalization](reports/2026-09-24-query-normalization)).
-
-Xác thực bằng `Authorization: Bearer <RAG_API_KEY>`. Để trống `RAG_API_KEY` thì tắt
-xác thực (API public); nghe `0.0.0.0` khi không có key vẫn chạy, chỉ in cảnh báo. Thiết kế và các bước tích hợp:
-[agents/2026-09-23-rag-api-server-integration-plan.md](agents/2026-09-23-rag-api-server-integration-plan.md).
-
-## Chọn chunking cũ hoặc theo cấu trúc
-
-Trong `.env`:
-
-```dotenv
-CHUNKING_STRATEGY=recursive
-CHUNK_MAX_TOKENS=400
-CHUNK_OVERLAP_TOKENS=40
-CHUNK_TOKENIZER_MODEL=
-CHROMA_DIR=
-```
-
-Đổi `CHUNKING_STRATEGY=structure` để dùng heading và giới hạn token. Khi
-`CHROMA_DIR` để trống, `recursive` dùng `chroma_db/`, `structure` dùng
-`chroma_db_structure/`; `search`, `ask`, `chat` tự chọn thư mục tương ứng.
-Sau khi đổi config, khởi động lại chương trình. Tạo mỗi index một lần:
+## Dùng CLI
 
 ```powershell
-python main.py preview-chunks --strategy structure --source apple/apple_black_rot.txt
-python main.py index --strategy recursive
-python main.py index --strategy structure
+python main.py search "Bệnh ghẻ táo có triệu chứng gì?" --debug   # chỉ tìm, không gọi LLM
+python main.py ask "Cách quản lý bệnh thối đen trên táo?"         # tìm và trả lời
+python main.py chat                                              # hỏi liên tục, nhớ lịch sử
+python main.py preview-chunks --source apple/apple_scab.txt      # xem cách chia chunk
 ```
 
-`--strategy` chỉ ghi đè cho lệnh index/preview đó, không sửa `.env`. Ví dụ,
-chạy `index --strategy structure` rồi `search` khi `.env` vẫn là `recursive`
-thì `search` vẫn đọc index recursive.
+Trong `chat`: `/reset` xóa lịch sử, `/exit` để thoát.
 
-Khi đã có cả hai index, so sánh cùng câu hỏi và cùng retrieval settings mà
-không cần đổi `.env`:
-
-```powershell
-python main.py search "Cắt tỉa táo thối đen khi nào?" --index-dir chroma_db --mode hybrid --no-rerank --top-k 4 --debug
-python main.py search "Cắt tỉa táo thối đen khi nào?" --index-dir chroma_db_structure --mode hybrid --no-rerank --top-k 4 --debug
-```
-
-Nếu `CHROMA_DIR` đã được điền, dùng `--index-dir` riêng cho cả hai lệnh index
-để không ghi vào cùng thư mục. Muốn so sánh đúng corpus trước khi thêm heading,
-dùng snapshot raw theo hướng dẫn A/B trong `docs/CHUNKING.md`.
-
-Đổi strategy không chia lại các chunk đã lưu. Sửa data hoặc budget thì chạy
-`index` lại. Có thể dùng `--index-dir` trên cả bốn lệnh để chọn index cụ thể.
-Hướng dẫn A/B, snapshot trước sửa, benchmark 60 câu và cách đọc code:
-[docs/CHUNKING.md](docs/CHUNKING.md).
-
-## Hỏi liên tục để tránh nạp lại model
-
-Chạy trong `RAG-module` với `.venv` đã activate:
-
-```powershell
-python main.py chat
-```
-
-Chờ dòng `Chuẩn bị xong`, nhập từng câu hỏi. Gõ `/exit` hoặc nhấn `Ctrl+C` để
-thoát. Embedding và reranker (nếu bật) được giữ trong RAM/VRAM suốt phiên.
-Chroma và LLM client cũng được dùng lại. `chat` giữ lịch sử theo phiên để làm rõ
-những câu nối tiếp như “bệnh đó thì sao?”. Gõ `/reset` để bắt đầu hội thoại mới
-mà không nạp lại model. Lịch sử chỉ nằm trong RAM và mất khi thoát chương trình.
-
-### Test hội thoại với Ollama Qwen3.5 4B
-
-```dotenv
-LLM_PROVIDER=ollama
-OLLAMA_MODEL=qwen3.5:4b
-OLLAMA_THINK=false
-CHAT_HISTORY_TURNS=4
-CHAT_HISTORY_MAX_CHARS=6000
-```
-
-```powershell
-python main.py chat --debug
-```
-
-Thử hỏi lần lượt `Bệnh ghẻ táo có triệu chứng gì?`, `Vậy tác nhân gây bệnh đó
-là gì?`, rồi đổi chủ đề sang `Cháy lá sớm trên khoai tây do tác nhân nào?`.
-Debug hiện `retrieval_query` để xem LLM đã hiểu câu nối tiếp thành câu nào.
-Mỗi lượt khi có lịch sử thêm một lần gọi LLM để rewrite, dùng cùng model/client
-đang chạy. `--history-turns 0` tắt memory để so sánh độ trễ.
-
-Chi tiết cách đọc code và giới hạn: [docs/CHAT_MEMORY.md](docs/CHAT_MEMORY.md).
-
-Thử nhiều query retrieval trong cùng phiên:
-
-```powershell
-python main.py chat --search-only --mode hybrid --no-rerank --debug
-python main.py chat --search-only --mode bm25 --no-rerank
-```
-
-`chat` in riêng thời gian chuẩn bị và thời gian mỗi query. `--search-only` tìm
-kiếm độc lập, không dùng/thay đổi lịch sử hoặc gọi LLM. Lệnh `ask`/`search` một lần vẫn khởi động process mới
-và nạp lại model local; cache file trên ổ đĩa không giữ model trong RAM.
-
-Đổi `.env` hoặc rebuild index thì thoát và mở lại phiên. LLM chạy ở Ollama/vLLM
-server có vòng đời bộ nhớ riêng; xem [docs/MODEL_LIFECYCLE.md](docs/MODEL_LIFECYCLE.md)
-để cấu hình Ollama giữ model lâu hơn và dùng `RAGSession` trực tiếp trong Python.
-
-## Chọn và debug retrieval
-
-```dotenv
-RETRIEVAL_MODE=hybrid
-RETRIEVAL_CANDIDATE_K=20
-RETRIEVAL_RRF_K=60
-RERANKER_ENABLED=false
-RERANKER_MODEL=cross-encoder/mmarco-mMiniLMv2-L12-H384-v1
-RERANKER_DEVICE=cpu
-```
-
-`RETRIEVAL_MODE` nhận `semantic`, `bm25` hoặc `hybrid`, độc lập với
-`LLM_PROVIDER=ollama|gemini|vllm`. Sau khi sửa `.env`, chạy lại chương trình.
-CLI cũng cho ghi đè mode/reranker cho từng lần chạy:
-
-```powershell
-python main.py search "Bệnh cháy lá sớm trên khoai tây?" --mode bm25 --no-rerank --debug
-python main.py search "Bệnh cháy lá sớm trên khoai tây?" --mode hybrid --no-rerank --debug
-python main.py search "Bệnh cháy lá sớm trên khoai tây?" --mode hybrid --rerank --debug
-python main.py ask "Bệnh ghẻ táo có triệu chứng gì?" --mode hybrid
-```
-
-BM25 đọc chunk từ Chroma nên dùng tiếp được index hiện có và không tải embedding.
-`--rerank` tải model reranker ở lần đầu, có thể cần Internet; mặc định tắt.
-Đổi mode/reranker không cần tạo lại index. Sửa corpus hoặc embedding vẫn cần
-`python main.py index`. Các điểm debug là điểm xếp hạng, không phải xác suất
-câu trả lời đúng.
-
-Kế hoạch và kết quả triển khai: [agents/hybrid-retrieval-plan.md](agents/hybrid-retrieval-plan.md).
-
-## 1. Cài Ollama trên Windows
-
-Cài bằng `winget`:
-
-```powershell
-winget install --exact --id Ollama.Ollama
-```
-
-Hoặc tải trình cài đặt từ [ollama.com/download/windows](https://ollama.com/download/windows).
-Sau khi cài, mở terminal PowerShell mới rồi kiểm tra:
-
-```powershell
-ollama --version
-```
-
-Ứng dụng Ollama trên Windows thường tự chạy server nền. Nếu
-`http://127.0.0.1:11434` chưa hoạt động, mở ứng dụng Ollama hoặc chạy:
-
-```powershell
-ollama serve
-```
-
-Giữ terminal này mở nếu bạn chạy `ollama serve` thủ công.
-
-## 2. Tải và thử model local
-
-Model mặc định, phù hợp với luồng RAG tiếng Việt:
-
-```powershell
-ollama pull qwen3.5:4b
-ollama run qwen3.5:4b
-```
-
-Nhập một câu hỏi để kiểm tra. Gõ `/bye` để thoát phiên chat. Có thể xem model
-đã tải và model đang nằm trong bộ nhớ bằng:
-
-```powershell
-ollama list
-ollama ps
-```
-
-Cấu hình thử nghiệm dùng model 4B với context 8192 token. Dùng `ollama ps` để
-kiểm tra model đang chạy trên CPU/GPU; mức dùng bộ nhớ còn phụ thuộc context
-và model embedding/reranker chạy cùng lúc. Thông tin model:
-[Ollama qwen3.5:4b](https://ollama.com/library/qwen3.5:4b).
-
-## 3. Tạo môi trường Python
-
-Yêu cầu Python 3.11. Từ thư mục gốc repository:
-
-```powershell
-Set-Location RAG-module
-py -3.11 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-```
-
-Nếu PowerShell chặn script activate, chỉ áp dụng cho terminal hiện tại:
-
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\.venv\Scripts\Activate.ps1
-```
-
-Tạo `.env` nếu file chưa tồn tại:
-
-```powershell
-if (-not (Test-Path .env)) { Copy-Item .env.example .env }
-```
-
-## 4. Cấu hình Ollama
-
-Nội dung cần có trong `.env`:
-
-```dotenv
-LLM_PROVIDER=ollama
-
-OLLAMA_MODEL=qwen3.5:4b
-OLLAMA_BASE_URL=http://127.0.0.1:11434
-OLLAMA_NUM_CTX=8192
-OLLAMA_NUM_PREDICT=800
-OLLAMA_KEEP_ALIVE=10m
-OLLAMA_THINK=false
-
-EMBEDDING_MODEL=AITeamVN/Vietnamese_Embedding
-EMBEDDING_DEVICE=cpu
-```
-
-Ý nghĩa các biến Ollama:
-
-| Biến | Mặc định | Mục đích |
-| --- | --- | --- |
-| `OLLAMA_MODEL` | `qwen3.5:4b` | Tên model đã tải bằng `ollama pull` |
-| `OLLAMA_BASE_URL` | `http://127.0.0.1:11434` | Địa chỉ Ollama server |
-| `OLLAMA_NUM_CTX` | `8192` | Số token context tối đa |
-| `OLLAMA_NUM_PREDICT` | `800` | Số token đầu ra tối đa |
-| `OLLAMA_KEEP_ALIVE` | `10m` | Thời gian giữ model trong bộ nhớ sau request |
-| `OLLAMA_THINK` | `false` | Bật/tắt reasoning; nên tắt cho RAG thông thường |
-
-Embedding để ở CPU nhằm dành VRAM cho LLM. Lần chạy `index` đầu tiên sẽ tải
-`AITeamVN/Vietnamese_Embedding`, nên cần Internet và có thể mất vài phút.
-
-## 5. Chạy RAG
-
-Làm theo mục **Chạy thử nhanh với Ollama Qwen3.5 4B** ở đầu README: activate
-venv → chọn `.env` → kiểm tra Ollama → index nếu cần → search/ask/chat.
-
-Thay đổi số chunk truy xuất:
-
-```powershell
-python main.py search "So sánh bệnh ghẻ và thối đen trên táo" --top-k 6
-python main.py ask "So sánh bệnh ghẻ và thối đen trên táo" --top-k 6
-```
-
-Các lệnh chính:
-
-| Lệnh | Tác dụng | Cần LLM provider đã chọn |
-| --- | --- | --- |
-| `python main.py preview-chunks` | Xem chunk và token trước khi index | Không |
-| `python main.py index` | Build lại index từ `data/**/*.txt` | Không |
-| `python main.py search "<câu hỏi>"` | In các chunk gần nhất | Không |
-| `python main.py ask "<câu hỏi>"` | Sinh câu trả lời và in nguồn | Có |
-| `python main.py chat` | Hỏi liên tục, giữ tài nguyên của phiên | Có |
-| `python main.py chat --search-only` | Retrieval liên tục, giữ model local | Không |
-
-Chạy lại `index` khi thêm/sửa tài liệu, đổi cách chia/header/budget hoặc embedding
-model. Chuyển sang strategy đã có index phù hợp thì chỉ cần chọn lại index.
-Đổi LLM, context, prompt, provider, mode retrieval hoặc bật/tắt reranker không
-yêu cầu build lại index.
-
-## Chuyển giữa Ollama, Gemini và vLLM
-
-Thiết lập model/endpoint/API key của từng provider một lần, sau đó chỉ đổi
-`LLM_PROVIDER` trong `.env`:
-
-| Giá trị | Provider | Cấu hình chính |
-| --- | --- | --- |
-| `ollama` | Ollama | `OLLAMA_MODEL`, `OLLAMA_BASE_URL` |
-| `gemini` | Gemini API | `GEMINI_MODEL`, `GEMINI_API_KEY` |
-| `vllm` | API vLLM local hoặc remote trên Vast | `VLLM_MODEL`, `VLLM_BASE_URL`, `VLLM_API_KEY` nếu có |
-
-Chạy lại `python main.py ask "..."` sau khi sửa `.env`. Với process Python chạy
-liên tục hoặc notebook, khởi động lại process/kernel để đọc cấu hình mới.
-Biến môi trường của terminal được ưu tiên hơn `.env`; nếu đã đặt
-`$env:LLM_PROVIDER`, hãy bỏ biến đó khi muốn chọn provider từ file.
-Chương trình gọi đúng provider được chọn, không tự chuyển sang provider khác
-khi gặp lỗi. Không cần sửa `rag.py` hay tạo lại Chroma index.
-
-## Dùng Gemini thay Ollama
-
-Đổi `.env` thành:
-
-```dotenv
-LLM_PROVIDER=gemini
-GEMINI_API_KEY=your_gemini_api_key
-GEMINI_MODEL=gemini-3.5-flash
-```
-
-`index` và `search` vẫn hoàn toàn local. Khi dùng Gemini, chỉ câu hỏi và các
-chunk đã retrieve được gửi tới API; toàn bộ corpus không được gửi đi.
-
-## Gọi cùng vLLM remote đang dùng trong playground
-
-Nếu `LLM-server-module/playground.py` đã gọi thành công, dùng đúng ba giá trị
-**Base URL**, **Model**, **API key** đang nhập ở sidebar để sửa `RAG-module/.env`.
-Các giá trị nhập trên giao diện playground không tự lưu vào `.env` của RAG.
-
-| Playground | `RAG-module/.env` |
-| --- | --- |
-| Base URL | `VLLM_BASE_URL` (giữ `/v1` ở cuối) |
-| Model | `VLLM_MODEL` (alias API, không tự đổi thành tên checkpoint) |
-| API key | `VLLM_API_KEY` |
-| enable_thinking = tắt | `VLLM_THINK=false` |
-
-Đặt thêm `LLM_PROVIDER=vllm`; để `VLLM_HOST=` và `VLLM_PORT=` trống khi đã dùng
-`VLLM_BASE_URL`. Giữ `VLLM_MAX_TOKENS=800`, `VLLM_TIMEOUT=120` để bắt đầu.
-Nếu URL là localhost qua SSH tunnel, giữ tunnel đang chạy trong lúc dùng RAG.
-
-Từ thư mục `RAG-module`, sau khi activate venv:
-
-```powershell
-python ..\LLM-server-module\check_api.py --env-file .env
-python main.py ask "Bệnh ghẻ táo có triệu chứng gì?"
-python main.py chat
-```
-
-Lệnh đầu chỉ kiểm tra kết nối và một câu trả lời từ LLM; hai lệnh sau chạy
-retrieval và gửi ngữ cảnh sang model. Không cần index lại khi chỉ đổi LLM.
-Nếu RAG API đang chạy (`python -m server`), khởi động lại process để đọc `.env`
-mới. Embedding và Chroma vẫn chạy ở host; RAG không nạp weights Qwen 27B.
-
-## Dùng vLLM trong Docker
-
-RAG có thể chạy trong môi trường Python trên Windows và gọi vLLM qua HTTP.
-Chỉ cài `langchain-openai` ở phía RAG (đã có trong `requirements.txt`), không
-cần cài package `vllm` vào `.venv` Windows:
-
-```powershell
-python -m pip install -r requirements.txt
-```
-
-Container cần publish cổng `8000` (ví dụ `-p 8000:8000`) và vLLM bên trong
-lắng nghe ở `0.0.0.0:8000`. Khi container đang chạy, kiểm tra từ PowerShell:
-
-```powershell
-curl.exe http://127.0.0.1:8000/v1/models
-```
-
-Điền `id` model trong kết quả vào `VLLM_MODEL`. Ví dụ với model trong
-`../test-vllm.txt`:
-
-```dotenv
-LLM_PROVIDER=vllm
-VLLM_SCHEME=http
-VLLM_HOST=127.0.0.1
-VLLM_PORT=8000
-VLLM_BASE_URL=
-VLLM_MODEL=Qwen/Qwen3-0.6B
-VLLM_API_KEY=
-VLLM_MAX_TOKENS=800
-VLLM_TIMEOUT=120
-VLLM_THINK=false
-
-EMBEDDING_MODEL=AITeamVN/Vietnamese_Embedding
-EMBEDDING_DEVICE=cpu
-```
-
-- Địa chỉ server: điền `VLLM_HOST` (chỉ IP hoặc tên miền, không kèm `http://`
-  hay `:cổng`) và `VLLM_PORT`; RAG tự ghép thành `VLLM_SCHEME://HOST:PORT/v1`.
-  Dùng HTTPS qua nginx thì `VLLM_SCHEME=https`, cổng 443 thì để trống `VLLM_PORT`.
-- Hoặc điền `VLLM_BASE_URL` đầy đủ (có `/v1`, không thêm `/chat/completions`) và
-  để trống `VLLM_HOST`/`VLLM_PORT`. Điền cả hai cách sẽ báo lỗi, để một dòng cũ
-  còn sót không lặng lẽ ghi đè dòng bạn vừa sửa.
-- `VLLM_MODEL` là tên phục vụ qua API (kể cả alias `--served-model-name`),
-  không phải tên model trong Ollama.
-- `VLLM_API_KEY`: để trống nếu server không bật xác thực. Nếu container dùng
-  `--api-key`, điền đúng key và dùng key đó khi kiểm tra `/v1/models`.
-- `VLLM_MAX_TOKENS`: giới hạn token đầu ra; `VLLM_TIMEOUT`: timeout tính bằng giây.
-  Cả hai phải là số nguyên lớn hơn 0.
-- `VLLM_THINK=false` gửi `chat_template_kwargs.enable_thinking=false` cho
-  chat template hỗ trợ như Qwen3. Để trống để dùng mặc định của server/model.
-  Khi bật thinking, cần cấu hình reasoning parser phù hợp ở vLLM nếu muốn
-  tách reasoning khỏi câu trả lời.
-- Context tối đa và bộ nhớ GPU được cấu hình khi chạy container, ví dụ
-  `--max-model-len`; các biến `OLLAMA_*` không điều khiển vLLM.
-- Nếu RAG chạy trong container khác cùng Docker network, dùng tên service,
-  ví dụ `VLLM_BASE_URL=http://vllm:8000/v1`.
-
-Sau đó chạy cùng CLI hiện tại:
-
-```powershell
-python main.py search "Bệnh ghẻ táo có triệu chứng gì?"
-python main.py ask "Bệnh ghẻ táo có triệu chứng gì?"
-```
-
-Nếu kết nối thất bại, kiểm tra trạng thái container, cổng publish và URL. Nếu
-API báo không tìm thấy model, đối chiếu `VLLM_MODEL` với `/v1/models`.
-
-Tham khảo: [LangChain vLLM](https://docs.langchain.com/oss/python/integrations/chat/vllm),
-[Qwen3 với vLLM](https://github.com/QwenLM/Qwen3/blob/main/docs/source/deployment/vllm.md).
-
-## Chạy test
-
-Test dùng provider giả và HTTP mock, không gọi server Ollama/vLLM, Gemini
-hay tải embedding model thật:
+## Kiểm thử
 
 ```powershell
 python -m pytest -q
 ```
 
-Thử nhanh ba câu hội thoại với **Ollama thật** và index đang chọn trong `.env`:
+Test chạy offline, không cần GPU, LLM hay tải model.
 
-```powershell
-python scripts/smoke_chat.py --mode bm25
-```
+## Lỗi thường gặp
 
-Script in câu hỏi, query đã làm rõ, nguồn, câu trả lời và thời gian mỗi lượt.
-Đây là smoke test để đọc kết quả thực tế; không tự chấm tính đúng đắn của nội
-dung như một benchmark có nhãn.
+| Hiện tượng | Cách xử lý |
+|---|---|
+| API báo index chưa sẵn sàng | Chạy `python main.py index` |
+| `Connection refused` khi hỏi | LLM chưa chạy: kiểm tra Ollama (`ollama list`), hoặc SSH tunnel tới Vast |
+| vLLM báo 401 | `VLLM_API_KEY` phải trùng `LLM_API_KEY` trên server |
+| vLLM báo 404 model | `VLLM_MODEL` phải trùng `LLM_SERVED_MODEL_NAME` (mặc định `rag-llm`) |
+| Báo điền cả hai cách khai báo địa chỉ | Dùng `VLLM_HOST` + `VLLM_PORT`, **hoặc** `VLLM_BASE_URL`, không dùng cả hai |
+| Chạy chậm, hết VRAM | Đặt `EMBEDDING_DEVICE=cpu` |
 
-## Xử lý lỗi thường gặp
-
-### Không nhận lệnh `ollama`
-
-Mở PowerShell mới sau khi cài. Nếu vẫn lỗi, mở ứng dụng Ollama từ Start Menu
-và kiểm tra lại `ollama --version`.
-
-### Không kết nối được `127.0.0.1:11434`
-
-Ollama server chưa chạy. Mở ứng dụng Ollama hoặc chạy `ollama serve` trong một
-terminal khác, sau đó thử:
-
-```powershell
-ollama list
-```
-
-### Báo không tìm thấy model
-
-Tên trong `.env` phải trùng với kết quả `ollama list`:
-
-```powershell
-ollama pull qwen3.5:4b
-ollama list
-```
-
-### Chậm, tràn VRAM hoặc chạy một phần trên CPU
-
-Giảm context trước:
-
-```dotenv
-OLLAMA_NUM_CTX=4096
-```
-
-Nếu vẫn thiếu bộ nhớ, chuyển sang `qwen3.5:4b`. Không nên chạy đồng thời
-model-service YOLO của `detection-module` và Qwen 9B trên GPU 8 GB. Dùng
-`ollama ps` để xem model đang chạy trên GPU hay CPU.
-
-### Câu trả lời hết giữa chừng
-
-Tăng `OLLAMA_NUM_PREDICT`, ví dụ `1200`. Giá trị lớn hơn làm thời gian sinh câu
-trả lời lâu hơn và có thể tăng mức dùng bộ nhớ.
-
-### Muốn thử DeepSeek reasoning
-
-```powershell
-ollama pull deepseek-r1:8b
-```
-
-Sau đó cấu hình:
-
-```dotenv
-OLLAMA_MODEL=deepseek-r1:8b
-OLLAMA_THINK=true
-```
-
-Model reasoning thường chậm hơn. Với hỏi đáp dựa trên context, nên bắt đầu bằng
-Qwen và `OLLAMA_THINK=false`.
-
-## Dùng trực tiếp từ Python
-
-```python
-from rag import ask, build_index, retrieve
-
-document_count, chunk_count = build_index()
-print(f"Đã index {document_count} tài liệu thành {chunk_count} chunk")
-
-chunks = retrieve("Dấu hiệu bệnh ghẻ táo là gì?")
-for chunk in chunks:
-    print(chunk.metadata["source"], chunk.metadata["disease"])
-
-answer, sources = ask("Cách quản lý bệnh thối đen trên táo?")
-print(answer)
-print(sources)
-```
-
-## Cấu trúc chính
+## Cấu trúc
 
 ```text
-RAG-module/
-|-- config.py          # Embedding và factory Ollama/Gemini/vLLM
-|-- rag.py             # Pipeline index, retrieve, ask và RAGSession dùng lại tài nguyên
-|-- retrieval.py       # Semantic, BM25, RRF, rerank, debug
-|-- conversation.py    # Lịch sử giới hạn theo phiên và query rewrite
-|-- main.py            # CLI
-|-- data/              # Corpus TXT
-|-- chroma_db/         # Vector database được sinh local
-|-- docs/              # Tài liệu kỹ thuật chi tiết
-|-- tests/             # Test offline
-|-- .env.example
-`-- requirements.txt
+main.py           CLI: index, search, ask, chat, preview-chunks
+server/           API FastAPI (python -m server)
+config.py         Đọc .env
+chunking.py       Chia chunk theo tiêu đề
+rag.py            Index, tìm kiếm, sinh câu trả lời
+retrieval.py      Tìm theo ngữ nghĩa, BM25, RRF, xếp hạng lại
+taxonomy.py       Bảng tên cây, bệnh và tài liệu tương ứng
+data/             Tài liệu bệnh cây (.txt)
+eval/             Bộ 60 câu hỏi đánh giá truy xuất
+experiments/      Thí nghiệm so sánh model, khảo sát người dùng
+docs/             Tài liệu kỹ thuật chi tiết (SETUP, ARCHITECTURE, DATA_GUIDE...)
+tests/            Test offline
 ```
+
+Thêm tài liệu mới: xem [docs/DATA_GUIDE.md](docs/DATA_GUIDE.md), rồi chạy lại `python main.py index`.

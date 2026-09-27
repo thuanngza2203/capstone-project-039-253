@@ -1,0 +1,4 @@
+# Script chạy trong container Linux phải giữ LF.
+*.sh text eol=lf
+# Script .cmd của Windows cần CRLF.
+*.cmd text eol=crlf

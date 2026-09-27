@@ -1,0 +1,7 @@
+# Máy không có GPU NVIDIA: RAG tính embedding bằng CPU (chậm hơn nhưng chạy được).
+# Bật bằng dòng COMPOSE_FILE trong .env gốc (xem .env.example).
+services:
+  rag:
+    environment:
+      EMBEDDING_DEVICE: cpu
+    deploy: !reset {}

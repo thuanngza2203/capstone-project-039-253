@@ -1,0 +1,13 @@
+# .env và models/ được mount lúc chạy (docker-compose.yml), không đóng vào image.
+.env
+.env.*
+!.env.example
+.venv
+**/__pycache__
+.pytest_cache
+.hallmark
+models
+debug
+chroma_db
+rag/chroma_db
+tests

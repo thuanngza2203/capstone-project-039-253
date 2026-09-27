@@ -20,6 +20,9 @@ if str(PROJECT_ROOT) not in sys.path:
 
 # Khong gui Chroma telemetry trong luc chay test.
 os.environ.setdefault("ANONYMIZED_TELEMETRY", "False")
+# RAG_TOP_K được đọc một lần lúc import config (thành giá trị mặc định của hàm trong rag.py),
+# nên phải cố định trước khi test import module nào; .env cá nhân có thể đặt giá trị khác.
+os.environ["RAG_TOP_K"] = "4"
 
 
 @pytest.fixture(autouse=True)

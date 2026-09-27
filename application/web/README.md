@@ -1,83 +1,60 @@
-# Web — Bác sĩ cây trồng
+# Web
 
-Web cho người dùng (chat bằng chữ và ảnh) và trang quản trị, chạy trên máy tính và điện thoại.
-React 18 + Vite 5, JavaScript. Thiết kế theo `RAG-module/agents/2026-09-24-system-architecture-api-frontend-plan.md`.
+Giao diện cho người dùng và trang quản trị, chạy được trên máy tính và điện thoại. React 18 + Vite 5.
 
 | Đường dẫn | Trang |
-| --- | --- |
-| `/` | Chat: gửi chữ, ảnh (tự thu nhỏ còn cạnh dài 1.600 px), hoặc cả hai. Nút chọn model ở đầu trang (kiểu ChatGPT / Gemini) khi detection cho phép nhiều model (`CHAT_LLM_PROVIDERS`). Nút "Tìm web" trong ô nhập: Groq tìm web và trả lời, không dùng kho tài liệu; câu trả lời kèm các trang web đã đọc và cảnh báo thông tin chưa được kiểm chứng. Mỗi câu trả lời liệt kê tài liệu trong kho và link nguồn tham khảo, nút thích/không thích, và mục "Cách hệ thống xử lý câu này" hiện từng bước pipeline (nhận diện ảnh, Groq chuẩn hóa, cây/bệnh, điều hướng, câu gửi RAG, phạm vi tìm). `/?session=<id>` mở một cuộc trò chuyện có sẵn. Trang chat không có đường dẫn sang trang quản trị. |
-| `/admin/login` | Đăng nhập quản trị bằng `ADMIN_USERNAME` / `ADMIN_PASSWORD` trong `.env` của detection (phải đặt `ADMIN_PASSWORD`). Mọi trang `/admin/*` chuyển về đây khi chưa đăng nhập hoặc phiên đã hết hạn. |
-| `/admin` | Tổng quan: số câu trả lời, cuộc trò chuyện, tỉ lệ có tài liệu, tỉ lệ được thích; biểu đồ theo ngày, theo hành động, bệnh hỏi nhiều, phạm vi tìm, đánh giá. |
-| `/admin/conversations` | Mọi cuộc trò chuyện; từng lượt kèm dấu vết pipeline, mở tiếp trong trang chat. |
-| `/admin/feedback` | Như trang admin cũ: lọc, tìm, sửa câu trả lời đúng, đưa vào Feedback RAG, xóa. |
-| `/admin/kb` | Kho tri thức: index, tài liệu, chunk, cây · bệnh, tìm chunk theo nội dung. |
-| `/admin/kb/playground` | Chạy riêng RAG (tìm, sinh câu trả lời) với mọi tùy chọn: cây/bệnh, index, cách tìm, số chunk, reranker, LLM. |
-| `/admin/system` | Trạng thái detection, RAG, LLM (model thật đang chạy trên Vast). |
+|---|---|
+| `/` | Chat bằng chữ và ảnh; chọn model trả lời; nút "Tìm trên web"; mỗi câu trả lời kèm tài liệu nguồn, nút thích/không thích và các bước hệ thống đã xử lý |
+| `/admin/login` | Đăng nhập quản trị (`ADMIN_USERNAME` / `ADMIN_PASSWORD` trong `.env` của detection) |
+| `/admin` | Thống kê: số câu trả lời, tỉ lệ được thích, bệnh hỏi nhiều... |
+| `/admin/conversations` | Mọi cuộc trò chuyện, kèm các bước xử lý từng lượt |
+| `/admin/feedback` | Duyệt đánh giá, sửa câu trả lời, đưa vào Feedback RAG |
+| `/admin/kb`, `/admin/kb/playground` | Xem tài liệu, chunk; chạy thử tìm kiếm và sinh câu trả lời |
+| `/admin/system` | Trạng thái detection, RAG, LLM |
 
-## Chạy local
+## Chạy
 
-Cần Node 18 trở lên (đã thử Node 22).
+Cần Node.js 18 trở lên (đã chạy thử Node 20, 22), và [detection server](../../detection-server-module/README.md) (cổng 8005), [RAG module](../../RAG-module/README.md) (cổng 8010) đang chạy.
 
 ```powershell
 cd application/web
-npm install
-npm run dev          # http://localhost:5173
+npm ci
+npm run dev
 ```
 
-Web gọi backend qua proxy của Vite: `/detection/*` → `http://127.0.0.1:8005`, `/rag/*` → `http://127.0.0.1:8010`
-(đổi bằng `DETECTION_TARGET`, `RAG_TARGET` trong `.env.local` nếu backend chạy chỗ khác). Vì vậy phải chạy
-trước, mỗi thứ một cửa sổ:
+Mở <http://localhost:5173>. Vite chuyển tiếp `/detection/*` tới `http://127.0.0.1:8005` và `/rag/*` tới `http://127.0.0.1:8010`. Backend chạy ở địa chỉ khác thì tạo `.env.local`:
 
-```powershell
-# 1. SSH tunnel tới Vast (cổng 8000), theo README của LLM-server-module.
-# 2. RAG server
-cd RAG-module; python -m server                                           # :8010
-# 3. detection-server
-cd detection-server-module; uvicorn app.api:app --host 127.0.0.1 --port 8005
+```dotenv
+DETECTION_TARGET=http://127.0.0.1:8005
+RAG_TARGET=http://127.0.0.1:8010
 ```
-
-**Để chat đi hết pipeline (detection → RAG → model trên Vast)**, kiểm tra `.env` (đã chạy thử ngày 25/09 với
-các giá trị này truyền qua biến môi trường):
-
-| File | Biến | Giá trị cần có | Hiện tại |
-| --- | --- | --- | --- |
-| `detection-server-module/.env` | `ANSWER_BACKEND` | `rag` (không thì chat dùng `rag/` nội bộ + Groq, không qua RAG server) | `groq` |
-| `detection-server-module/.env` | `MONGO_URI` | đúng MongoDB đang chạy | `…:27018`, trong khi `mongod` trên máy nghe `27017` |
-| `RAG-module/.env` | `VLLM_MODEL` | `rag-llm` (served-model-name của vLLM) | `Qwen/Qwen3.8-27B-FP8` → `/v1/answer` lỗi 404 |
-
-Trang **Hệ thống** (`/admin/system`) báo ngay mấy lỗi cấu hình này.
 
 ## Mở trên điện thoại (cùng Wi-Fi)
 
-1. `npm run dev` in ra dòng `Network: http://192.168.x.x:5173`; mở địa chỉ đó trên điện thoại.
-2. Lần đầu có thể phải mở cổng trong Windows Firewall (PowerShell quyền Administrator):
-   `New-NetFirewallRule -DisplayName "Plant web" -Direction Inbound -Protocol TCP -LocalPort 5173,4173 -Action Allow -Profile Private`
-
-Qua `http://<IP>` trình duyệt không có `crypto.randomUUID()`; web tự tạo `session_id` bằng
-`crypto.getRandomValues()` nên vẫn chạy. Chọn ảnh bằng `<input type="file">` vẫn mở được camera.
-
-## Build và deploy
+`npm run dev` in ra dòng `Network: http://192.168.x.x:5173`; mở địa chỉ đó trên điện thoại. Nếu không vào được, mở cổng trong Windows Firewall (PowerShell quyền Administrator):
 
 ```powershell
-npm run build        # ra dist/
-npm run preview      # http://localhost:4173, vẫn dùng proxy như dev
+New-NetFirewallRule -DisplayName "Plant web" -Direction Inbound -Protocol TCP -LocalPort 5173 -Action Allow -Profile Private
 ```
 
-Khi đặt web và API ở địa chỉ public khác nhau, ghi `.env.production` (xem `.env.example`) rồi build lại:
-`VITE_DETECTION_URL`, `VITE_RAG_URL`. Lúc đó detection cần `CORS_ORIGINS=*` trong `.env`; RAG đã mở CORS
-mặc định (`RAG_API_CORS_ORIGINS`). Đặt `dist/` lên hosting tĩnh thì bật chuyển mọi đường dẫn về `index.html`.
+## Build
+
+```powershell
+npm run build     # ra thư mục dist/
+npm run preview   # xem bản build ở http://localhost:4173
+```
+
+Khi web và API nằm ở các địa chỉ public khác nhau, tạo `.env.production` với `VITE_DETECTION_URL`, `VITE_RAG_URL` (xem `.env.example`) rồi build lại; detection cần thêm địa chỉ web vào `CORS_ORIGINS`. Khi chạy bằng Docker, web được build sẵn và phục vụ bằng nginx ([docker/nginx.conf](docker/nginx.conf)).
 
 ## Cấu trúc
 
-```
+```text
 src/
-  api.js                    mọi lời gọi detection và RAG
-  lib/                      localStorage, thu nhỏ ảnh, định dạng số/ngày, tên cây/bệnh tiếng Việt
-  components/               icon, markdown, biểu đồ, DebugPanel (dấu vết pipeline), chat/
-  pages/Chat.jsx            trang người dùng
-  pages/admin/              trang quản trị (tải riêng, người dùng chat không phải tải)
-  styles/tokens.css         hệ màu Garden, chép từ detection-server-module/app/static
+  api.js           Mọi lời gọi tới detection và RAG
+  pages/Chat.jsx   Trang chat
+  pages/admin/     Các trang quản trị
+  components/      Khung chat, markdown, biểu đồ, bảng các bước xử lý
+  lib/             Lưu localStorage, thu nhỏ ảnh, tên cây/bệnh tiếng Việt
 ```
 
-Danh sách cuộc trò chuyện ở trang chat lưu trong `localStorage` của từng trình duyệt; backend vẫn lưu nội dung
-(MongoDB). Trang admin thấy mọi cuộc trò chuyện.
+Danh sách cuộc trò chuyện ở trang chat lưu trong trình duyệt; nội dung hội thoại lưu ở MongoDB phía detection.

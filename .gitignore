@@ -7,6 +7,8 @@
 # ------------------------------------------------------------------------------
 .env
 .env.*
+# File cấu hình có key đặt tên kiểu rag-client.env (chép từ rag-client.env.example).
+*.env
 !.env.example
 *.local
 *.pem
