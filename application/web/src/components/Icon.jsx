@@ -21,7 +21,6 @@ const PATHS = {
   chat: "M4 5h16v11H9l-5 4z",
   chart: "M4 20V4M4 20h16M8 16v-5M12 16V8M16 16v-3",
   database: "M5 6c0-1.7 3.1-3 7-3s7 1.3 7 3-3.1 3-7 3-7-1.3-7-3zM5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3",
-  flask: "M9 3h6M10 3v6L4.5 18.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3M7 15h10",
   pulse: "M3 12h4l2-6 4 12 2-6h6",
   message: "M4 4h16v12H8l-4 4zM8 9h8M8 12h5",
   external: "M14 4h6v6M20 4l-9 9M18 14v6H4V6h6",

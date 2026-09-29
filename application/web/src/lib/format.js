@@ -39,11 +39,6 @@ export function formatPercent(value, digits = 0) {
   return `${(value * 100).toFixed(digits).replace(".", ",")}%`;
 }
 
-export function formatMs(value) {
-  if (value === null || value === undefined) return "—";
-  return value >= 1000 ? `${(value / 1000).toFixed(1).replace(".", ",")} s` : `${Math.round(value)} ms`;
-}
-
 // Bỏ nhãn [Nguồn n] trong câu trả lời; tài liệu và link được liệt kê riêng dưới câu trả lời.
 // Detection đã bỏ ở câu trả lời mới (strip_citations trong rag_http.py); ở đây cho các lượt lưu trước đó.
 const CITATIONS = /[ \t]*\[\s*Nguồn\s+\d[^\]]*\](?:[ \t]*(?:,|;|và|and)?[ \t]*\[\s*Nguồn\s+\d[^\]]*\])*/giu;

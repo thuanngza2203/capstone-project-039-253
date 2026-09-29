@@ -8,7 +8,6 @@ const NAV = [
   { to: "/admin/conversations", label: "Hội thoại", icon: "message" },
   { to: "/admin/feedback", label: "Feedback", icon: "thumbUp" },
   { to: "/admin/kb", label: "Kho tri thức", icon: "database", end: true },
-  { to: "/admin/kb/playground", label: "Thử truy vấn", icon: "flask" },
   { to: "/admin/system", label: "Hệ thống", icon: "pulse" },
 ];
 

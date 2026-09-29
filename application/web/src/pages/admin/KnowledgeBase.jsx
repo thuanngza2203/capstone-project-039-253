@@ -212,12 +212,7 @@ export default function KnowledgeBase() {
         description={overview.data
           ? `${overview.data.data.documents} tài liệu trong data/ (dấu vân tay ${overview.data.data.fingerprint}). Sửa tài liệu trong RAG-module/data/ rồi chạy python main.py index.`
           : "Tài liệu trong RAG-module/data/ và các chunk đã index."}
-        actions={(
-          <>
-            <Link className="btn" to="/admin/kb/playground"><Icon name="flask" size={18} /> Thử truy vấn</Link>
-            <RefreshButton onClick={overview.reload} loading={overview.loading} />
-          </>
-        )}
+        actions={<RefreshButton onClick={overview.reload} loading={overview.loading} />}
       />
       <ErrorNote error={overview.error} onRetry={overview.reload} />
       {overview.loading && !overview.data ? <Spinner label="Đang đọc index (lần đầu mất vài giây)…" /> : null}

@@ -102,8 +102,6 @@ export const rag = {
   status: () => request("rag", "/v1/status"),
   llm: (probe = false) => request("rag", `/v1/llm${query({ probe: probe || undefined })}`),
   taxonomy: () => request("rag", "/v1/taxonomy"),
-  retrieve: (body) => request("rag", "/v1/retrieve", { method: "POST", body }),
-  answer: (body) => request("rag", "/v1/answer", { method: "POST", body }),
   overview: () => request("rag", "/v1/admin/overview"),
   documents: (index) => request("rag", `/v1/admin/documents${query({ index })}`),
   document: (source, { index, includeText } = {}) =>

@@ -9,7 +9,7 @@ Giao diện cho người dùng và trang quản trị, chạy được trên má
 | `/admin` | Thống kê: số câu trả lời, tỉ lệ được thích, bệnh hỏi nhiều... |
 | `/admin/conversations` | Mọi cuộc trò chuyện, kèm các bước xử lý từng lượt |
 | `/admin/feedback` | Duyệt đánh giá, sửa câu trả lời, đưa vào Feedback RAG |
-| `/admin/kb`, `/admin/kb/playground` | Xem tài liệu, chunk; chạy thử tìm kiếm và sinh câu trả lời |
+| `/admin/kb` | Xem tài liệu, chunk; tìm chunk theo nội dung |
 | `/admin/system` | Trạng thái detection, RAG, LLM |
 
 ## Chạy

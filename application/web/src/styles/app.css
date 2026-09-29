@@ -436,7 +436,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .textarea[aria-invalid="true"] { border-color: var(--color-error); }
 .form-grid { display: grid; gap: var(--space-sm); grid-template-columns: 1fr; }
 @media (min-width: 640px) { .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1024px) { .form-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .check { display: inline-flex; align-items: center; gap: var(--space-xs); min-height: var(--size-control); cursor: pointer; }
 .check input { width: 1.1rem; height: 1.1rem; accent-color: var(--color-accent); }
 .toolbar { display: flex; flex-wrap: wrap; gap: var(--space-xs); align-items: center; }

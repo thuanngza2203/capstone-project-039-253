@@ -13,7 +13,6 @@ const Feedback = lazy(() => import("./pages/admin/Feedback.jsx"));
 const KnowledgeBase = lazy(() => import("./pages/admin/KnowledgeBase.jsx"));
 const DocumentPage = lazy(() => import("./pages/admin/Document.jsx"));
 const ChunkPage = lazy(() => import("./pages/admin/Chunk.jsx"));
-const Playground = lazy(() => import("./pages/admin/Playground.jsx"));
 const System = lazy(() => import("./pages/admin/System.jsx"));
 
 const page = (element) => <Suspense fallback={<div className="spinner-center"><Spinner /></div>}>{element}</Suspense>;
@@ -41,7 +40,6 @@ export default function App() {
         <Route path="kb" element={page(<KnowledgeBase />)} />
         <Route path="kb/doc/*" element={page(<DocumentPage />)} />
         <Route path="kb/chunk/:id" element={page(<ChunkPage />)} />
-        <Route path="kb/playground" element={page(<Playground />)} />
         <Route path="system" element={page(<System />)} />
       </Route>
       <Route path="*" element={<NotFound />} />
