@@ -4,6 +4,7 @@ Chạy mô hình ngôn ngữ sinh câu trả lời trên GPU thuê ở [Vast.ai]
 
 - Model mặc định: `Qwen/Qwen3.8-27B-FP8`, gọi qua tên `rag-llm`.
 - Cần GPU NVIDIA khoảng 48 GB VRAM (ví dụ RTX 4090 48 GB, A6000). Model nhỏ hơn thì GPU nhỏ hơn.
+- Ổ đĩa trống từ 80 GB: model khoảng 32 GB, thư viện (Torch, vLLM) và cache tải khoảng 20–30 GB.
 - Không dùng Vast: RAG module chạy được với Gemini hoặc Ollama, bỏ qua module này.
 
 ## 1. Cài trên Vast (một lần cho mỗi instance)
@@ -45,8 +46,10 @@ Trong tmux (thoát SSH không làm tắt server; `Ctrl+B` rồi `D` để thoát
 cd /workspace/capstone-project-039-253/LLM-server-module
 source .venv/bin/activate
 python serve.py --dry-run        # kiểm tra cấu hình, in lệnh sẽ chạy
-python serve.py                  # lần đầu tải model (khoảng 30 GB), các lần sau dùng lại cache
+python serve.py                  # tải model (lần đầu khoảng 32 GB), rồi bật vLLM
 ```
+
+`serve.py` tải đủ model bằng `hf download` trước khi bật vLLM: có thanh tiến độ, in lỗi thật thay cho "Can't load tokenizer", chạy lại thì tải tiếp phần còn thiếu. Tải qua Xet lỗi (ví dụ `CAS Client Error ... 401`) thì tự tải lại bằng HTTPS thường. Tải xong, vLLM chạy offline từ cache (`HF_HUB_OFFLINE=1`), không gọi HuggingFace nữa. Các lần sau chỉ kiểm tra nhanh rồi bật luôn.
 
 Ở cửa sổ tmux khác, khi server đã sẵn sàng:
 
@@ -88,7 +91,8 @@ Sửa `LLM_MODEL_ID` trong `.env`, giữ `LLM_SERVED_MODEL_NAME=rag-llm`, rồi 
 | Hiện tượng | Cách xử lý |
 |---|---|
 | `bash install.sh` báo `invalid peer certificate: UnknownIssuer` | Máy Vast đi qua proxy HTTPS có CA riêng: pip tin được (dùng kho chứng chỉ của hệ điều hành), uv thì không. Script đã tự cho uv dùng kho đó (dòng `uv dung kho chung chi cua he dieu hanh` trong log); bản cũ chưa có thì `git pull` rồi chạy lại. Vẫn lỗi: kiểm tra `ca-certificates` đã cài; lỗi riêng ở `download.pytorch.org` thì chạy `LLM_TORCH_BACKEND=pypi bash install.sh`. Máy có mirror pip (`PIP_INDEX_URL` hoặc cấu hình pip) thì uv tự dùng chung |
-| `serve.py` báo `Can't load tokenizer for 'Qwen/...'` | Máy Vast không tải được model từ HuggingFace. Lỗi chứng chỉ (`CERTIFICATE_VERIFY_FAILED`) do proxy HTTPS: `serve.py` đã tự trỏ `SSL_CERT_FILE` về kho chứng chỉ của hệ điều hành (dòng `Chứng chỉ TLS khi tải model` khi khởi động). Lỗi gốc có `CAS Client Error ... 401` (xethub): thêm `HF_HUB_DISABLE_XET=1` vào `.env`. Không kết nối được HuggingFace: thêm `HF_ENDPOINT=https://hf-mirror.com`. Vẫn lỗi thì thuê máy ở khu vực khác |
+| `serve.py` báo `Can't load tokenizer for 'Qwen/...'` | Lỗi tải model bị vLLM che mất. `serve.py` bản mới tải model trước và in lỗi thật: `git pull` rồi chạy lại. Đã tự xử lý: chứng chỉ của proxy HTTPS (`SSL_CERT_FILE`), Xet lỗi `CAS Client Error ... 401` (tải lại không dùng Xet), timeout ngắn (chờ 60 giây thay vì 10) |
+| `serve.py` báo `Không tải được model` | Đọc lỗi in ngay phía trên, gợi ý in kèm. `429 Too Many Requests`: HF giới hạn máy chưa đăng nhập, tạo token ở huggingface.co/settings/tokens rồi thêm `HF_TOKEN=<token>` vào `.env`. `timed out`/`Connection`: tăng `HF_HUB_DOWNLOAD_TIMEOUT` hoặc thêm `HF_ENDPOINT=https://hf-mirror.com`. `No space left on device`: thuê máy ổ lớn hơn. Vẫn lỗi thì thuê máy ở khu vực khác |
 | `Connection refused` | Server chưa sẵn sàng, tunnel chưa mở, hoặc IP/cổng SSH đã đổi (thuê máy mới) |
 | HTTP 401/403 | `VLLM_API_KEY` bên RAG phải trùng `LLM_API_KEY` |
 | HTTP 404, sai model | `VLLM_MODEL` phải trùng `LLM_SERVED_MODEL_NAME`; URL phải kết thúc bằng `/v1` |
@@ -102,7 +106,7 @@ Tắt máy Vast: thoát terminal **không** dừng tính phí. Stop vẫn tính 
 | File | Công dụng |
 |---|---|
 | `install.sh` | Tạo `.venv`, cài vLLM, kiểm tra CUDA, tạo `.env` lần đầu (`bash install.sh --upgrade` để nâng cấp, `--help` xem tùy chọn) |
-| `serve.py` | Đọc `.env`, khởi động vLLM; tải model bằng kho chứng chỉ của hệ điều hành |
+| `serve.py` | Đọc `.env`, tải trước model (báo lỗi thật, Xet lỗi thì tải lại bằng HTTPS thường), khởi động vLLM |
 | `check_api.py` | Kiểm tra kết nối, API key và một câu trả lời |
 | `rag-client.env.example` | Các dòng cần chép sang `.env` của RAG module |
 | `nginx.conf.example` | Tùy chọn: mở API qua HTTPS có tên miền thay cho SSH tunnel |

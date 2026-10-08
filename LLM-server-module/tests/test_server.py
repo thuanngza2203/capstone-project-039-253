@@ -5,6 +5,7 @@ from __future__ import annotations
 import io
 import json
 import os
+import subprocess
 import sys
 import tempfile
 import threading
@@ -131,7 +132,8 @@ class ServerTests(unittest.TestCase):
             }
             with patch.object(serve, "read_environment", return_value=env), \
                  patch.object(serve.sys, "platform", "linux"), \
-                 patch.object(serve.shutil, "which", return_value="/venv/bin/vllm") as lookup, \
+                 patch.object(serve.shutil, "which", side_effect=lambda name, path: f"/venv/bin/{name}") as lookup, \
+                 patch.object(serve.subprocess, "run", return_value=subprocess.CompletedProcess([], 0)) as run, \
                  patch.object(serve.os, "execvpe") as execute, redirect_stdout(io.StringIO()) as output:
                 self.assertEqual(serve.main([]), 0)
             executable, command, child_env = execute.call_args.args
@@ -140,7 +142,12 @@ class ServerTests(unittest.TestCase):
             self.assertEqual(command[command.index("--port") + 1], "8123")
             self.assertEqual(child_env["VLLM_API_KEY"], "secret-not-in-argv")
             self.assertEqual(child_env["HF_HOME"], str(cache.resolve()))
-            lookup.assert_called_once_with("vllm", path=str(Path(serve.sys.executable).parent))
+            lookup.assert_any_call("vllm", path=str(Path(serve.sys.executable).parent))
+            # Model tải trước bằng `hf download` cùng HF_HOME; vLLM chạy offline sau đó.
+            download, = run.call_args_list
+            self.assertEqual(download.args[0], ["/venv/bin/hf", "download", "Qwen/Qwen3.8-27B-FP8"])
+            self.assertEqual(download.kwargs["env"]["HF_HOME"], str(cache.resolve()))
+            self.assertEqual(child_env["HF_HUB_OFFLINE"], "1")
             self.assertNotIn("secret-not-in-argv", " ".join(command) + output.getvalue())
             self.assertTrue(cache.is_dir())
 
@@ -173,13 +180,86 @@ class ServerTests(unittest.TestCase):
             with patch.object(serve, "read_environment", return_value=env), \
                  patch.object(serve, "SYSTEM_CA_BUNDLES", (bundle,)), \
                  patch.object(serve.sys, "platform", "linux"), \
-                 patch.object(serve.shutil, "which", return_value="/venv/bin/vllm"), \
+                 patch.object(serve.shutil, "which", side_effect=lambda name, path: f"/venv/bin/{name}"), \
+                 patch.object(serve.subprocess, "run", return_value=subprocess.CompletedProcess([], 0)) as run, \
                  patch.object(serve.os, "execvpe") as execute, redirect_stdout(io.StringIO()) as output:
                 self.assertEqual(serve.main([]), 0)
             child_env = execute.call_args.args[2]
             self.assertEqual(child_env["SSL_CERT_FILE"], str(bundle))
             self.assertEqual(child_env["REQUESTS_CA_BUNDLE"], str(bundle))
             self.assertIn(str(bundle), output.getvalue())
+            # Bước tải trước cũng dùng kho chứng chỉ đó.
+            self.assertEqual(run.call_args.kwargs["env"]["SSL_CERT_FILE"], str(bundle))
+
+    def fake_downloads(self, *returncodes):
+        """`hf download` giả: trả lần lượt các mã thoát, ghi lại env của từng lần gọi."""
+        calls = []
+
+        def run(command, env):
+            calls.append((command, dict(env)))
+            return subprocess.CompletedProcess(command, returncodes[len(calls) - 1])
+
+        return run, calls
+
+    def test_download_succeeds_with_xet_and_switches_vllm_offline(self):
+        run, calls = self.fake_downloads(0)
+        env = {"HF_HOME": "/cache"}
+        with redirect_stdout(io.StringIO()):
+            serve.download_model("org/model", env, "/venv/bin/hf", run=run)
+        (command, first), = calls
+        self.assertEqual(command, ["/venv/bin/hf", "download", "org/model"])
+        self.assertNotIn("HF_HUB_DISABLE_XET", first)
+        self.assertEqual(first["HF_HUB_DOWNLOAD_TIMEOUT"], "60")
+        self.assertEqual(first["HF_HUB_ETAG_TIMEOUT"], "30")
+        self.assertEqual(env["HF_HUB_OFFLINE"], "1")
+
+    def test_xet_failure_retries_over_plain_https(self):
+        # Xet hỏng ("CAS Client Error ... 401") nhưng HTTPS thường tải được.
+        run, calls = self.fake_downloads(1, 0)
+        env = {"HF_HUB_DOWNLOAD_TIMEOUT": "300"}
+        with redirect_stdout(io.StringIO()) as output:
+            serve.download_model("org/model", env, "/venv/bin/hf", run=run)
+        self.assertEqual([call[1].get("HF_HUB_DISABLE_XET") for call in calls], [None, "1"])
+        self.assertEqual(calls[1][1]["HF_HUB_DOWNLOAD_TIMEOUT"], "300")
+        self.assertEqual((env["HF_HUB_DISABLE_XET"], env["HF_HUB_OFFLINE"]), ("1", "1"))
+        self.assertIn("HF_HUB_DISABLE_XET=1", output.getvalue())
+
+    def test_download_failure_reports_real_causes_instead_of_tokenizer_error(self):
+        run, calls = self.fake_downloads(1, 1)
+        env = {}
+        with redirect_stdout(io.StringIO()), self.assertRaises(ValueError) as raised:
+            serve.download_model("org/model", env, "/venv/bin/hf", run=run)
+        self.assertEqual(len(calls), 2)
+        for hint in ("org/model", "429", "HF_TOKEN", "HF_ENDPOINT", "No space left"):
+            self.assertIn(hint, str(raised.exception))
+        self.assertNotIn("HF_HUB_OFFLINE", env)
+
+    def test_download_tries_once_when_xet_is_already_disabled(self):
+        run, calls = self.fake_downloads(1)
+        with redirect_stdout(io.StringIO()), self.assertRaises(ValueError):
+            serve.download_model("org/model", {"HF_HUB_DISABLE_XET": "1"}, "/venv/bin/hf", run=run)
+        self.assertEqual(len(calls), 1)
+
+    def test_download_is_skipped_for_offline_local_or_missing_cli(self):
+        run, calls = self.fake_downloads()
+        with tempfile.TemporaryDirectory() as local_model, redirect_stdout(io.StringIO()):
+            serve.download_model("org/model", {"HF_HUB_OFFLINE": "1"}, "/venv/bin/hf", run=run)
+            serve.download_model(local_model, {}, "/venv/bin/hf", run=run)
+            serve.download_model("org/model", {}, None, run=run)
+        self.assertEqual(calls, [])
+
+    def test_failed_download_stops_before_starting_vllm(self):
+        with tempfile.TemporaryDirectory() as directory:
+            env = {"LLM_API_KEY": "test-key", "LLM_CACHE_DIR": str(Path(directory) / "cache")}
+            with patch.object(serve, "read_environment", return_value=env), \
+                 patch.object(serve.sys, "platform", "linux"), \
+                 patch.object(serve.shutil, "which", side_effect=lambda name, path: f"/venv/bin/{name}"), \
+                 patch.object(serve.subprocess, "run", return_value=subprocess.CompletedProcess([], 1)), \
+                 patch.object(serve.os, "execvpe") as execute, \
+                 redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()) as error:
+                self.assertEqual(serve.main([]), 1)
+            execute.assert_not_called()
+            self.assertIn("HF_TOKEN", error.getvalue())
 
     def test_dry_run_does_not_create_cache_or_execute(self):
         with tempfile.TemporaryDirectory() as directory:

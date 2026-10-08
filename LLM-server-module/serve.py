@@ -12,6 +12,7 @@ import math
 import os
 import shlex
 import shutil
+import subprocess
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -27,6 +28,18 @@ SYSTEM_CA_BUNDLES = (
     Path("/etc/pki/tls/certs/ca-bundle.crt"),
     Path("/etc/ssl/cert.pem"),
 )
+# Mặc định của huggingface_hub là 10 giây: mạng Vast chậm là hết giờ, transformers nuốt lỗi
+# và vLLM chỉ báo "Can't load tokenizer". Đặt trong .env thì giữ giá trị đó.
+HF_TIMEOUTS = {"HF_HUB_DOWNLOAD_TIMEOUT": "60", "HF_HUB_ETAG_TIMEOUT": "30"}
+DOWNLOAD_HINTS = """Không tải được model {model} từ HuggingFace. Lỗi thật in ở trên; cách xử lý theo lỗi:
+- "429" / "Too Many Requests": HF giới hạn máy chưa đăng nhập. Tạo token (huggingface.co/settings/tokens),
+  thêm HF_TOKEN=<token> vào .env.
+- "401" / "403" / "gated": model cần token hoặc phải chấp nhận điều khoản trên trang model; thêm HF_TOKEN.
+- "404" / "Repository Not Found": sai LLM_MODEL_ID.
+- "timed out" / "Connection": mạng chậm hoặc chặn HuggingFace. Tăng HF_HUB_DOWNLOAD_TIMEOUT trong .env,
+  hoặc tải qua mirror: HF_ENDPOINT=https://hf-mirror.com.
+- "No space left on device": ổ đĩa đầy (model mặc định cần khoảng 32 GB trống).
+Sửa .env rồi chạy lại python serve.py: phần đã tải được giữ lại."""
 
 
 def read_environment(path: Path) -> dict[str, str]:
@@ -156,6 +169,40 @@ def use_system_certificates(env: dict[str, str], bundles: tuple[Path, ...] | Non
     return bundle
 
 
+def is_true(value: str | None) -> bool:
+    return (value or "").strip().lower() in {"1", "true", "yes", "on"}
+
+
+def download_model(model_id: str, env: dict[str, str], hf: str | None, run=None) -> None:
+    """Tải đủ model vào HF_HOME bằng `hf download` trước khi bật vLLM, rồi cho vLLM chạy offline.
+
+    vLLM/transformers nuốt lỗi tải và chỉ báo "Can't load tokenizer"; `hf download` in lỗi thật, có
+    thanh tiến độ và tải tiếp phần còn thiếu khi chạy lại. Xet hỏng (ví dụ "CAS Client Error ... 401")
+    thì tải lại bằng HTTPS thường (HF_HUB_DISABLE_XET=1). Bỏ qua khi model là thư mục trên máy,
+    khi đã đặt HF_HUB_OFFLINE=1 (model có sẵn trong cache) hoặc khi venv không có lệnh `hf`.
+    """
+    if hf is None or is_true(env.get("HF_HUB_OFFLINE")) or Path(model_id).is_dir():
+        return
+    run = run or subprocess.run
+    print(f"Tải model {model_id} vào {env.get('HF_HOME', 'cache HuggingFace')} "
+          "(lần đầu mất vài chục GB; chạy lại thì tải tiếp phần còn thiếu)...", flush=True)
+    for name, value in HF_TIMEOUTS.items():
+        if not env.get(name, "").strip():
+            env[name] = value
+    attempts = [dict(env)]
+    if not is_true(env.get("HF_HUB_DISABLE_XET")):
+        attempts.append({**env, "HF_HUB_DISABLE_XET": "1"})
+    for number, attempt in enumerate(attempts):
+        if number:
+            print("Tải qua Xet lỗi; tải lại bằng HTTPS thường (HF_HUB_DISABLE_XET=1)...", flush=True)
+        if run([hf, "download", model_id], env=attempt).returncode == 0:
+            env.update(attempt)
+            # Model đã đủ trong cache: vLLM không gọi mạng nữa, không còn lỗi tải bị che.
+            env["HF_HUB_OFFLINE"] = "1"
+            return
+    raise ValueError(DOWNLOAD_HINTS.format(model=model_id))
+
+
 def build_command(settings: ServerSettings) -> list[str]:
     """Truyền argv trực tiếp, không nối model/config thành shell command."""
     command = [
@@ -212,6 +259,7 @@ def main(argv: list[str] | None = None) -> int:
         bundle = use_system_certificates(env)
         if bundle:
             print(f"Chứng chỉ TLS khi tải model: {bundle}", flush=True)
+        download_model(settings.model_id, env, shutil.which("hf", path=str(Path(sys.executable).parent)))
         os.execvpe(executable, command, env)
     except (ValueError, OSError) as exc:
         print(f"Lỗi: {exc}", file=sys.stderr)
