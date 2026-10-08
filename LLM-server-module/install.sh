@@ -9,6 +9,8 @@ case "${1:-}" in
   --help|-h)
     echo "Usage: bash install.sh [--upgrade]"
     echo "LLM_PYTHON_BIN=python3.12 bash install.sh  # Chon Python tao venv"
+    echo "LLM_TORCH_BACKEND=pypi bash install.sh     # Lay torch tu PyPI/mirror thay vi download.pytorch.org"
+    echo "UV_SYSTEM_CERTS=1 bash install.sh          # uv dung chung chi cua he dieu hanh"
     exit 0
     ;;
   *) echo "Usage: bash install.sh [--upgrade]" >&2; exit 1 ;;
@@ -60,7 +62,27 @@ fi
 
 # Chi dung venv cua module, ke ca khi shell dang activate venv khac hoac co UV_PYTHON.
 "$venv_python" -m pip install --upgrade pip uv
-"$venv_python" -m uv pip install --python "$venv_python" -r requirements.txt --torch-backend=auto "${upgrade_args[@]}"
+
+# uv khong doc cau hinh cua pip. May Vast o mot so khu vuc dat san mirror cho pip (vi du Huawei)
+# va chan ket noi thang toi PyPI ("invalid peer certificate"): khi do uv dung chung mirror voi pip.
+if [[ -z "${UV_DEFAULT_INDEX:-}" && -z "${UV_INDEX_URL:-}" ]]; then
+  pip_index="${PIP_INDEX_URL:-}"
+  if [[ -z "$pip_index" ]]; then
+    pip_index="$("$venv_python" -m pip config get global.index-url 2>/dev/null || true)"
+  fi
+  if [[ -n "$pip_index" ]]; then
+    export UV_DEFAULT_INDEX="$pip_index"
+    echo "uv dung chung mirror voi pip: $pip_index"
+  fi
+fi
+
+# Torch lay tu download.pytorch.org theo driver CUDA (auto). Khong vao duoc trang do thi
+# LLM_TORCH_BACKEND=pypi: lay torch tu index mac dinh (PyPI hoac mirror), nhu pip install vllm.
+torch_args=(--torch-backend="${LLM_TORCH_BACKEND:-auto}")
+if [[ "${LLM_TORCH_BACKEND:-}" == "pypi" ]]; then
+  torch_args=()
+fi
+"$venv_python" -m uv pip install --python "$venv_python" -r requirements.txt "${torch_args[@]}" "${upgrade_args[@]}"
 "$venv_python" -m pip check
 "$venv_python" -c 'import torch; assert torch.cuda.is_available(), "Torch khong truy cap duoc CUDA"; print(torch.cuda.get_device_name(0))'
 mkdir -p runtime

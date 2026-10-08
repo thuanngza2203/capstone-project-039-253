@@ -94,6 +94,8 @@ Sửa `LLM_MODEL_ID` trong `.env`, giữ `LLM_SERVED_MODEL_NAME=rag-llm`, rồi 
 
 | Hiện tượng | Cách xử lý |
 |---|---|
+| `bash install.sh` báo `invalid peer certificate` | Máy Vast không vào thẳng được PyPI. Script tự dùng mirror của pip nếu có (`PIP_INDEX_URL` hoặc cấu hình pip); vẫn lỗi ở `download.pytorch.org` thì chạy `LLM_TORCH_BACKEND=pypi bash install.sh` |
+| `serve.py` báo `Can't load tokenizer for 'Qwen/...'` | Máy Vast không tải được model từ HuggingFace. Lỗi gốc có `CAS Client Error ... 401` (xethub): thêm `HF_HUB_DISABLE_XET=1` vào `.env`. Lỗi chứng chỉ/kết nối: thêm `HF_ENDPOINT=https://hf-mirror.com`. Vẫn lỗi thì thuê máy ở khu vực khác |
 | `Connection refused` | Server chưa sẵn sàng, tunnel chưa mở, hoặc IP/cổng SSH đã đổi (thuê máy mới) |
 | HTTP 401/403 | `VLLM_API_KEY` bên RAG phải trùng `LLM_API_KEY` |
 | HTTP 404, sai model | `VLLM_MODEL` phải trùng `LLM_SERVED_MODEL_NAME`; URL phải kết thúc bằng `/v1` |

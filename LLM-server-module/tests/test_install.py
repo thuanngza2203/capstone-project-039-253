@@ -35,6 +35,16 @@ elif [[ "${1:-}" == "-m" && "${2:-}" == "venv" ]]; then
   chmod +x "$3/bin/python"
 elif [[ "${1:-}" == "-m" && "${2:-}" == "pip" && "${3:-}" == "freeze" ]]; then
   echo 'vllm==0.29.0'
+elif [[ "${1:-}" == "-m" && "${2:-}" == "pip" && "${3:-}" == "config" ]]; then
+  # Giả lập mirror ghi trong pip.conf; không có thì pip báo lỗi như thật.
+  if [[ -n "${INSTALL_TEST_PIP_CONFIG_INDEX:-}" ]]; then
+    echo "$INSTALL_TEST_PIP_CONFIG_INDEX"
+  else
+    echo "ERROR: No such key - global.index-url" >&2
+    exit 1
+  fi
+elif [[ "${1:-}" == "-m" && "${2:-}" == "uv" ]]; then
+  printf '%s' "${UV_DEFAULT_INDEX:-}" > "$INSTALL_TEST_LOG.uv-index"
 fi
 '''
 
@@ -59,7 +69,8 @@ class InstallerTests(unittest.TestCase):
         self.write_tool("nvidia-smi", "#!/usr/bin/env bash\nexit 0\n")
         self.env = os.environ.copy()
         # Không nhận config installer từ máy đang chạy test.
-        for key in ("LLM_PYTHON_BIN", "INSTALL_TEST_OLD_PYTHON", "INSTALL_TEST_OS"):
+        for key in ("LLM_PYTHON_BIN", "LLM_TORCH_BACKEND", "INSTALL_TEST_OLD_PYTHON", "INSTALL_TEST_OS",
+                    "INSTALL_TEST_PIP_CONFIG_INDEX", "PIP_INDEX_URL", "UV_DEFAULT_INDEX", "UV_INDEX_URL"):
             self.env.pop(key, None)
         self.env.update({
             "INSTALL_TEST_BIN": self.bin_dir.as_posix(),
@@ -113,6 +124,49 @@ exec bash install.sh "$@"
             (self.module / "runtime/requirements.freeze.txt").read_text().strip(),
             "vllm==0.29.0",
         )
+
+    def uv_install(self) -> list[str]:
+        return next(call for call in self.calls() if call[1:3] == ["-m", "uv"])
+
+    def uv_index(self) -> str:
+        return Path(f"{self.log}.uv-index").read_text(encoding="utf-8")
+
+    def test_uv_uses_pypi_when_pip_has_no_mirror(self):
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(self.uv_index(), "")
+
+    def test_uv_reuses_pip_mirror_from_environment(self):
+        self.env["PIP_INDEX_URL"] = "https://repo.huaweicloud.com/repository/pypi/simple"
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(self.uv_index(), "https://repo.huaweicloud.com/repository/pypi/simple")
+
+    def test_uv_reuses_pip_mirror_from_pip_config(self):
+        self.env["INSTALL_TEST_PIP_CONFIG_INDEX"] = "https://mirror.example/simple"
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(self.uv_index(), "https://mirror.example/simple")
+        self.assertIn("uv dung chung mirror voi pip", result.stdout)
+
+    def test_explicit_uv_index_is_not_overridden_by_pip_mirror(self):
+        self.env["PIP_INDEX_URL"] = "https://mirror.example/simple"
+        self.env["UV_DEFAULT_INDEX"] = "https://chosen.example/simple"
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertEqual(self.uv_index(), "https://chosen.example/simple")
+
+    def test_torch_backend_pypi_drops_pytorch_index(self):
+        self.env["LLM_TORCH_BACKEND"] = "pypi"
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertFalse([arg for arg in self.uv_install() if arg.startswith("--torch-backend")])
+
+    def test_torch_backend_can_be_pinned(self):
+        self.env["LLM_TORCH_BACKEND"] = "cu128"
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn("--torch-backend=cu128", self.uv_install())
 
     def test_upgrade_reuses_venv_and_explicitly_upgrades_dependencies(self):
         initial = self.run_installer()
