@@ -21,6 +21,12 @@ from dotenv import dotenv_values
 
 MODULE_DIR = Path(__file__).resolve().parent
 DEFAULT_SERVED_MODEL_NAME = "rag-llm"
+# Kho chứng chỉ của hệ điều hành: Debian/Ubuntu (image Vast), rồi RHEL, Alpine.
+SYSTEM_CA_BUNDLES = (
+    Path("/etc/ssl/certs/ca-certificates.crt"),
+    Path("/etc/pki/tls/certs/ca-bundle.crt"),
+    Path("/etc/ssl/cert.pem"),
+)
 
 
 def read_environment(path: Path) -> dict[str, str]:
@@ -130,6 +136,26 @@ class ServerSettings:
         )
 
 
+def use_system_certificates(env: dict[str, str], bundles: tuple[Path, ...] | None = None) -> str | None:
+    """Cho vLLM tải model bằng kho chứng chỉ của hệ điều hành.
+
+    Một số máy Vast đi qua proxy HTTPS có CA riêng, CA đó chỉ nằm trong kho của hệ điều hành.
+    huggingface_hub (httpx) mặc định chỉ tin certifi nên tải model báo CERTIFICATE_VERIFY_FAILED
+    ("Can't load tokenizer"). Máy bình thường thì hai kho có cùng CA nên không đổi gì.
+    Đã đặt SSL_CERT_FILE/REQUESTS_CA_BUNDLE (shell hoặc .env) thì giữ nguyên.
+    """
+    bundle = env.get("SSL_CERT_FILE", "").strip()
+    if not bundle:
+        candidates = SYSTEM_CA_BUNDLES if bundles is None else bundles
+        found = next((path for path in candidates if path.is_file() and path.stat().st_size > 0), None)
+        if found is None:
+            return None
+        bundle = env["SSL_CERT_FILE"] = str(found)
+    if not env.get("REQUESTS_CA_BUNDLE", "").strip():
+        env["REQUESTS_CA_BUNDLE"] = bundle
+    return bundle
+
+
 def build_command(settings: ServerSettings) -> list[str]:
     """Truyền argv trực tiếp, không nối model/config thành shell command."""
     command = [
@@ -183,6 +209,9 @@ def main(argv: list[str] | None = None) -> int:
         # vLLM hỗ trợ key qua environment; không đưa secret vào argv/log.
         env["VLLM_API_KEY"] = settings.api_key
         env["HF_HOME"] = str(settings.cache_dir)
+        bundle = use_system_certificates(env)
+        if bundle:
+            print(f"Chứng chỉ TLS khi tải model: {bundle}", flush=True)
         os.execvpe(executable, command, env)
     except (ValueError, OSError) as exc:
         print(f"Lỗi: {exc}", file=sys.stderr)

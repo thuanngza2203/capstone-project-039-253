@@ -144,6 +144,43 @@ class ServerTests(unittest.TestCase):
             self.assertNotIn("secret-not-in-argv", " ".join(command) + output.getvalue())
             self.assertTrue(cache.is_dir())
 
+    def test_model_download_trusts_operating_system_certificates(self):
+        # Proxy HTTPS của máy Vast: huggingface_hub (httpx) chỉ tin certifi nếu không có SSL_CERT_FILE.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            empty, bundle = root / "empty.crt", root / "ca-certificates.crt"
+            empty.write_text("", encoding="utf-8")
+            bundle.write_text("-----BEGIN CERTIFICATE-----\n", encoding="utf-8")
+            candidates = (root / "missing.crt", empty, bundle)
+
+            env = {}
+            self.assertEqual(serve.use_system_certificates(env, candidates), str(bundle))
+            self.assertEqual(env, {"SSL_CERT_FILE": str(bundle), "REQUESTS_CA_BUNDLE": str(bundle)})
+
+            chosen = {"SSL_CERT_FILE": "/custom/ca.pem", "REQUESTS_CA_BUNDLE": ""}
+            self.assertEqual(serve.use_system_certificates(chosen, candidates), "/custom/ca.pem")
+            self.assertEqual(chosen, {"SSL_CERT_FILE": "/custom/ca.pem", "REQUESTS_CA_BUNDLE": "/custom/ca.pem"})
+
+            nothing = {}
+            self.assertIsNone(serve.use_system_certificates(nothing, (root / "missing.crt", empty)))
+            self.assertEqual(nothing, {})
+
+    def test_launch_passes_system_certificates_to_vllm(self):
+        with tempfile.TemporaryDirectory() as directory:
+            bundle = Path(directory) / "ca-certificates.crt"
+            bundle.write_text("-----BEGIN CERTIFICATE-----\n", encoding="utf-8")
+            env = {"LLM_API_KEY": "test-key", "LLM_CACHE_DIR": str(Path(directory) / "cache")}
+            with patch.object(serve, "read_environment", return_value=env), \
+                 patch.object(serve, "SYSTEM_CA_BUNDLES", (bundle,)), \
+                 patch.object(serve.sys, "platform", "linux"), \
+                 patch.object(serve.shutil, "which", return_value="/venv/bin/vllm"), \
+                 patch.object(serve.os, "execvpe") as execute, redirect_stdout(io.StringIO()) as output:
+                self.assertEqual(serve.main([]), 0)
+            child_env = execute.call_args.args[2]
+            self.assertEqual(child_env["SSL_CERT_FILE"], str(bundle))
+            self.assertEqual(child_env["REQUESTS_CA_BUNDLE"], str(bundle))
+            self.assertIn(str(bundle), output.getvalue())
+
     def test_dry_run_does_not_create_cache_or_execute(self):
         with tempfile.TemporaryDirectory() as directory:
             cache = Path(directory) / "not-created"

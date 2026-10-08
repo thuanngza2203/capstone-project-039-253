@@ -11,7 +11,7 @@ Chạy mô hình ngôn ngữ sinh câu trả lời trên GPU thuê ở [Vast.ai]
 Thuê instance Ubuntu có GPU NVIDIA, thêm SSH public key vào tài khoản Vast, rồi SSH vào (lệnh lấy ở nút **Connect**). Trong terminal Linux:
 
 ```bash
-apt-get update && apt-get install -y git python3 python3-venv python3-pip tmux nano build-essential
+apt-get update && apt-get install -y git python3 python3-venv python3-pip tmux nano build-essential ca-certificates
 nvidia-smi                       # phải thấy GPU
 
 mkdir -p /workspace && cd /workspace
@@ -19,21 +19,14 @@ git clone --filter=blob:none --sparse https://github.com/thuanngza2203/capstone-
 cd capstone-project-039-253
 git sparse-checkout set LLM-server-module
 cd LLM-server-module
-bash install.sh                  # tạo .venv và cài vLLM
-source .venv/bin/activate
+LLM_API_KEY=<key> bash install.sh   # tạo .venv, cài vLLM, tạo .env với key này
 ```
 
-Repo private thì cần quyền đọc GitHub trên máy Vast (SSH key của Vast không tự có quyền này).
+`<key>` là giá trị `VLLM_API_KEY` đang có trong `RAG-module/.env` trên máy bạn, để hai bên khớp nhau. Bỏ `LLM_API_KEY=<key>` thì script tự sinh key ngẫu nhiên và in ra; chép key đó vào `VLLM_API_KEY` của RAG. Đã có `.env` thì script giữ nguyên, không đổi key.
 
-Tạo cấu hình và API key:
+Máy Vast đã clone từ trước: `git pull` rồi chạy lại `bash install.sh`, không cần xoá `.venv`.
 
-```bash
-cp .env.example .env
-python -c "import secrets; print(secrets.token_urlsafe(32))"   # chép key này
-nano .env                        # dán vào LLM_API_KEY; Ctrl+O, Enter để lưu, Ctrl+X để thoát
-```
-
-Giữ lại key để điền vào `VLLM_API_KEY` của RAG module. Các biến chính trong `.env`:
+Các biến chính trong `.env` (sửa bằng `nano .env`; `Ctrl+O`, Enter để lưu, `Ctrl+X` để thoát):
 
 | Biến | Mặc định | Ý nghĩa |
 |---|---|---|
@@ -94,8 +87,8 @@ Sửa `LLM_MODEL_ID` trong `.env`, giữ `LLM_SERVED_MODEL_NAME=rag-llm`, rồi 
 
 | Hiện tượng | Cách xử lý |
 |---|---|
-| `bash install.sh` báo `invalid peer certificate` | Máy Vast không vào thẳng được PyPI. Script tự dùng mirror của pip nếu có (`PIP_INDEX_URL` hoặc cấu hình pip); vẫn lỗi ở `download.pytorch.org` thì chạy `LLM_TORCH_BACKEND=pypi bash install.sh` |
-| `serve.py` báo `Can't load tokenizer for 'Qwen/...'` | Máy Vast không tải được model từ HuggingFace. Lỗi gốc có `CAS Client Error ... 401` (xethub): thêm `HF_HUB_DISABLE_XET=1` vào `.env`. Lỗi chứng chỉ/kết nối: thêm `HF_ENDPOINT=https://hf-mirror.com`. Vẫn lỗi thì thuê máy ở khu vực khác |
+| `bash install.sh` báo `invalid peer certificate: UnknownIssuer` | Máy Vast đi qua proxy HTTPS có CA riêng: pip tin được (dùng kho chứng chỉ của hệ điều hành), uv thì không. Script đã tự cho uv dùng kho đó (dòng `uv dung kho chung chi cua he dieu hanh` trong log); bản cũ chưa có thì `git pull` rồi chạy lại. Vẫn lỗi: kiểm tra `ca-certificates` đã cài; lỗi riêng ở `download.pytorch.org` thì chạy `LLM_TORCH_BACKEND=pypi bash install.sh`. Máy có mirror pip (`PIP_INDEX_URL` hoặc cấu hình pip) thì uv tự dùng chung |
+| `serve.py` báo `Can't load tokenizer for 'Qwen/...'` | Máy Vast không tải được model từ HuggingFace. Lỗi chứng chỉ (`CERTIFICATE_VERIFY_FAILED`) do proxy HTTPS: `serve.py` đã tự trỏ `SSL_CERT_FILE` về kho chứng chỉ của hệ điều hành (dòng `Chứng chỉ TLS khi tải model` khi khởi động). Lỗi gốc có `CAS Client Error ... 401` (xethub): thêm `HF_HUB_DISABLE_XET=1` vào `.env`. Không kết nối được HuggingFace: thêm `HF_ENDPOINT=https://hf-mirror.com`. Vẫn lỗi thì thuê máy ở khu vực khác |
 | `Connection refused` | Server chưa sẵn sàng, tunnel chưa mở, hoặc IP/cổng SSH đã đổi (thuê máy mới) |
 | HTTP 401/403 | `VLLM_API_KEY` bên RAG phải trùng `LLM_API_KEY` |
 | HTTP 404, sai model | `VLLM_MODEL` phải trùng `LLM_SERVED_MODEL_NAME`; URL phải kết thúc bằng `/v1` |
@@ -108,8 +101,8 @@ Tắt máy Vast: thoát terminal **không** dừng tính phí. Stop vẫn tính 
 
 | File | Công dụng |
 |---|---|
-| `install.sh` | Tạo `.venv`, cài vLLM, kiểm tra CUDA (`bash install.sh --upgrade` để nâng cấp) |
-| `serve.py` | Đọc `.env`, khởi động vLLM |
+| `install.sh` | Tạo `.venv`, cài vLLM, kiểm tra CUDA, tạo `.env` lần đầu (`bash install.sh --upgrade` để nâng cấp, `--help` xem tùy chọn) |
+| `serve.py` | Đọc `.env`, khởi động vLLM; tải model bằng kho chứng chỉ của hệ điều hành |
 | `check_api.py` | Kiểm tra kết nối, API key và một câu trả lời |
 | `rag-client.env.example` | Các dòng cần chép sang `.env` của RAG module |
 | `nginx.conf.example` | Tùy chọn: mở API qua HTTPS có tên miền thay cho SSH tunnel |
